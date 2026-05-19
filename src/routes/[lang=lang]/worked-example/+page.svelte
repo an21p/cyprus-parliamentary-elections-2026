@@ -60,7 +60,13 @@
           target="_blank"
           rel="noopener noreferrer"
         >data.gov.cy — Επίσημα Αποτελέσματα Βουλευτικών Εκλογών 2021 ↗</a>
-        (Υπουργείο Εσωτερικών, αναλυτικά στοιχεία ανά εκλογικό τμήμα, αθροισμένα κατά επαρχία × κόμμα).
+        (Υπουργείο Εσωτερικών, αναλυτικά στοιχεία ανά εκλογικό τμήμα, αθροισμένα κατά επαρχία × κόμμα). Διασταύρωση εκλεγέντων ανά επαρχία:
+        <a
+          class="inline-link"
+          href="https://web.archive.org/web/20210531154919/https://www.sigmalive.com/news/politics/791942/aftoi-einai-oi-56-vouleftes-deite-poioi-ekselegisan"
+          target="_blank"
+          rel="noopener noreferrer"
+        >SigmaLive — «Αυτοί είναι οι 56 βουλευτές» (31 Μαΐου 2021, αρχειοθετημένο) ↗</a>.
       {:else}
         Data source:
         <a
@@ -69,7 +75,13 @@
           target="_blank"
           rel="noopener noreferrer"
         >data.gov.cy — Official 2021 Parliamentary Election Results ↗</a>
-        (Cyprus Ministry of Interior, polling-station-level data aggregated by district × party).
+        (Cyprus Ministry of Interior, polling-station-level data aggregated by district × party). Cross-check of the elected MPs per district:
+        <a
+          class="inline-link"
+          href="https://web.archive.org/web/20210531154919/https://www.sigmalive.com/news/politics/791942/aftoi-einai-oi-56-vouleftes-deite-poioi-ekselegisan"
+          target="_blank"
+          rel="noopener noreferrer"
+        >SigmaLive — "These are the 56 MPs" (31 May 2021, archived) ↗</a>.
       {/if}
     </p>
   </SectionBlock>
