@@ -36,19 +36,25 @@
     title={lang === 'el' ? 'Τι έδειξαν οι τελευταίες δημοσκοπήσεις' : 'What the final polls showed'}
   >
     <p>
-      {lang === 'el'
-        ? 'Στις δημοσκοπήσεις που δημοσιεύτηκαν μεταξύ 5 και 17 Μαΐου 2026, ο ΔΗΣΥ επανέκτησε μικρό προβάδισμα από το ΑΚΕΛ στις περισσότερες εταιρείες (Explorer 19,7 vs 18,8· Prime/SIGMA 18,0 vs 17,6· RAI/Alpha 18,2 vs 15,2). Δύο εταιρείες, η MRC Cypronetwork και η CYMAR, εμφανίζουν τα δύο κόμματα ισόπαλα. Το ΕΛΑΜ διατηρεί την τρίτη θέση γύρω στο 10–14%, με την υψηλότερη συσπείρωση από κάθε άλλο κόμμα (79% κατά Cypronetwork).'
-        : 'In polls published between 5 and 17 May 2026, DISY reclaimed a narrow lead over AKEL with most pollsters (Explorer 19.7 vs 18.8; Prime/SIGMA 18.0 vs 17.6; RAI/Alpha 18.2 vs 15.2). Two of them, MRC Cypronetwork and CYMAR, show the two parties level. ELAM holds third place at around 10–14%, with the highest voter-consolidation rate of any party (79% per Cypronetwork).'}
+      {#if lang === 'el'}
+        Στις δημοσκοπήσεις που δημοσιεύτηκαν μεταξύ <strong>5 και 17 Μαΐου 2026</strong>, ο <strong>ΔΗΣΥ</strong> επανέκτησε <strong>μικρό προβάδισμα</strong> από το ΑΚΕΛ στις περισσότερες εταιρείες (Explorer <strong>19,7 vs 18,8</strong>· Prime/SIGMA <strong>18,0 vs 17,6</strong>· RAI/Alpha <strong>18,2 vs 15,2</strong>). Δύο εταιρείες, η <strong>MRC Cypronetwork</strong> και η <strong>CYMAR</strong>, εμφανίζουν τα δύο κόμματα <strong>ισόπαλα</strong>. Το <strong>ΕΛΑΜ</strong> διατηρεί την τρίτη θέση γύρω στο <strong>10–14%</strong>, με την <strong>υψηλότερη συσπείρωση</strong> από κάθε άλλο κόμμα (<strong>79%</strong> κατά Cypronetwork).
+      {:else}
+        In polls published between <strong>5 and 17 May 2026</strong>, <strong>DISY</strong> reclaimed a <strong>narrow lead</strong> over AKEL with most pollsters (Explorer <strong>19.7 vs 18.8</strong>; Prime/SIGMA <strong>18.0 vs 17.6</strong>; RAI/Alpha <strong>18.2 vs 15.2</strong>). Two of them, <strong>MRC Cypronetwork</strong> and <strong>CYMAR</strong>, show the two parties <strong>level</strong>. <strong>ELAM</strong> holds third place at around <strong>10–14%</strong>, with the <strong>highest voter-consolidation rate</strong> of any party (<strong>79%</strong> per Cypronetwork).
+      {/if}
     </p>
     <p>
-      {lang === 'el'
-        ? 'Δύο μετατοπίσεις ξεχωρίζουν στην τελική εβδομάδα: το ΑΛΜΑ υποχωρεί 2+ μονάδες από τα ύψη του Απριλίου («σημαντική πτώση», σύμφωνα με τον Φιλελεύθερο), ενώ τα Volt και ΕΔΕΚ ανεβαίνουν ελαφρά. Η ακραία τιμή της RealPolls δείχνει το Volt πάνω από το όριο (7,2%). Ο γενικός κανόνας: ο κατακερματισμός παγιώνεται. Επτά κόμματα φαίνονται να μπαίνουν στη νέα Βουλή και κανένα δεν πλησιάζει την πλειοψηφία των 29 εδρών.'
-        : 'Two shifts stood out in the final week: ALMA slipped 2+ points from its April highs (a "significant drop", per Phileleftheros), while Volt and EDEK edged upward. The RealPolls outlier even put Volt above the 7.2% bar. The pattern: fragmentation has locked in. Seven parties look set to enter the new House, and none comes close to the 29-seat majority threshold.'}
+      {#if lang === 'el'}
+        Δύο μετατοπίσεις ξεχωρίζουν στην τελική εβδομάδα: το <strong>ΑΛΜΑ</strong> υποχωρεί <strong>2+ μονάδες</strong> από τα ύψη του Απριλίου («σημαντική πτώση», σύμφωνα με τον Φιλελεύθερο), ενώ τα <strong>Volt</strong> και <strong>ΕΔΕΚ</strong> ανεβαίνουν ελαφρά. Η ακραία τιμή της RealPolls δείχνει το Volt πάνω από το όριο (<strong>7,2%</strong>). Ο γενικός κανόνας: ο <strong>κατακερματισμός παγιώνεται</strong>. Επτά κόμματα φαίνονται να μπαίνουν στη νέα Βουλή και <strong>κανένα δεν πλησιάζει την πλειοψηφία των 29 εδρών</strong>.
+      {:else}
+        Two shifts stood out in the final week: <strong>ALMA</strong> slipped <strong>2+ points</strong> from its April highs (a "significant drop", per Phileleftheros), while <strong>Volt</strong> and <strong>EDEK</strong> edged upward. The RealPolls outlier even put Volt above the <strong>7.2% bar</strong>. The pattern: <strong>fragmentation has locked in</strong>. Seven parties look set to enter the new House, and <strong>none comes close to the 29-seat majority threshold</strong>.
+      {/if}
     </p>
     <Callout tone="warn">
-      {lang === 'el'
-        ? 'Καμία νέα δημοσκόπηση δεν επιτρέπεται να δημοσιευτεί από τις 22:00 της Παρασκευής 22 Μαΐου έως τις 18:00 της Κυριακής 24 Μαΐου. Όλα τα αριθμητικά αυτής της σελίδας προέρχονται από δημοσκοπήσεις πριν από αυτό το χρονικό όριο.'
-        : 'No new poll figures may be published from 22:00 Friday 22 May to 18:00 Sunday 24 May. All figures on this page come from polls published before that blackout window.'}
+      {#if lang === 'el'}
+        <strong>Καμία νέα δημοσκόπηση</strong> δεν επιτρέπεται να δημοσιευτεί από τις <strong>22:00 της Παρασκευής 22 Μαΐου</strong> έως τις <strong>18:00 της Κυριακής 24 Μαΐου</strong>. Όλα τα αριθμητικά αυτής της σελίδας προέρχονται από δημοσκοπήσεις πριν από αυτό το χρονικό όριο.
+      {:else}
+        <strong>No new poll figures</strong> may be published from <strong>22:00 Friday 22 May</strong> to <strong>18:00 Sunday 24 May</strong>. All figures on this page come from polls published before that blackout window.
+      {/if}
     </Callout>
   </SectionBlock>
 
@@ -58,24 +64,32 @@
     title={lang === 'el' ? 'Γιατί οι δημοσκοπήσεις μπορούν να παραπλανήσουν' : 'Why polls can mislead'}
   >
     <p>
-      {lang === 'el'
-        ? 'Πρώτον, η αναγωγή στα έγκυρα. Οι περισσότερες κυπριακές εταιρείες δημοσιεύουν δύο εκδοχές της ίδιας δημοσκόπησης: τα ποσοστά «επί συνόλου» και τα ποσοστά «μετά από αναγωγή στα έγκυρα», όπου αφαιρούνται οι αναποφάσιστοι και οι αρνούμενοι να ψηφίσουν. Η δεύτερη εκδοχή φουσκώνει συστηματικά τα ποσοστά των μεγάλων κομμάτων. Η τελευταία RAI/Alpha έδειξε ΔΗΣΥ 18,2% επί συνόλου, αλλά 24,5% επί εγκύρων.'
-        : 'First, the "redistribution-to-valid" convention. Most Cypriot pollsters publish two versions of the same poll: the raw shares and the shares after redistribution to valid votes (i.e. with undecided and refused voters removed). The redistributed numbers systematically inflate the major parties. The final RAI/Alpha showed DISY at 18.2% raw, but 24.5% after redistribution.'}
+      {#if lang === 'el'}
+        <strong>Πρώτον, η αναγωγή στα έγκυρα.</strong> Οι περισσότερες κυπριακές εταιρείες δημοσιεύουν δύο εκδοχές της ίδιας δημοσκόπησης: τα ποσοστά <em>«επί συνόλου»</em> και τα ποσοστά <em>«μετά από αναγωγή στα έγκυρα»</em>, όπου αφαιρούνται οι αναποφάσιστοι και οι αρνούμενοι να ψηφίσουν. Η δεύτερη εκδοχή <strong>φουσκώνει συστηματικά</strong> τα ποσοστά των μεγάλων κομμάτων. Η τελευταία RAI/Alpha έδειξε ΔΗΣΥ <strong>18,2% επί συνόλου</strong>, αλλά <strong>24,5% επί εγκύρων</strong>.
+      {:else}
+        <strong>First, the "redistribution-to-valid" convention.</strong> Most Cypriot pollsters publish two versions of the same poll: the <em>raw shares</em> and the shares after <em>redistribution to valid votes</em> (i.e. with undecided and refused voters removed). The redistributed numbers <strong>systematically inflate</strong> the major parties. The final RAI/Alpha showed DISY at <strong>18.2% raw</strong>, but <strong>24.5% after redistribution</strong>.
+      {/if}
     </p>
     <p>
-      {lang === 'el'
-        ? 'Δεύτερον, η δεξαμενή αναποφάσιστων. Στην τελική RAI/Alpha έφτασε το 26,3%, σχεδόν όσο ΔΗΣΥ και ΑΚΕΛ μαζί. Η CYMAR κατέγραψε 17%, η Stratego/Kathimerini 8,1%. Όσο μεγαλύτερη η δεξαμενή αυτή, τόσο μεγαλύτερο το περιθώριο έκπληξης το βράδυ των εκλογών.'
-        : 'Second, the undecided pool. In the final RAI/Alpha it reached 26.3%, almost as much as DISY and AKEL combined. CYMAR recorded 17%, Stratego/Kathimerini 8.1%. The larger that pool, the bigger the room for election-night surprise.'}
+      {#if lang === 'el'}
+        <strong>Δεύτερον, η δεξαμενή αναποφάσιστων.</strong> Στην τελική RAI/Alpha έφτασε το <strong>26,3%</strong>, σχεδόν όσο ΔΗΣΥ και ΑΚΕΛ μαζί. Η CYMAR κατέγραψε <strong>17%</strong>, η Stratego/Kathimerini <strong>8,1%</strong>. Όσο μεγαλύτερη η δεξαμενή αυτή, τόσο μεγαλύτερο το <strong>περιθώριο έκπληξης</strong> το βράδυ των εκλογών.
+      {:else}
+        <strong>Second, the undecided pool.</strong> In the final RAI/Alpha it reached <strong>26.3%</strong>, almost as much as DISY and AKEL combined. CYMAR recorded <strong>17%</strong>, Stratego/Kathimerini <strong>8.1%</strong>. The larger that pool, the bigger the <strong>room for election-night surprise</strong>.
+      {/if}
     </p>
     <p>
-      {lang === 'el'
-        ? 'Τρίτον, τα νέα κόμματα δεν έχουν ιστορικό. Ο αναλυτής Χριστόφορος Χριστοφόρου (Cyprus Mail, 17 Μαΐου 2026) σημειώνει εύρος ±7 μονάδων για την Άμεση Δημοκρατία και ±4 για το ΑΛΜΑ, γιατί οι εταιρείες δεν έχουν προηγούμενη βάση σύγκρισης. Το 2024, ο Φειδίας Παναγιώτου δημοσκοπούνταν στο 3,8% δύο εβδομάδες πριν τις ευρωεκλογές και κατέληξε να παίρνει 19,4%, ένα σφάλμα 15,6 ποσοστιαίων μονάδων.'
-        : 'Third, new parties have no historical baseline. Analyst Christoforos Christoforou (Cyprus Mail, 17 May 2026) notes a ±7-point spread for Direct Democracy and ±4 for ALMA, because pollsters lack any prior reference. In 2024, Fidias Panayiotou was polling 3.8% two weeks before the EP election and ended up with 19.4%, a 15.6-point miss.'}
+      {#if lang === 'el'}
+        <strong>Τρίτον, τα νέα κόμματα δεν έχουν ιστορικό.</strong> Ο αναλυτής Χριστόφορος Χριστοφόρου (Cyprus Mail, 17 Μαΐου 2026) σημειώνει εύρος <strong>±7 μονάδων</strong> για την Άμεση Δημοκρατία και <strong>±4</strong> για το ΑΛΜΑ, γιατί οι εταιρείες δεν έχουν προηγούμενη βάση σύγκρισης. Το 2024, ο <strong>Φειδίας Παναγιώτου</strong> δημοσκοπούνταν στο <strong>3,8%</strong> δύο εβδομάδες πριν τις ευρωεκλογές και κατέληξε να παίρνει <strong>19,4%</strong>, ένα <strong>σφάλμα 15,6 ποσοστιαίων μονάδων</strong>.
+      {:else}
+        <strong>Third, new parties have no historical baseline.</strong> Analyst Christoforos Christoforou (Cyprus Mail, 17 May 2026) notes a <strong>±7-point spread</strong> for Direct Democracy and <strong>±4</strong> for ALMA, because pollsters lack any prior reference. In 2024, <strong>Fidias Panayiotou</strong> was polling <strong>3.8%</strong> two weeks before the EP election and ended up with <strong>19.4%</strong>, a <strong>15.6-point miss</strong>.
+      {/if}
     </p>
     <p>
-      {lang === 'el'
-        ? 'Και το πιο σημαντικό: οι δημοσκοπήσεις μετρούν εθνικό ποσοστό. Όμως οι έδρες κερδίζονται επαρχία προς επαρχία. Ένα κόμμα με 4% μπορεί να βγει εκτός Βουλής· ένα με 4,2% μπορεί να καταλήξει με 2–3 έδρες ανάλογα με την κατανομή. Δείτε τον προσομοιωτή.'
-        : 'And the most important point: polls report national share, but seats are won district by district. A party on 4% can end up locked out; one on 4.2% can finish with 2 or 3 seats depending on how its vote is spread. See the simulator.'}
+      {#if lang === 'el'}
+        Και το πιο σημαντικό: <strong>οι δημοσκοπήσεις μετρούν εθνικό ποσοστό. Όμως οι έδρες κερδίζονται επαρχία προς επαρχία.</strong> Ένα κόμμα με <strong>4%</strong> μπορεί να βγει εκτός Βουλής· ένα με <strong>4,2%</strong> μπορεί να καταλήξει με <strong>2–3 έδρες</strong> ανάλογα με την κατανομή. Δείτε τον προσομοιωτή.
+      {:else}
+        And the most important point: <strong>polls report national share, but seats are won district by district.</strong> A party on <strong>4%</strong> can end up locked out; one on <strong>4.2%</strong> can finish with <strong>2 or 3 seats</strong> depending on how its vote is spread. See the simulator.
+      {/if}
     </p>
   </SectionBlock>
 

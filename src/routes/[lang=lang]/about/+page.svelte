@@ -84,14 +84,18 @@
     title={lang === 'el' ? 'Γιατί υπάρχει αυτή η σελίδα' : 'Why this site exists'}
   >
     <p>
-      {lang === 'el'
-        ? 'Στόχος είναι να εξηγήσει στους πολίτες πώς οι ψήφοι μετατρέπονται σε έδρες στην Κύπρο, μια διαδικασία που, λόγω της τριπλής κατανομής και των ορίων, δεν είναι διαισθητική. Η σελίδα απευθύνεται σε ψηφοφόρους, δημοσιογράφους, ερευνητές και διεθνείς αναγνώστες που θέλουν να καταλάβουν τη μηχανική πίσω από τα αποτελέσματα της 24ης Μαΐου 2026.'
-        : 'The aim is to help readers understand how votes are translated into seats in Cyprus, a process that is not intuitive because of the three-stage allocation and the various thresholds. The site is for voters, journalists, researchers and international readers who want to follow the mechanics behind the 24 May 2026 result.'}
+      {#if lang === 'el'}
+        Στόχος είναι να εξηγήσει στους πολίτες <strong>πώς οι ψήφοι μετατρέπονται σε έδρες στην Κύπρο</strong>, μια διαδικασία που, λόγω της <strong>τριπλής κατανομής</strong> και των ορίων, δεν είναι διαισθητική. Η σελίδα απευθύνεται σε <strong>ψηφοφόρους, δημοσιογράφους, ερευνητές και διεθνείς αναγνώστες</strong> που θέλουν να καταλάβουν τη μηχανική πίσω από τα αποτελέσματα της <strong>24ης Μαΐου 2026</strong>.
+      {:else}
+        The aim is to help readers understand <strong>how votes are translated into seats in Cyprus</strong>, a process that is not intuitive because of the <strong>three-stage allocation</strong> and the various thresholds. The site is for <strong>voters, journalists, researchers and international readers</strong> who want to follow the mechanics behind the <strong>24 May 2026</strong> result.
+      {/if}
     </p>
     <p>
-      {lang === 'el'
-        ? 'Η σελίδα είναι μη κομματική. Δεν στηρίζει κανένα κόμμα ή υποψήφιο, δεν προβλέπει αποτελέσματα, και δεν αξιολογεί τις πολιτικές των κομμάτων.'
-        : 'The site is non-partisan. It does not endorse any party or candidate, does not forecast results, and does not pass judgement on party platforms.'}
+      {#if lang === 'el'}
+        Η σελίδα είναι <strong>μη κομματική</strong>. Δεν στηρίζει κανένα κόμμα ή υποψήφιο, <strong>δεν προβλέπει αποτελέσματα</strong>, και δεν αξιολογεί τις πολιτικές των κομμάτων.
+      {:else}
+        The site is <strong>non-partisan</strong>. It does not endorse any party or candidate, <strong>does not forecast results</strong>, and does not pass judgement on party platforms.
+      {/if}
     </p>
   </SectionBlock>
 
@@ -174,9 +178,11 @@
     title={lang === 'el' ? 'Πώς φτιάχτηκε' : 'How it was built'}
   >
     <p>
-      {lang === 'el'
-        ? 'Η σελίδα είναι στατικό build με SvelteKit 5 (runes mode) και TypeScript. Δεν χρησιμοποιεί cookies, δεν φιλοξενεί διαφημίσεις και δεν παρακολουθεί τους επισκέπτες με analytics. Λειτουργεί σε δύο γλώσσες (Ελληνικά / English) και ο πηγαίος κώδικας είναι ανοιχτός. Όλος ο αλγόριθμος εκλογής εδρών εκτελείται στον περιηγητή σας.'
-        : 'The site is a static build using SvelteKit 5 (runes mode) and TypeScript. It uses no cookies, runs no ads, and does not track visitors with analytics. It is bilingual (English / Greek) and the source code is open. The full seat-allocation algorithm runs locally in your browser.'}
+      {#if lang === 'el'}
+        Η σελίδα είναι <strong>στατικό build</strong> με <strong>SvelteKit 5</strong> (runes mode) και <strong>TypeScript</strong>. <strong>Δεν χρησιμοποιεί cookies</strong>, <strong>δεν φιλοξενεί διαφημίσεις</strong> και <strong>δεν παρακολουθεί</strong> τους επισκέπτες με analytics. Λειτουργεί σε δύο γλώσσες (<strong>Ελληνικά / English</strong>) και ο πηγαίος κώδικας είναι <strong>ανοιχτός</strong>. Όλος ο αλγόριθμος εκλογής εδρών εκτελείται <strong>στον περιηγητή σας</strong>.
+      {:else}
+        The site is a <strong>static build</strong> using <strong>SvelteKit 5</strong> (runes mode) and <strong>TypeScript</strong>. It uses <strong>no cookies</strong>, runs <strong>no ads</strong>, and <strong>does not track</strong> visitors with analytics. It is bilingual (<strong>English / Greek</strong>) and the source code is <strong>open</strong>. The full seat-allocation algorithm runs <strong>locally in your browser</strong>.
+      {/if}
     </p>
   </SectionBlock>
 </PageShell>

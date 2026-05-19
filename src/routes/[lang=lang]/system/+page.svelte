@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { PageShell, SectionBlock, Callout } from '$components/layout';
+  import { PageShell, SectionBlock, Callout, KMath } from '$components/layout';
   import { BallotPreview } from '$components/map';
 
   let { data } = $props();
@@ -10,7 +10,7 @@
 <PageShell
   {lang}
   {currentPath}
-  numeral="3"
+  numeral="3.6"
   eyebrow={lang === 'el' ? 'Πώς λειτουργεί' : 'How it works'}
   title={lang === 'el' ? 'Το εκλογικό σύστημα της Κύπρου' : 'The Cypriot electoral system'}
   lede={lang === 'el'
@@ -59,13 +59,32 @@
     </p>
     <Callout tone="fact" title={lang === 'el' ? 'Ο τύπος' : 'The formula'}>
       <p>
-        <strong>{lang === 'el' ? 'Μέτρο' : 'Quota'}</strong> = floor(<em>{lang === 'el' ? 'έγκυροι ψήφοι' : 'valid votes'}</em> ÷ <em>{lang === 'el' ? 'έδρες' : 'seats'}</em>)
+        <strong>{lang === 'el' ? 'Μέτρο' : 'Quota'}</strong>
       </p>
+      <KMath
+        display
+        expr={'Q \\;=\\; \\left\\lfloor \\dfrac{V_{\\text{valid}}}{S} \\right\\rfloor'}
+      />
       <p>
-        <strong>{lang === 'el' ? 'Έδρες κόμματος' : 'Party seats'}</strong> = floor(<em>{lang === 'el' ? 'ψήφοι κόμματος' : 'party votes'}</em> ÷ <em>{lang === 'el' ? 'μέτρο' : 'quota'}</em>)
+        <strong>{lang === 'el' ? 'Έδρες κόμματος' : 'Party seats'}</strong>
       </p>
+      <KMath
+        display
+        expr={'S_p \\;=\\; \\left\\lfloor \\dfrac{V_p}{Q} \\right\\rfloor'}
+      />
       <p>
-        <strong>{lang === 'el' ? 'Αχρησιμοποίητες ψήφοι' : 'Unused votes'}</strong> = <em>{lang === 'el' ? 'ψήφοι κόμματος' : 'party votes'}</em> − (<em>{lang === 'el' ? 'έδρες' : 'seats'}</em> × <em>{lang === 'el' ? 'μέτρο' : 'quota'}</em>)
+        <strong>{lang === 'el' ? 'Αχρησιμοποίητες ψήφοι' : 'Unused votes'}</strong>
+      </p>
+      <KMath
+        display
+        expr={'U_p \\;=\\; V_p \\,-\\, S_p \\cdot Q'}
+      />
+      <p class="math-legend-line">
+        {#if lang === 'el'}
+          όπου <KMath expr={'V_{\\text{valid}}'} /> είναι οι έγκυροι ψήφοι της επαρχίας, <KMath expr={'S'} /> οι έδρες της, <KMath expr={'V_p'} /> οι ψήφοι του κόμματος και <KMath expr={'\\lfloor \\cdot \\rfloor'} /> ο ακέραιος προς τα κάτω.
+        {:else}
+          where <KMath expr={'V_{\\text{valid}}'} /> is the district's valid votes, <KMath expr={'S'} /> its seats, <KMath expr={'V_p'} /> the party's votes, and <KMath expr={'\\lfloor \\cdot \\rfloor'} /> the floor function.
+        {/if}
       </p>
     </Callout>
     <p>
@@ -206,4 +225,134 @@
 
     <BallotPreview districtId="NIC" {lang} />
   </SectionBlock>
+
+  <SectionBlock
+    id="simulator-approximation"
+    eyebrow={lang === 'el' ? 'Στον προσομοιωτή' : 'In the simulator'}
+    title={lang === 'el'
+      ? 'Από πανεθνικά ποσοστά σε ψήφους ανά επαρχία'
+      : 'From national shares to district votes'}
+  >
+    <p>
+      {#if lang === 'el'}
+        Οι δημοσκοπήσεις δίνουν <strong>ένα ποσοστό ανά κόμμα σε εθνικό επίπεδο</strong>, αλλά ο νόμος μετράει έδρες <em>ανά επαρχία</em>. Ο προσομοιωτής γεφυρώνει αυτό το κενό με μία ρητή προσέγγιση — τη μόνη του πιπέλαϊν που <strong>δεν</strong> είναι ακριβής. Η ίδια η κατανομή εδρών παραμένει ακριβώς όπως στον νόμο.
+      {:else}
+        Polls give us <strong>one national percentage per party</strong>, but the law counts seats <em>per district</em>. The simulator bridges that gap with an explicit approximation — the only step in the pipeline that is <strong>not</strong> exact. The seat allocation itself is exactly what the law prescribes.
+      {/if}
+    </p>
+
+    <Callout
+      tone="info"
+      title={lang === 'el' ? 'Ο τύπος' : 'The formula'}
+      label={lang === 'el' ? 'Προσέγγιση' : 'Approximation'}
+    >
+      <p>
+        {#if lang === 'el'}
+          Για κάθε κόμμα <em>p</em> και επαρχία <em>d</em>, οι προσομοιωμένες ψήφοι είναι:
+        {:else}
+          For each party <em>p</em> and district <em>d</em>, simulated votes are:
+        {/if}
+      </p>
+      <KMath
+        display
+        expr={'V_{p,d} \\;=\\; s_p \\,\\times\\, R_d \\,\\times\\, \\tau \\,\\times\\, \\iota_{p,d}'}
+      />
+      <ul class="math-legend">
+        <li>
+          <KMath expr={'s_p'} /> —
+          {lang === 'el'
+            ? 'εθνικό μερίδιο του κόμματος (από τη δημοσκόπηση), στο διάστημα 0–1'
+            : "party's national share (from the poll), in 0–1"}
+        </li>
+        <li>
+          <KMath expr={'R_d'} /> —
+          {lang === 'el'
+            ? 'εγγεγραμμένοι ψηφοφόροι της επαρχίας το 2026'
+            : '2026 registered voters in the district'}
+        </li>
+        <li>
+          <KMath expr={'\\tau'} /> —
+          {lang === 'el' ? 'εκτιμώμενη πανεθνική προσέλευση (0–1)' : 'estimated national turnout (0–1)'}
+        </li>
+        <li>
+          <KMath expr={'\\iota_{p,d}'} /> —
+          {lang === 'el'
+            ? 'συντελεστής τοπικής έντασης (βλ. παρακάτω)'
+            : 'local intensity coefficient (see below)'}
+        </li>
+      </ul>
+    </Callout>
+
+    <p>
+      {#if lang === 'el'}
+        Ο <strong>συντελεστής έντασης</strong> δείχνει αν ένα κόμμα είναι ισχυρότερο ή ασθενέστερο σε μια συγκεκριμένη επαρχία σε σχέση με το μέγεθος του εκλογικού της σώματος. Υπολογίζεται από τα <strong>πραγματικά αποτελέσματα του 2021</strong>:
+      {:else}
+        The <strong>intensity coefficient</strong> captures whether a party over- or under-performs in a given district relative to the size of its electorate. It is computed from the <strong>actual 2021 results</strong>:
+      {/if}
+    </p>
+
+    <KMath
+      display
+      expr={'\\iota_{p,d} \\;=\\; \\dfrac{\\,V^{2021}_{p,d} \\,/\\, V^{2021}_{p}\\,}{\\,R_d \\,/\\, \\sum_{k} R_k\\,}'}
+    />
+
+    <p>
+      {#if lang === 'el'}
+        Δηλαδή: το μερίδιο των πανεθνικών ψήφων του κόμματος που προήλθε από την επαρχία <em>d</em>, διά το μερίδιο του εκλογικού σώματος που της αναλογεί. Τιμή <KMath expr={'\\iota_{p,d} = 1'} /> σημαίνει ότι το κόμμα ψηφίστηκε εκεί ακριβώς στο μέτρο που θα ανέμενε κανείς από τον πληθυσμό· <KMath expr={'\\iota_{p,d} > 1'} /> σημαίνει υπεραπόδοση, <KMath expr={'\\iota_{p,d} < 1'} /> υποαπόδοση. Νέα κόμματα χωρίς αναφορά στο 2021 χρησιμοποιούν <KMath expr={'\\iota_{p,d} = 1'} /> (ομοιόμορφη κατανομή).
+      {:else}
+        That is: the share of the party's 2021 national vote that came from district <em>d</em>, divided by the district's share of the national electorate. A value of <KMath expr={'\\iota_{p,d} = 1'} /> means the party polled exactly in proportion to the district's population; <KMath expr={'\\iota_{p,d} > 1'} /> means over-performance, <KMath expr={'\\iota_{p,d} < 1'} /> under-performance. New parties with no 2021 baseline default to <KMath expr={'\\iota_{p,d} = 1'} /> (uniform).
+      {/if}
+    </p>
+
+    <p>
+      {#if lang === 'el'}
+        Για τις λίγες περιπτώσεις του 2021 όπου είναι γνωστές μόνο οι έδρες ενός κόμματος σε μια επαρχία (όχι οι ψήφοι), η ένταση εκτιμάται από έναν συνδυασμό σεϊτ-σερ και πληθυσμού:
+      {:else}
+        For the handful of 2021 cases where only a party's seats in a district are known (not its votes), intensity is estimated from a blend of seat share and population:
+      {/if}
+    </p>
+
+    <KMath
+      display
+      expr={'w_d \\;=\\; R_d \\,\\bigl(\\,0.1 \\,+\\, 1.8 \\cdot \\tfrac{\\text{seats}_{p,d}}{\\text{seats}_d}\\,\\bigr)'}
+    />
+
+    <p>
+      {#if lang === 'el'}
+        και οι αδιάθετες πανεθνικές ψήφοι του κόμματος κατανέμονται στις άγνωστες επαρχίες κατ' αναλογία αυτών των βαρών. Όλη η διαδικασία είναι ντοκουμενταρισμένη ως προσέγγιση στο UI του προσομοιωτή· από εκεί και πέρα, το <KMath expr={'V_{p,d}'} /> τροφοδοτεί τον ακριβή αλγόριθμο κατανομής εδρών.
+      {:else}
+        and the party's residual national votes are spread across the unknown districts in proportion to these weights. The whole step is flagged as an approximation in the simulator UI; from there onward, <KMath expr={'V_{p,d}'} /> feeds the exact seat-allocation algorithm.
+      {/if}
+    </p>
+
+    <Callout
+      tone="fact"
+      title={lang === 'el' ? 'Παράκαμψη: το προκαθορισμένο σενάριο του 2021' : 'Escape hatch: the 2021 preset'}
+    >
+      <p>
+        {#if lang === 'el'}
+          Όταν επιλέγετε «πραγματικά αποτελέσματα 2021», η παραπάνω προσέγγιση <strong>παρακάμπτεται εντελώς</strong>: ο προσομοιωτής τροφοδοτεί απευθείας τις χειροκαλιβρωμένες ψήφους ανά επαρχία και αναπαράγει ακριβώς το ιστορικό 17/15/9/4/4/4/3 = 56 έδρες. Οποιαδήποτε χειροκίνητη αλλαγή μεριδίου ακυρώνει την παράκαμψη.
+        {:else}
+          When you pick the "2021 actual" preset, the approximation above is <strong>bypassed entirely</strong>: the simulator feeds the algorithm hand-calibrated district vote counts directly, reproducing the historic 17/15/9/4/4/4/3 = 56 seats exactly. Editing any share clears the override.
+        {/if}
+      </p>
+    </Callout>
+  </SectionBlock>
 </PageShell>
+
+<style>
+  .math-legend {
+    margin: var(--sp-2) 0 0;
+    padding-left: var(--sp-4);
+    display: grid;
+    gap: var(--sp-1);
+  }
+  .math-legend li {
+    line-height: 1.55;
+  }
+  .math-legend-line {
+    margin-top: var(--sp-2);
+    font-size: var(--fs-90);
+    color: var(--color-ink-2, inherit);
+  }
+</style>
