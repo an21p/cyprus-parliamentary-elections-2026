@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import type { Lang, PartyId, PollEntry } from '$data/types';
   import { POLLS } from '$data/polls';
   import { getParty } from '$data/parties';
@@ -469,7 +470,7 @@
     <div class="party-card">
       <div class="party-card-logo" style="--party-color: {swatch};">
         {#if party.logo}
-          <img src={party.logo} alt="" />
+          <img src={`${base}${party.logo}`} alt="" />
         {:else}
           <span class="party-card-swatch" aria-hidden="true"></span>
         {/if}

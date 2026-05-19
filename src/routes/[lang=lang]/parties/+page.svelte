@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import { PageShell, SectionBlock } from '$components/layout';
   import { PARTIES, getParty } from '$data/parties';
   import { RESULTS_2021 } from '$data/results-2021';
@@ -112,7 +113,7 @@
           {#if party.logo}
             <img
               class="party-bg-logo"
-              src={party.logo}
+              src={`${base}${party.logo}`}
               alt=""
               aria-hidden="true"
               loading="lazy"
@@ -177,7 +178,7 @@
           {#if party.logo}
             <img
               class="party-bg-logo"
-              src={party.logo}
+              src={`${base}${party.logo}`}
               alt=""
               aria-hidden="true"
               loading="lazy"
@@ -242,7 +243,7 @@
           {#if party.logo}
             <img
               class="party-bg-logo"
-              src={party.logo}
+              src={`${base}${party.logo}`}
               alt=""
               aria-hidden="true"
               loading="lazy"
@@ -300,7 +301,7 @@
                 ? `Μεγέθυνση λογοτύπου ${localizedName(party.shortName, lang)}`
                 : `Zoom ${localizedName(party.shortName, lang)} logo`}
             >
-              <img class="logo-zoom-img" src={party.logo} alt="" loading="lazy" />
+              <img class="logo-zoom-img" src={`${base}${party.logo}`} alt="" loading="lazy" />
             </button>
           {:else}
             <span class="minor-logo minor-logo--placeholder" aria-hidden="true">
