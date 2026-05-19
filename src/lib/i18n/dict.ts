@@ -23,7 +23,15 @@ export const messages: Dict = {
   'nav.polls': { en: 'Polls', el: 'Δημοσκοπήσεις' },
   'nav.districts': { en: 'Districts', el: 'Επαρχίες' },
   'nav.parties': { en: 'Parties', el: 'Κόμματα' },
-  'nav.worked_example': { en: 'Example', el: 'Παράδειγμα' },
+  'nav.worked_example': { en: 'Examples', el: 'Παράδειγματα' },
+  'nav.worked_example.nicosia': {
+    en: 'Nicosia 2021',
+    el: 'Λευκωσία 2021'
+  },
+  'nav.worked_example.govcy': {
+    en: 'MOI worked example',
+    el: 'Παράδειγμα Υπ. Εσωτερικών'
+  },
   'nav.about': { en: 'About', el: 'Σχετικά' },
 
   // Language switcher

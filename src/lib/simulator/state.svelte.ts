@@ -1,10 +1,12 @@
 // Svelte 5 rune-based store for the simulator page.
 //
 // Holds (a) per-party national vote share %, (b) estimated turnout fraction,
-// and (c) an optional explicit district breakdown override (used by the
-// "2021 actual" preset so the historical result is reproduced exactly).
-// Derives an AllocationResult by feeding the chosen breakdown through the
-// 3-stage `allocateSeats` algorithm.
+// (c) the district seat-boundary year (2021 or 2026 — the October 2025 reform
+// moved one seat from Nicosia to Paphos), and (d) an optional explicit
+// district breakdown override (used by the "2021 actual" preset so the
+// historical result is reproduced exactly).
+// Derives an AllocationResult by feeding the chosen breakdown and seat map
+// through the 3-stage `allocateSeats` algorithm.
 
 import { allocateSeats } from '../election-algorithm';
 import { DISTRICTS } from '../data/districts';
@@ -24,7 +26,7 @@ import {
   PRESET_2021_DISTRICT_SEATS
 } from './preset-2021';
 
-// 2026 seats per district.
+// 2026 seats per district (after the Nicosia → Paphos seat transfer).
 const SEATS_2026: Record<DistrictId, number> = DISTRICTS.reduce(
   (acc, d) => {
     acc[d.id] = d.seats2026;
@@ -32,6 +34,8 @@ const SEATS_2026: Record<DistrictId, number> = DISTRICTS.reduce(
   },
   {} as Record<DistrictId, number>
 );
+
+export type BoundariesYear = 2021 | 2026;
 
 export const DEFAULT_TURNOUT = 0.62;
 
@@ -50,12 +54,15 @@ interface PresetMeta {
 export interface SimulatorStore {
   shares: Record<PartyId, number>;
   turnout: number;
+  boundariesYear: BoundariesYear;
   readonly allocation: AllocationResult;
   readonly totalSharePct: number;
   readonly seatsByParty: Map<PartyId, number>;
   readonly activePresetLabel: { en: string; el: string } | null;
+  readonly districtSeats: Record<DistrictId, number>;
   setShare(pid: PartyId, value: number): void;
   setTurnout(value: number): void;
+  setBoundariesYear(year: BoundariesYear): void;
   reset(): void;
   apply2021Actual(): void;
   applyPoll(index: number): void;
@@ -70,16 +77,20 @@ export function createSimulatorStore(): SimulatorStore {
   const state = $state<{
     shares: Record<PartyId, number>;
     turnout: number;
+    boundariesYear: BoundariesYear;
     overrideBreakdown: DistrictVoteBreakdown | null;
-    overrideDistrictSeats: Record<DistrictId, number> | null;
     activePresetMeta: PresetMeta | null;
   }>({
     shares: blankShares(),
     turnout: DEFAULT_TURNOUT,
+    boundariesYear: 2026,
     overrideBreakdown: null,
-    overrideDistrictSeats: null,
     activePresetMeta: null
   });
+
+  const districtSeats = $derived<Record<DistrictId, number>>(
+    state.boundariesYear === 2021 ? PRESET_2021_DISTRICT_SEATS : SEATS_2026
+  );
 
   // Allocation re-runs on every input change. With 6 districts and < 20
   // parties this is sub-millisecond, so no memoisation needed.
@@ -87,10 +98,9 @@ export function createSimulatorStore(): SimulatorStore {
     const breakdown =
       state.overrideBreakdown ??
       deriveDistrictVotes(state.shares, state.turnout);
-    const seats = state.overrideDistrictSeats ?? SEATS_2026;
     return allocateSeats(
       { districtBreakdown: breakdown },
-      seats,
+      districtSeats,
       THRESHOLDS
     );
   });
@@ -114,7 +124,6 @@ export function createSimulatorStore(): SimulatorStore {
     // Any manual edit invalidates the active preset and clears the override.
     state.activePresetMeta = null;
     state.overrideBreakdown = null;
-    state.overrideDistrictSeats = null;
   }
 
   function setTurnout(value: number): void {
@@ -125,17 +134,20 @@ export function createSimulatorStore(): SimulatorStore {
     // so the simulator picks up the change.
     if (state.overrideBreakdown) {
       state.overrideBreakdown = null;
-      state.overrideDistrictSeats = null;
       // keep the shares so the user can see what was loaded
     }
+  }
+
+  function setBoundariesYear(year: BoundariesYear): void {
+    state.boundariesYear = year;
   }
 
   function reset(): void {
     state.shares = blankShares();
     state.turnout = DEFAULT_TURNOUT;
+    state.boundariesYear = 2026;
     state.activePresetMeta = null;
     state.overrideBreakdown = null;
-    state.overrideDistrictSeats = null;
   }
 
   function apply2021Actual(): void {
@@ -147,7 +159,7 @@ export function createSimulatorStore(): SimulatorStore {
     // Real 2021 vote breakdown + 2021 seat counts (Nicosia 20, Paphos 4) so
     // the algorithm reproduces the historic 17/15/9/4/4/4/3 outcome.
     state.overrideBreakdown = PRESET_2021_BREAKDOWN;
-    state.overrideDistrictSeats = PRESET_2021_DISTRICT_SEATS;
+    state.boundariesYear = 2021;
     state.activePresetMeta = {
       label: { en: '2021 actual', el: 'Πραγματικό 2021' }
     };
@@ -162,7 +174,8 @@ export function createSimulatorStore(): SimulatorStore {
     }
     state.shares = shares;
     state.overrideBreakdown = null;
-    state.overrideDistrictSeats = null;
+    // Polls are forward-looking — default to 2026 boundaries.
+    state.boundariesYear = 2026;
     // Keep turnout at user's current setting - polls don't predict turnout.
     state.activePresetMeta = {
       label: {
@@ -179,7 +192,6 @@ export function createSimulatorStore(): SimulatorStore {
     set shares(v) {
       state.shares = v;
       state.overrideBreakdown = null;
-      state.overrideDistrictSeats = null;
       state.activePresetMeta = null;
     },
     get turnout() {
@@ -187,6 +199,12 @@ export function createSimulatorStore(): SimulatorStore {
     },
     set turnout(v) {
       setTurnout(v);
+    },
+    get boundariesYear() {
+      return state.boundariesYear;
+    },
+    set boundariesYear(v) {
+      setBoundariesYear(v);
     },
     get allocation() {
       return allocation;
@@ -200,8 +218,12 @@ export function createSimulatorStore(): SimulatorStore {
     get activePresetLabel() {
       return state.activePresetMeta?.label ?? null;
     },
+    get districtSeats() {
+      return districtSeats;
+    },
     setShare,
     setTurnout,
+    setBoundariesYear,
     reset,
     apply2021Actual,
     applyPoll

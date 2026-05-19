@@ -15,8 +15,9 @@ import {
 } from '../src/lib/simulator/preset-2021';
 import { deriveDistrictVotes } from '../src/lib/simulator/derive-district-votes';
 import { DISTRICTS } from '../src/lib/data/districts';
+import { RESULTS_2021 } from '../src/lib/data/results-2021';
 import { THRESHOLDS } from '../src/lib/data/thresholds';
-import type { PartyId } from '../src/lib/data/types';
+import type { DistrictId, PartyId } from '../src/lib/data/types';
 
 describe('simulator 2021-actual preset', () => {
   it('reproduces the historical 2021 seat distribution exactly', () => {
@@ -45,6 +46,41 @@ describe('simulator 2021-actual preset', () => {
     for (const dist of result.perDistrict) {
       const filled = dist.perParty.reduce((a, p) => a + p.seats, 0);
       expect(filled).toBe(PRESET_2021_DISTRICT_SEATS[dist.districtId]);
+    }
+  });
+
+  it('places every seat in the exact district per the MOI 2021 tally', () => {
+    // The gov.cy MOI rule (round-robin stage 2 + sequential stage 3) yields
+    // not just the right national totals, but the exact per-district
+    // placement reported by the Ministry of Interior for 2021. We assert
+    // every (district, party) cell matches RESULTS_2021.
+    const result = allocateSeats(
+      { districtBreakdown: PRESET_2021_BREAKDOWN },
+      PRESET_2021_DISTRICT_SEATS,
+      THRESHOLDS
+    );
+
+    const districts: DistrictId[] = ['NIC', 'LIM', 'FAM', 'LAR', 'PAF', 'KYR'];
+    const qualifying: PartyId[] = [
+      'DISY',
+      'AKEL',
+      'DIKO',
+      'ELAM',
+      'EDEK',
+      'DIPA',
+      'KOSP'
+    ];
+
+    for (const did of districts) {
+      const distOut = result.perDistrict.find((x) => x.districtId === did);
+      for (const pid of qualifying) {
+        const got =
+          distOut?.perParty.find((x) => x.partyId === pid)?.seats ?? 0;
+        const want =
+          RESULTS_2021.find((r) => r.partyId === pid)?.perDistrict[did]
+            ?.seats ?? 0;
+        expect(got, `${did} ${pid}`).toBe(want);
+      }
     }
   });
 });

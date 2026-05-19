@@ -49,11 +49,12 @@ Any seats still unfilled go one-by-one to the qualifying party with the largest 
 
 ### Re-assigning earned seats back to districts
 
-This part is easy to get wrong, because it's the bit the system is most often described as. Per the Wikipedia / electoral-law summary of the relevant statute:
+This part is easy to get wrong. Shorter English summaries (Wikipedia, IDEA, parliament.cy) all rank parties "by their total votes," which is **not** what the Ministry of Interior actually does. The canonical rule lives on the [gov.cy MOI election-system page](https://www.gov.cy/moi-elections/documents/voyleytikes-plirofories/eklogiko-systima/) and works in two distinct passes:
 
-> Seats allocated in the second and third allocation are distributed to lists in constituencies by ranking the parties based on their total votes and giving the lists a seat in the constituency where it had the most unused votes in the first allocation, assuming that constituency did not have all its seats filled previously …
+1. **Stage 2 placement — round-robin by nationwide unused remainder.** Qualifying parties are sorted descending by their *nationwide* unused total. In pass 1, each party (in that order) places one seat in the district where it has its **largest** unused remainder, provided that district still has an unfilled seat; if not, it falls through to the next-largest. Pass 2 advances each party to its *next-largest* unused district, and so on, until every party's second-distribution seats are placed.
+2. **Stage 3 placement — sequential by stage-2 remainder.** Residual seats go one at a time to the qualifying party (≥ 7.2 %) with the largest *post-stage-2* remainder (national unused minus seats × stage-2 quota), placed in that party's highest stage-1 unused district that still has capacity.
 
-So national-pool seats are *earned* by national unused totals, then *placed* in the party's strongest-unused district that still has capacity. The implementation processes parties in descending national-vote order and walks each party's district list highest-unused first, decrementing seat capacity per placement.
+Together with the real 2021 vote breakdown in [`results-2021.ts`](src/lib/data/results-2021.ts) and the 2021 boundaries (Nicosia 20, Paphos 4), this reproduces the historical Ministry of Interior tally **per district and per party, all 42 cells exactly** — see [`tests/simulator.test.ts`](tests/simulator.test.ts). The MOI's own hypothetical worked example (5 parties, 99k unused, 18 seats) is also pinned as a test.
 
 ### Output
 
@@ -61,7 +62,9 @@ So national-pool seats are *earned* by national unused totals, then *placed* in 
 
 ### Tests
 
-[`tests/election-algorithm.test.ts`](tests/election-algorithm.test.ts) reproduces the 2021 worked example with inline fixtures. The tests deliberately do **not** import production data files so a data refactor can't silently turn a regression green.
+[`tests/election-algorithm.test.ts`](tests/election-algorithm.test.ts) reproduces the 2021 worked example with inline fixtures and also pins the [gov.cy MOI worked example](https://www.gov.cy/moi-elections/documents/voyleytikes-plirofories/eklogiko-systima/) (5 parties / 18 unallocated seats / stage-2 quota 5,500). Those tests deliberately do **not** import production data files, so a data refactor can't silently turn a regression green.
+
+[`tests/simulator.test.ts`](tests/simulator.test.ts) is the integration check: it feeds the real 2021 vote breakdown (from `results-2021.ts`) through the engine with 2021 boundaries and asserts that every (district, party) cell matches the Ministry of Interior's published 2021 tally — including the AKEL-Nicosia +1, DISY-Kyrenia +1, etc. that flow from the round-robin placement rule.
 
 ```bash
 npm test                                  # all
@@ -79,7 +82,8 @@ nationalShares (%) ──► deriveDistrictVotes ──► allocateSeats ──�
 ```
 
 - [`derive-district-votes.ts`](src/lib/simulator/derive-district-votes.ts) is the **only** approximation in the chain. It splits each party's national vote share across six districts using 2021-derived intensity coefficients (party-specific local strength relative to district population). The UI flags this as approximate; everything downstream is exact.
-- A "2021 actual" preset bypasses the approximation by setting an explicit `overrideBreakdown` from [`preset-2021.ts`](src/lib/simulator/preset-2021.ts). Editing any share clears the override.
+- A "2021 actual" preset bypasses the approximation by setting an explicit `overrideBreakdown` from [`preset-2021.ts`](src/lib/simulator/preset-2021.ts) — built directly from `RESULTS_2021`. Editing any share clears the override.
+- The simulator carries a `boundariesYear: 2021 | 2026` flag that selects the per-district seat map (20/12/11/6/4/3 vs 19/12/11/6/5/3). The "2021 actual" preset flips it to 2021 so the reproduction matches history exactly; manual edits and poll presets default to 2026. The toggle is exposed in the simulator UI as a segmented control.
 
 ## Data
 

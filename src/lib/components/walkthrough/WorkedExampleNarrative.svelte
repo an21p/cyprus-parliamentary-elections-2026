@@ -63,11 +63,14 @@
           : 'The national pool runs on each party\'s nationwide unused total',
       body: [
         lang === 'el'
-          ? 'Η ίδια διαδικασία της 1ης κατανομής επαναλαμβάνεται σε κάθε επαρχία. Στη συνέχεια, για τη 2η κατανομή, η Κύπρος αντιμετωπίζεται ως <strong>μία περιφέρεια</strong>: αθροίζονται οι αχρησιμοποίητες ψήφοι κάθε κόμματος και από τις 6 επαρχίες, και ένα νέο μέτρο (συνολικές αχρ. ψήφοι ÷ έδρες που μένουν) αποδίδει εθνικές έδρες στα κόμματα που έχουν ξεπεράσει το 3,6%.'
-          : 'The first-distribution procedure repeats in every district. Then, for the second distribution, Cyprus is treated as <strong>a single constituency</strong>: each party\'s unused votes are summed across all six districts, and a new quota (total unused ÷ remaining seats) hands out national-pool seats to parties above the 3.6 % threshold.',
+          ? 'Η ίδια διαδικασία της 1ης κατανομής επαναλαμβάνεται σε κάθε επαρχία. Για τη 2η κατανομή, η Κύπρος αντιμετωπίζεται ως <strong>μία περιφέρεια</strong>: αθροίζονται οι αχρ. ψήφοι κάθε κόμματος και από τις 6 επαρχίες, και ένα νέο μέτρο (συνολικές αχρ. ψήφοι ÷ έδρες που μένουν) αποδίδει εθνικές έδρες στα κόμματα που έχουν ξεπεράσει το 3,6%.'
+          : 'The first-distribution procedure repeats in every district. For the second distribution, Cyprus is treated as <strong>a single constituency</strong>: each party\'s unused votes are summed across all six districts, and a new quota (total unused ÷ remaining seats) hands out national-pool seats to parties above the 3.6 % threshold.',
         lang === 'el'
-          ? 'Το <strong>ΑΚΕΛ</strong> κέρδισε εθνικές έδρες όχι μόνο χάρη στις <strong>1.302 αχρ. ψήφους</strong> του στη Λευκωσία, αλλά χάρη στο <strong>πανεθνικό σύνολο των 23.395</strong>. Η Λευκωσία είναι όμως η επαρχία όπου είχε τις περισσότερες αχρ. ψήφους, γι\' αυτό, με βάση τον νόμο, μία από τις εθνικές του έδρες <em>προσγειώθηκε</em> εκεί.'
-          : '<strong>AKEL</strong> earned its national-pool seats not because of its <strong>1,302 unused votes in Nicosia</strong> alone but because of its <strong>nationwide total of 23,395</strong>. Nicosia happens to be the district where AKEL had the largest unused tally, which is why one of its earned seats <em>landed</em> there under the re-assignment rule.'
+          ? 'Πώς μοιράζονται μετά αυτές οι έδρες ξανά στις επαρχίες; Ο νόμος ορίζει: τα κόμματα <strong>κατατάσσονται κατά σειρά πανεθνικού αχρ. υπολοίπου</strong>. Με τη σειρά, καθένα παίρνει μία έδρα στην επαρχία όπου έχει το <strong>μεγαλύτερο αχρ. υπόλοιπό του</strong>, αν εκεί υπάρχει αδιάθετη έδρα· αλλιώς, στην επόμενη μεγαλύτερη. Η διαδικασία επαναλαμβάνεται για το επόμενο μεγαλύτερο αχρ. υπόλοιπο κάθε κόμματος, μέχρι να εξαντληθούν οι έδρες τους.'
+          : 'How are those national-pool seats then placed back into districts? The law ranks parties by their <strong>nationwide unused total</strong>. Going down that ranking, each party gets one seat in the district where <em>it</em> has its <strong>largest unused remainder</strong>, provided that district still has an unfilled seat; otherwise it falls through to the next-largest. The pass repeats with each party\'s next-largest district, until every party\'s national-pool seats are placed.',
+        lang === 'el'
+          ? 'Στην περίπτωση του <strong>ΑΚΕΛ</strong>: με πανεθνικό αχρ. υπόλοιπο 23.395 ψήφων, κατατάχθηκε πρώτο. Οι μεγαλύτερες αχρ. ψήφοι του ήταν στην <strong>Πάφο</strong> (5.539), μετά στην Αμμόχωστο, Κερύνεια, Λεμεσό. Όταν έφτασε στη Λευκωσία, όπου είχε τις <em>λιγότερες</em> αχρ. ψήφους (1.302), όλες οι άλλες επαρχίες είχαν γεμίσει — έτσι <strong>δύο</strong> από τις εθνικές έδρες του ΑΚΕΛ προσγειώθηκαν στη Λευκωσία, παρότι δεν ήταν εκεί που είχε τη μεγαλύτερη «δύναμη» αχρ. ψήφων.'
+          : 'For <strong>AKEL</strong>: with a nationwide unused total of 23,395 it was ranked first. AKEL\'s largest unused tallies were in <strong>Paphos</strong> (5,539), then Famagusta, Kyrenia, Limassol. By the time the algorithm got to Nicosia — where AKEL actually had the <em>smallest</em> unused, 1,302 — every other district had filled up. So <strong>two</strong> of AKEL\'s national-pool seats ended up landing in Nicosia, even though Nicosia was the weakest of its leftover piles.'
       ]
     },
     s4: {
@@ -117,8 +120,10 @@
 
   <WorkedExampleStep step={3} title={T.s3.title} eyebrow={stepLabel(3)}>
     {#snippet body()}
-      <p>{@html T.s3.body[0]}</p>
-      <p>{@html T.s3.body[1]}</p>
+      {#each T.s3.body as p}
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        <p>{@html p}</p>
+      {/each}
     {/snippet}
     {#snippet figure()}
       <div class="s3-stack">

@@ -30,7 +30,9 @@ This is a static, prerendered, bilingual (English / Greek) explainer + simulator
 
 [src/lib/election-algorithm.ts](src/lib/election-algorithm.ts) implements `allocateSeats(input, districtSeats, thresholds)` as a pure, deterministic function. Seat counts and thresholds are **inputs**, not constants - the same routine reproduces 2021 (Nicosia 20, Paphos 4) and runs 2026 (Nicosia 19, Paphos 5). Don't hardcode either. The three traces in `AllocationResult` (`firstDistribution`, `secondDistribution`, `thirdDistribution`) are surfaced verbatim in the simulator UI, so changing their shape is a UI-breaking change.
 
-Tests in [tests/election-algorithm.test.ts](tests/election-algorithm.test.ts) use inline fixtures (worked 2021 examples from the research file). Do **not** make these tests import `data/results-2021.ts`.
+The stage-2/3 placement rule follows the official MOI procedure on the [gov.cy election-system page](https://www.gov.cy/moi-elections/documents/voyleytikes-plirofories/eklogiko-systima/): **stage 2 is round-robin by nationwide unused remainder** (each party places one seat per pass in its next-largest unused district with capacity); **stage 3 is sequential by post-stage-2 remainder**. Shorter English summaries that rank parties "by total votes" are wrong — do not regress to that simpler rule.
+
+Tests in [tests/election-algorithm.test.ts](tests/election-algorithm.test.ts) use inline fixtures: the worked 2021 examples from the research file *and* the MOI's own hypothetical example (5 parties, 99k unused, 18 seats, quota 5,500). Do **not** make these tests import `data/results-2021.ts`. The integration check that uses real 2021 data is in [tests/simulator.test.ts](tests/simulator.test.ts); it asserts every (district, party) cell matches the MOI's published 2021 tally exactly.
 
 ### Simulator pipeline
 
@@ -43,7 +45,9 @@ nationalShares (%) ──► deriveDistrictVotes ──► allocateSeats ──�
 
 [src/lib/simulator/derive-district-votes.ts](src/lib/simulator/derive-district-votes.ts) is the **only approximation** in the chain - it splits national vote shares across six districts using 2021-derived intensity coefficients. It's surfaced in the UI as such; the rest of the chain is exact.
 
-The "2021 actual" preset bypasses the approximation by setting an explicit `overrideBreakdown` from [src/lib/simulator/preset-2021.ts](src/lib/simulator/preset-2021.ts) - a hand-calibrated literal that makes the algorithm reproduce the historic 2021 outcome (17/15/9/4/4/4/3 = 56). Any manual share edit clears the override.
+The "2021 actual" preset bypasses the approximation by setting an explicit `overrideBreakdown` built in [src/lib/simulator/preset-2021.ts](src/lib/simulator/preset-2021.ts) directly from `RESULTS_2021` (so all 48 qualifying-party cells are the real gov.cy MOI numbers, not hand-tuned estimates). Applying the preset also flips the store's `boundariesYear` to `2021` so seats are 20/12/11/6/4/3 — together these reproduce the historic 2021 outcome both nationally (17/15/9/4/4/4/3 = 56) and per district. Any manual share edit clears the override.
+
+The simulator state carries a `boundariesYear: 2021 | 2026` flag (default 2026) exposed in the UI as a segmented toggle. The 2026 reform moved one seat from Nicosia (20→19) to Paphos (4→5); the toggle lets the user simulate any vote pattern under either boundary set.
 
 ### Polls
 

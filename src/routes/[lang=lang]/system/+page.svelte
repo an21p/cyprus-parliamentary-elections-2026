@@ -58,32 +58,31 @@
       {/if}
     </p>
     <Callout tone="fact" title={lang === 'el' ? 'Ο τύπος' : 'The formula'}>
-      <p>
-        <strong>{lang === 'el' ? 'Μέτρο' : 'Quota'}</strong>
-      </p>
-      <KMath
-        display
-        expr={'Q \\;=\\; \\left\\lfloor \\dfrac{V_{\\text{valid}}}{S} \\right\\rfloor'}
-      />
-      <p>
-        <strong>{lang === 'el' ? 'Έδρες κόμματος' : 'Party seats'}</strong>
-      </p>
-      <KMath
-        display
-        expr={'S_p \\;=\\; \\left\\lfloor \\dfrac{V_p}{Q} \\right\\rfloor'}
-      />
-      <p>
-        <strong>{lang === 'el' ? 'Αχρησιμοποίητες ψήφοι' : 'Unused votes'}</strong>
-      </p>
-      <KMath
-        display
-        expr={'U_p \\;=\\; V_p \\,-\\, S_p \\cdot Q'}
-      />
+      <dl class="formula-list">
+        <dt>{lang === 'el' ? 'εκλογικό μέτρο' : 'electoral quota'}</dt>
+        <dd>
+          <KMath
+            expr={'=\\; \\left\\lfloor \\dfrac{\\text{valid votes}}{\\text{seats}} \\right\\rfloor'}
+          />
+        </dd>
+        <dt>{lang === 'el' ? 'έδρες κόμματος' : 'party seats'}</dt>
+        <dd>
+          <KMath
+            expr={'=\\; \\left\\lfloor \\dfrac{\\text{party votes}}{\\text{quota}} \\right\\rfloor'}
+          />
+        </dd>
+        <dt>{lang === 'el' ? 'αχρ. ψήφοι' : 'unused'}</dt>
+        <dd>
+          <KMath
+            expr={'=\\; \\text{party votes} \\,-\\, \\text{party seats} \\times \\text{quota}'}
+          />
+        </dd>
+      </dl>
       <p class="math-legend-line">
         {#if lang === 'el'}
-          όπου <KMath expr={'V_{\\text{valid}}'} /> οι έγκυροι ψήφοι επαρχίας, <KMath expr={'S'} /> οι έδρες, <KMath expr={'V_p'} /> οι ψήφοι κόμματος και <KMath expr={'\\lfloor \\cdot \\rfloor'} /> ο ακέραιος προς τα κάτω.
+          Το <KMath expr={'\\lfloor \\,\\cdot\\, \\rfloor'} /> «πατώνει» τη διαίρεση στον αμέσως μικρότερο ακέραιο.
         {:else}
-          where <KMath expr={'V_{\\text{valid}}'} /> is the district's valid votes, <KMath expr={'S'} /> its seats, <KMath expr={'V_p'} /> the party's votes, and <KMath expr={'\\lfloor \\cdot \\rfloor'} /> the floor function.
+          The <KMath expr={'\\lfloor \\,\\cdot\\, \\rfloor'} /> brackets round the division down to the nearest whole number.
         {/if}
       </p>
     </Callout>
@@ -175,18 +174,65 @@
   >
     <p>
       {#if lang === 'el'}
-        Οι έδρες που κερδήθηκαν στη δεύτερη και τρίτη κατανομή πρέπει να αντιστοιχιστούν σε συγκεκριμένες επαρχίες. Ο νόμος ορίζει μία σαφή σειρά: τα κόμματα κατατάσσονται <strong>κατά συνολικές ψήφους</strong> και κάθε κόμμα παίρνει έδρα στην επαρχία όπου είχε τις <strong>περισσότερες αχρησιμοποίητες ψήφους</strong> στην πρώτη κατανομή, εφόσον αυτή η επαρχία δεν έχει ήδη συμπληρωθεί. Η διαδικασία επαναλαμβάνεται μέχρι να τοποθετηθεί κάθε εθνική έδρα σε μία επαρχία.
+        Οι έδρες που κερδίζονται στη δεύτερη και τρίτη κατανομή πρέπει να αντιστοιχιστούν σε συγκεκριμένες επαρχίες. Ο νόμος ορίζει δύο ξεχωριστές διαδικασίες — μία για τη φάση 2 και μία για τη φάση 3 — σύμφωνα με την επίσημη σελίδα του <strong>Υπουργείου Εσωτερικών</strong>.
       {:else}
-        Seats won at the national level must be assigned to specific districts. The law sets a clear order: parties are <strong>ranked by total votes</strong>, and each is awarded a seat in the district where it had the <strong>largest unused-vote pile</strong> in the first distribution, provided that district has not already been filled. The process repeats until every national seat is placed in a district.
+        Seats won in stages 2 and 3 must be placed back in specific districts. The law sets out two distinct procedures — one for stage 2 and one for stage 3 — per the <strong>Ministry of Interior's</strong> official page.
       {/if}
     </p>
+
+    <Callout
+      tone="info"
+      title={lang === 'el' ? 'Φάση 2 — κυκλικά κατά πανεθνικό αχρ. υπόλοιπο' : 'Stage 2 — round-robin by nationwide unused remainder'}
+    >
+      <p>
+        {#if lang === 'el'}
+          Τα κόμματα <strong>κατατάσσονται κατά το πανεθνικό άθροισμα αχρ. ψήφων τους</strong> (φθίνουσα σειρά). Σε κάθε «γύρο», κάθε κόμμα — με τη σειρά κατάταξης — τοποθετεί <strong>μία έδρα</strong> στην επαρχία όπου έχει το <em>μεγαλύτερο</em> αχρ. υπόλοιπό του, εφόσον εκεί υπάρχει αδιάθετη έδρα. Αν η επαρχία είναι γεμάτη, πάει στην επόμενη μεγαλύτερη. Στον επόμενο γύρο, κάθε κόμμα προχωρά στην <em>επόμενη</em> μεγαλύτερη του επαρχία. Η διαδικασία επαναλαμβάνεται μέχρι να τοποθετηθούν όλες οι έδρες φάσης 2.
+        {:else}
+          Parties are <strong>ranked descending by their nationwide unused total</strong>. In pass 1, each party (in rank order) places <strong>one seat</strong> in the district where it has its <em>largest</em> unused remainder, provided that district still has an unfilled seat; if not, it falls through to its next-largest. Pass 2 advances every party to its <em>next-largest</em> unused district, and so on, until every party's stage-2 quota is placed.
+        {/if}
+      </p>
+    </Callout>
+
+    <Callout
+      tone="info"
+      title={lang === 'el' ? 'Φάση 3 — μία-μία, κατά υπόλοιπο μετά τη φάση 2' : 'Stage 3 — one by one, by post-stage-2 remainder'}
+    >
+      <p>
+        {#if lang === 'el'}
+          Οι εναπομείνασες έδρες δίνονται <strong>μία προς μία</strong>: κάθε φορά παίρνει σειρά το κόμμα με το μεγαλύτερο <em>νέο</em> υπόλοιπο (αχρ. ψήφοι μείον έδρες×μέτρο φάσης 2), εφόσον είναι πάνω από το 7,2%. Η έδρα τοποθετείται στην επαρχία όπου το κόμμα έχει τη μεγαλύτερη αχρ. ψήφο και υπάρχει διαθέσιμη έδρα.
+        {:else}
+          Residual seats are awarded <strong>one at a time</strong> to the qualifying party (≥ 7.2 %) with the largest <em>new</em> remainder (national unused − seats × stage-2 quota), placed in that party's highest stage-1 unused district that still has capacity.
+        {/if}
+      </p>
+    </Callout>
+
     <p>
       {#if lang === 'el'}
-        Αποτέλεσμα: ένα κόμμα μπορεί να μην έφτασε το επαρχιακό μέτρο σε <strong>καμία</strong> επαρχία, και όμως να καταλήξει με έδρες σε αρκετές επαρχίες, αν το πανεθνικό του ποσοστό πέρασε το <strong>3,6%</strong>. Όπως το διατύπωσε ο Cyprus Mail (10 Μαΐου 2026): «Το παρόν εκλογικό σύστημα προβλέπει την κατανομή εδρών στην πρώτη κατανομή σε απλή αναλογική βάση, ενώ στις επόμενες δύο φάσεις της δεύτερης κατανομής εφαρμόζεται ενισχυμένη αναλογική με όρια 3,6% και 7,2% αντίστοιχα.»
+        Αποτέλεσμα: ένα κόμμα μπορεί να μην έφτασε το επαρχιακό μέτρο σε <strong>καμία</strong> επαρχία, και όμως να καταλήξει με έδρες σε αρκετές επαρχίες, αν το πανεθνικό του ποσοστό πέρασε το <strong>3,6%</strong>. Ταυτόχρονα, μπορεί να καταλήξει με έδρες σε επαρχίες που <strong>δεν</strong> είχε τις περισσότερες αχρ. ψήφους — απλώς γιατί όταν ήρθε η σειρά του, οι «καλύτερες» επαρχίες είχαν ήδη γεμίσει.
       {:else}
-        The upshot: a party may not have reached the quota in <strong>any</strong> district and still end up with seats in several, provided its national share crossed <strong>3.6%</strong>. As the Cyprus Mail put it (10 May 2026): "The current electoral system provides for the allocation of parliamentary seats at the first distribution on a simple pro rata basis, while in the two subsequent phases of the second allocation, a reinforced proportional representation system is applied, with thresholds of 3.6 per cent and 7.2 per cent, respectively."
+        The upshot: a party may not have reached the quota in <strong>any</strong> district and still end up with seats in several, provided its national share cleared <strong>3.6 %</strong>. Equally, it can end up with seats in districts where it did <strong>not</strong> have its highest unused pile — simply because by the time it picked, the "better" districts were full. (This is exactly how AKEL ended up with two Nicosia reassignment seats in 2021 despite Nicosia being its <em>smallest</em> unused pile.)
       {/if}
     </p>
+
+    <Callout
+      tone="fact"
+      title={lang === 'el' ? 'Πηγή: Υπουργείο Εσωτερικών' : 'Source: Ministry of Interior'}
+    >
+      <p>
+        <a
+          class="inline-link"
+          href="https://www.gov.cy/moi-elections/documents/voyleytikes-plirofories/eklogiko-systima/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          gov.cy/moi-elections — Εκλογικό Σύστημα
+        </a>
+        —
+        {lang === 'el'
+          ? 'η μοναδική δημόσια πηγή που περιγράφει αναλυτικά τη διαδικασία ανά γύρο.'
+          : 'the only public source that describes the round-by-round placement procedure in detail.'}
+      </p>
+    </Callout>
   </SectionBlock>
 
   <SectionBlock
@@ -248,39 +294,26 @@
     >
       <p>
         {#if lang === 'el'}
-          Για κάθε κόμμα <em>p</em> και επαρχία <em>d</em>, οι προσομοιωμένες ψήφοι είναι:
+          Για κάθε κόμμα και κάθε επαρχία, οι προσομοιωμένες ψήφοι είναι:
         {:else}
-          For each party <em>p</em> and district <em>d</em>, simulated votes are:
+          For each party in each district, simulated votes are:
         {/if}
       </p>
-      <KMath
-        display
-        expr={'V_{p,d} \\;=\\; s_p \\,\\times\\, R_d \\,\\times\\, \\tau \\,\\times\\, \\iota_{p,d}'}
-      />
-      <ul class="math-legend">
-        <li>
-          <KMath expr={'s_p'} /> —
-          {lang === 'el'
-            ? 'εθνικό μερίδιο κόμματος (από δημοσκόπηση), 0–1'
-            : "party's national share (from the poll), in 0–1"}
-        </li>
-        <li>
-          <KMath expr={'R_d'} /> —
-          {lang === 'el'
-            ? 'εγγεγραμμένοι ψηφοφόροι της επαρχίας το 2026'
-            : '2026 registered voters in the district'}
-        </li>
-        <li>
-          <KMath expr={'\\tau'} /> —
-          {lang === 'el' ? 'εκτιμώμενη πανεθνική προσέλευση (0–1)' : 'estimated national turnout (0–1)'}
-        </li>
-        <li>
-          <KMath expr={'\\iota_{p,d}'} /> —
-          {lang === 'el'
-            ? 'συντελεστής τοπικής έντασης (βλ. παρακάτω)'
-            : 'local intensity coefficient (see below)'}
-        </li>
-      </ul>
+      <dl class="formula-list">
+        <dt>{lang === 'el' ? 'ψήφοι' : 'votes'}</dt>
+        <dd>
+          <KMath
+            expr={'=\\; \\text{national share} \\,\\times\\, \\text{registered voters} \\,\\times\\, \\text{turnout} \\,\\times\\, \\text{intensity}'}
+          />
+        </dd>
+      </dl>
+      <p class="math-legend-line">
+        {#if lang === 'el'}
+          Τα τρία πρώτα είναι γνωστά: το <em>εθνικό μερίδιο</em> το δίνει η δημοσκόπηση, οι <em>εγγεγραμμένοι</em> είναι δημόσιο στοιχείο, και η <em>προσέλευση</em> τίθεται από εσάς. Η <em>ένταση</em> είναι ο μόνος εκτιμώμενος όρος.
+        {:else}
+          Three of these are known: the <em>national share</em> comes from the poll, <em>registered voters</em> is public data, and <em>turnout</em> is the value you set. <em>Intensity</em> is the only estimated term.
+        {/if}
+      </p>
     </Callout>
 
     <p>
@@ -291,37 +324,45 @@
       {/if}
     </p>
 
-    <KMath
-      display
-      expr={'\\iota_{p,d} \\;=\\; \\dfrac{\\,V^{2021}_{p,d} \\,/\\, V^{2021}_{p}\\,}{\\,R_d \\,/\\, \\sum_{k} R_k\\,}'}
-    />
+    <dl class="formula-list">
+      <dt>{lang === 'el' ? 'ένταση' : 'intensity'}</dt>
+      <dd>
+        <KMath
+          expr={'=\\; \\dfrac{\\;\\text{party\\textquoteright s share of its 2021 vote from this district}\\;}{\\;\\text{district\\textquoteright s share of the national electorate}\\;}'}
+        />
+      </dd>
+    </dl>
 
     <p>
       {#if lang === 'el'}
-        Δηλαδή: το μερίδιο των πανεθνικών ψήφων του κόμματος που προήλθε από την επαρχία <em>d</em>, διά το μερίδιο του εκλογικού σώματος που της αναλογεί. Τιμή <KMath expr={'\\iota_{p,d} = 1'} /> σημαίνει ότι το κόμμα ψηφίστηκε εκεί ακριβώς στο μέτρο που θα ανέμενε κανείς από τον πληθυσμό· <KMath expr={'\\iota_{p,d} > 1'} /> σημαίνει υπεραπόδοση, <KMath expr={'\\iota_{p,d} < 1'} /> υποαπόδοση. Νέα κόμματα χωρίς αναφορά στο 2021 χρησιμοποιούν <KMath expr={'\\iota_{p,d} = 1'} /> (ομοιόμορφη κατανομή).
+        Με άλλα λόγια: τιμή <strong>1</strong> σημαίνει ότι το κόμμα ψηφίστηκε εκεί ακριβώς στο μέτρο που θα περίμενε κανείς από τον πληθυσμό· <strong>πάνω από 1</strong> σημαίνει υπεραπόδοση, <strong>κάτω από 1</strong> υποαπόδοση. Νέα κόμματα χωρίς αναφορά στο 2021 παίρνουν προεπιλεγμένη ένταση <strong>1</strong> (ομοιόμορφη κατανομή).
       {:else}
-        That is: the share of the party's 2021 national vote that came from district <em>d</em>, divided by the district's share of the national electorate. A value of <KMath expr={'\\iota_{p,d} = 1'} /> means the party polled exactly in proportion to the district's population; <KMath expr={'\\iota_{p,d} > 1'} /> means over-performance, <KMath expr={'\\iota_{p,d} < 1'} /> under-performance. New parties with no 2021 baseline default to <KMath expr={'\\iota_{p,d} = 1'} /> (uniform).
+        In plain terms: a value of <strong>1</strong> means the party polled exactly in proportion to the district's population; <strong>above 1</strong> means over-performance, <strong>below 1</strong> under-performance. New parties with no 2021 baseline default to an intensity of <strong>1</strong> (uniform).
       {/if}
     </p>
 
     <p>
       {#if lang === 'el'}
-        Για τις λίγες περιπτώσεις του 2021 όπου είναι γνωστές μόνο οι έδρες ενός κόμματος σε μια επαρχία (όχι οι ψήφοι), η ένταση εκτιμάται από έναν συνδυασμό σεϊτ-σερ και πληθυσμού:
+        Για τις λίγες περιπτώσεις του 2021 όπου είναι γνωστές μόνο οι έδρες ενός κόμματος σε μια επαρχία (όχι οι ψήφοι), η ένταση εκτιμάται από έναν συνδυασμό μεριδίου εδρών και πληθυσμού:
       {:else}
         For the handful of 2021 cases where only a party's seats in a district are known (not its votes), intensity is estimated from a blend of seat share and population:
       {/if}
     </p>
 
-    <KMath
-      display
-      expr={'w_d \\;=\\; R_d \\,\\bigl(\\,0.1 \\,+\\, 1.8 \\cdot \\tfrac{\\text{seats}_{p,d}}{\\text{seats}_d}\\,\\bigr)'}
-    />
+    <dl class="formula-list">
+      <dt>{lang === 'el' ? 'βάρος' : 'weight'}</dt>
+      <dd>
+        <KMath
+          expr={'=\\; \\text{registered voters} \\,\\times\\, \\left(0.1 \\,+\\, 1.8 \\,\\times\\, \\dfrac{\\text{party\\textquoteright s seats}}{\\text{district\\textquoteright s seats}}\\right)'}
+        />
+      </dd>
+    </dl>
 
     <p>
       {#if lang === 'el'}
-        και οι αδιάθετες πανεθνικές ψήφοι του κόμματος κατανέμονται στις άγνωστες επαρχίες κατ' αναλογία αυτών των βαρών. Όλη η διαδικασία είναι ντοκουμενταρισμένη ως προσέγγιση στο UI του προσομοιωτή· από εκεί και πέρα, το <KMath expr={'V_{p,d}'} /> τροφοδοτεί τον ακριβή αλγόριθμο κατανομής εδρών.
+        και οι αδιάθετες πανεθνικές ψήφοι του κόμματος κατανέμονται στις άγνωστες επαρχίες κατ' αναλογία αυτών των βαρών. Όλη η διαδικασία είναι ντοκουμενταρισμένη ως προσέγγιση στο UI του προσομοιωτή· από εκεί και πέρα, οι προσομοιωμένες ψήφοι τροφοδοτούν τον ακριβή αλγόριθμο κατανομής εδρών.
       {:else}
-        and the party's residual national votes are spread across the unknown districts in proportion to these weights. The whole step is flagged as an approximation in the simulator UI; from there onward, <KMath expr={'V_{p,d}'} /> feeds the exact seat-allocation algorithm.
+        and the party's residual national votes are spread across the unknown districts in proportion to these weights. The whole step is flagged as an approximation in the simulator UI; from there onward, the simulated votes feed the exact seat-allocation algorithm.
       {/if}
     </p>
 
@@ -341,18 +382,40 @@
 </PageShell>
 
 <style>
-  .math-legend {
-    margin: var(--sp-2) 0 0;
-    padding-left: var(--sp-4);
-    display: grid;
-    gap: var(--sp-1);
-  }
-  .math-legend li {
-    line-height: 1.55;
-  }
   .math-legend-line {
     margin-top: var(--sp-2);
     font-size: var(--fs-90);
     color: var(--color-ink-2, inherit);
   }
+
+  .formula-list {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: var(--sp-3);
+    row-gap: var(--sp-2);
+    align-items: baseline;
+    margin: var(--sp-3) 0;
+    padding: 0;
+  }
+  .formula-list dt {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--color-ink);
+    white-space: nowrap;
+  }
+  .formula-list dd {
+    margin: 0;
+    min-width: 0;
+    overflow-x: auto;
+  }
+
+  .inline-link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    font-weight: 600;
+  }
+  .inline-link:hover { text-decoration-thickness: 2px; }
 </style>
