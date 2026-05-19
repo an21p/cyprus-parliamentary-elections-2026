@@ -115,8 +115,8 @@
   const L = $derived({
     title:
       lang === 'el'
-        ? 'Επαρχίες Κύπρου - Βουλευτικές Εκλογές 2026'
-        : 'Cyprus electoral districts - 2026 parliamentary elections',
+        ? 'Επαρχίες Κύπρου · Βουλευτικές Εκλογές 2026'
+        : 'Cyprus electoral districts · 2026 parliamentary elections',
     seats2026: lang === 'el' ? 'έδρες 2026' : 'seats 2026',
     voters: lang === 'el' ? 'εγγεγραμμένοι ψηφοφόροι' : 'registered voters',
     ballot: lang === 'el' ? 'χρώμα ψηφοδελτίου' : 'ballot colour',

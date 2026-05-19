@@ -16,7 +16,7 @@
   }
 
   const L = $derived({
-    eyebrow: lang === 'el' ? 'Νicosia 2021 - Εκλογικό Μέτρο' : 'Nicosia 2021 - Electoral Quota',
+    eyebrow: lang === 'el' ? 'Νicosia 2021 · Εκλογικό Μέτρο' : 'Nicosia 2021 · Electoral Quota',
     title:
       lang === 'el'
         ? 'Το «μέτρο» χωρίζει τους ψήφους σε ίσες θέσεις'

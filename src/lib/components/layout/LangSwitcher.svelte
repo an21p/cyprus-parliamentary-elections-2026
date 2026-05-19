@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import type { Lang } from '$i18n/dict';
   import { t, otherLang } from '$i18n/dict';
 
@@ -19,10 +20,13 @@
    */
   const href = $derived.by(() => {
     const path = currentPath || '/';
-    const match = path.match(/^\/(en|el)(\/.*)?$/);
-    if (!match) return `/${target}`;
+    // currentPath comes from url.pathname which includes the deployment base.
+    // Strip it before matching so the regex works regardless of where we're hosted.
+    const stripped = base && path.startsWith(base) ? path.slice(base.length) || '/' : path;
+    const match = stripped.match(/^\/(en|el)(\/.*)?$/);
+    if (!match) return `${base}/${target}`;
     const rest = match[2] ?? '';
-    return `/${target}${rest}`;
+    return `${base}/${target}${rest}`;
   });
 
   const label = $derived(

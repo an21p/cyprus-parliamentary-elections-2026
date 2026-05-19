@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import { PageShell, SectionBlock, Callout, StatGrid, StatCard } from '$components/layout';
   import { PollTracker } from '$components/charts';
   import { t } from '$i18n/dict';
@@ -38,17 +39,19 @@
   <SectionBlock
     id="overview"
     eyebrow={lang === 'el' ? 'Σύνοψη' : 'In brief'}
-    title={lang === 'el' ? 'Μια Βουλή σε επτά κομμάτια' : 'A seven-way parliament'}
+    title={lang === 'el' ? 'Η εικόνα της κούρσας' : 'The state of the race'}
   >
     <p>
-      {lang === 'el'
-        ? 'Για πρώτη φορά από το 1985, καμία πολιτική δύναμη δεν φαίνεται να φτάνει το 25%. Οι τελευταίες δημοσκοπήσεις δείχνουν επτά κόμματα να εισέρχονται στη Βουλή των Αντιπροσώπων: ΔΗΣΥ και ΑΚΕΛ ισόπαλα γύρω στο 18–22%, ΕΛΑΜ τρίτο γύρω στο 10–15%, και τρία νέα μορφώματα (ΑΛΜΑ, Άμεση Δημοκρατία Κύπρου του Φειδία, και Volt) να ξεπερνούν το όριο του 3,6%. Ο συνδυασμός ΔΗΣΥ+ΑΚΕΛ, που το 2001 άγγιξε το 68,7%, πέφτει για πρώτη φορά κάτω από το μισό των εδρών.'
-        : 'For the first time since 1985, no single party is on track to clear 25%. Final-week polling shows seven parties entering the House of Representatives: DISY and AKEL roughly level at 18–22%, ELAM consolidating in third at 10–15%, and three newcomers (ALMA, Direct Democracy Cyprus and Volt) sitting on or above the 3.6% threshold. The combined DISY+AKEL share, which peaked at 68.7% in 2001, will fall below half of the seats for the first time in modern Cypriot politics.'}
+      {#if lang === 'el'}
+        Οι δημοσκοπήσεις της τελευταίας εβδομάδας δείχνουν ένα <strong>κατακερματισμένο πεδίο</strong>. <strong>ΔΗΣΥ</strong> και <strong>ΑΚΕΛ</strong> κινούνται κοντά μεταξύ τους στο <strong>18–22%</strong>, με το <strong>ΕΛΑΜ</strong> στην τρίτη θέση γύρω στο <strong>10–15%</strong>. Τρία νεότερα σχήματα — <strong>ΑΛΜΑ</strong>, <strong>Άμεση Δημοκρατία Κύπρου</strong> και <strong>Volt</strong> — καταγράφονται κοντά ή πάνω από το όριο εισόδου του <strong>3,6%</strong>. Πόσα κόμματα θα το ξεπεράσουν τελικά και πώς θα μοιραστούν οι έδρες εξαρτάται από την προσέλευση και από την κατανομή των ψήφων σε κάθε επαρχία.
+      {:else}
+        Final-week polling shows a <strong>crowded field</strong>. <strong>DISY</strong> and <strong>AKEL</strong> are within polling margin of each other in the <strong>18–22%</strong> range, with <strong>ELAM</strong> in third around <strong>10–15%</strong>. Three newer formations — <strong>ALMA</strong>, <strong>Direct Democracy Cyprus</strong> and <strong>Volt</strong> — are polling near or above the <strong>3.6% entry threshold</strong>. How many parties ultimately cross that line, and how the seats are divided, depends on turnout and on how the vote falls in each district.
+      {/if}
     </p>
     <p>
       {lang === 'el'
         ? 'Αυτή η σελίδα εξηγεί πώς το εκλογικό σύστημα μετατρέπει τις ψήφους σε έδρες και γιατί δύο κόμματα με σχεδόν ίδιο εθνικό ποσοστό μπορούν να καταλήξουν με πολύ διαφορετικό αριθμό εδρών. Ο '
-        : 'This site explains how the electoral arithmetic turns votes into seats, and why two parties on nearly identical national shares can end up with very different seat counts. The '}<a class="inline-link" href={`/${lang}/simulator`}>{lang === 'el' ? 'προσομοιωτής' : 'simulator'}</a>{lang === 'el'
+        : 'This site explains how the electoral arithmetic turns votes into seats, and why two parties on nearly identical national shares can end up with very different seat counts. The '}<a class="inline-link" href={`${base}/${lang}/simulator`}>{lang === 'el' ? 'προσομοιωτής' : 'simulator'}</a>{lang === 'el'
         ? ' σας επιτρέπει να δοκιμάσετε τα δικά σας σενάρια.'
         : ' lets you try the math yourself.'}
     </p>
@@ -89,9 +92,11 @@
     title={lang === 'el' ? 'Πέντε κόμματα διεκδικούν την κορυφή' : 'Five parties competing at the top'}
   >
     <p>
-      {lang === 'el'
-        ? 'Στη φάρα της εβδομάδας πριν από τις εκλογές, οι δύο μεγαλύτεροι ιστορικοί αντίπαλοι, ΔΗΣΥ και ΑΚΕΛ, εμφανίζονται στατιστικά ισοπαλίες. Πίσω τους έχει εδραιωθεί το ΕΛΑΜ ως τρίτη δύναμη, ενώ τα νέα κόμματα ΑΛΜΑ και Άμεση Δημοκρατία Κύπρου μπαίνουν για πρώτη φορά στο πεδίο. Το παρακάτω γράφημα δείχνει την πορεία των πέντε αυτών κομμάτων στις δημοσιευμένες δημοσκοπήσεις από τα τέλη του 2024.'
-        : 'In the final week before the vote, the two historic giants, DISY and AKEL, are statistically tied. Behind them, ELAM has consolidated as the third force, and two newcomers, ALMA and Direct Democracy Cyprus, are contesting their first parliamentary election. The chart below tracks the five leaders across every published poll since late 2024.'}
+      {#if lang === 'el'}
+        Στη φάρα της εβδομάδας πριν από τις εκλογές, οι δύο μεγαλύτεροι ιστορικοί αντίπαλοι, <strong>ΔΗΣΥ</strong> και <strong>ΑΚΕΛ</strong>, εμφανίζονται <strong>στατιστικά ισοπαλίες</strong>. Πίσω τους έχει εδραιωθεί το <strong>ΕΛΑΜ</strong> ως τρίτη δύναμη, ενώ τα νέα κόμματα <strong>ΑΛΜΑ</strong> και <strong>Άμεση Δημοκρατία Κύπρου</strong> μπαίνουν για πρώτη φορά στο πεδίο. Το παρακάτω γράφημα δείχνει την πορεία των πέντε αυτών κομμάτων στις δημοσιευμένες δημοσκοπήσεις από τα τέλη του 2024.
+      {:else}
+        In the final week before the vote, the two historic giants, <strong>DISY</strong> and <strong>AKEL</strong>, are <strong>statistically tied</strong>. Behind them, <strong>ELAM</strong> has consolidated as the third force, and two newcomers, <strong>ALMA</strong> and <strong>Direct Democracy Cyprus</strong>, are contesting their first parliamentary election. The chart below tracks the five leaders across every published poll since late 2024.
+      {/if}
     </p>
     <PollTracker {lang} parties={leadersForChart} />
   </SectionBlock>
@@ -102,7 +107,7 @@
     title={lang === 'el' ? 'Τρεις προτεινόμενες αφετηρίες' : 'Three places to begin'}
   >
     <div class="signposts">
-      <a class="signpost" href={`/${lang}/system`}>
+      <a class="signpost" href={`${base}/${lang}/system`}>
         <p class="signpost-eyebrow">{lang === 'el' ? 'Το σύστημα' : 'The system'}</p>
         <p class="signpost-title">{lang === 'el' ? 'Πώς εκλέγονται 56 έδρες σε τρεις φάσεις' : 'How 56 seats are filled in three stages'}</p>
         <p class="signpost-body">
@@ -113,7 +118,7 @@
         <p class="signpost-cta">{lang === 'el' ? 'Διαβάστε →' : 'Read →'}</p>
       </a>
 
-      <a class="signpost" href={`/${lang}/simulator`}>
+      <a class="signpost" href={`${base}/${lang}/simulator`}>
         <p class="signpost-eyebrow">{lang === 'el' ? 'Διαδραστικό' : 'Interactive'}</p>
         <p class="signpost-title">{lang === 'el' ? 'Ο προσομοιωτής εδρών' : 'The seat allocation simulator'}</p>
         <p class="signpost-body">
@@ -124,7 +129,7 @@
         <p class="signpost-cta">{lang === 'el' ? 'Δοκιμάστε →' : 'Try it →'}</p>
       </a>
 
-      <a class="signpost" href={`/${lang}/polls`}>
+      <a class="signpost" href={`${base}/${lang}/polls`}>
         <p class="signpost-eyebrow">{lang === 'el' ? 'Δεδομένα' : 'Data'}</p>
         <p class="signpost-title">{lang === 'el' ? 'Ο πλήρης πίνακας δημοσκοπήσεων' : 'The full polling table'}</p>
         <p class="signpost-body">
@@ -139,9 +144,11 @@
 
   <Callout tone="fact">
     <strong>{lang === 'el' ? 'Απαγόρευση δημοσκοπήσεων' : 'Poll blackout'}:</strong>
-    {lang === 'el'
-      ? ' Από τις 22:00 της Παρασκευής 22 Μαΐου έως το κλείσιμο των καλπών στις 18:00 της Κυριακής 24 Μαΐου, ο κυπριακός νόμος απαγορεύει τη δημοσίευση νέων δημοσκοπήσεων. Η τελευταία έγκυρη δημοσκόπηση που μπορεί να δημοσιευτεί είναι αυτή της Παρασκευής 15 / Σαββάτου 16 Μαΐου 2026.'
-      : ' From 22:00 on Friday 22 May until polls close at 18:00 on Sunday 24 May, Cypriot law forbids the publication of new poll figures. The last legal publication window closed on Friday 15 / Saturday 16 May 2026.'}
+    {#if lang === 'el'}
+      Από τις <strong>22:00 της Παρασκευής 22 Μαΐου</strong> έως το κλείσιμο των καλπών στις <strong>18:00 της Κυριακής 24 Μαΐου</strong>, ο κυπριακός νόμος απαγορεύει τη δημοσίευση νέων δημοσκοπήσεων. Η τελευταία έγκυρη δημοσκόπηση που μπορεί να δημοσιευτεί είναι αυτή της <strong>Παρασκευής 15 / Σαββάτου 16 Μαΐου 2026</strong>.
+    {:else}
+      From <strong>22:00 on Friday 22 May</strong> until polls close at <strong>18:00 on Sunday 24 May</strong>, Cypriot law forbids the publication of new poll figures. The last legal publication window closed on <strong>Friday 15 / Saturday 16 May 2026</strong>.
+    {/if}
   </Callout>
 </PageShell>
 

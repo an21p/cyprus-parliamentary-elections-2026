@@ -14,3 +14,4 @@ export { default as SectionBlock } from './SectionBlock.svelte';
 export { default as Callout } from './Callout.svelte';
 export { default as StatGrid } from './StatGrid.svelte';
 export { default as StatCard } from './StatCard.svelte';
+export { default as KMath } from './KMath.svelte';

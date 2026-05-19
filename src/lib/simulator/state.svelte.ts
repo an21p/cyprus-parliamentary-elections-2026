@@ -19,7 +19,10 @@ import type {
   PartyId
 } from '../data/types';
 import { deriveDistrictVotes } from './derive-district-votes';
-import { PRESET_2021_BREAKDOWN } from './preset-2021';
+import {
+  PRESET_2021_BREAKDOWN,
+  PRESET_2021_DISTRICT_SEATS
+} from './preset-2021';
 
 // 2026 seats per district.
 const SEATS_2026: Record<DistrictId, number> = DISTRICTS.reduce(
@@ -68,11 +71,13 @@ export function createSimulatorStore(): SimulatorStore {
     shares: Record<PartyId, number>;
     turnout: number;
     overrideBreakdown: DistrictVoteBreakdown | null;
+    overrideDistrictSeats: Record<DistrictId, number> | null;
     activePresetMeta: PresetMeta | null;
   }>({
     shares: blankShares(),
     turnout: DEFAULT_TURNOUT,
     overrideBreakdown: null,
+    overrideDistrictSeats: null,
     activePresetMeta: null
   });
 
@@ -82,9 +87,10 @@ export function createSimulatorStore(): SimulatorStore {
     const breakdown =
       state.overrideBreakdown ??
       deriveDistrictVotes(state.shares, state.turnout);
+    const seats = state.overrideDistrictSeats ?? SEATS_2026;
     return allocateSeats(
       { districtBreakdown: breakdown },
-      SEATS_2026,
+      seats,
       THRESHOLDS
     );
   });
@@ -108,6 +114,7 @@ export function createSimulatorStore(): SimulatorStore {
     // Any manual edit invalidates the active preset and clears the override.
     state.activePresetMeta = null;
     state.overrideBreakdown = null;
+    state.overrideDistrictSeats = null;
   }
 
   function setTurnout(value: number): void {
@@ -118,6 +125,7 @@ export function createSimulatorStore(): SimulatorStore {
     // so the simulator picks up the change.
     if (state.overrideBreakdown) {
       state.overrideBreakdown = null;
+      state.overrideDistrictSeats = null;
       // keep the shares so the user can see what was loaded
     }
   }
@@ -127,6 +135,7 @@ export function createSimulatorStore(): SimulatorStore {
     state.turnout = DEFAULT_TURNOUT;
     state.activePresetMeta = null;
     state.overrideBreakdown = null;
+    state.overrideDistrictSeats = null;
   }
 
   function apply2021Actual(): void {
@@ -135,8 +144,10 @@ export function createSimulatorStore(): SimulatorStore {
     for (const r of RESULTS_2021) shares[r.partyId] = r.nationalShare;
     state.shares = shares;
     state.turnout = 0.6572; // 2021 actual turnout
-    // Use the calibrated literal breakdown so the result matches history.
+    // Real 2021 vote breakdown + 2021 seat counts (Nicosia 20, Paphos 4) so
+    // the algorithm reproduces the historic 17/15/9/4/4/4/3 outcome.
     state.overrideBreakdown = PRESET_2021_BREAKDOWN;
+    state.overrideDistrictSeats = PRESET_2021_DISTRICT_SEATS;
     state.activePresetMeta = {
       label: { en: '2021 actual', el: 'Πραγματικό 2021' }
     };
@@ -151,6 +162,7 @@ export function createSimulatorStore(): SimulatorStore {
     }
     state.shares = shares;
     state.overrideBreakdown = null;
+    state.overrideDistrictSeats = null;
     // Keep turnout at user's current setting - polls don't predict turnout.
     state.activePresetMeta = {
       label: {
@@ -167,6 +179,7 @@ export function createSimulatorStore(): SimulatorStore {
     set shares(v) {
       state.shares = v;
       state.overrideBreakdown = null;
+      state.overrideDistrictSeats = null;
       state.activePresetMeta = null;
     },
     get turnout() {

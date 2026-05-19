@@ -36,8 +36,8 @@
   const txt = $derived({
     threshold:
       lang === 'el'
-        ? 'Όριο 3,6% - εθνικό μερίδιο'
-        : '3.6 % threshold - national share',
+        ? 'Όριο 3,6% · εθνικό μερίδιο'
+        : '3.6 % threshold · national share',
     qualifying:
       lang === 'el' ? 'Κόμματα που πέρασαν' : 'Parties that qualified',
     excluded:

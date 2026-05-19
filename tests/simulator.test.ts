@@ -1,33 +1,28 @@
 // Verifies the simulator's "2021 actual" preset reproduces the historical
 // 2021 seat distribution exactly:
 //   DISY 17 / AKEL 15 / DIKO 9 / ELAM 4 / EDEK 4 / DIPA 4 / KOSP 3 = 56
-// using the 2026 seat counts (Nicosia 19, Paphos 5) and the calibrated
-// per-district vote breakdown baked into the preset.
+// using the 2021 seat counts (Nicosia 20, Paphos 4) and the real
+// gov.cy MOI per-district vote breakdown built into the preset.
 //
 // We test the pure functions directly (not the Svelte 5 rune store, which
 // requires the Svelte compiler - covered by the integration build).
 
 import { describe, expect, it } from 'vitest';
 import { allocateSeats } from '../src/lib/election-algorithm';
-import { PRESET_2021_BREAKDOWN } from '../src/lib/simulator/preset-2021';
+import {
+  PRESET_2021_BREAKDOWN,
+  PRESET_2021_DISTRICT_SEATS
+} from '../src/lib/simulator/preset-2021';
 import { deriveDistrictVotes } from '../src/lib/simulator/derive-district-votes';
 import { DISTRICTS } from '../src/lib/data/districts';
 import { THRESHOLDS } from '../src/lib/data/thresholds';
-import type { DistrictId, PartyId } from '../src/lib/data/types';
-
-const SEATS_2026: Record<DistrictId, number> = DISTRICTS.reduce(
-  (acc, d) => {
-    acc[d.id] = d.seats2026;
-    return acc;
-  },
-  {} as Record<DistrictId, number>
-);
+import type { PartyId } from '../src/lib/data/types';
 
 describe('simulator 2021-actual preset', () => {
   it('reproduces the historical 2021 seat distribution exactly', () => {
     const result = allocateSeats(
       { districtBreakdown: PRESET_2021_BREAKDOWN },
-      SEATS_2026,
+      PRESET_2021_DISTRICT_SEATS,
       THRESHOLDS
     );
 
@@ -49,7 +44,7 @@ describe('simulator 2021-actual preset', () => {
     // Every district is fully seated.
     for (const dist of result.perDistrict) {
       const filled = dist.perParty.reduce((a, p) => a + p.seats, 0);
-      expect(filled).toBe(SEATS_2026[dist.districtId]);
+      expect(filled).toBe(PRESET_2021_DISTRICT_SEATS[dist.districtId]);
     }
   });
 });

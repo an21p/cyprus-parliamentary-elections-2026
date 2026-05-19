@@ -37,8 +37,8 @@
   eyebrow={lang === 'el' ? 'Διαδραστικός' : 'Interactive'}
   title={lang === 'el' ? 'Προσομοιωτής έδρας' : 'Seat allocation simulator'}
   lede={lang === 'el'
-    ? 'Δώστε ποσοστά ψήφων σε κάθε κόμμα και δείτε πώς μετατρέπονται σε έδρες - και πού «χάνονται» ψήφοι.'
-    : 'Set a vote share for each party and see how it translates into seats - and where votes get lost on the way.'}
+    ? 'Δώστε ποσοστά ψήφων σε κάθε κόμμα και δείτε πώς μετατρέπονται σε έδρες, και πού «χάνονται» ψήφοι.'
+    : 'Set a vote share for each party and see how it translates into seats, and where votes get lost on the way.'}
 >
   <SectionBlock
     id="inputs"
@@ -51,9 +51,11 @@
     <SimulatorInputs {lang} />
 
     <Callout tone="info">
-      {lang === 'el'
-        ? 'Πρόκειται για εκπαιδευτικό εργαλείο, όχι πρόβλεψη. Ο αλγόριθμος της κατανομής εδρών είναι ακριβής· η μετατροπή εθνικών ποσοστών σε ψήφους ανά επαρχία είναι προσέγγιση από τα δεδομένα του 2021 (πλήρη για Λευκωσία, Πάφο, Κερύνεια· εκτίμηση για Λεμεσό, Αμμόχωστο, Λάρνακα).'
-        : 'Educational tool, not a forecast. The seat-allocation algorithm is exact; the upstream mapping of national shares into per-district votes is an approximation based on 2021 patterns (complete for Nicosia, Paphos, Kyrenia; estimated for Limassol, Famagusta, Larnaca).'}
+      {#if lang === 'el'}
+        Πρόκειται για <strong>εκπαιδευτικό εργαλείο, όχι πρόβλεψη</strong>. Ο αλγόριθμος της κατανομής εδρών είναι <strong>ακριβής</strong>· η μετατροπή εθνικών ποσοστών σε ψήφους ανά επαρχία είναι <strong>προσέγγιση</strong> από τα δεδομένα του 2021 (πλήρη για Λευκωσία, Πάφο, Κερύνεια· εκτίμηση για Λεμεσό, Αμμόχωστο, Λάρνακα).
+      {:else}
+        <strong>Educational tool, not a forecast.</strong> The seat-allocation algorithm is <strong>exact</strong>; the upstream mapping of national shares into per-district votes is an <strong>approximation</strong> based on 2021 patterns (complete for Nicosia, Paphos, Kyrenia; estimated for Limassol, Famagusta, Larnaca).
+      {/if}
     </Callout>
   </SectionBlock>
 

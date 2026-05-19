@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import type { Lang } from '$i18n/dict';
   import { t } from '$i18n/dict';
 
@@ -32,7 +33,7 @@
   ];
 
   function hrefFor(slug: string): string {
-    return slug ? `/${lang}/${slug}` : `/${lang}`;
+    return slug ? `${base}/${lang}/${slug}` : `${base}/${lang}`;
   }
 
   const year = new Date().getFullYear();
@@ -55,7 +56,7 @@
     <!-- Column 1: identity + disclaimer -->
     <section class="footer-col footer-identity" aria-label={identityLabel}>
       <a href={hrefFor('')} class="footer-wordmark">
-        <img class="footer-mark" src="/favicon.svg" alt="" width="32" height="32" />
+        <img class="footer-mark" src="{base}/favicon.svg" alt="" width="32" height="32" />
         <span class="footer-title">{t(lang, 'site.title')}</span>
       </a>
       <p class="footer-disclaimer">{t(lang, 'footer.disclaimer')}</p>

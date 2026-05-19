@@ -289,6 +289,27 @@
     return `${f.format(new Date(poll.fieldworkStart))} – ${f.format(new Date(poll.fieldworkEnd))}`;
   }
 
+  // ----- Visibility helpers --------------------------------------------
+  // Pure-white brand colours (e.g. ADK) disappear against the paper
+  // background. Draw the line in a near-black variant and give dots a
+  // darker outline so the series remains legible.
+  function isLight(hex: string): boolean {
+    const c = hex.replace('#', '');
+    if (c.length !== 6) return false;
+    const r = parseInt(c.slice(0, 2), 16);
+    const g = parseInt(c.slice(2, 4), 16);
+    const b = parseInt(c.slice(4, 6), 16);
+    return 0.299 * r + 0.587 * g + 0.114 * b > 220;
+  }
+
+  function lineStroke(hex: string): string {
+    return isLight(hex) ? 'var(--color-ink-2)' : hex;
+  }
+
+  function dotStroke(hex: string): string {
+    return isLight(hex) ? 'var(--color-ink-2)' : 'var(--color-paper)';
+  }
+
   // ----- Legend ---------------------------------------------------------
   const legendItems = $derived<LegendItem[]>(
     parties.map((id) => {
@@ -385,7 +406,7 @@
       {@const p = getParty(party)}
       {@const on = activeIds.includes(party)}
       <g class="series" class:series--off={!on} aria-label={localizedName(p.shortName, lang)}>
-        <path d={linePath(series)} stroke={p.colour} fill="none" stroke-width="1.75" />
+        <path d={linePath(series)} stroke={lineStroke(p.colour)} fill="none" stroke-width="1.75" />
         {#each series as point, i (i)}
           <circle
             class="data-dot"
@@ -393,7 +414,7 @@
             cy={yScale(point.share)}
             r="3"
             fill={p.colour}
-            stroke="var(--color-paper)"
+            stroke={dotStroke(p.colour)}
             stroke-width="1"
           />
         {/each}
@@ -416,7 +437,7 @@
           cy={yScale(row.point.share)}
           r="5"
           fill={row.colour}
-          stroke="var(--color-paper)"
+          stroke={dotStroke(row.colour)}
           stroke-width="1.5"
         />
       {/each}

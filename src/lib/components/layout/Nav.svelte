@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import type { Lang } from '$i18n/dict';
   import { t } from '$i18n/dict';
   import LangSwitcher from './LangSwitcher.svelte';
@@ -36,12 +37,12 @@
   ];
 
   function hrefFor(slug: string): string {
-    return slug ? `/${lang}/${slug}` : `/${lang}`;
+    return slug ? `${base}/${lang}/${slug}` : `${base}/${lang}`;
   }
 
   function isActive(slug: string): boolean {
     const path = currentPath || '/';
-    const root = `/${lang}`;
+    const root = `${base}/${lang}`;
     if (slug === '') {
       return path === root || path === `${root}/`;
     }
@@ -63,7 +64,7 @@
 <header class="nav-root" class:is-open={mobileOpen}>
   <div class="nav-inner">
     <a class="wordmark" href={hrefFor('')} onclick={closeMobile} aria-label={t(lang, 'site.title')}>
-      <img class="wordmark-mark" src="/favicon.svg" alt="" width="32" height="32" />
+      <img class="wordmark-mark" src="{base}/favicon.svg" alt="" width="32" height="32" />
       <span class="wordmark-label">
         <span class="wordmark-title">{t(lang, 'site.title')}</span>
       </span>

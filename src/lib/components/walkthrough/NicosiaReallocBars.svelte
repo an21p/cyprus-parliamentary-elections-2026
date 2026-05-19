@@ -33,8 +33,8 @@
   const L = $derived({
     eyebrow:
       lang === 'el'
-        ? 'Νicosia 2021 - Αχρησιμοποίητες ψήφοι'
-        : 'Nicosia 2021 - unused votes',
+        ? 'Νicosia 2021 · Αχρησιμοποίητες ψήφοι'
+        : 'Nicosia 2021 · unused votes',
     title:
       lang === 'el'
         ? 'Αυτές οι ψήφοι μπαίνουν στην εθνική δεξαμενή'

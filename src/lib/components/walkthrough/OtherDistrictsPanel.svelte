@@ -76,8 +76,8 @@
   const L = $derived({
     eyebrow:
       lang === 'el'
-        ? '1η κατανομή — Άλλες επαρχίες (2021)'
-        : 'First distribution — other districts (2021)',
+        ? '1η κατανομή · Άλλες επαρχίες (2021)'
+        : 'First distribution · other districts (2021)',
     title:
       lang === 'el'
         ? 'Κάθε επαρχία αφήνει τις δικές της αχρησιμοποίητες ψήφους'
@@ -99,8 +99,8 @@
         : 'Highlighted row = the party with the most unused votes in that district (where its reallocated seat lands).',
     sourceNote:
       lang === 'el'
-        ? 'Πηγή: Υπουργείο Εσωτερικών — data.gov.cy «Επίσημα Αποτελέσματα Βουλευτικών Εκλογών 2021». Αθροιστική κατανομή ανά εκλογική επαρχία × κόμμα.'
-        : 'Source: Cyprus Ministry of Interior — data.gov.cy "Official Results, 2021 Parliamentary Elections". Aggregated per electoral district × party.'
+        ? 'Πηγή: Υπουργείο Εσωτερικών, data.gov.cy «Επίσημα Αποτελέσματα Βουλευτικών Εκλογών 2021». Αθροιστική κατανομή ανά εκλογική επαρχία × κόμμα.'
+        : 'Source: Cyprus Ministry of Interior, data.gov.cy "Official Results, 2021 Parliamentary Elections". Aggregated per electoral district × party.'
   });
 </script>
 
