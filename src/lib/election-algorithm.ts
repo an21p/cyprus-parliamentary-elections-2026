@@ -18,11 +18,6 @@ import type {
 
 const DISTRICT_IDS: DistrictId[] = ['NIC', 'LIM', 'FAM', 'LAR', 'PAF', 'KYR'];
 
-interface PartyDistrictUnused {
-  districtId: DistrictId;
-  unusedVotes: number;
-}
-
 export function allocateSeats(
   input: AllocationInput,
   districtSeats: Record<DistrictId, number>,
@@ -224,62 +219,118 @@ export function allocateSeats(
     seatsAllocated: stage3SeatsAllocated
   };
 
-  // ---- Reassign stage 2+3 seats back to districts (§1.6 quote) ----
-  // "Seats allocated in the second and third allocation are distributed to lists
-  // in constituencies by ranking the parties based on their total votes and
-  // giving the lists a seat in the constituency where it had the most unused
-  // votes in the first allocation, assuming that constituency did not have all
-  // its seats filled previously."
+  // ---- Reassign stage 2+3 seats back to districts (gov.cy MOI rule) ----
+  // Source: https://www.gov.cy/moi-elections/documents/voyleytikes-plirofories/eklogiko-systima/
   //
-  // Implementation: process parties in descending national-vote order. For each
-  // party, repeatedly place one seat into its highest-unused-votes district that
-  // still has capacity, decrementing capacity each time.
-  const partyOrder: PartyId[] = Array.from(allPartyIds).sort(
-    (a, b) => (nationalVotesByParty.get(b) ?? 0) - (nationalVotesByParty.get(a) ?? 0)
-  );
+  // The official procedure has two phases with different placement rules:
+  //
+  // Stage 2 — round-robin. Qualifying parties are ranked by their NATIONAL
+  // unused remainder from the first allocation (descending). On each pass,
+  // each party places one seat in the constituency where IT has its next-
+  // largest unused remainder; if that constituency is full, the seat falls
+  // through to the party's next-next-largest, and so on. Each party's
+  // per-district pointer advances independently. Repeat until every party
+  // has placed its second-distribution seat quota.
+  //
+  // Stage 3 (β' phase) — sequential by stage-2 remainder. Each residual
+  // seat goes to the qualifying party (≥ 7.2 % nationally) with the largest
+  // remainder after stage 2 (national unused minus seats × second-stage
+  // quota). The seat is placed in that party's highest stage-1-unused
+  // district that still has capacity. The party's stage-2 remainder is
+  // then decremented by one second-stage quota before the next pick.
 
-  for (const pid of partyOrder) {
-    const nationalSeats =
-      (stage2SeatsByParty.get(pid) ?? 0) + (stage3SeatsByParty.get(pid) ?? 0);
-    if (nationalSeats === 0) continue;
+  // Per-party district list, descending by stage-1 unused (shared by both stages).
+  const districtRanking = new Map<PartyId, DistrictId[]>();
+  for (const pid of allPartyIds) {
+    const ranked = DISTRICT_IDS.slice().sort(
+      (a, b) =>
+        (unusedByDistrictParty.get(b)?.get(pid) ?? 0) -
+        (unusedByDistrictParty.get(a)?.get(pid) ?? 0)
+    );
+    districtRanking.set(pid, ranked);
+  }
 
-    // (district, unused) snapshot for this party, descending by unused votes.
-    const ranked: PartyDistrictUnused[] = DISTRICT_IDS.map((did) => ({
-      districtId: did,
-      unusedVotes: unusedByDistrictParty.get(did)?.get(pid) ?? 0
-    })).sort((a, b) => b.unusedVotes - a.unusedVotes);
-
-    let toPlace = nationalSeats;
-    for (const { districtId } of ranked) {
-      if (toPlace === 0) break;
-      const cap = seatsRemainingByDistrict.get(districtId) ?? 0;
-      if (cap <= 0) continue;
-      const seatMap =
-        seatsByDistrictParty.get(districtId) ?? new Map<PartyId, number>();
-      seatMap.set(pid, (seatMap.get(pid) ?? 0) + 1);
-      seatsByDistrictParty.set(districtId, seatMap);
-      seatsRemainingByDistrict.set(districtId, cap - 1);
-      toPlace--;
+  function placeSeat(pid: PartyId, ptr: number): number | null {
+    const ranked = districtRanking.get(pid)!;
+    while (ptr < ranked.length) {
+      const did = ranked[ptr];
+      if ((seatsRemainingByDistrict.get(did) ?? 0) > 0) {
+        const seatMap = seatsByDistrictParty.get(did) ?? new Map<PartyId, number>();
+        seatMap.set(pid, (seatMap.get(pid) ?? 0) + 1);
+        seatsByDistrictParty.set(did, seatMap);
+        seatsRemainingByDistrict.set(did, (seatsRemainingByDistrict.get(did) ?? 0) - 1);
+        return ptr + 1;
+      }
+      ptr++;
     }
-    // If toPlace > 0 here, all preferred districts are full - fall back to any
-    // district with remaining capacity, still preferring those with higher unused.
-    // (In well-formed Cypriot inputs this branch is not exercised, but it keeps
-    // the algorithm total rather than throwing on pathological inputs.)
-    if (toPlace > 0) {
-      for (const districtId of DISTRICT_IDS) {
-        while (toPlace > 0 && (seatsRemainingByDistrict.get(districtId) ?? 0) > 0) {
-          const seatMap =
-            seatsByDistrictParty.get(districtId) ?? new Map<PartyId, number>();
-          seatMap.set(pid, (seatMap.get(pid) ?? 0) + 1);
-          seatsByDistrictParty.set(districtId, seatMap);
-          seatsRemainingByDistrict.set(
-            districtId,
-            (seatsRemainingByDistrict.get(districtId) ?? 0) - 1
-          );
-          toPlace--;
-        }
+    return null;
+  }
+
+  // ---- Stage 2 placement: round-robin by national unused remainder ----
+  const stage2Order: PartyId[] = qualifyingSecond.slice().sort(
+    (a, b) =>
+      (nationalUnusedByParty.get(b) ?? 0) - (nationalUnusedByParty.get(a) ?? 0)
+  );
+  const stage2RemainingPlacements = new Map<PartyId, number>();
+  for (const pid of stage2Order) {
+    stage2RemainingPlacements.set(pid, stage2SeatsByParty.get(pid) ?? 0);
+  }
+  const stage2Pointer = new Map<PartyId, number>();
+
+  let stage2Pending = stage2SeatsAllocated;
+  while (stage2Pending > 0) {
+    let placedInPass = 0;
+    for (const pid of stage2Order) {
+      if ((stage2RemainingPlacements.get(pid) ?? 0) === 0) continue;
+      const startPtr = stage2Pointer.get(pid) ?? 0;
+      const next = placeSeat(pid, startPtr);
+      if (next === null) continue; // exhausted districts (shouldn't happen with consistent inputs)
+      stage2Pointer.set(pid, next);
+      stage2RemainingPlacements.set(pid, (stage2RemainingPlacements.get(pid) ?? 0) - 1);
+      placedInPass++;
+      stage2Pending--;
+    }
+    if (placedInPass === 0) break; // safety against infinite loop
+  }
+
+  // ---- Stage 3 placement: sequential by largest stage-2 remainder ----
+  const stage3Remainders = new Map<PartyId, number>();
+  for (const pid of qualifyingThird) {
+    const unused = nationalUnusedByParty.get(pid) ?? 0;
+    const consumed = (stage2SeatsByParty.get(pid) ?? 0) * secondStageQuota;
+    stage3Remainders.set(pid, unused - consumed);
+  }
+  const stage3RemainingPlacements = new Map<PartyId, number>();
+  for (const pid of qualifyingThird) {
+    stage3RemainingPlacements.set(pid, stage3SeatsByParty.get(pid) ?? 0);
+  }
+
+  let stage3Pending = stage3SeatsAllocated;
+  while (stage3Pending > 0) {
+    let bestPid: PartyId | null = null;
+    let bestRem = -Infinity;
+    let bestNational = -Infinity;
+    for (const pid of qualifyingThird) {
+      if ((stage3RemainingPlacements.get(pid) ?? 0) === 0) continue;
+      const rem = stage3Remainders.get(pid) ?? 0;
+      const nat = nationalVotesByParty.get(pid) ?? 0;
+      if (rem > bestRem || (rem === bestRem && nat > bestNational)) {
+        bestRem = rem;
+        bestNational = nat;
+        bestPid = pid;
       }
     }
+    if (bestPid === null) break;
+    // Place in this party's highest-unused district with capacity (always
+    // restart from index 0 — stage 3 is independent of stage 2's pointer).
+    const next = placeSeat(bestPid, 0);
+    if (next === null) break;
+    stage3RemainingPlacements.set(
+      bestPid,
+      (stage3RemainingPlacements.get(bestPid) ?? 0) - 1
+    );
+    stage3Remainders.set(bestPid, bestRem - secondStageQuota);
+    stage3Pending--;
   }
 
   // ---- Roll up final per-party / per-district totals ----

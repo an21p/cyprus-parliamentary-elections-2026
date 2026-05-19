@@ -24,6 +24,14 @@ export const messages: Dict = {
   'nav.districts': { en: 'Districts', el: 'Επαρχίες' },
   'nav.parties': { en: 'Parties', el: 'Κόμματα' },
   'nav.worked_example': { en: 'Example', el: 'Παράδειγμα' },
+  'nav.worked_example.nicosia': {
+    en: 'Example 1 — Nicosia 2021',
+    el: 'Παράδειγμα 1 — Λευκωσία 2021'
+  },
+  'nav.worked_example.govcy': {
+    en: 'Example 2 — MOI worked example',
+    el: 'Παράδειγμα 2 — Παράδειγμα Υπ. Εσωτερικών'
+  },
   'nav.about': { en: 'About', el: 'Σχετικά' },
 
   // Language switcher

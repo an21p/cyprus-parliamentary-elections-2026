@@ -13,6 +13,10 @@
     katex.renderToString(expr, {
       displayMode: display,
       throwOnError: false,
+      // Greek text inside \text{...} triggers strict-mode warnings about
+      // non-ASCII codepoints; KaTeX renders them correctly anyway, so we
+      // silence the noise rather than refuse to render the formula.
+      strict: 'ignore',
       output: 'html'
     })
   );

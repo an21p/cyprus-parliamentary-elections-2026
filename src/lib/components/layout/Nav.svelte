@@ -21,9 +21,12 @@
     | 'nav.districts'
     | 'nav.parties'
     | 'nav.worked_example'
+    | 'nav.worked_example.nicosia'
+    | 'nav.worked_example.govcy'
     | 'nav.about';
 
-  type NavItem = { key: NavKey; slug: string };
+  type NavChild = { key: NavKey; slug: string };
+  type NavItem = { key: NavKey; slug: string; children?: NavChild[] };
 
   const items: NavItem[] = [
     { key: 'nav.home',           slug: '' },
@@ -32,7 +35,14 @@
     { key: 'nav.polls',          slug: 'polls' },
     { key: 'nav.districts',      slug: 'districts' },
     { key: 'nav.parties',        slug: 'parties' },
-    { key: 'nav.worked_example', slug: 'worked-example' },
+    {
+      key: 'nav.worked_example',
+      slug: 'worked-example',
+      children: [
+        { key: 'nav.worked_example.nicosia', slug: 'worked-example' },
+        { key: 'nav.worked_example.govcy',   slug: 'worked-example/gov-cy' }
+      ]
+    },
     { key: 'nav.about',          slug: 'about' }
   ];
 
@@ -50,14 +60,38 @@
     return path === target || path.startsWith(`${target}/`);
   }
 
+  function isExactlyActive(slug: string): boolean {
+    const path = currentPath || '/';
+    const target = slug ? `${base}/${lang}/${slug}` : `${base}/${lang}`;
+    return path === target || path === `${target}/`;
+  }
+
+  // Track which dropdown is open. Null = none. Closed on outside click / Esc.
+  let openDropdownKey: NavKey | null = $state(null);
+  function toggleDropdown(key: NavKey) {
+    openDropdownKey = openDropdownKey === key ? null : key;
+  }
+  function closeDropdowns() {
+    openDropdownKey = null;
+  }
+
   function closeMobile() {
     mobileOpen = false;
+    closeDropdowns();
   }
 </script>
 
 <svelte:window
   on:keydown={(e) => {
-    if (e.key === 'Escape' && mobileOpen) closeMobile();
+    if (e.key === 'Escape') {
+      if (openDropdownKey) closeDropdowns();
+      else if (mobileOpen) closeMobile();
+    }
+  }}
+  on:click={(e) => {
+    if (!openDropdownKey) return;
+    const t = e.target as HTMLElement | null;
+    if (!t || !t.closest('.nav-item--dropdown')) closeDropdowns();
   }}
 />
 
@@ -74,16 +108,54 @@
       <ul class="nav-list" role="list">
         {#each items as item (item.key)}
           {@const active = isActive(item.slug)}
-          <li>
-            <a
-              href={hrefFor(item.slug)}
-              class="nav-link"
-              class:active
-              aria-current={active ? 'page' : undefined}
-            >
-              {t(lang, item.key)}
-            </a>
-          </li>
+          {#if item.children}
+            {@const open = openDropdownKey === item.key}
+            <li class="nav-item--dropdown">
+              <button
+                type="button"
+                class="nav-link nav-link--dropdown"
+                class:active
+                aria-expanded={open}
+                aria-haspopup="menu"
+                onclick={() => toggleDropdown(item.key)}
+              >
+                {t(lang, item.key)}
+                <svg class="nav-caret" class:open width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
+                  <path d="M1 1 L5 5 L9 1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+              {#if open}
+                <ul class="nav-dropdown" role="menu" aria-label={t(lang, item.key)}>
+                  {#each item.children as child (child.key)}
+                    {@const childActive = isExactlyActive(child.slug)}
+                    <li role="none">
+                      <a
+                        href={hrefFor(child.slug)}
+                        class="nav-dropdown-link"
+                        class:active={childActive}
+                        role="menuitem"
+                        aria-current={childActive ? 'page' : undefined}
+                        onclick={closeDropdowns}
+                      >
+                        {t(lang, child.key)}
+                      </a>
+                    </li>
+                  {/each}
+                </ul>
+              {/if}
+            </li>
+          {:else}
+            <li>
+              <a
+                href={hrefFor(item.slug)}
+                class="nav-link"
+                class:active
+                aria-current={active ? 'page' : undefined}
+              >
+                {t(lang, item.key)}
+              </a>
+            </li>
+          {/if}
         {/each}
       </ul>
     </nav>
@@ -123,15 +195,35 @@
         {#each items as item (item.key)}
           {@const active = isActive(item.slug)}
           <li>
-            <a
-              href={hrefFor(item.slug)}
-              class="drawer-link"
-              class:active
-              aria-current={active ? 'page' : undefined}
-              onclick={closeMobile}
-            >
-              {t(lang, item.key)}
-            </a>
+            {#if item.children}
+              <div class="drawer-group-label">{t(lang, item.key)}</div>
+              <ul class="drawer-children" role="list">
+                {#each item.children as child (child.key)}
+                  {@const childActive = isExactlyActive(child.slug)}
+                  <li>
+                    <a
+                      href={hrefFor(child.slug)}
+                      class="drawer-link drawer-link--child"
+                      class:active={childActive}
+                      aria-current={childActive ? 'page' : undefined}
+                      onclick={closeMobile}
+                    >
+                      {t(lang, child.key)}
+                    </a>
+                  </li>
+                {/each}
+              </ul>
+            {:else}
+              <a
+                href={hrefFor(item.slug)}
+                class="drawer-link"
+                class:active
+                aria-current={active ? 'page' : undefined}
+                onclick={closeMobile}
+              >
+                {t(lang, item.key)}
+              </a>
+            {/if}
           </li>
         {/each}
       </ul>
@@ -281,6 +373,73 @@
     background-color: var(--color-accent);
   }
 
+  /* ---------- Dropdown (desktop) ---------- */
+  .nav-item--dropdown {
+    position: relative;
+  }
+
+  .nav-link--dropdown {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font: inherit;
+  }
+
+  .nav-caret {
+    color: currentColor;
+    transition: transform var(--dur-fast) var(--ease-standard);
+  }
+
+  .nav-caret.open {
+    transform: rotate(180deg);
+  }
+
+  .nav-dropdown {
+    list-style: none;
+    margin: 0;
+    padding: var(--sp-2);
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 14rem;
+    background-color: var(--color-paper);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    z-index: 1;
+  }
+
+  .nav-dropdown-link {
+    display: block;
+    padding: var(--sp-2) var(--sp-3);
+    font-family: var(--font-sans);
+    font-size: var(--fs-100);
+    font-weight: 500;
+    color: var(--color-ink-2);
+    text-decoration: none;
+    border-radius: var(--radius-2);
+    transition: background-color var(--dur-fast) var(--ease-standard),
+                color var(--dur-fast) var(--ease-standard);
+  }
+
+  .nav-dropdown-link:hover {
+    background-color: var(--color-paper-2);
+    color: var(--color-ink);
+  }
+
+  .nav-dropdown-link:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .nav-dropdown-link.active {
+    color: var(--color-ink);
+    background-color: var(--color-accent-soft);
+  }
+
   /* ---------- Trailing ---------- */
   .nav-trailing {
     display: flex;
@@ -411,5 +570,28 @@
     color: var(--color-ink);
     border-left-color: var(--color-accent);
     background-color: var(--color-accent-soft);
+  }
+
+  .drawer-group-label {
+    padding: var(--sp-3) var(--sp-3) var(--sp-1);
+    font-family: var(--font-sans);
+    font-size: var(--fs-50);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    font-weight: 700;
+    color: var(--color-ink-2);
+  }
+
+  .drawer-children {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+
+  .drawer-link--child {
+    padding-left: var(--sp-5);
+    font-size: var(--fs-100);
   }
 </style>

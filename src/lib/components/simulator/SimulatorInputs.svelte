@@ -70,7 +70,18 @@
     approxNote:
       lang === 'el'
         ? 'Βασίζεται σε περιφερειακά μοτίβα 2021. Δεν αποτελεί πρόβλεψη.'
-        : 'Based on regional vote-distribution patterns from 2021; not a forecast.'
+        : 'Based on regional vote-distribution patterns from 2021; not a forecast.',
+    boundariesLabel: lang === 'el' ? 'Όρια εδρών' : 'Seat boundaries',
+    boundaries2021Short: '2021',
+    boundaries2026Short: '2026',
+    boundaries2021Full:
+      lang === 'el' ? 'Λευκωσία 20 · Πάφος 4' : 'Nicosia 20 · Paphos 4',
+    boundaries2026Full:
+      lang === 'el' ? 'Λευκωσία 19 · Πάφος 5' : 'Nicosia 19 · Paphos 5',
+    boundariesNote:
+      lang === 'el'
+        ? 'Ο νόμος του 2025 μετέφερε μία έδρα από τη Λευκωσία στην Πάφο για τις εκλογές της 24ης Μαΐου 2026.'
+        : 'The October 2025 reform moved one seat from Nicosia to Paphos for the 24 May 2026 election.'
   });
 
   function onApplyPoll(): void {
@@ -148,6 +159,43 @@
         simulatorState.activePresetLabel.en}
     </p>
   {/if}
+
+  <!-- ---- Boundaries toggle (2021 vs 2026 seat split) ---- -->
+  <fieldset class="boundaries">
+    <legend>
+      <span class="boundaries-label">{txt.boundariesLabel}</span>
+      <span class="boundaries-sub">
+        {simulatorState.boundariesYear === 2021
+          ? txt.boundaries2021Full
+          : txt.boundaries2026Full}
+      </span>
+    </legend>
+    <div class="boundaries-control" role="radiogroup" aria-label={txt.boundariesLabel}>
+      <button
+        type="button"
+        role="radio"
+        class="boundaries-option"
+        class:active={simulatorState.boundariesYear === 2021}
+        aria-checked={simulatorState.boundariesYear === 2021}
+        onclick={() => simulatorState.setBoundariesYear(2021)}
+      >
+        <strong>{txt.boundaries2021Short}</strong>
+        <span class="boundaries-option-sub">{txt.boundaries2021Full}</span>
+      </button>
+      <button
+        type="button"
+        role="radio"
+        class="boundaries-option"
+        class:active={simulatorState.boundariesYear === 2026}
+        aria-checked={simulatorState.boundariesYear === 2026}
+        onclick={() => simulatorState.setBoundariesYear(2026)}
+      >
+        <strong>{txt.boundaries2026Short}</strong>
+        <span class="boundaries-option-sub">{txt.boundaries2026Full}</span>
+      </button>
+    </div>
+    <p class="boundaries-note">{txt.boundariesNote}</p>
+  </fieldset>
 
   <!-- ---- Filter toggle ---- -->
   <label class="filter-toggle">
@@ -359,6 +407,82 @@
   .active-preset .muted {
     color: var(--color-ink-3);
     margin-right: var(--sp-2);
+  }
+
+  .boundaries {
+    margin: 0;
+    padding: var(--sp-3);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-3);
+    background-color: var(--color-paper-2);
+    display: grid;
+    gap: var(--sp-2);
+  }
+  .boundaries legend {
+    padding: 0;
+    margin: 0 0 var(--sp-1);
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+  }
+  .boundaries-label {
+    font-size: var(--fs-50);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    font-weight: 700;
+    color: var(--color-ink-2);
+  }
+  .boundaries-sub {
+    font-size: var(--fs-75);
+    color: var(--color-ink-3);
+  }
+  .boundaries-control {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2);
+  }
+  .boundaries-option {
+    display: grid;
+    gap: 2px;
+    padding: var(--sp-2) var(--sp-3);
+    text-align: left;
+    background-color: var(--color-paper);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-2);
+    cursor: pointer;
+    color: var(--color-ink-2);
+    transition: border-color var(--dur-fast) var(--ease-standard),
+                color var(--dur-fast) var(--ease-standard),
+                background-color var(--dur-fast) var(--ease-standard);
+  }
+  .boundaries-option:hover {
+    border-color: var(--color-rule-strong);
+    color: var(--color-ink);
+  }
+  .boundaries-option:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+  .boundaries-option.active {
+    border-color: var(--color-accent);
+    color: var(--color-ink);
+    background-color: var(--color-accent-soft);
+  }
+  .boundaries-option strong {
+    font-family: var(--font-display);
+    font-size: var(--fs-100);
+    font-weight: 600;
+  }
+  .boundaries-option-sub {
+    font-size: var(--fs-50);
+    color: var(--color-ink-3);
+  }
+  .boundaries-note {
+    margin: 0;
+    font-size: var(--fs-50);
+    color: var(--color-ink-3);
+    line-height: var(--lh-relaxed);
   }
 
   .filter-toggle {

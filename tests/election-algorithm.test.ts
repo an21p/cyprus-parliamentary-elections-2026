@@ -320,6 +320,138 @@ describe('synthetic end-to-end run exercises all three stages', () => {
 });
 
 // ============================================================
+// gov.cy MOI worked example (eklogiko-systima page)
+// https://www.gov.cy/moi-elections/documents/voyleytikes-plirofories/eklogiko-systima/
+// ============================================================
+
+describe('gov.cy MOI worked example - second & third distribution', () => {
+  // The official MOI page gives this hypothetical: 5 qualifying parties with
+  // stage-1 national unused remainders of 30,000 / 22,000 / 20,000 / 15,000 /
+  // 12,000 (sum 99,000) and 18 unallocated seats after stage 1. The stage-2
+  // quota is then 99,000 / 18 = 5,500, and the example states:
+  //   Α': 30000/5500 = 5 seats, unused 2,500
+  //   Β': 22000/5500 = 4 seats, unused 0
+  //   Γ': 20000/5500 = 3 seats, unused 3,500
+  //   Δ': 15000/5500 = 2 seats, unused 4,000
+  //   Ε': 12000/5500 = 2 seats, unused 1,000
+  // -> 16 stage-2 seats placed; 2 residuals go to Δ' (largest remainder) and
+  // then Γ', as per the third-distribution rule.
+  //
+  // We rebuild this scenario via a single 38-seat district where each main
+  // party wins exactly 4 stage-1 seats (quota 30,001) and walks out of stage
+  // 1 with the target unused remainder. Twelve sub-threshold filler buckets
+  // absorb ~441k votes at ~3.22% each (below the 3.6% threshold).
+  it('matches the gov.cy stage-2 quota math and stage-3 residual allocation', () => {
+    // Six districts × 8 seats = 48 seats; per-district quota 8,000. Each main
+    // party wins exactly 1 stage-1 seat in each district with the per-district
+    // unused remainder shown below, so its NATIONAL stage-1 unused matches the
+    // gov.cy example. Each district carries one sub-threshold filler at ~7.5k
+    // votes (~1.95 % nationally) to soak up validity without contaminating
+    // stage 2.
+    //
+    // Total: 30 stage-1 seats + 18 unallocated = 48 seats. Total qualifying
+    // stage-1 unused = 30,000 + 22,000 + 20,000 + 15,000 + 12,000 = 99,000.
+    // Stage-2 quota = floor(99,000 / 18) = 5,500 (matches gov.cy exactly).
+
+    const input: AllocationInput = { districtBreakdown: emptyDistrictBreakdown() };
+    // NIC and LIM: AKEL 3667 / DIKO 3334 per-district unused.
+    for (const did of ['NIC', 'LIM'] as DistrictId[]) {
+      input.districtBreakdown[did] = {
+        DISY: 13000, // 1 seat, unused 5000
+        AKEL: 11667, // 1 seat, unused 3667
+        DIKO: 11334, // 1 seat, unused 3334
+        ELAM: 10500, // 1 seat, unused 2500
+        EDEK: 10000 // 1 seat, unused 2000
+      };
+    }
+    // FAM and LAR: DIKO 3333 per-district unused (vs 3334) so DIKO national = 20000 exactly.
+    for (const did of ['FAM', 'LAR'] as DistrictId[]) {
+      input.districtBreakdown[did] = {
+        DISY: 13000,
+        AKEL: 11667,
+        DIKO: 11333, // 1 seat, unused 3333
+        ELAM: 10500,
+        EDEK: 10000
+      };
+    }
+    // PAF and KYR: AKEL 3666 (vs 3667) so AKEL national = 22000 exactly.
+    for (const did of ['PAF', 'KYR'] as DistrictId[]) {
+      input.districtBreakdown[did] = {
+        DISY: 13000,
+        AKEL: 11666, // 1 seat, unused 3666
+        DIKO: 11333,
+        ELAM: 10500,
+        EDEK: 10000
+      };
+    }
+    // Sub-threshold fillers — one per district at 7,499–7,501 votes (1.95 %
+    // nationally each, well below the 3.6 % stage-2 threshold) — bring every
+    // district's validity to exactly 64,000 so the per-district quota is 8,000.
+    input.districtBreakdown.NIC.ALMA = 7499;
+    input.districtBreakdown.LIM.ADK = 7499;
+    input.districtBreakdown.FAM.VOLT = 7500;
+    input.districtBreakdown.LAR.DEK = 7500;
+    input.districtBreakdown.PAF.DIMAL = 7501;
+    input.districtBreakdown.KYR.KEKK = 7501;
+
+    const seats: Record<DistrictId, number> = {
+      NIC: 8, LIM: 8, FAM: 8, LAR: 8, PAF: 8, KYR: 8
+    };
+
+    const result = allocateSeats(input, seats, THRESHOLDS_2021);
+
+    // Per-district stage-1: every district has 5 main-party seats and one
+    // sub-threshold bucket with 0 seats, leaving 3 seats unallocated.
+    for (const trace of result.firstDistribution) {
+      expect(trace.quota, `${trace.districtId} quota`).toBe(8000);
+      expect(trace.seatsAllocated, `${trace.districtId} stage-1 seats`).toBe(5);
+      expect(trace.seatsRemaining, `${trace.districtId} unallocated`).toBe(3);
+    }
+
+    // Fillers must be excluded from stage 2.
+    for (const filler of ['ALMA', 'ADK', 'VOLT', 'DEK', 'DIMAL', 'KEKK'] as PartyId[]) {
+      expect(result.secondDistribution.qualifyingParties).not.toContain(filler);
+    }
+
+    // gov.cy worked example: stage-2 quota = floor(99,000 / 18) = 5,500.
+    expect(result.secondDistribution.totalUnusedVotes).toBe(99000);
+    expect(result.secondDistribution.seatsRemaining).toBe(18);
+    expect(result.secondDistribution.quota).toBe(5500);
+
+    // gov.cy stage-2 seat counts.
+    const stage2 = new Map(
+      result.secondDistribution.perParty.map((p) => [p.partyId, p.seatsWon])
+    );
+    expect(stage2.get('DISY'), 'DISY (Α’) stage-2').toBe(5);
+    expect(stage2.get('AKEL'), 'AKEL (Β’) stage-2').toBe(4);
+    expect(stage2.get('DIKO'), 'DIKO (Γ’) stage-2').toBe(3);
+    expect(stage2.get('ELAM'), 'ELAM (Δ’) stage-2').toBe(2);
+    expect(stage2.get('EDEK'), 'EDEK (Ε’) stage-2').toBe(2);
+    expect(result.secondDistribution.seatsAllocated).toBe(16);
+
+    // Stage 3 (Β' phase): 2 residual seats. Per the gov.cy example, they go
+    // to Δ' (ELAM, stage-2 remainder 4,000) and Γ' (DIKO, remainder 3,500).
+    expect(result.thirdDistribution.seatsRemaining).toBe(2);
+    expect(result.thirdDistribution.seatsAllocated).toBe(2);
+    const stage3 = new Map(
+      result.thirdDistribution.perParty.map((p) => [p.partyId, p.seatsWon])
+    );
+    expect(stage3.get('ELAM'), 'ELAM (Δ’) stage-3').toBe(1);
+    expect(stage3.get('DIKO'), 'DIKO (Γ’) stage-3').toBe(1);
+    expect(stage3.get('DISY') ?? 0).toBe(0);
+    expect(stage3.get('AKEL') ?? 0).toBe(0);
+    expect(stage3.get('EDEK') ?? 0).toBe(0);
+
+    // Combined stage-2 + stage-3 per main party (matches gov.cy summary).
+    expect((stage2.get('DISY') ?? 0) + (stage3.get('DISY') ?? 0)).toBe(5);
+    expect((stage2.get('AKEL') ?? 0) + (stage3.get('AKEL') ?? 0)).toBe(4);
+    expect((stage2.get('DIKO') ?? 0) + (stage3.get('DIKO') ?? 0)).toBe(4);
+    expect((stage2.get('ELAM') ?? 0) + (stage3.get('ELAM') ?? 0)).toBe(3);
+    expect((stage2.get('EDEK') ?? 0) + (stage3.get('EDEK') ?? 0)).toBe(2);
+  });
+});
+
+// ============================================================
 // Result structure invariants
 // ============================================================
 
