@@ -3,21 +3,21 @@
   import { POLLS } from '$data/polls';
   import { getParty } from '$data/parties';
   import { localizedName } from '$i18n/dict';
-  import { partyColour } from '$lib/theme/a11y.svelte';
+  import { chartPartyColour } from '$lib/theme/a11y.svelte';
   import LegendSwatches, { type LegendItem } from './LegendSwatches.svelte';
 
   type Props = {
     lang: Lang;
-    /** Parties to plot. Default = 7 parties that polled consistently. */
+    /**
+     * Parties to plot. If omitted, derived from `data`: every party with a
+     * positive share in any poll currently in scope, ordered by mean share.
+     */
     parties?: PartyId[];
     /** Override the underlying POLLS dataset (used for tests/storybook). */
     data?: PollEntry[];
   };
 
-  // Top five parties competing at the top of recent polls.
-  const DEFAULT_PARTIES: PartyId[] = ['DISY', 'AKEL', 'ELAM', 'ALMA', 'DIKO'];
-
-  let { lang, parties = DEFAULT_PARTIES, data = POLLS }: Props = $props();
+  let { lang, parties: partiesProp, data = POLLS }: Props = $props();
 
   // ----- Active set (toggleable via legend) ------------------------------
   // Initialised from props in an effect so changes to `parties` are honoured.
@@ -26,33 +26,32 @@
     activeIds = [...parties];
   });
 
-  // ----- Chart mode (lines | area) --------------------------------------
-  type ChartMode = 'lines' | 'area';
-  let chartMode = $state<ChartMode>('lines');
+  // ----- Pollster filter -------------------------------------------------
+  // Mixing houses with different sampling/weighting choices makes trend
+  // reading noisy. Letting the user pin a single pollster gives a cleaner
+  // within-methodology trend. Only pollsters with more than one poll are
+  // offered — a one-shot pollster has no trend to read.
+  let selectedPollster = $state<string | null>('CYMAR');
 
-  // ----- Time range filter ----------------------------------------------
-  type RangeOption = '3m' | '6m' | '12m' | 'all';
-  let range = $state<RangeOption>('3m');
+  const eligiblePollsters = $derived.by<string[]>(() => {
+    const counts = new Map<string, number>();
+    for (const p of data) counts.set(p.pollster, (counts.get(p.pollster) ?? 0) + 1);
+    return Array.from(counts.entries())
+      .filter(([, n]) => n > 1)
+      .map(([name]) => name)
+      .sort((a, b) => a.localeCompare(b));
+  });
 
-  const RANGE_OPTIONS: { value: RangeOption; months: number | null }[] = [
-    { value: '3m', months: 3 },
-    { value: '6m', months: 6 },
-    { value: '12m', months: 12 },
-    { value: 'all', months: null }
-  ];
-
-  function rangeLabel(value: RangeOption): string {
-    if (lang === 'el') {
-      return value === '3m' ? '3 μήνες'
-        : value === '6m' ? '6 μήνες'
-        : value === '12m' ? '1 έτος'
-        : 'Όλα';
+  $effect(() => {
+    if (!selectedPollster || !eligiblePollsters.includes(selectedPollster)) {
+      selectedPollster = eligiblePollsters[0] ?? null;
     }
-    return value === '3m' ? '3 months'
-      : value === '6m' ? '6 months'
-      : value === '12m' ? '1 year'
-      : 'All time';
-  }
+  });
+
+  const pollsterFiltered = $derived.by<PollEntry[]>(() => {
+    if (!selectedPollster) return data;
+    return data.filter((p) => p.pollster === selectedPollster);
+  });
 
   // ----- Plot points -----------------------------------------------------
   type Point = {
@@ -69,25 +68,55 @@
     return new Date((a + b) / 2);
   }
 
-  // Anchor the range window to the most recent poll so "last 3 months"
-  // always lines up with the freshest data even if the system clock drifts.
-  const anchorTime = $derived.by(() => {
-    if (data.length === 0) return Date.now();
-    let max = -Infinity;
-    for (const p of data) {
-      const t = midDate(p).getTime();
-      if (t > max) max = t;
+  const filteredData = $derived<PollEntry[]>(pollsterFiltered);
+
+  // Union of every party that appears with a positive share in any poll
+  // currently in scope, ordered by mean share descending so the biggest
+  // parties read first in the legend.
+  const partiesInScope = $derived.by<PartyId[]>(() => {
+    const sum = new Map<PartyId, number>();
+    const count = new Map<PartyId, number>();
+    for (const poll of filteredData) {
+      for (const [key, v] of Object.entries(poll.shares) as [PartyId, number][]) {
+        if (typeof v === 'number' && v > 0) {
+          sum.set(key, (sum.get(key) ?? 0) + v);
+          count.set(key, (count.get(key) ?? 0) + 1);
+        }
+      }
     }
-    return max;
+    return Array.from(sum.keys()).sort((a, b) => {
+      const ma = sum.get(a)! / count.get(a)!;
+      const mb = sum.get(b)! / count.get(b)!;
+      return mb - ma;
+    });
   });
 
-  const filteredData = $derived.by<PollEntry[]>(() => {
-    const opt = RANGE_OPTIONS.find((r) => r.value === range);
-    if (!opt || opt.months === null) return data;
-    const cutoff = new Date(anchorTime);
-    cutoff.setMonth(cutoff.getMonth() - opt.months);
-    const cutoffT = cutoff.getTime();
-    return data.filter((p) => midDate(p).getTime() >= cutoffT);
+  const parties = $derived<PartyId[]>(partiesProp ?? partiesInScope);
+
+  // Caption span: min fieldworkStart → max fieldworkEnd across the
+  // currently selected polls, so users see what window they're looking at.
+  const selectedSpan = $derived.by<string | null>(() => {
+    if (filteredData.length === 0) return null;
+    let minStart = Infinity;
+    let maxEnd = -Infinity;
+    for (const p of filteredData) {
+      const s = new Date(p.fieldworkStart).getTime();
+      const e = new Date(p.fieldworkEnd).getTime();
+      if (s < minStart) minStart = s;
+      if (e > maxEnd) maxEnd = e;
+    }
+    const fmt = new Intl.DateTimeFormat(lang === 'el' ? 'el-CY' : 'en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+    return `${fmt.format(new Date(minStart))} – ${fmt.format(new Date(maxEnd))}`;
+  });
+
+  const selectedCountLabel = $derived.by<string>(() => {
+    const n = filteredData.length;
+    if (lang === 'el') return `${n} ${n === 1 ? 'δημοσκόπηση' : 'δημοσκοπήσεις'}`;
+    return `${n} ${n === 1 ? 'poll' : 'polls'}`;
   });
 
   const pointsByParty = $derived.by<Record<PartyId, Point[]>>(() => {
@@ -148,14 +177,12 @@
   const tMin = $derived(allDates.length ? Math.min(...allDates) : Date.now());
   const tMax = $derived(allDates.length ? Math.max(...allDates) : Date.now());
 
-  const yMaxLines = $derived(
+  const yMax = $derived(
     Math.max(
       30,
       Math.ceil(Math.max(0, ...allPoints.map((p) => p.share)))
     )
   );
-  // Area mode is always 0–100% so stacks reach the top of the chart.
-  const yMax = $derived(chartMode === 'area' ? 100 : yMaxLines);
 
   function xScale(d: Date): number {
     if (tMax === tMin) return margin.left + innerW / 2;
@@ -175,95 +202,12 @@
   }
 
   // ----- Axis ticks ------------------------------------------------------
-  // Y-axis: every 5% in lines mode; every 10% in area mode (0–100 range).
+  // Y-axis: every 5% across the lines chart.
   const yTicks = $derived.by(() => {
-    const step = chartMode === 'area' ? 10 : 5;
     const ticks: number[] = [];
-    for (let v = 0; v <= yMax; v += step) ticks.push(v);
+    for (let v = 0; v <= yMax; v += 5) ticks.push(v);
     return ticks;
   });
-
-  // ----- Stacked-area columns -------------------------------------------
-  // One column per poll: bands stack from bottom up in `parties` order,
-  // capped by an "Other / undecided" band at the top so each column
-  // reaches 100%. Toggled-off parties are dropped from the stack and
-  // absorbed into "Other", which matches the user's mental model when
-  // they hide a series via the legend.
-  type StackBand = {
-    party: PartyId | '__other__';
-    from: number;
-    to: number;
-    share: number;
-  };
-  type StackColumn = {
-    date: Date;
-    mid: string;
-    poll: PollEntry;
-    bands: StackBand[];
-  };
-
-  const stackColumns = $derived.by<StackColumn[]>(() => {
-    const polls = [...filteredData].sort(
-      (a, b) => midDate(a).getTime() - midDate(b).getTime()
-    );
-    const out: StackColumn[] = [];
-    for (const poll of polls) {
-      const d = midDate(poll);
-      const bands: StackBand[] = [];
-      let cum = 0;
-      for (const id of parties) {
-        if (!activeIds.includes(id)) continue;
-        const share = poll.shares[id];
-        if (typeof share !== 'number') continue;
-        bands.push({ party: id, from: cum, to: cum + share, share });
-        cum += share;
-      }
-      const otherShare = Math.max(0, 100 - cum);
-      bands.push({
-        party: '__other__',
-        from: cum,
-        to: cum + otherShare,
-        share: otherShare
-      });
-      out.push({
-        date: d,
-        mid: d.toISOString().slice(0, 10),
-        poll,
-        bands
-      });
-    }
-    return out;
-  });
-
-  // Path generator for a single band across all stack columns.
-  function bandPath(party: PartyId | '__other__'): string {
-    if (stackColumns.length === 0) return '';
-    const top: { x: number; y: number }[] = [];
-    const bottom: { x: number; y: number }[] = [];
-    for (const col of stackColumns) {
-      const band = col.bands.find((b) => b.party === party);
-      const x = xScale(col.date);
-      top.push({ x, y: yScale(band ? band.to : 0) });
-      bottom.push({ x, y: yScale(band ? band.from : 0) });
-    }
-    // If we only have a single column the polygon collapses to a line;
-    // widen it slightly so the band stays visible.
-    if (top.length === 1) {
-      const t = top[0];
-      const b = bottom[0];
-      const w = 3;
-      return `M ${t.x - w},${t.y} L ${t.x + w},${t.y} L ${b.x + w},${b.y} L ${b.x - w},${b.y} Z`;
-    }
-    const topPath = top
-      .map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(2)},${p.y.toFixed(2)}`)
-      .join(' ');
-    const botPath = bottom
-      .slice()
-      .reverse()
-      .map((p) => `L ${p.x.toFixed(2)},${p.y.toFixed(2)}`)
-      .join(' ');
-    return `${topPath} ${botPath} Z`;
-  }
 
   // X-axis: month ticks. Thin out when narrow.
   const xTicks = $derived.by<{ d: Date; label: string }[]>(() => {
@@ -343,22 +287,11 @@
       rows.push({
         party,
         point: found,
-        colour: partyColour(p.id),
+        colour: chartPartyColour(p.id),
         name: localizedName(p.shortName, lang)
       });
     }
-    rows.sort((a, b) => b.point.share - a.point.share);
-    return rows;
-  });
-
-  // In area mode, expose the leftover "Other / undecided" share at the
-  // hovered date so users can read the size of the unallocated band.
-  const hoverOtherShare = $derived.by<number | null>(() => {
-    if (chartMode !== 'area' || !hoverMid) return null;
-    const col = stackColumns.find((c) => c.mid === hoverMid);
-    if (!col) return null;
-    const other = col.bands.find((b) => b.party === '__other__');
-    return other ? Math.round(other.share * 10) / 10 : null;
+    return rows.sort((a, b) => b.point.share - a.point.share);
   });
 
   const hoverX = $derived(
@@ -414,7 +347,7 @@
   const legendItems = $derived<LegendItem[]>(
     parties.map((id) => {
       const p = getParty(id);
-      return { id, label: localizedName(p.shortName, lang), colour: partyColour(p.id) };
+      return { id, label: localizedName(p.shortName, lang), colour: chartPartyColour(p.id) };
     })
   );
 
@@ -436,48 +369,30 @@
 
 <div class="poll-tracker" bind:this={wrapper}>
   <div class="tracker-toolbar">
-    <div class="range-bar" role="group" aria-label={lang === 'el' ? 'Χρονικό εύρος' : 'Time range'}>
-      <span class="range-label">{lang === 'el' ? 'Χρονικό εύρος' : 'Time range'}</span>
-      <div class="range-buttons">
-        {#each RANGE_OPTIONS as opt (opt.value)}
-          {@const on = range === opt.value}
-          <button
-            type="button"
-            class="range-btn"
-            class:range-btn--on={on}
-            aria-pressed={on}
-            onclick={() => (range = opt.value)}
-          >
-            {rangeLabel(opt.value)}
-          </button>
-        {/each}
-      </div>
-    </div>
-
-    <div class="mode-bar" role="group" aria-label={lang === 'el' ? 'Τύπος γραφήματος' : 'Chart type'}>
-      <span class="range-label">{lang === 'el' ? 'Τύπος' : 'Chart'}</span>
-      <div class="range-buttons">
-        <button
-          type="button"
-          class="range-btn"
-          class:range-btn--on={chartMode === 'lines'}
-          aria-pressed={chartMode === 'lines'}
-          onclick={() => (chartMode = 'lines')}
+    {#if eligiblePollsters.length > 0}
+      <div class="pollster-bar" role="group" aria-label={lang === 'el' ? 'Εταιρεία' : 'Pollster'}>
+        <span class="range-label">{lang === 'el' ? 'Εταιρεία' : 'Pollster'}</span>
+        <select
+          class="pollster-select"
+          bind:value={selectedPollster}
+          aria-label={lang === 'el' ? 'Επιλογή εταιρείας' : 'Select pollster'}
         >
-          {lang === 'el' ? 'Γραμμές' : 'Lines'}
-        </button>
-        <button
-          type="button"
-          class="range-btn"
-          class:range-btn--on={chartMode === 'area'}
-          aria-pressed={chartMode === 'area'}
-          onclick={() => (chartMode = 'area')}
-        >
-          {lang === 'el' ? 'Στοιβαγμένη' : 'Stacked'}
-        </button>
+          {#each eligiblePollsters as name (name)}
+            <option value={name}>{name}</option>
+          {/each}
+        </select>
       </div>
-    </div>
+    {/if}
   </div>
+
+  {#if selectedSpan}
+    <p class="tracker-span">
+      <span class="range-label">{lang === 'el' ? 'Περίοδος' : 'Range'}</span>
+      <span class="tracker-span-value">{selectedSpan}</span>
+      <span class="tracker-span-dot" aria-hidden="true">·</span>
+      <span class="tracker-span-count">{selectedCountLabel}</span>
+    </p>
+  {/if}
 
   <svg
     bind:this={svgEl}
@@ -526,65 +441,27 @@
       {/each}
     </g>
 
-    {#if chartMode === 'lines'}
-      <!-- lines + points per party -->
-      {#each parties as party (party)}
-        {@const series = pointsByParty[party] ?? []}
-        {@const p = getParty(party)}
-        {@const colour = partyColour(p.id)}
-        {@const on = activeIds.includes(party)}
-        <g class="series" class:series--off={!on} aria-label={localizedName(p.shortName, lang)}>
-          <path d={linePath(series)} stroke={lineStroke(colour)} fill="none" stroke-width="1.75" />
-          {#each series as point, i (i)}
-            <circle
-              class="data-dot"
-              cx={xScale(point.date)}
-              cy={yScale(point.share)}
-              r="3"
-              fill={colour}
-              stroke={dotStroke(colour)}
-              stroke-width="1"
-            />
-          {/each}
-        </g>
-      {/each}
-    {:else}
-      <!-- stacked area: one band per active party, "Other" hatched on top -->
-      <defs>
-        <pattern
-          id="poll-other-stripes"
-          patternUnits="userSpaceOnUse"
-          width="8"
-          height="8"
-          patternTransform="rotate(45)"
-        >
-          <rect width="8" height="8" fill="var(--color-paper-3, #eee)" />
-          <rect width="4" height="8" fill="var(--color-paper-2)" />
-        </pattern>
-      </defs>
-      {#each parties as party (party)}
-        {#if activeIds.includes(party)}
-          {@const p = getParty(party)}
-          {@const colour = partyColour(p.id)}
-          <path
-            class="area-band"
-            d={bandPath(party)}
+    <!-- lines + points per party -->
+    {#each parties as party (party)}
+      {@const series = pointsByParty[party] ?? []}
+      {@const p = getParty(party)}
+      {@const colour = chartPartyColour(p.id)}
+      {@const on = activeIds.includes(party)}
+      <g class="series" class:series--off={!on} aria-label={localizedName(p.shortName, lang)}>
+        <path d={linePath(series)} stroke={lineStroke(colour)} fill="none" stroke-width="1.75" />
+        {#each series as point, i (i)}
+          <circle
+            class="data-dot"
+            cx={xScale(point.date)}
+            cy={yScale(point.share)}
+            r="3"
             fill={colour}
-            stroke={isLight(colour) ? 'var(--color-ink-3)' : 'rgba(255,255,255,0.55)'}
-            stroke-width="0.6"
-            aria-label={localizedName(p.shortName, lang)}
+            stroke={dotStroke(colour)}
+            stroke-width="1"
           />
-        {/if}
-      {/each}
-      <path
-        class="area-band area-band--other"
-        d={bandPath('__other__')}
-        fill="url(#poll-other-stripes)"
-        stroke="var(--color-rule-strong)"
-        stroke-width="0.6"
-        aria-label={lang === 'el' ? 'Λοιπά / αναποφάσιστοι' : 'Other / undecided'}
-      />
-    {/if}
+        {/each}
+      </g>
+    {/each}
 
     <!-- spike cursor: vertical line + highlighted points at snapped date -->
     {#if hoverMid}
@@ -595,19 +472,17 @@
         y1={margin.top}
         y2={margin.top + innerH}
       />
-      {#if chartMode === 'lines'}
-        {#each hoverRows as row (row.party)}
-          <circle
-            class="spike-dot"
-            cx={hoverX}
-            cy={yScale(row.point.share)}
-            r="5"
-            fill={row.colour}
-            stroke={dotStroke(row.colour)}
-            stroke-width="1.5"
-          />
-        {/each}
-      {/if}
+      {#each hoverRows as row (row.party)}
+        <circle
+          class="spike-dot"
+          cx={hoverX}
+          cy={yScale(row.point.share)}
+          r="5"
+          fill={row.colour}
+          stroke={dotStroke(row.colour)}
+          stroke-width="1.5"
+        />
+      {/each}
     {/if}
 
     <!-- transparent hit area: receives mousemove across the plot region -->
@@ -637,13 +512,6 @@
             <span class="tip-share">{row.point.share}%</span>
           </li>
         {/each}
-        {#if hoverOtherShare !== null && hoverOtherShare > 0}
-          <li class="tip-row tip-row--other">
-            <span class="tip-sw tip-sw--other" aria-hidden="true"></span>
-            <span class="tip-name">{lang === 'el' ? 'Λοιπά / αναποφάσιστοι' : 'Other / undecided'}</span>
-            <span class="tip-share">{hoverOtherShare}%</span>
-          </li>
-        {/if}
       </ul>
       {#if hoverPollsters.length}
         <p class="tip-meta">{hoverPollsters.join(' · ')}</p>
@@ -801,36 +669,63 @@
     gap: var(--sp-3);
   }
 
-  .range-bar,
-  .mode-bar {
+  .pollster-bar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--sp-2) var(--sp-3);
   }
 
-  .area-band {
-    transition: opacity var(--dur-fast) var(--ease-standard);
+  .tracker-span {
+    margin: calc(var(--sp-2) * -1) 0 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    font-family: var(--font-sans);
+    font-size: var(--fs-50);
+    color: var(--color-ink-3);
   }
-  .area-band:hover {
-    opacity: 0.88;
+  .tracker-span-value {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--color-ink-2);
   }
-  .area-band--other {
-    pointer-events: none;
+  .tracker-span-dot {
+    color: var(--color-ink-3);
+  }
+  .tracker-span-count {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--color-ink-3);
   }
 
-  .tip-sw--other {
-    background: repeating-linear-gradient(
-      45deg,
-      var(--color-paper-3, #eee),
-      var(--color-paper-3, #eee) 3px,
-      var(--color-paper-2) 3px,
-      var(--color-paper-2) 6px
-    );
-    border: 1px solid rgba(255, 255, 255, 0.25);
+  .pollster-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--color-paper-2);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-sans);
+    font-size: var(--fs-50);
+    color: var(--color-ink);
+    padding: 0 var(--sp-6) 0 var(--sp-3);
+    height: 28px;
+    line-height: 1;
+    cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, var(--color-ink-3) 50%),
+      linear-gradient(135deg, var(--color-ink-3) 50%, transparent 50%);
+    background-position: calc(100% - 14px) 12px, calc(100% - 9px) 12px;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    transition: border-color var(--dur-fast) var(--ease-standard);
   }
-  .tip-row--other .tip-name {
-    color: rgba(255, 255, 255, 0.55);
+  .pollster-select:hover {
+    border-color: var(--color-rule-strong);
+  }
+  .pollster-select:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   .range-label {
@@ -840,51 +735,5 @@
     text-transform: uppercase;
     letter-spacing: var(--tracking-eyebrow);
     color: var(--color-ink-3);
-  }
-
-  .range-buttons {
-    display: inline-flex;
-    align-items: stretch;
-    flex-wrap: wrap;
-    gap: var(--sp-1);
-    padding: 2px;
-    background-color: var(--color-paper-2);
-    border: 1px solid var(--color-rule);
-    border-radius: var(--radius-pill);
-  }
-
-  .range-btn {
-    appearance: none;
-    border: none;
-    background: transparent;
-    /* Fix the box height so toggling font-weight on the active pill
-       can never subpixel-shift its neighbours. */
-    display: inline-flex;
-    align-items: center;
-    height: 24px;
-    padding: 0 var(--sp-3);
-    border-radius: var(--radius-pill);
-    font-family: var(--font-sans);
-    font-size: var(--fs-50);
-    line-height: 1;
-    color: var(--color-ink-2);
-    cursor: pointer;
-    transition: background-color var(--dur-fast) var(--ease-standard),
-      color var(--dur-fast) var(--ease-standard);
-  }
-
-  .range-btn:hover {
-    color: var(--color-ink);
-  }
-
-  .range-btn:focus-visible {
-    outline: none;
-    box-shadow: var(--focus-ring);
-  }
-
-  .range-btn--on {
-    background-color: var(--color-ink);
-    color: var(--color-paper);
-    font-weight: 600;
   }
 </style>

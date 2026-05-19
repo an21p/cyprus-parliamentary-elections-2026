@@ -196,7 +196,8 @@
   /* District paths form a single muted wash with a copper-orange
      stroke that echoes the Cyprus flag (Pantone 144 C). Each
      non-Nicosia path slides in from its outward direction so the
-     island assembles on load. */
+     island assembles on load, then all districts take on their
+     official ballot colour. */
   .cy-outline__path {
     fill: var(--color-accent-soft);
     stroke: #d57800;
@@ -207,13 +208,22 @@
     transform-origin: center;
     opacity: 0;
     transform: translate(var(--dx, 0), var(--dy, 0));
-    animation: district-converge 1500ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--delay, 0ms) forwards;
+    animation:
+      district-converge 1500ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--delay, 0ms) forwards,
+      district-colorize 400ms ease-out 1750ms forwards;
   }
+  /* Ballot colour per district (at 0.4 opacity). */
+  .cy-outline__path[data-district='NIC'] { --ballot-color: rgba(245, 245, 245, 0.4); }
+  .cy-outline__path[data-district='LIM'] { --ballot-color: rgba(255, 235, 59,  0.4); }
+  .cy-outline__path[data-district='FAM'] { --ballot-color: rgba(33,  150, 243, 0.4); }
+  .cy-outline__path[data-district='LAR'] { --ballot-color: rgba(244, 143, 177, 0.4); }
+  .cy-outline__path[data-district='PAF'] { --ballot-color: rgba(76,  175, 80,  0.4); }
+  .cy-outline__path[data-district='KYR'] { --ballot-color: rgba(255, 152, 0,   0.4); }
   /* Nicosia is the stationary anchor; the other five slide in to meet it. */
   .cy-outline__path[data-district='NIC'] {
     opacity: 1;
     transform: none;
-    animation: none;
+    animation: district-colorize 400ms ease-out 1750ms forwards;
   }
 
   @keyframes district-converge {
@@ -225,6 +235,10 @@
       opacity: 1;
       transform: translate(0, 0);
     }
+  }
+  @keyframes district-colorize {
+    from { fill: var(--color-accent-soft); }
+    to   { fill: var(--ballot-color); }
   }
 
   /* ----------------------------------------------------------------------
@@ -587,11 +601,16 @@
     .title__line,
     .lede,
     .rule,
-    .cta,
+    .cta {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
     .cy-outline__path {
       animation: none;
       opacity: 1;
       transform: none;
+      fill: var(--ballot-color);
     }
     .rule { transform: scaleX(1); }
   }
