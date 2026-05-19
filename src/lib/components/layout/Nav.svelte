@@ -409,7 +409,6 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font: inherit;
   }
 
   .nav-caret {
