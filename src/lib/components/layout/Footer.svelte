@@ -55,7 +55,7 @@
     <!-- Column 1: identity + disclaimer -->
     <section class="footer-col footer-identity" aria-label={identityLabel}>
       <a href={hrefFor('')} class="footer-wordmark">
-        <span class="footer-mark" aria-hidden="true">CY</span>
+        <img class="footer-mark" src="/favicon.svg" alt="" width="32" height="32" />
         <span class="footer-title">{t(lang, 'site.title')}</span>
       </a>
       <p class="footer-disclaimer">{t(lang, 'footer.disclaimer')}</p>
@@ -69,7 +69,7 @@
     <!-- Column 2: section links -->
     <nav class="footer-col" aria-label={sectionsLabel}>
       <h3 class="footer-heading">{sectionsLabel}</h3>
-      <ul class="footer-list">
+      <ul class="footer-list" role="list">
         {#each sections as item (item.key)}
           <li>
             <a href={hrefFor(item.slug)} class="footer-link">{t(lang, item.key)}</a>
@@ -81,7 +81,7 @@
     <!-- Column 3: sources + methodology -->
     <nav class="footer-col" aria-label={referenceLabel}>
       <h3 class="footer-heading">{referenceLabel}</h3>
-      <ul class="footer-list">
+      <ul class="footer-list" role="list">
         <li>
           <a href={`${hrefFor('about')}#sources`} class="footer-link">{t(lang, 'footer.sources')}</a>
         </li>
@@ -150,17 +150,9 @@
   }
 
   .footer-mark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    background-color: var(--color-accent);
-    color: var(--color-accent-ink);
-    font-family: var(--font-sans);
-    font-size: 0.78rem;
-    font-weight: 700;
-    border-radius: var(--radius-2);
+    display: block;
+    width: 32px;
+    height: 32px;
     flex-shrink: 0;
   }
 

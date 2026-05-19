@@ -1,0 +1,19 @@
+{
+  "fieldworkStart": "2024-10-21",
+  "fieldworkEnd": "2024-11-01",
+  "pollster": "RAI Consultants",
+  "commissioner": "independent",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 27.9,
+    "AKEL": 25.8,
+    "ELAM": 14.5,
+    "DIKO": 11.4,
+    "VOLT": 5.7,
+    "EDEK": 4,
+    "KOSP": 1.6,
+    "KEKK": 1.4
+  },
+  "notes": "Pre-ALMA."
+}

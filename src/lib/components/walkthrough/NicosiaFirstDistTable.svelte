@@ -46,8 +46,8 @@
   const L = $derived({
     caption:
       lang === 'el'
-        ? 'Πρώτη κατανομή στην Επαρχία Λευκωσίας (2021) — μέτρο 6.117 ψήφων'
-        : 'First distribution in Nicosia district (2021) — quota 6,117 votes',
+        ? 'Πρώτη κατανομή στην Επαρχία Λευκωσίας (2021) - μέτρο 6.117 ψήφων'
+        : 'First distribution in Nicosia district (2021) - quota 6,117 votes',
     party: lang === 'el' ? 'Κόμμα' : 'Party',
     votes: lang === 'el' ? 'Ψήφοι' : 'Votes',
     seats:

@@ -5,7 +5,7 @@
 // per-district vote breakdown baked into the preset.
 //
 // We test the pure functions directly (not the Svelte 5 rune store, which
-// requires the Svelte compiler — covered by the integration build).
+// requires the Svelte compiler - covered by the integration build).
 
 import { describe, expect, it } from 'vitest';
 import { allocateSeats } from '../src/lib/election-algorithm';
@@ -43,7 +43,7 @@ describe('simulator 2021-actual preset', () => {
     expect(seats.get('EDEK')).toBe(4);
     expect(seats.get('DIPA')).toBe(4);
     expect(seats.get('KOSP')).toBe(3);
-    // KEKK was 3.27 % nationally — under the 3.6 % threshold.
+    // KEKK was 3.27 % nationally - under the 3.6 % threshold.
     expect(seats.get('KEKK')).toBeUndefined();
 
     // Every district is fully seated.

@@ -1,0 +1,22 @@
+{
+  "fieldworkStart": "2026-02-09",
+  "fieldworkEnd": "2026-02-17",
+  "pollster": "RAI Consultants",
+  "commissioner": "Alpha Cyprus",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 21.5,
+    "AKEL": 22.7,
+    "ELAM": 16.4,
+    "ALMA": 10,
+    "ADK": 8.1,
+    "DIKO": 9.4,
+    "VOLT": 3.8,
+    "EDEK": 2.3,
+    "DIPA": 2.8,
+    "KOSP": 2,
+    "KEKK": 0.8
+  },
+  "notes": "AKEL leads."
+}

@@ -21,13 +21,13 @@
     return `${formatted}%`;
   }
 
-  // Curated narrative blurbs per party — neutral and short. Render below the
+  // Curated narrative blurbs per party - neutral and short. Render below the
   // cookie-cutter card metadata. Used only where we have a story to tell;
   // smaller lists fall back to the party's `alignment` field.
   const NARRATIVES: Partial<Record<PartyId, { en: string; el: string }>> = {
     DISY: {
-      en: 'The dominant centre-right list of the past two decades. Annita Demetriou — the youngest party leader and first female Speaker of the House (2021) — succeeded Averof Neofytou after the 2023 presidential defeat.',
-      el: 'Το κυρίαρχο κεντροδεξιό κόμμα των τελευταίων δύο δεκαετιών. Η Αννίτα Δημητρίου — η νεότερη αρχηγός και πρώτη γυναίκα Πρόεδρος της Βουλής (2021) — διαδέχθηκε τον Αβέρωφ Νεοφύτου μετά την προεδρική ήττα του 2023.'
+      en: 'The dominant centre-right list of the past two decades. Annita Demetriou - the youngest party leader and first female Speaker of the House (2021) - succeeded Averof Neofytou after the 2023 presidential defeat.',
+      el: 'Το κυρίαρχο κεντροδεξιό κόμμα των τελευταίων δύο δεκαετιών. Η Αννίτα Δημητρίου - η νεότερη αρχηγός και πρώτη γυναίκα Πρόεδρος της Βουλής (2021) - διαδέχθηκε τον Αβέρωφ Νεοφύτου μετά την προεδρική ήττα του 2023.'
     },
     AKEL: {
       en: 'The historic Cypriot left, rooted in the 1926 communist movement. Rebranded as "AKEL – Social Alliance" after the 2024 European Parliament election, having absorbed smaller left-leaning groups.',
@@ -85,11 +85,12 @@
 <PageShell
   {lang}
   {currentPath}
+  numeral="19"
   eyebrow={lang === 'el' ? 'Κόμματα' : 'Parties'}
   title={lang === 'el' ? '19 κόμματα και 9 ανεξάρτητοι' : '19 parties and 9 independents'}
   lede={lang === 'el'
-    ? 'Από τον ΔΗΣΥ και το ΑΚΕΛ μέχρι τα νέα κόμματα ΑΛΜΑ, Άμεση Δημοκρατία Κύπρου και Volt — ο πλήρης κατάλογος των υποψηφίων λιστών για τις 24 Μαΐου 2026.'
-    : 'From DISY and AKEL to the new entrants ALMA, Direct Democracy Cyprus and Volt — the full slate of lists contesting 24 May 2026.'}
+    ? 'Από τον ΔΗΣΥ και το ΑΚΕΛ μέχρι τα νέα κόμματα ΑΛΜΑ, Άμεση Δημοκρατία Κύπρου και Volt - ο πλήρης κατάλογος των υποψηφίων λιστών για τις 24 Μαΐου 2026.'
+    : 'From DISY and AKEL to the new entrants ALMA, Direct Democracy Cyprus and Volt - the full slate of lists contesting 24 May 2026.'}
 >
   <SectionBlock
     id="big-two"
@@ -105,12 +106,24 @@
       {#each BIG_TWO as pid (pid)}
         {@const party = getParty(pid)}
         <article class="party-card party-card--big">
+          {#if party.logo}
+            <img
+              class="party-bg-logo"
+              src={party.logo}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
+          {:else}
+            <span
+              class="party-bg-logo party-bg-logo--swatch"
+              style="background-color: {party.colour};"
+              aria-hidden="true"
+            ></span>
+          {/if}
           <header class="party-head">
-            <span class="party-swatch" style="background-color: {party.colour};" aria-hidden="true"></span>
-            <div>
-              <p class="party-name">{localizedName(party, lang)}</p>
-              <p class="party-short">{localizedName(party.shortName, lang)}</p>
-            </div>
+            <p class="party-name">{localizedName(party, lang)}</p>
+            <p class="party-short">{localizedName(party.shortName, lang)}</p>
           </header>
           <dl class="party-meta">
             <div>
@@ -150,18 +163,30 @@
     <p>
       {lang === 'el'
         ? 'Η απερχόμενη Βουλή πλαισιωνόταν και από έξι μικρότερα κοινοβουλευτικά κόμματα. Δύο τους (ΕΔΕΚ και ΔΗΠΑ) εμφανίζονται οριακά πάνω ή κάτω από το όριο του 3,6%.'
-        : 'The outgoing parliament also seated six smaller lists. Two of them (EDEK and DIPA) are running close to — or below — the 3.6% threshold.'}
+        : 'The outgoing parliament also seated six smaller lists. Two of them (EDEK and DIPA) are running close to - or below - the 3.6% threshold.'}
     </p>
     <div class="party-grid">
       {#each INCUMBENTS as pid (pid)}
         {@const party = getParty(pid)}
         <article class="party-card">
+          {#if party.logo}
+            <img
+              class="party-bg-logo"
+              src={party.logo}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
+          {:else}
+            <span
+              class="party-bg-logo party-bg-logo--swatch"
+              style="background-color: {party.colour};"
+              aria-hidden="true"
+            ></span>
+          {/if}
           <header class="party-head">
-            <span class="party-swatch" style="background-color: {party.colour};" aria-hidden="true"></span>
-            <div>
-              <p class="party-name">{localizedName(party, lang)}</p>
-              <p class="party-short">{localizedName(party.shortName, lang)}</p>
-            </div>
+            <p class="party-name">{localizedName(party, lang)}</p>
+            <p class="party-short">{localizedName(party.shortName, lang)}</p>
           </header>
           <dl class="party-meta">
             <div>
@@ -200,19 +225,31 @@
   >
     <p>
       {lang === 'el'
-        ? 'Τέσσερα κόμματα κατεβαίνουν για πρώτη φορά σε βουλευτικές εκλογές. Τα δύο πρώτα — ΑΛΜΑ και Άμεση Δημοκρατία Κύπρου — βρίσκονται καλά πάνω από το όριο εισόδου σύμφωνα με τις δημοσκοπήσεις και θα μπουν σχεδόν σίγουρα στη Βουλή.'
-        : 'Four parties are contesting a parliamentary election for the first time. The two leaders — ALMA and Direct Democracy Cyprus — are polling well above the threshold and look near-certain to enter the House.'}
+        ? 'Τέσσερα κόμματα κατεβαίνουν για πρώτη φορά σε βουλευτικές εκλογές. Τα δύο πρώτα - ΑΛΜΑ και Άμεση Δημοκρατία Κύπρου - βρίσκονται καλά πάνω από το όριο εισόδου σύμφωνα με τις δημοσκοπήσεις και θα μπουν σχεδόν σίγουρα στη Βουλή.'
+        : 'Four parties are contesting a parliamentary election for the first time. The two leaders - ALMA and Direct Democracy Cyprus - are polling well above the threshold and look near-certain to enter the House.'}
     </p>
     <div class="party-grid">
       {#each NEW_ENTRANTS as pid (pid)}
         {@const party = getParty(pid)}
         <article class="party-card">
+          {#if party.logo}
+            <img
+              class="party-bg-logo"
+              src={party.logo}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
+          {:else}
+            <span
+              class="party-bg-logo party-bg-logo--swatch"
+              style="background-color: {party.colour};"
+              aria-hidden="true"
+            ></span>
+          {/if}
           <header class="party-head">
-            <span class="party-swatch" style="background-color: {party.colour};" aria-hidden="true"></span>
-            <div>
-              <p class="party-name">{localizedName(party, lang)}</p>
-              <p class="party-short">{localizedName(party.shortName, lang)}</p>
-            </div>
+            <p class="party-name">{localizedName(party, lang)}</p>
+            <p class="party-short">{localizedName(party.shortName, lang)}</p>
           </header>
           <dl class="party-meta">
             <div>
@@ -242,16 +279,33 @@
         ? 'Επτά μικρότερες λίστες συμπληρώνουν τις 19 υποψηφιότητες. Καμία δεν εμφανίζεται κοντά στο όριο εισόδου, αλλά πολλές εκπροσωπούν ένα συγκεκριμένο εκλογικό αίτημα ή κοινωνική ομάδα.'
         : 'Seven smaller lists round out the 19 parties on the ballot. None is polling near the 3.6% threshold, but several represent a particular constituency or single-issue cause.'}
     </p>
-    <ul class="minor-list">
+    <ul class="minor-list" role="list">
       {#each MINOR as pid (pid)}
         {@const party = getParty(pid)}
         <li class="minor-item">
-          <span class="party-swatch party-swatch--sm" style="background-color: {party.colour};" aria-hidden="true"></span>
+          {#if party.logo}
+            <button
+              type="button"
+              class="minor-logo logo-zoom logo-zoom--minor"
+              aria-label={lang === 'el'
+                ? `Μεγέθυνση λογοτύπου ${localizedName(party.shortName, lang)}`
+                : `Zoom ${localizedName(party.shortName, lang)} logo`}
+            >
+              <img class="logo-zoom-img" src={party.logo} alt="" loading="lazy" />
+            </button>
+          {:else}
+            <span class="minor-logo minor-logo--placeholder" aria-hidden="true">
+              <span
+                class="minor-logo-chip"
+                style="background-color: {party.colour};"
+              ></span>
+            </span>
+          {/if}
           <div class="minor-text">
             <p class="minor-name">{localizedName(party, lang)} <span class="minor-short">({localizedName(party.shortName, lang)})</span></p>
             <p class="minor-detail">
               {localizedName(party.leader, lang)} · {localizedName(party.alignment, lang)}
-              {#if party.notes}— {localizedName(party.notes, lang)}{/if}
+              {#if party.notes}- {localizedName(party.notes, lang)}{/if}
             </p>
           </div>
         </li>
@@ -266,8 +320,8 @@
   >
     <p>
       {lang === 'el'
-        ? 'Πέρα από τις 19 λίστες, εννέα ανεξάρτητοι υποψήφιοι θα εμφανιστούν στα ψηφοδέλτια χωρίς κομματική σήμανση. Στο κυπριακό σύστημα οι ανεξάρτητοι αντιμετωπίζονται όπως μία μονομελής λίστα και θεωρητικά οφείλουν να πληρούν τα ίδια εθνικά όρια — γεγονός που πρακτικά καθιστά εξαιρετικά δύσκολη την εκλογή τους χωρίς ευρεία επαρχιακή απήχηση.'
-        : 'Beyond the 19 parties, nine independent candidates will appear on the ballots without any party affiliation. Under the Cypriot system, independents are treated as single-name lists and are nominally held to the same national thresholds — which makes their election very difficult absent broad district-level support.'}
+        ? 'Πέρα από τις 19 λίστες, εννέα ανεξάρτητοι υποψήφιοι θα εμφανιστούν στα ψηφοδέλτια χωρίς κομματική σήμανση. Στο κυπριακό σύστημα οι ανεξάρτητοι αντιμετωπίζονται όπως μία μονομελής λίστα και θεωρητικά οφείλουν να πληρούν τα ίδια εθνικά όρια - γεγονός που πρακτικά καθιστά εξαιρετικά δύσκολη την εκλογή τους χωρίς ευρεία επαρχιακή απήχηση.'
+        : 'Beyond the 19 parties, nine independent candidates will appear on the ballots without any party affiliation. Under the Cypriot system, independents are treated as single-name lists and are nominally held to the same national thresholds - which makes their election very difficult absent broad district-level support.'}
     </p>
   </SectionBlock>
 </PageShell>
@@ -286,36 +340,114 @@
   }
 
   .party-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: var(--sp-3);
     padding: var(--sp-5);
-    background-color: var(--color-paper);
+    /* Reserve room in the top-right corner for the logo. */
+    padding-right: calc(var(--sp-5) + 80px);
+    background-color: var(--color-paper-2);
     border: 1px solid var(--color-rule);
     border-radius: var(--radius-3);
   }
   .party-card--big {
     border-color: var(--color-rule-strong);
+    background-color: var(--color-paper-3);
+    padding-right: calc(var(--sp-5) + 96px);
+  }
+
+  /* Top-right anchored logo (decorative - zoom is only on the minor list). */
+  .party-bg-logo {
+    position: absolute;
+    top: var(--sp-5);
+    right: var(--sp-5);
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    object-position: right top;
+    pointer-events: none;
+    user-select: none;
+  }
+  .party-card--big .party-bg-logo {
+    width: 80px;
+    height: 80px;
+  }
+  .party-bg-logo--swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-2);
+  }
+  .party-card--big .party-bg-logo--swatch {
+    width: 48px;
+    height: 48px;
   }
 
   .party-head {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-3);
+    min-width: 0;
   }
-  .party-swatch {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
+
+  /* ---------- Click-to-inspect logo ---------- */
+  /* The button keeps the layout slot; the inner image scales above
+     everything else on hover/focus so users can read text-heavy marks. */
+  .logo-zoom {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    cursor: zoom-in;
     border-radius: var(--radius-2);
-    flex-shrink: 0;
-    border: 1px solid var(--color-rule);
+    overflow: visible;
+    color: inherit;
   }
-  .party-swatch--sm {
-    width: 14px;
-    height: 14px;
-    border-radius: var(--radius-pill);
-    margin-top: 0.35em;
+  .logo-zoom:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+  .logo-zoom-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: inherit;
+    display: block;
+    border-radius: var(--radius-2);
+    transition:
+      transform var(--dur-fast) var(--ease-standard),
+      box-shadow var(--dur-fast) var(--ease-standard),
+      background-color var(--dur-fast) var(--ease-standard),
+      padding var(--dur-fast) var(--ease-standard);
+    transform-origin: top right;
+    will-change: transform;
+  }
+  .logo-zoom--minor .logo-zoom-img {
+    transform-origin: center left;
+  }
+  .logo-zoom:hover .logo-zoom-img,
+  .logo-zoom:focus-visible .logo-zoom-img,
+  .logo-zoom:focus .logo-zoom-img {
+    transform: scale(3.6);
+    padding: 6px;
+    background-color: var(--color-paper);
+    box-shadow: var(--shadow-overlay);
+    cursor: zoom-out;
+    position: relative;
+    z-index: 50;
+  }
+  .logo-zoom--minor:hover .logo-zoom-img,
+  .logo-zoom--minor:focus-visible .logo-zoom-img,
+  .logo-zoom--minor:focus .logo-zoom-img {
+    transform: scale(4);
+  }
+  /* Lift the whole button (including the scaled child) above sibling cards. */
+  .logo-zoom:hover,
+  .logo-zoom:focus-visible,
+  .logo-zoom:focus {
+    position: relative;
+    z-index: 50;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo-zoom-img { transition: none; }
   }
   .party-name {
     font-family: var(--font-display);
@@ -372,13 +504,34 @@
   }
   .minor-item {
     display: flex;
-    gap: var(--sp-3);
-    align-items: flex-start;
-    padding: var(--sp-3) 0;
+    gap: var(--sp-4);
+    align-items: center;
+    padding: var(--sp-4) 0;
     border-top: 1px solid var(--color-rule);
   }
   .minor-item:first-child { border-top: 0; padding-top: 0; }
   .minor-text { min-width: 0; }
+  .minor-logo {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+  /* Logo-less parties (FARL, POPSF) - same 56px slot as the logo so text
+     baselines line up across every row, with a smaller colour chip inside. */
+  .minor-logo--placeholder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .minor-logo-chip {
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-2);
+  }
   .minor-name {
     font-family: var(--font-display);
     font-size: var(--fs-200);

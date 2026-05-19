@@ -1,0 +1,49 @@
+{
+  "fieldworkStart": "2026-05-01",
+  "fieldworkEnd": "2026-05-11",
+  "pollster": "Prime Consulting",
+  "commissioner": "SIGMA (\"Χωρίς Περιστροφές\")",
+  "sample": 1136,
+  "marginOfError": 3,
+  "shares": {
+    "DISY": 18,
+    "AKEL": 17.6,
+    "ELAM": 10,
+    "ALMA": 8,
+    "ADK": 6.2,
+    "DIKO": 7.4,
+    "VOLT": 3.6
+  },
+  "notes": "After valid-vote redistribution: DISY 18.8 / AKEL 18.3 / ELAM 10.4 / ALMA 8.3. Refused 7.3%.",
+  "seatProjection": {
+    "DISY": [
+      13,
+      15
+    ],
+    "AKEL": [
+      12,
+      14
+    ],
+    "ELAM": [
+      7,
+      9
+    ],
+    "ALMA": [
+      6,
+      7
+    ],
+    "ADK": [
+      6,
+      7
+    ],
+    "DIKO": [
+      5,
+      6
+    ],
+    "VOLT": [
+      2,
+      4
+    ]
+  },
+  "undecidedPct": 10.3
+}

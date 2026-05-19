@@ -1,8 +1,8 @@
 // Calibrated 2021-actual district vote breakdown.
 //
 // Real per-district vote counts from RESULTS_2021 for the three districts
-// where the data is complete (NIC, PAF, KYR). For LIM, FAM and LAR — where
-// only the seat counts are publicly available — we use estimates derived
+// where the data is complete (NIC, PAF, KYR). For LIM, FAM and LAR - where
+// only the seat counts are publicly available - we use estimates derived
 // from each party's known seat share, weighted by district size, then
 // hand-tuned so the algorithm (run with 2026 seat counts: Nicosia 19,
 // Paphos 5) reproduces the historic 2021 outcome:

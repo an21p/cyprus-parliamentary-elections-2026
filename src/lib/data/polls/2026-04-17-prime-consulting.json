@@ -1,0 +1,21 @@
+{
+  "fieldworkStart": "2026-04-14",
+  "fieldworkEnd": "2026-04-17",
+  "pollster": "Prime Consulting",
+  "commissioner": "SIGMA",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 23.3,
+    "AKEL": 23.3,
+    "ELAM": 13.8,
+    "ALMA": 11.9,
+    "ADK": 9.4,
+    "DIKO": 9.4,
+    "VOLT": 3.8,
+    "EDEK": 1.3,
+    "DIPA": 2.5,
+    "KOSP": 1.3
+  },
+  "notes": "Tie at the top."
+}

@@ -24,7 +24,7 @@
     })
   );
 
-  // Max share for the threshold bar — at least the largest party, with a tiny
+  // Max share for the threshold bar - at least the largest party, with a tiny
   // headroom so the highest bar doesn't kiss the edge.
   const maxShare = $derived(
     Math.max(
@@ -36,8 +36,8 @@
   const txt = $derived({
     threshold:
       lang === 'el'
-        ? 'Όριο 3,6% — εθνικό μερίδιο'
-        : '3.6 % threshold — national share',
+        ? 'Όριο 3,6% - εθνικό μερίδιο'
+        : '3.6 % threshold - national share',
     qualifying:
       lang === 'el' ? 'Κόμματα που πέρασαν' : 'Parties that qualified',
     excluded:

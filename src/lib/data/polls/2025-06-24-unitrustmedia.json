@@ -1,0 +1,14 @@
+{
+  "fieldworkStart": "2025-06-13",
+  "fieldworkEnd": "2025-06-24",
+  "pollster": "Unitrustmedia",
+  "commissioner": "Vouli TV",
+  "sample": 2460,
+  "marginOfError": null,
+  "shares": {
+    "ELAM": 17,
+    "ALMA": 20,
+    "VOLT": 6
+  },
+  "notes": "Online panel; ALMA hypothetically 20% (treated as outlier). DISY/AKEL not reported."
+}

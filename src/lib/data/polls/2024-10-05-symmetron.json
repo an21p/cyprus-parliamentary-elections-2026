@@ -1,0 +1,18 @@
+{
+  "fieldworkStart": "2024-09-25",
+  "fieldworkEnd": "2024-10-05",
+  "pollster": "Symmetron",
+  "commissioner": "independent",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 28.8,
+    "AKEL": 25,
+    "ELAM": 14.1,
+    "DIKO": 10.9,
+    "VOLT": 3.2,
+    "EDEK": 4.3,
+    "DIPA": 3.4,
+    "KOSP": 3.6
+  }
+}

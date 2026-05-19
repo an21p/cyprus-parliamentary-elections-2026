@@ -38,7 +38,7 @@
     label:
       lang === 'el' ? 'Φόρτωση από δημοσκόπηση' : 'Load from a poll',
     apply: lang === 'el' ? 'Εφαρμογή' : 'Apply',
-    none: '—'
+    none: '-'
   });
 </script>
 

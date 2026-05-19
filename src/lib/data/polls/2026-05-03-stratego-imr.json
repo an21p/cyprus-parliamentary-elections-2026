@@ -1,0 +1,19 @@
+{
+  "fieldworkStart": "2026-04-24",
+  "fieldworkEnd": "2026-05-03",
+  "pollster": "Stratego-IMR",
+  "commissioner": "Kathimerini Cyprus",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "ALMA": 8.9,
+    "ADK": 5.7,
+    "DIKO": 7.4,
+    "VOLT": 4.2,
+    "EDEK": 2.3,
+    "DIPA": 1.2,
+    "KOSP": 2.1,
+    "KEKK": 1.2
+  },
+  "notes": "DISY/AKEL/ELAM shares not reported in source. Volt up sharply vs December; ADK at lowest poll figure since founding."
+}

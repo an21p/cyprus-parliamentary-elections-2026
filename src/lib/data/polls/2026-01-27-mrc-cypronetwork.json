@@ -1,0 +1,22 @@
+{
+  "fieldworkStart": "2026-01-12",
+  "fieldworkEnd": "2026-01-27",
+  "pollster": "MRC Cypronetwork",
+  "commissioner": "RIK",
+  "sample": 1213,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 17,
+    "AKEL": 16,
+    "ELAM": 11,
+    "ALMA": 9,
+    "ADK": 6.5,
+    "DIKO": 6,
+    "VOLT": 2,
+    "EDEK": 2.5,
+    "DIPA": 1,
+    "KOSP": 2.5,
+    "KEKK": 1
+  },
+  "notes": "High undecided + abstainers."
+}

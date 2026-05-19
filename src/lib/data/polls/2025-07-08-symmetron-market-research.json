@@ -1,0 +1,20 @@
+{
+  "fieldworkStart": "2025-07-01",
+  "fieldworkEnd": "2025-07-08",
+  "pollster": "Symmetron Market Research",
+  "commissioner": "independent",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 23.2,
+    "AKEL": 20.5,
+    "ELAM": 16.4,
+    "ALMA": 15.1,
+    "DIKO": 8.2,
+    "VOLT": 2.7,
+    "EDEK": 4.1,
+    "DIPA": 1.4,
+    "KOSP": 2.7
+  },
+  "notes": "ALMA poll-debut at 15%+."
+}

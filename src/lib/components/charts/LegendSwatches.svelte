@@ -28,14 +28,14 @@
   const interactive = $derived(typeof onToggle === 'function');
 </script>
 
-<div class="legend" role="list" aria-label={title ?? (lang === 'el' ? 'Υπόμνημα' : 'Legend')}>
+<div class="legend" aria-label={title ?? (lang === 'el' ? 'Υπόμνημα' : 'Legend')}>
   {#if title}
     <p class="legend-title">{title}</p>
   {/if}
-  <ul class="legend-list">
+  <ul class="legend-list" role="list">
     {#each items as item (item.id)}
       {@const on = isActive(item.id)}
-      <li role="listitem">
+      <li>
         {#if interactive}
           <button
             type="button"
@@ -84,14 +84,24 @@
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: var(--sp-2);
   }
 
+  .legend-list > li {
+    display: flex;
+    align-items: center;
+  }
+
   .chip {
+    /* Fix the chip box dimensions so the chip-swatch and label can't
+       shift baseline between chips (otherwise the first row can sit
+       a pixel high or low depending on font metrics). */
     display: inline-flex;
     align-items: center;
     gap: var(--sp-2);
-    padding: var(--sp-1) var(--sp-3);
+    height: 24px;
+    padding: 0 var(--sp-3);
     border-radius: var(--radius-pill);
     background-color: var(--color-paper-2);
     border: 1px solid var(--color-rule);
@@ -100,6 +110,7 @@
     line-height: 1;
     color: var(--color-ink);
     cursor: default;
+    box-sizing: border-box;
   }
 
   button.chip {

@@ -1,7 +1,7 @@
 // Cyprus 3-stage parliamentary seat allocation ("reinforced proportional representation").
 //
 // Reference: research/compass_artifact_wf-...md §1.6–§1.7. The implementation here is a
-// pure, deterministic translation of that spec. No data is hardcoded — district seat
+// pure, deterministic translation of that spec. No data is hardcoded - district seat
 // counts and thresholds are inputs so the same routine works for 2021 (Nicosia 20, Paphos 4)
 // and 2026 (Nicosia 19, Paphos 5).
 
@@ -180,7 +180,7 @@ export function allocateSeats(
   let stage3SeatsAllocated = 0;
   for (let i = 0; i < seatsRemainingAfterStage2; i++) {
     // Pick qualifying party with largest remaining unused votes. Tie-break by
-    // total national votes (descending) for determinism — a defensible reading
+    // total national votes (descending) for determinism - a defensible reading
     // of "ranking the parties based on their total votes" (§1.6 quote).
     let bestPid: PartyId | null = null;
     let bestRemaining = -Infinity;
@@ -261,7 +261,7 @@ export function allocateSeats(
       seatsRemainingByDistrict.set(districtId, cap - 1);
       toPlace--;
     }
-    // If toPlace > 0 here, all preferred districts are full — fall back to any
+    // If toPlace > 0 here, all preferred districts are full - fall back to any
     // district with remaining capacity, still preferring those with higher unused.
     // (In well-formed Cypriot inputs this branch is not exercised, but it keeps
     // the algorithm total rather than throwing on pathological inputs.)

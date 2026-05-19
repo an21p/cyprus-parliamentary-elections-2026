@@ -1,0 +1,18 @@
+{
+  "fieldworkStart": "2026-02-11",
+  "fieldworkEnd": "2026-02-27",
+  "pollster": "CyBC in-house",
+  "commissioner": "CyBC",
+  "sample": 1417,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 18,
+    "AKEL": 17.5,
+    "ELAM": 12,
+    "ALMA": 8.5,
+    "ADK": 7,
+    "DIKO": 6.5,
+    "VOLT": 3
+  },
+  "notes": "Voting certainty 86%."
+}

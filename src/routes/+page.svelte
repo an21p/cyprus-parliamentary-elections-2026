@@ -3,8 +3,8 @@
 </script>
 
 <svelte:head>
-  <title>Cyprus 2026 — Choose language / Επιλογή γλώσσας</title>
-  <meta name="description" content="Cyprus parliamentary elections 2026 — interactive explainer in English & Greek." />
+  <title>Cyprus 2026 · Choose language / Επιλογή γλώσσας</title>
+  <meta name="description" content="Cyprus parliamentary elections 2026: an interactive explainer in English & Greek." />
 </svelte:head>
 
 <main class="picker">

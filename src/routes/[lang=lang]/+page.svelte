@@ -9,11 +9,28 @@
   const currentPath = $derived(data.currentPath);
 
   const leadersForChart: PartyId[] = ['DISY', 'AKEL', 'ELAM', 'ALMA', 'ADK'];
+
+  const title = $derived(t(lang, 'site.title'));
+  const description = $derived(t(lang, 'home.lede'));
+  const ogLocale = $derived(lang === 'el' ? 'el_GR' : 'en_GB');
+  const ogLocaleAlt = $derived(lang === 'el' ? 'en_GB' : 'el_GR');
 </script>
+
+<svelte:head>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:locale" content={ogLocale} />
+  <meta property="og:locale:alternate" content={ogLocaleAlt} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+</svelte:head>
 
 <PageShell
   {lang}
   {currentPath}
+  numeral="56"
   eyebrow={lang === 'el' ? 'Κυριακή 24 Μαΐου 2026' : 'Sunday 24 May 2026'}
   title={t(lang, 'site.title')}
   lede={t(lang, 'home.lede')}
@@ -25,13 +42,13 @@
   >
     <p>
       {lang === 'el'
-        ? 'Για πρώτη φορά από το 1985, καμία πολιτική δύναμη δεν φαίνεται να φτάνει το 25%. Οι τελευταίες δημοσκοπήσεις δείχνουν επτά κόμματα να εισέρχονται στη Βουλή των Αντιπροσώπων: ΔΗΣΥ και ΑΚΕΛ ισόπαλα γύρω στο 18–22%, ΕΛΑΜ τρίτο γύρω στο 10–15%, και τρία νέα μορφώματα — ΑΛΜΑ, Άμεση Δημοκρατία Κύπρου (Φειδίας) και Volt — να ξεπερνούν το όριο του 3,6%. Ο συνδυασμός ΔΗΣΥ+ΑΚΕΛ, που το 2001 άγγιξε το 68,7%, πέφτει για πρώτη φορά κάτω από το μισό των εδρών.'
-        : 'For the first time since 1985, no single party looks set to clear 25%. Final-week polling shows seven parties entering the House of Representatives: DISY and AKEL roughly level at 18–22%, ELAM consolidating in third at 10–15%, and three newcomers — ALMA, Direct Democracy Cyprus (Fidias) and Volt — sitting on or above the 3.6% threshold. The combined DISY+AKEL share, which peaked at 68.7% in 2001, is poised to fall below half of the seats for the first time in modern Cypriot politics.'}
+        ? 'Για πρώτη φορά από το 1985, καμία πολιτική δύναμη δεν φαίνεται να φτάνει το 25%. Οι τελευταίες δημοσκοπήσεις δείχνουν επτά κόμματα να εισέρχονται στη Βουλή των Αντιπροσώπων: ΔΗΣΥ και ΑΚΕΛ ισόπαλα γύρω στο 18–22%, ΕΛΑΜ τρίτο γύρω στο 10–15%, και τρία νέα μορφώματα (ΑΛΜΑ, Άμεση Δημοκρατία Κύπρου του Φειδία, και Volt) να ξεπερνούν το όριο του 3,6%. Ο συνδυασμός ΔΗΣΥ+ΑΚΕΛ, που το 2001 άγγιξε το 68,7%, πέφτει για πρώτη φορά κάτω από το μισό των εδρών.'
+        : 'For the first time since 1985, no single party is on track to clear 25%. Final-week polling shows seven parties entering the House of Representatives: DISY and AKEL roughly level at 18–22%, ELAM consolidating in third at 10–15%, and three newcomers (ALMA, Direct Democracy Cyprus and Volt) sitting on or above the 3.6% threshold. The combined DISY+AKEL share, which peaked at 68.7% in 2001, will fall below half of the seats for the first time in modern Cypriot politics.'}
     </p>
     <p>
       {lang === 'el'
         ? 'Αυτή η σελίδα εξηγεί πώς το εκλογικό σύστημα μετατρέπει τις ψήφους σε έδρες και γιατί δύο κόμματα με σχεδόν ίδιο εθνικό ποσοστό μπορούν να καταλήξουν με πολύ διαφορετικό αριθμό εδρών. Ο '
-        : 'This site explains how the electoral arithmetic turns votes into seats — and why two parties on nearly identical national shares can end up with very different seat counts. The '}<a class="inline-link" href={`/${lang}/simulator`}>{lang === 'el' ? 'προσομοιωτής' : 'simulator'}</a>{lang === 'el'
+        : 'This site explains how the electoral arithmetic turns votes into seats, and why two parties on nearly identical national shares can end up with very different seat counts. The '}<a class="inline-link" href={`/${lang}/simulator`}>{lang === 'el' ? 'προσομοιωτής' : 'simulator'}</a>{lang === 'el'
         ? ' σας επιτρέπει να δοκιμάσετε τα δικά σας σενάρια.'
         : ' lets you try the math yourself.'}
     </p>
@@ -42,7 +59,7 @@
     eyebrow={lang === 'el' ? 'Βασικοί αριθμοί' : 'Key numbers'}
     title={lang === 'el' ? 'Η εκλογή σε νούμερα' : 'The election in numbers'}
   >
-    <StatGrid>
+    <StatGrid columns={4}>
       <StatCard
         eyebrow={lang === 'el' ? 'Βουλή' : 'House'}
         value="56"
@@ -74,7 +91,7 @@
     <p>
       {lang === 'el'
         ? 'Στη φάρα της εβδομάδας πριν από τις εκλογές, οι δύο μεγαλύτεροι ιστορικοί αντίπαλοι, ΔΗΣΥ και ΑΚΕΛ, εμφανίζονται στατιστικά ισοπαλίες. Πίσω τους έχει εδραιωθεί το ΕΛΑΜ ως τρίτη δύναμη, ενώ τα νέα κόμματα ΑΛΜΑ και Άμεση Δημοκρατία Κύπρου μπαίνουν για πρώτη φορά στο πεδίο. Το παρακάτω γράφημα δείχνει την πορεία των πέντε αυτών κομμάτων στις δημοσιευμένες δημοσκοπήσεις από τα τέλη του 2024.'
-        : 'In the final week before the vote, the two historic giants — DISY and AKEL — are statistically tied. Behind them, ELAM has consolidated as the third force, and two newcomers, ALMA and Direct Democracy Cyprus, are contesting their first parliamentary election. The chart below tracks the five leaders across every published poll since late 2024.'}
+        : 'In the final week before the vote, the two historic giants, DISY and AKEL, are statistically tied. Behind them, ELAM has consolidated as the third force, and two newcomers, ALMA and Direct Democracy Cyprus, are contesting their first parliamentary election. The chart below tracks the five leaders across every published poll since late 2024.'}
     </p>
     <PollTracker {lang} parties={leadersForChart} />
   </SectionBlock>
@@ -102,7 +119,7 @@
         <p class="signpost-body">
           {lang === 'el'
             ? 'Δώστε ποσοστά σε κάθε κόμμα και δείτε ποιες έδρες κερδίζονται και ποιες ψήφοι χάνονται κάτω από το όριο.'
-            : 'Set a share for each party and watch how seats are won — and how votes vanish below the threshold.'}
+            : 'Set a share for each party and watch how seats are won, and how votes vanish below the threshold.'}
         </p>
         <p class="signpost-cta">{lang === 'el' ? 'Δοκιμάστε →' : 'Try it →'}</p>
       </a>
@@ -171,11 +188,14 @@
   }
   .signpost-title {
     font-family: var(--font-display);
+    font-variation-settings: var(--fvs-display-md);
     font-size: var(--fs-300);
     font-weight: 600;
     line-height: var(--lh-snug);
+    letter-spacing: var(--tracking-snug);
     margin: 0;
     color: var(--color-ink);
+    text-wrap: balance;
   }
   .signpost-body {
     font-size: var(--fs-100);

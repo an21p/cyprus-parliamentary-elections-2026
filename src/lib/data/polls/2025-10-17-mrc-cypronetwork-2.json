@@ -1,0 +1,22 @@
+{
+  "fieldworkStart": "2025-09-29",
+  "fieldworkEnd": "2025-10-17",
+  "pollster": "MRC Cypronetwork",
+  "commissioner": "RIK",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 23.1,
+    "AKEL": 23.1,
+    "ELAM": 15.6,
+    "ALMA": 8.2,
+    "ADK": 6.1,
+    "DIKO": 10.2,
+    "VOLT": 2,
+    "EDEK": 3.4,
+    "DIPA": 1.4,
+    "KOSP": 2.7,
+    "KEKK": 2
+  },
+  "notes": "Tie at the top."
+}

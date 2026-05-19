@@ -1,0 +1,22 @@
+{
+  "fieldworkStart": "2026-05-11",
+  "fieldworkEnd": "2026-05-15",
+  "pollster": "Stratego-IMR",
+  "commissioner": "Kathimerini Cyprus",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 23,
+    "AKEL": 19.9,
+    "ELAM": 13.3,
+    "ALMA": 9.9,
+    "DIKO": 8.7,
+    "ADK": 7.6,
+    "VOLT": 4.6,
+    "EDEK": 2.4,
+    "DIPA": 1.5,
+    "KOSP": 2.4,
+    "KEKK": 1.5
+  },
+  "notes": "Final Kathimerini poll before the 16 May publication blackout. Shares appear to be valid-vote / redistributed (source: Wikipedia poll table)."
+}

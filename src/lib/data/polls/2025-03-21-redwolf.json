@@ -1,0 +1,19 @@
+{
+  "fieldworkStart": "2025-03-10",
+  "fieldworkEnd": "2025-03-21",
+  "pollster": "Redwolf",
+  "commissioner": "independent",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 25,
+    "AKEL": 20,
+    "ELAM": 16.25,
+    "ALMA": 11.25,
+    "DIKO": 10,
+    "VOLT": 5,
+    "EDEK": 3.75,
+    "DIPA": 1.25,
+    "KOSP": 5
+  }
+}

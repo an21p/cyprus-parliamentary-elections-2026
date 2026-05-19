@@ -1,0 +1,22 @@
+{
+  "fieldworkStart": "2025-11-04",
+  "fieldworkEnd": "2025-11-13",
+  "pollster": "Pulse Market Research",
+  "commissioner": "Omega Channel",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 23.2,
+    "AKEL": 20.3,
+    "ELAM": 13,
+    "ALMA": 10.1,
+    "ADK": 8.7,
+    "DIKO": 8.7,
+    "VOLT": 2.9,
+    "EDEK": 2.9,
+    "DIPA": 1.4,
+    "KOSP": 2.9,
+    "KEKK": 1.4
+  },
+  "notes": "ALMA 6–8 seats in Pulse scenarios."
+}

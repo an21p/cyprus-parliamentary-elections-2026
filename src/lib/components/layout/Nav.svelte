@@ -63,14 +63,14 @@
 <header class="nav-root" class:is-open={mobileOpen}>
   <div class="nav-inner">
     <a class="wordmark" href={hrefFor('')} onclick={closeMobile} aria-label={t(lang, 'site.title')}>
-      <span class="wordmark-mark" aria-hidden="true">CY</span>
+      <img class="wordmark-mark" src="/favicon.svg" alt="" width="32" height="32" />
       <span class="wordmark-label">
         <span class="wordmark-title">{t(lang, 'site.title')}</span>
       </span>
     </a>
 
     <nav class="nav-primary" aria-label={lang === 'el' ? 'Κύρια πλοήγηση' : 'Primary navigation'}>
-      <ul class="nav-list">
+      <ul class="nav-list" role="list">
         {#each items as item (item.key)}
           {@const active = isActive(item.slug)}
           <li>
@@ -118,7 +118,7 @@
     hidden={!mobileOpen}
   >
     <nav aria-label={lang === 'el' ? 'Κύρια πλοήγηση (κινητό)' : 'Primary navigation (mobile)'}>
-      <ul class="drawer-list">
+      <ul class="drawer-list" role="list">
         {#each items as item (item.key)}
           {@const active = isActive(item.slug)}
           <li>
@@ -190,18 +190,9 @@
   }
 
   .wordmark-mark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    background-color: var(--color-accent);
-    color: var(--color-accent-ink);
-    font-family: var(--font-sans);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    border-radius: var(--radius-2);
+    display: block;
+    width: 32px;
+    height: 32px;
     flex-shrink: 0;
   }
 
@@ -216,10 +207,14 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 18ch;
+    /* On phones, hide the wordmark title - the CY lozenge is enough mark
+       and the title is still announced via the wordmark's aria-label. */
+    display: none;
   }
 
   @media (min-width: 768px) {
     .wordmark-title {
+      display: inline;
       max-width: 32ch;
       font-size: 1rem;
     }

@@ -1,0 +1,21 @@
+{
+  "fieldworkStart": "2026-02-26",
+  "fieldworkEnd": "2026-03-11",
+  "pollster": "Noverna",
+  "commissioner": "independent",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 22.5,
+    "AKEL": 22.2,
+    "ELAM": 13.4,
+    "ALMA": 12.2,
+    "ADK": 9.8,
+    "DIKO": 9.5,
+    "VOLT": 3.4,
+    "EDEK": 2,
+    "DIPA": 1.1,
+    "KOSP": 1.7,
+    "KEKK": 1.5
+  }
+}

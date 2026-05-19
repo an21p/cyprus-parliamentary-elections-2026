@@ -16,7 +16,8 @@ export const PARTIES: Party[] = [
     },
     contested2021: true,
     seatsOutgoing: 17,
-    newParty: false
+    newParty: false,
+    logo: '/parties/disy.svg'
   },
   {
     id: 'AKEL',
@@ -37,7 +38,8 @@ export const PARTIES: Party[] = [
     notes: {
       en: 'Rebranded "AKEL – Social Alliance" since the 2024 EP election.',
       el: 'Μετονομάστηκε σε «ΑΚΕΛ – Κοινωνική Συμμαχία» μετά τις Ευρωεκλογές 2024.'
-    }
+    },
+    logo: '/parties/akel.svg'
   },
   {
     id: 'DIKO',
@@ -47,14 +49,15 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'DIKO', el: 'ΔΗΚΟ' },
     leader: { en: 'Nicolas Papadopoulos', el: 'Νικόλας Παπαδόπουλος' },
-    colour: '#ff8c00',
+    colour: '#00bcd4',
     alignment: {
       en: 'Centrist / Greek-Cypriot nationalist',
       el: 'Κεντρώο / Ελληνοκυπριακός εθνικισμός'
     },
     contested2021: true,
     seatsOutgoing: 9,
-    newParty: false
+    newParty: false,
+    logo: '/parties/diko.svg'
   },
   {
     id: 'ELAM',
@@ -64,14 +67,15 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'ELAM', el: 'ΕΛΑΜ' },
     leader: { en: 'Christos Christou', el: 'Χρήστος Χρήστου' },
-    colour: '#1a1a1a',
+    colour: '#000000',
     alignment: {
       en: 'Far-right, ultranationalist (ECR)',
       el: 'Άκρα δεξιά, υπερεθνικιστικό (ECR)'
     },
     contested2021: true,
     seatsOutgoing: 3,
-    newParty: false
+    newParty: false,
+    logo: '/parties/elam.png'
   },
   {
     id: 'EDEK',
@@ -81,14 +85,15 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'EDEK', el: 'ΕΔΕΚ' },
     leader: { en: 'Nikos Anastasiou', el: 'Νίκος Αναστασίου' },
-    colour: '#e91e63',
+    colour: '#c2185b',
     alignment: {
       en: 'Social-democratic (S&D)',
       el: 'Σοσιαλδημοκρατικό (S&D)'
     },
     contested2021: true,
     seatsOutgoing: 2,
-    newParty: false
+    newParty: false,
+    logo: '/parties/edek.png'
   },
   {
     id: 'DIPA',
@@ -98,14 +103,15 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'DIPA', el: 'ΔΗΠΑ' },
     leader: { en: 'Marios Garoyian', el: 'Μάριος Καρογιάν' },
-    colour: '#1abc9c',
+    colour: '#00897b',
     alignment: {
       en: 'Centrist liberal',
       el: 'Κεντρώο φιλελεύθερο'
     },
     contested2021: true,
     seatsOutgoing: 4,
-    newParty: false
+    newParty: false,
+    logo: '/parties/dipa.png'
   },
   {
     id: 'KOSP',
@@ -115,7 +121,7 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'KOSP (Greens)', el: 'ΚΟΣΠ (Οικολόγοι)' },
     leader: { en: 'Stavros Papadouris', el: 'Σταύρος Παπαδούρης' },
-    colour: '#4caf50',
+    colour: '#2e7d32',
     alignment: {
       en: 'Greens',
       el: 'Πράσινοι'
@@ -126,7 +132,8 @@ export const PARTIES: Party[] = [
     notes: {
       en: 'Formed an electoral list with the Animal Party Cyprus (APC) for 2026.',
       el: 'Σχημάτισε εκλογικό συνδυασμό με το Κόμμα για τα Ζώα Κύπρου (APC) για το 2026.'
-    }
+    },
+    logo: '/parties/kosp.svg'
   },
   {
     id: 'ALMA',
@@ -136,7 +143,7 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'ALMA', el: 'ΑΛΜΑ' },
     leader: { en: 'Odysseas Michaelides', el: 'Οδυσσέας Μιχαηλίδης' },
-    colour: '#f4b400',
+    colour: '#ffb300',
     alignment: {
       en: 'Reformist, anti-corruption',
       el: 'Μεταρρυθμιστικό, κατά της διαφθοράς'
@@ -147,7 +154,8 @@ export const PARTIES: Party[] = [
     notes: {
       en: 'Founded May 2025 by former Auditor-General Odysseas Michaelides.',
       el: 'Ιδρύθηκε τον Μάιο 2025 από τον πρώην Γενικό Ελεγκτή Οδυσσέα Μιχαηλίδη.'
-    }
+    },
+    logo: '/parties/alma.png'
   },
   {
     id: 'ADK',
@@ -157,7 +165,7 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'ADK', el: 'ΑΔΚ' },
     leader: { en: 'Fidias Panayiotou', el: 'Φειδίας Παναγιώτου' },
-    colour: '#7e57c2',
+    colour: '#ffffff',
     alignment: {
       en: 'Direct-democracy, anti-establishment',
       el: 'Άμεση δημοκρατία, αντι-κατεστημένο'
@@ -168,7 +176,8 @@ export const PARTIES: Party[] = [
     notes: {
       en: 'Founded October 2025 by MEP Fidias Panayiotou; candidates selected via the Agorà mobile app.',
       el: 'Ιδρύθηκε τον Οκτώβριο 2025 από τον ευρωβουλευτή Φειδία Παναγιώτου· οι υποψήφιοι επιλέχθηκαν μέσω της εφαρμογής Agorà.'
-    }
+    },
+    logo: '/parties/adk.jpg'
   },
   {
     id: 'VOLT',
@@ -181,7 +190,7 @@ export const PARTIES: Party[] = [
       en: 'Andromache Sophocleous & Panos Loizou Parras',
       el: 'Ανδρομάχη Σοφοκλέους & Πάνος Λοΐζου Παρράς'
     },
-    colour: '#502379',
+    colour: '#6f1ab1',
     alignment: {
       en: 'Pan-European federalist, progressive',
       el: 'Πανευρωπαϊκό φεντεραλιστικό, προοδευτικό'
@@ -192,7 +201,8 @@ export const PARTIES: Party[] = [
     notes: {
       en: 'First general-election test; one outgoing MP (Alexandra Attalides, switched from KOSP).',
       el: 'Πρώτη συμμετοχή σε βουλευτικές εκλογές· μία απερχόμενη βουλεύτρια (Αλεξάνδρα Ατταλίδου, αποσκίρτησε από ΚΟΣΠ).'
-    }
+    },
+    logo: '/parties/volt.svg'
   },
   {
     id: 'DEK',
@@ -202,7 +212,7 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'DEK', el: 'ΔΕΚ' },
     leader: { en: 'Andreas Themistocleous', el: 'Ανδρέας Θεμιστοκλέους' },
-    colour: '#5d4037',
+    colour: '#795548',
     alignment: {
       en: 'Religious-conservative, nationalist',
       el: 'Θρησκευτικό-συντηρητικό, εθνικιστικό'
@@ -213,7 +223,8 @@ export const PARTIES: Party[] = [
     notes: {
       en: 'Founded January 2025 by former ELAM MP Andreas Themistokleous.',
       el: 'Ιδρύθηκε τον Ιανουάριο 2025 από τον πρώην βουλευτή του ΕΛΑΜ Ανδρέα Θεμιστοκλέους.'
-    }
+    },
+    logo: '/parties/dek.png'
   },
   {
     id: 'DIMAL',
@@ -223,14 +234,15 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'DIMAL', el: 'ΔΗΜΑΛ' },
     leader: { en: 'Christos Clerides', el: 'Χρήστος Κληρίδης' },
-    colour: '#0288d1',
+    colour: '#5c6bc0',
     alignment: {
       en: 'Centrist, reformist',
       el: 'Κεντρώο, μεταρρυθμιστικό'
     },
     contested2021: false,
     seatsOutgoing: 0,
-    newParty: true
+    newParty: true,
+    logo: '/parties/dimal.webp'
   },
   {
     id: 'KEKK',
@@ -240,7 +252,7 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'KEKK (Hunters)', el: 'ΚΕΚΚ (Κυνηγοί)' },
     leader: { en: 'Nikolaos Prodromou', el: 'Νικόλαος Προδρόμου' },
-    colour: '#8d6e63',
+    colour: '#558b2f',
     alignment: {
       en: 'Single-issue, pro-hunting',
       el: 'Μονοθεματικό, υπέρ του κυνηγιού'
@@ -251,7 +263,8 @@ export const PARTIES: Party[] = [
     notes: {
       en: 'Polled 3.27% in 2021, missing the 3.6% threshold.',
       el: 'Έλαβε 3,27% το 2021, χάνοντας το όριο του 3,6%.'
-    }
+    },
+    logo: '/parties/kekk.png'
   },
   {
     id: 'LAKE',
@@ -261,14 +274,15 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'Spartans', el: 'Λακεδαιμόνιοι' },
     leader: { en: 'Marianna Athanasiou', el: 'Μαριάννα Αθανασίου' },
-    colour: '#37474f',
+    colour: '#3e2723',
     alignment: {
       en: 'Far-right',
       el: 'Άκρα δεξιά'
     },
     contested2021: false,
     seatsOutgoing: 0,
-    newParty: true
+    newParty: true,
+    logo: '/parties/lake.jpg'
   },
   {
     id: 'SIKOU',
@@ -278,7 +292,7 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'Sikou Pano', el: 'Σήκου Πάνω' },
     leader: { en: 'Christoforos Tornaritis', el: 'Χριστόφορος Τορναρίτης' },
-    colour: '#ff5722',
+    colour: '#f57c00',
     alignment: {
       en: 'Anti-establishment',
       el: 'Αντι-κατεστημένο'
@@ -289,7 +303,8 @@ export const PARTIES: Party[] = [
     notes: {
       en: 'Founded January 2026; led by former Olympiakos Nicosia chairman.',
       el: 'Ιδρύθηκε τον Ιανουάριο 2026· επικεφαλής ο πρώην πρόεδρος του Ολυμπιακού Λευκωσίας.'
-    }
+    },
+    logo: '/parties/sikou.png'
   },
   {
     id: 'FARL',
@@ -299,7 +314,7 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'Far-Left Resistance', el: 'Άκρα Αριστερά' },
     leader: { en: 'Celestina De Petro', el: 'Σελεστίνα Ντε Πέτρο' },
-    colour: '#b71c1c',
+    colour: '#880e4f',
     alignment: {
       en: 'Far-left, communist',
       el: 'Άκρα αριστερά, κομμουνιστικό'
@@ -340,7 +355,8 @@ export const PARTIES: Party[] = [
     },
     contested2021: false,
     seatsOutgoing: 0,
-    newParty: true
+    newParty: true,
+    logo: '/parties/agro.svg'
   },
   {
     id: 'GRNC',
@@ -357,7 +373,8 @@ export const PARTIES: Party[] = [
     },
     contested2021: false,
     seatsOutgoing: 0,
-    newParty: true
+    newParty: true,
+    logo: '/parties/grnc.png'
   }
 ];
 

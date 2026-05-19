@@ -1,0 +1,18 @@
+{
+  "fieldworkStart": "2026-05-06",
+  "fieldworkEnd": "2026-05-13",
+  "pollster": "Explorer",
+  "commissioner": "Phileleftheros",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 23.1,
+    "AKEL": 22.2,
+    "ELAM": 13.6,
+    "ALMA": 9.8,
+    "DIKO": 9.8,
+    "ADK": 7.9,
+    "VOLT": 3.8
+  },
+  "notes": "Second-to-last Explorer/Phileleftheros poll, published around 16 May. Shares are after redistribution per Explorer house style; raw shares not republished."
+}

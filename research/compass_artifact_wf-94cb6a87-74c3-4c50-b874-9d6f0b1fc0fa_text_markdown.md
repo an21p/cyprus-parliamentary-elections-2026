@@ -1,4 +1,4 @@
-# Cyprus 2026 Parliamentary Elections — Comprehensive Research File
+# Cyprus 2026 Parliamentary Elections - Comprehensive Research File
 
 **Compiled:** 18 May 2026 (6 days before election day). Intended as the reference document for the agent building the interactive website.
 
@@ -10,14 +10,14 @@
 
 ---
 
-# PART 1 — ELECTORAL SYSTEM MECHANICS
+# PART 1 - ELECTORAL SYSTEM MECHANICS
 
 ## 1.1 Constitutional structure of the House of Representatives
 
 - The Constitution of 1960 originally set the House at **50 seats: 35 Greek-Cypriot, 15 Turkish-Cypriot**.
 - In 1985, under the **"doctrine of necessity"**, the House was enlarged by ordinary law to **80 seats: 56 Greek-Cypriot, 24 Turkish-Cypriot**.
 - Since the Turkish-Cypriot withdrawal from state institutions in **1963–64**, the 24 Turkish-Cypriot seats have remained **unfilled**. The de-facto House has 56 voting members.
-- Three constitutionally recognised religious groups — **Armenians, Maronites and Latins** — each elect **one non-voting representative**.
+- Three constitutionally recognised religious groups - **Armenians, Maronites and Latins** - each elect **one non-voting representative**.
 - Following *Aziz v. Cyprus* (ECtHR, 22 June 2004), Turkish Cypriots resident in government-controlled areas may register on the Greek-Cypriot roll; in 2026, **859 Turkish Cypriots are on the roll** out of 568,587 registered voters.
 
 ## 1.2 The six districts and 2026 seat allocation
@@ -32,7 +32,7 @@ A 2025 redistribution law (passed October 2025) transferred **one seat from Nico
 | Larnaca (Λάρνακα) | 6 | 6 | 60,561 | Pink | 2 |
 | Paphos (Πάφος) | 4 | **5** | 47,429 | Green | 2 |
 | Kyrenia (Κερύνεια)* | 3 | 3 | 28,824 | Orange | 1 |
-| **Total** | **56** | **56** | **568,587** | — | — |
+| **Total** | **56** | **56** | **568,587** | - | - |
 
 *Famagusta and Kyrenia districts vote for the displaced/enclaved populations of those occupied territories.
 
@@ -56,7 +56,7 @@ A 2025 redistribution law (passed October 2025) transferred **one seat from Nico
 - If a voter marks **more** preference crosses than allowed, the excess crosses are disregarded; the ballot remains a valid party vote.
 - A voter **cannot split** preferences across different lists; doing so invalidates the ballot.
 - **Party leaders / coalition heads** automatically receive preference votes equal to the total list vote and **do not require a personal cross**. In 2026, the leaders exempted are: Annita Demetriou (DISY), Stefanos Stefanou (AKEL), Nicolas Papadopoulos (DIKO), Christos Christou (ELAM), Odysseas Michaelides (ALMA), Kyriakos Andreou (Greens), Christos Clerides (Demal) and Celestina De Petro (Far-Left Resistance).
-- The leaders of the following parties **do** still need preference crosses: Stavros Papadouris (KOSP Ecologists), Nikolaos Prodromou (Hunters), Andromache Sophocleous & Panos Loizou Parras (Volt — list heads, not the formal "leader"), Fidias Panayiotou (Direct Democracy Cyprus), Sotiris Christou (Sikou Pano), Andreas Themistocleous (DEK), Andreas Christofi (Agrarians), Marianna Athanasiou (Spartans/Lakedaimonioi) and Apostolos Apostolou (Popular Struggle for Freedom).
+- The leaders of the following parties **do** still need preference crosses: Stavros Papadouris (KOSP Ecologists), Nikolaos Prodromou (Hunters), Andromache Sophocleous & Panos Loizou Parras (Volt - list heads, not the formal "leader"), Fidias Panayiotou (Direct Democracy Cyprus), Sotiris Christou (Sikou Pano), Andreas Themistocleous (DEK), Andreas Christofi (Agrarians), Marianna Athanasiou (Spartans/Lakedaimonioi) and Apostolos Apostolou (Popular Struggle for Freedom).
 - The rule of one cross per four seats comes from electoral law: **"each voter is entitled to mark one preference cross for every four seats. However, if there is a remainder when dividing the total number of parliamentary seats … by four, the number of preference crosses shall be increased by one."** (Central Elections Service, gov.cy).
 
 ## 1.5 How candidates within a party win seats
@@ -67,7 +67,7 @@ After counting closes, candidates on each list are **re-ordered by the number of
 
 Cyprus uses a system known as **"reinforced proportional representation" (ενισχυμένη αναλογική)**, consisting of three sequential distributions:
 
-### First distribution — District-level Hare quota
+### First distribution - District-level Hare quota
 
 For each of the six districts:
 
@@ -75,7 +75,7 @@ For each of the six districts:
 2. For each list, **seats won = floor(list votes ÷ quota)** (decimals again dropped).
 3. Each list's **"unused votes" (αχρησιμοποίητες ψήφοι)** in that district = `list votes − (seats won × quota)`.
 
-### Second distribution — National pool, 3.6 % threshold
+### Second distribution - National pool, 3.6 % threshold
 
 If seats remain unfilled after the first distribution (as is invariably the case), all of Cyprus is treated as a **single constituency**. Only lists clearing thresholds participate:
 
@@ -88,7 +88,7 @@ Procedure (per Wikipedia/OSCE/Cyprus electoral-law summary):
 1. A **second-stage electoral quota** is computed: `total unused votes of qualifying lists ÷ seats remaining`.
 2. Each qualifying list's unused votes are divided by that quota to obtain integer seats.
 
-### Third distribution — Residual seats, 7.2 % threshold
+### Third distribution - Residual seats, 7.2 % threshold
 
 If seats are still unfilled after the second distribution, they are allocated to the qualifying lists with the **largest remaining unused votes**, **excluding any list below 7.2 %** of the nationwide vote.
 
@@ -96,7 +96,7 @@ If seats are still unfilled after the second distribution, they are allocated to
 
 Seats won at the national level are pushed back to specific districts as follows:
 
-> "Seats allocated in the second and third allocation are distributed to lists in constituencies by ranking the parties based on their total votes and giving the lists a seat in the constituency where it had the most unused votes in the first allocation, assuming that constituency did not have all its seats filled previously, and this is repeated until every list's seats from the second and third allocations are allocated to constituencies." — *Wikipedia: Elections in Cyprus*
+> "Seats allocated in the second and third allocation are distributed to lists in constituencies by ranking the parties based on their total votes and giving the lists a seat in the constituency where it had the most unused votes in the first allocation, assuming that constituency did not have all its seats filled previously, and this is repeated until every list's seats from the second and third allocations are allocated to constituencies." - *Wikipedia: Elections in Cyprus*
 
 The Cyprus Mail (10 May 2026) summarises in plain English: **"The current electoral system provides for the allocation of parliamentary seats at the first distribution on a simple pro rata basis, while in the two subsequent phases of the second allocation, a reinforced proportional representation system is applied, with thresholds of 3.6 per cent and 7.2 per cent, respectively."**
 
@@ -110,7 +110,7 @@ The 2021 election (30 May 2021) provides a complete worked example. Cyprus-wide:
 
 ### National threshold check (3.6 %)
 
-`3.6 % × 357,712 = 12,878 votes`. Seven lists cleared the bar (DISY 99,328 / AKEL 79,913 / DIKO 40,395 / ELAM 24,255 / EDEK 24,022 / DIPA 21,832 / Ecologists/KOSP 15,762). The eighth — Hunters/Active Citizens with **11,712 votes (3.27 %)** — fell short by 1,166 votes and won zero seats despite outpolling 6 other lists. Roughly **15,000 votes for sub-threshold parties were discarded entirely** (Al Jazeera, 31 May 2021).
+`3.6 % × 357,712 = 12,878 votes`. Seven lists cleared the bar (DISY 99,328 / AKEL 79,913 / DIKO 40,395 / ELAM 24,255 / EDEK 24,022 / DIPA 21,832 / Ecologists/KOSP 15,762). The eighth - Hunters/Active Citizens with **11,712 votes (3.27 %)** - fell short by 1,166 votes and won zero seats despite outpolling 6 other lists. Roughly **15,000 votes for sub-threshold parties were discarded entirely** (Al Jazeera, 31 May 2021).
 
 ### Nicosia 2021 (20 seats, 122,347 valid votes)
 
@@ -151,18 +151,18 @@ This illustrates a defining feature of the Cypriot system: **a party that crosse
 
 ### Coalition-threshold mechanics
 
-In 2021 the **EDEK–SYPOL list** ran as a two-party coalition. Two-party coalitions need ≥ 10 % nationally to participate in the second distribution; the list polled 6.72 %, which was below the coalition threshold of 10 %. EDEK avoided being excluded because the Ministry of Interior treated the list as the principal party (EDEK) for allocation purposes — a technical detail commonly cited as a reason why future coalitions are now usually re-registered as single parties rather than formal coalitions.
+In 2021 the **EDEK–SYPOL list** ran as a two-party coalition. Two-party coalitions need ≥ 10 % nationally to participate in the second distribution; the list polled 6.72 %, which was below the coalition threshold of 10 %. EDEK avoided being excluded because the Ministry of Interior treated the list as the principal party (EDEK) for allocation purposes - a technical detail commonly cited as a reason why future coalitions are now usually re-registered as single parties rather than formal coalitions.
 
 ---
 
-# PART 2 — 2026 ELECTION CONTEXT
+# PART 2 - 2026 ELECTION CONTEXT
 
 ## 2.1 Headline facts
 
 - **Election date:** Sunday 24 May 2026.
 - **Parliament dissolved:** 23 April 2026; ministerial decree published 24 April.
 - **Candidate filing day:** Wednesday 6 May 2026.
-- **Total candidates:** **753** (records for both candidates and parties): 744 on party lists, 9 independents. 520 men (~69 %) and 224 women (~30 %). Per Chief Returning Officer Dr Elikkos Elia (Financial Mirror, 7 May 2026), **"there were 102 more candidates than the previous elections in 2021"** — placing the 2021 total at 651 candidates.
+- **Total candidates:** **753** (records for both candidates and parties): 744 on party lists, 9 independents. 520 men (~69 %) and 224 women (~30 %). Per Chief Returning Officer Dr Elikkos Elia (Financial Mirror, 7 May 2026), **"there were 102 more candidates than the previous elections in 2021"** - placing the 2021 total at 651 candidates.
 - **Parties contesting:** **19** (vs 15 in 2021), plus 9 independents.
 - **Registered voters:** **568,587** (incl. 859 Turkish-Cypriot voters); over 10,000 are new voters.
 - **Speaker / opening:** New Speaker to be elected after the 25 May proclamation.
@@ -172,16 +172,16 @@ In 2021 the **EDEK–SYPOL list** ran as a two-party coalition. Two-party coalit
 
 Official list submitted to the Chief Returning Officer (Dr Elikkos Elia, 6 May 2026):
 
-1. **Democratic Rally (DISY) — Δημοκρατικός Συναγερμός.** Centre-right, liberal-conservative, EPP-aligned. Leader: **Annita Demetriou** (first female Speaker, 2021). 17 seats outgoing.
-2. **Progressive Party of Working People (AKEL) — Ανορθωτικό Κόμμα Εργαζομένου Λαού.** Left (communist roots, Cypriot left); rebranded **"AKEL – Social Alliance"** since the 2024 EP election after absorbing smaller left-leaning groups. Leader: **Stefanos Stefanou**. 15 seats.
-3. **Democratic Party (DIKO) — Δημοκρατικό Κόμμα.** Centrist / Greek-Cypriot nationalist. Leader: **Nicolas Papadopoulos**. 9 seats. Supports Christodoulides government.
-4. **National Popular Front (ELAM) — Εθνικό Λαϊκό Μέτωπο.** Far-right, ultranationalist (originally close to Greek Golden Dawn). Leader: **Christos Christou**. ECR-affiliated. 3 seats (was 4 in 2021; lost Themistokleous).
-5. **Movement for Social Democracy (EDEK) — Κίνημα Σοσιαλδημοκρατών.** Social-democratic, S&D-aligned. Leader: **Nikos Anastasiou** (new). 2 seats currently (originally 4 in 2021; one expelled, one resigned).
-6. **Democratic Alignment (DIPA) — Δημοκρατική Παράταξη.** Centrist liberal (split from DIKO in 2018). Leader: **Marios Garoyian** (not standing himself). 4 seats.
-7. **Movement of Ecologists – Citizens' Cooperation (KOSP) — Κίνημα Οικολόγων – Συνεργασία Πολιτών.** Greens. Leader: **Stavros Papadouris**. 2 seats. Has formed an electoral list with the **Animal Party Cyprus (APC)** for 2026.
-8. **Volt Cyprus — Volt Κύπρου.** Pan-European federalist / progressive (part of Volt Europa). First general-election test. 1 seat (Alexandra Attalides, who switched from KOSP). 56 candidates, avg. age 48.8, 41.1 % women.
-9. **ALMA — "Άλμα" (Dignity, Accountability, Reform, Development).** Founded **May 2025** by former Auditor-General **Odysseas Michaelides**. Reformist, anti-corruption, pro-federal solution. Aiming for a presidential bid in 2028. Full name on ballot: "ALMA – Citizens for Cyprus".
-10. **Direct Democracy Cyprus (Άμεση Δημοκρατία Κύπρου, ADK).** Founded October 2025 by MEP **Fidias Panayiotou** (b. 2000, YouTube-influencer; won **71,330 votes / 19.4 %** in the 2024 EP elections as an independent, becoming "the first independent Cypriot candidate to win a seat in the European Parliament … since the country joined the European Union in 2004" — Cyprus Mail, 11 May 2026). Candidates selected via the **Agorà mobile app**. Per Cyprus Mail (23 March 2026), Panayiotou was elected party president on 22 March 2026 with **4,006 votes** out of "around 7,000 members [who] participated in the vote conducted through the Agora application, representing 56.79 per cent of total votes." (The implied membership base at that stage was therefore on the order of ~12,300 users — earlier media reporting of "~38,000 registered users" appears to relate to total app downloads rather than verified active members.)
+1. **Democratic Rally (DISY) - Δημοκρατικός Συναγερμός.** Centre-right, liberal-conservative, EPP-aligned. Leader: **Annita Demetriou** (first female Speaker, 2021). 17 seats outgoing.
+2. **Progressive Party of Working People (AKEL) - Ανορθωτικό Κόμμα Εργαζομένου Λαού.** Left (communist roots, Cypriot left); rebranded **"AKEL – Social Alliance"** since the 2024 EP election after absorbing smaller left-leaning groups. Leader: **Stefanos Stefanou**. 15 seats.
+3. **Democratic Party (DIKO) - Δημοκρατικό Κόμμα.** Centrist / Greek-Cypriot nationalist. Leader: **Nicolas Papadopoulos**. 9 seats. Supports Christodoulides government.
+4. **National Popular Front (ELAM) - Εθνικό Λαϊκό Μέτωπο.** Far-right, ultranationalist (originally close to Greek Golden Dawn). Leader: **Christos Christou**. ECR-affiliated. 3 seats (was 4 in 2021; lost Themistokleous).
+5. **Movement for Social Democracy (EDEK) - Κίνημα Σοσιαλδημοκρατών.** Social-democratic, S&D-aligned. Leader: **Nikos Anastasiou** (new). 2 seats currently (originally 4 in 2021; one expelled, one resigned).
+6. **Democratic Alignment (DIPA) - Δημοκρατική Παράταξη.** Centrist liberal (split from DIKO in 2018). Leader: **Marios Garoyian** (not standing himself). 4 seats.
+7. **Movement of Ecologists – Citizens' Cooperation (KOSP) - Κίνημα Οικολόγων – Συνεργασία Πολιτών.** Greens. Leader: **Stavros Papadouris**. 2 seats. Has formed an electoral list with the **Animal Party Cyprus (APC)** for 2026.
+8. **Volt Cyprus - Volt Κύπρου.** Pan-European federalist / progressive (part of Volt Europa). First general-election test. 1 seat (Alexandra Attalides, who switched from KOSP). 56 candidates, avg. age 48.8, 41.1 % women.
+9. **ALMA - "Άλμα" (Dignity, Accountability, Reform, Development).** Founded **May 2025** by former Auditor-General **Odysseas Michaelides**. Reformist, anti-corruption, pro-federal solution. Aiming for a presidential bid in 2028. Full name on ballot: "ALMA – Citizens for Cyprus".
+10. **Direct Democracy Cyprus (Άμεση Δημοκρατία Κύπρου, ADK).** Founded October 2025 by MEP **Fidias Panayiotou** (b. 2000, YouTube-influencer; won **71,330 votes / 19.4 %** in the 2024 EP elections as an independent, becoming "the first independent Cypriot candidate to win a seat in the European Parliament … since the country joined the European Union in 2004" - Cyprus Mail, 11 May 2026). Candidates selected via the **Agorà mobile app**. Per Cyprus Mail (23 March 2026), Panayiotou was elected party president on 22 March 2026 with **4,006 votes** out of "around 7,000 members [who] participated in the vote conducted through the Agora application, representing 56.79 per cent of total votes." (The implied membership base at that stage was therefore on the order of ~12,300 users - earlier media reporting of "~38,000 registered users" appears to relate to total app downloads rather than verified active members.)
 11. **Democratic National Movement (DEK).** Founded January 2025 by former ELAM MP **Andreas Themistokleous**. Religious-conservative, nationalist, "anti-woke".
 12. **Democratic Change (DIMAL / Demal).** Founded 2025 by lawyer **Christos Clerides** (former bar association chairman).
 13. **Active Citizens – Movement of United Cypriot Hunters (KEKK).** Single-issue pro-hunting. Leader: **Nikolaos Prodromou**. 3.27 % in 2021 (missed threshold).
@@ -211,11 +211,11 @@ Plus **9 independents**.
 | EDEK–SYPOL | 24,022 | 6.72 | 4 | Nic 1, Lim 1, Lar 1, Pap 1 |
 | DIPA | 21,832 | 6.10 | 4 | Nic 2, Lim 1, Fam 1 |
 | KOSP (Greens) | 15,762 | 4.41 | 3 | Nic 2, Lim 1 |
-| Active Citizens / Hunters | 11,712 | 3.27 | 0 | — (below threshold) |
-| Generation Change | 10,095 | 2.82 | 0 | — |
-| Solidarity Movement | 8,254 | 2.31 | 0 | — |
-| Other small lists | — | — | 0 | — |
-| **Total** | **357,712** | **100** | **56** | — |
+| Active Citizens / Hunters | 11,712 | 3.27 | 0 | - (below threshold) |
+| Generation Change | 10,095 | 2.82 | 0 | - |
+| Solidarity Movement | 8,254 | 2.31 | 0 | - |
+| Other small lists | - | - | 0 | - |
+| **Total** | **357,712** | **100** | **56** | - |
 
 Turnout: **65.72 %** (lowest in the Republic's history at that date).
 
@@ -227,55 +227,55 @@ Vote-share columns are first-preference intentions (raw, not redistributed) unle
 
 | Fieldwork | Pollster | Commissioner | Sample | MoE | DISY | AKEL | ELAM | ALMA | ADK | DIKO | Volt | EDEK | DIPA | KOSP | KEKK | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1–11 May 2026 | Prime Consulting | SIGMA ("Χωρίς Περιστροφές") | 1,136 | ±3 % | 18.0 | 17.6 | 10.0 | 8.0 | 6.2 | 7.4 | 3.6 | — | — | — | — | After valid-vote redistribution: DISY 18.8 / AKEL 18.3 / ELAM 10.4 / ALMA 8.3. Seat projection: DISY 13–15, AKEL 12–14, ELAM 7–9, ALMA 6–7, ADK 6–7, DIKO 5–6, Volt 2–4. Undecided 10.3 %, refused 7.3 %. |
-| 2–9 May 2026 | RAI Consultants | Alpha Cyprus (5th & final RAI/Alpha poll) | 1,332 | ±2.7 % | 18.2 | 15.2 | 10.7 | 5.8 | 4.4 | 7.2 | — | — | — | — | — | On valid votes: DISY 24.5 / AKEL 20.5 / ELAM 14.4. Seat projection: DISY 15, AKEL 13, ELAM 9, DIKO 6, ALMA 6, ADK 4, Volt 3. Undecided 26.3 %. |
-| ~5–7 May 2026 | Explorer | Phileleftheros | n/a | n/a | 19.7* | 18.8* | 11.6 | 8.3 | 6.7 | 8.3 | 3.2 | — | — | — | — | *After redistribution. Regional: ELAM 22 % in Famagusta; AKEL 23 % in Larnaca; DISY 23 % in Paphos. |
+| 1–11 May 2026 | Prime Consulting | SIGMA ("Χωρίς Περιστροφές") | 1,136 | ±3 % | 18.0 | 17.6 | 10.0 | 8.0 | 6.2 | 7.4 | 3.6 | - | - | - | - | After valid-vote redistribution: DISY 18.8 / AKEL 18.3 / ELAM 10.4 / ALMA 8.3. Seat projection: DISY 13–15, AKEL 12–14, ELAM 7–9, ALMA 6–7, ADK 6–7, DIKO 5–6, Volt 2–4. Undecided 10.3 %, refused 7.3 %. |
+| 2–9 May 2026 | RAI Consultants | Alpha Cyprus (5th & final RAI/Alpha poll) | 1,332 | ±2.7 % | 18.2 | 15.2 | 10.7 | 5.8 | 4.4 | 7.2 | - | - | - | - | - | On valid votes: DISY 24.5 / AKEL 20.5 / ELAM 14.4. Seat projection: DISY 15, AKEL 13, ELAM 9, DIKO 6, ALMA 6, ADK 4, Volt 3. Undecided 26.3 %. |
+| ~5–7 May 2026 | Explorer | Phileleftheros | n/a | n/a | 19.7* | 18.8* | 11.6 | 8.3 | 6.7 | 8.3 | 3.2 | - | - | - | - | *After redistribution. Regional: ELAM 22 % in Famagusta; AKEL 23 % in Larnaca; DISY 23 % in Paphos. |
 | ~1–7 May 2026 | RealPolls | (independent) | 1,555 | n/a | 19.7 | 17.5 | 14.0 | 9.4 | 8.7 | 7.8 | 7.2 | 3.9 | 3.7 | 2.7 | 2.8 | Outlier: lowest DISY+AKEL ever recorded; Volt as high as 7.2 %. |
 | 24 Apr – 3 May 2026 | Stratego-IMR | Kathimerini Cyprus | n/a | n/a | n/a | n/a | n/a | 8.9 | 5.7 | 7.4 | 4.2 | 2.3 | 1.2 | 2.1 | 1.2 | Volt up sharply vs December; ADK at lowest poll figure since founding. |
 | 7–21 Apr 2026 | RAI Consultants | Alpha Cyprus | n/a | n/a | 21.3 | 21.7 | 13.9 | 9.1 | 10.3 | 7.7 | 5.1 | 3.2 | 1.8 | 2.6 | 2.8 | AKEL leads by 0.4. |
-| 14–17 Apr 2026 | Prime Consulting | SIGMA | n/a | n/a | 23.3 | 23.3 | 13.8 | 11.9 | 9.4 | 9.4 | 3.8 | 1.3 | 2.5 | 1.3 | — | Tie at the top. |
+| 14–17 Apr 2026 | Prime Consulting | SIGMA | n/a | n/a | 23.3 | 23.3 | 13.8 | 11.9 | 9.4 | 9.4 | 3.8 | 1.3 | 2.5 | 1.3 | - | Tie at the top. |
 | 6–17 Apr 2026 | CYMAR | ANT1 | n/a | n/a | 22 | 21 | 13 | 8 | 9 | 12 | 4 | 4 | 2 | 2 | 2 | Undecideds 17 %. |
-| 30 Mar – 6 Apr 2026 | Explorer | Phileleftheros | n/a | n/a | 23.2 | 22.5 | 14.0 | 13.4 | 7.4 | 9.6 | 2.6 | 2.8 | 1.3 | 1.3 | — | — |
+| 30 Mar – 6 Apr 2026 | Explorer | Phileleftheros | n/a | n/a | 23.2 | 22.5 | 14.0 | 13.4 | 7.4 | 9.6 | 2.6 | 2.8 | 1.3 | 1.3 | - | - |
 | 10–26 Mar 2026 | MRC Cypronetwork | RIK / CyBC | n/a | n/a | 22.8 | 22.8 | 14.6 | 9.5 | 7.0 | 9.5 | 3.2 | 3.2 | 1.3 | 3.2 | 1.3 | Tie. Cypronetwork seat projection: AKEL 15 / DISY 15 / ELAM 10 / ALMA 6 / DIKO 6 / ADK 4. |
 | 6–14 Mar 2026 | CYMAR | ANT1 | n/a | n/a | 21 | 21 | 13 | 12 | 9 | 12 | 4 | 4 | 1 | 2 | 1 | Tie. |
-| 26 Feb – 11 Mar 2026 | Noverna | (independent) | n/a | n/a | 22.5 | 22.2 | 13.4 | 12.2 | 9.8 | 9.5 | 3.4 | 2.0 | 1.1 | 1.7 | 1.5 | — |
-| 11–27 Feb 2026 | CyBC in-house | CyBC | 1,417 | n/a | 18 | 17.5 | 12 | 8.5 | 7 | 6.5 | 3 | — | — | — | — | Voting certainty 86 %. |
-| 17–25 Feb 2026 | Explorer | Phileleftheros | n/a | n/a | 22.5 | 22.0 | 15.0 | 12.2 | 8.8 | 8.9 | 2.6 | 2.6 | 1.3 | 1.3 | — | — |
+| 26 Feb – 11 Mar 2026 | Noverna | (independent) | n/a | n/a | 22.5 | 22.2 | 13.4 | 12.2 | 9.8 | 9.5 | 3.4 | 2.0 | 1.1 | 1.7 | 1.5 | - |
+| 11–27 Feb 2026 | CyBC in-house | CyBC | 1,417 | n/a | 18 | 17.5 | 12 | 8.5 | 7 | 6.5 | 3 | - | - | - | - | Voting certainty 86 %. |
+| 17–25 Feb 2026 | Explorer | Phileleftheros | n/a | n/a | 22.5 | 22.0 | 15.0 | 12.2 | 8.8 | 8.9 | 2.6 | 2.6 | 1.3 | 1.3 | - | - |
 | 9–17 Feb 2026 | RAI Consultants | Alpha Cyprus | n/a | n/a | 21.5 | 22.7 | 16.4 | 10.0 | 8.1 | 9.4 | 3.8 | 2.3 | 2.8 | 2.0 | 0.8 | AKEL leads. |
-| 6–14 Feb 2026 | Prime Consulting | SIGMA | n/a | n/a | 22.4 | 23.1 | 15.4 | 12.8 | 8.3 | 9.0 | 2.6 | 2.6 | 1.3 | 1.3 | — | — |
+| 6–14 Feb 2026 | Prime Consulting | SIGMA | n/a | n/a | 22.4 | 23.1 | 15.4 | 12.8 | 8.3 | 9.0 | 2.6 | 2.6 | 1.3 | 1.3 | - | - |
 | 10–16 Jan 2026 | RAI Consultants | Alpha Cyprus | 1,031 | n/a | 22.8 | 21.8 | 16.5 | 10.5 | 10.1 | 7.9 | 4.0 | 1.5 | 1.6 | 1.0 | 1.3 | First mention of ADK at 10.1 %. |
 | 12–27 Jan 2026 | MRC Cypronetwork | RIK | 1,213 | n/a | 17 | 16 | 11 | 9 | 6.5 | 6 | 2 | 2.5 | 1 | 2.5 | 1 | High undecided + abstainers. |
-| 27 Nov – 3 Dec 2025 | Stratego-IMR | Kathimerini Cyprus | n/a | n/a | 23.5 | 22.3 | 16.4 | 10.0 | 9.2 | 8.1 | 2.4 | 2.1 | 1.3 | 2.3 | 1.4 | — |
+| 27 Nov – 3 Dec 2025 | Stratego-IMR | Kathimerini Cyprus | n/a | n/a | 23.5 | 22.3 | 16.4 | 10.0 | 9.2 | 8.1 | 2.4 | 2.1 | 1.3 | 2.3 | 1.4 | - |
 | 15 Nov 2025 (publ.) | MRC Cypronetwork | RIK / CyBC | 1,422 | n/a | 17 | 17 | 11.5 | 6 | 6.5 | 7.5 | n/a | n/a | n/a | n/a | n/a | Fieldwork 29 Sep – 17 Oct 2025. ELAM consolidation 79 %. |
 | 4–13 Nov 2025 | Pulse Market Research | Omega Channel | n/a | n/a | 23.2 | 20.3 | 13.0 | 10.1 | 8.7 | 8.7 | 2.9 | 2.9 | 1.4 | 2.9 | 1.4 | ALMA 6–8 seats in Pulse scenarios. |
-| 3–10 Nov 2025 | IMR | Reporter | n/a | n/a | 22.1 | 21.3 | 16.2 | 12.2 | 6.9 | 8.6 | 3.7 | 2.3 | 1.2 | 3.0 | 1.6 | — |
+| 3–10 Nov 2025 | IMR | Reporter | n/a | n/a | 22.1 | 21.3 | 16.2 | 12.2 | 6.9 | 8.6 | 3.7 | 2.3 | 1.2 | 3.0 | 1.6 | - |
 | 29 Sep – 17 Oct 2025 | MRC Cypronetwork | RIK | n/a | n/a | 23.1 | 23.1 | 15.6 | 8.2 | 6.1 | 10.2 | 2.0 | 3.4 | 1.4 | 2.7 | 2.0 | Tie. |
 | 22–29 Sep 2025 | Prime Consulting | SIGMA | 1,144 | n/a | 18.5 | 18 | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | Voting-certainty poll. |
 | 12–22 Sep 2025 | Stratego-IMR | Kathimerini Cyprus | 800 | n/a | 22.7 (20) | 23.9 (21) | 15.9 (14) | 12.5 (11) | 3.4 | 9.1 (8) | 2.3 (2) | 1.1 (1) | 1.1 (1) | 2.3 (2) | 1.1 | First major poll after ALMA launch. |
-| 11 Aug 2025 | Cypronet | online | n/a | n/a | 21.9 | 23.3 | 17.8 | 12.3 | n/a | 8.2 | 2.7 | 2.7 | 1.4 | 2.7 | 2.7 | — |
-| 1–8 Jul 2025 | Symmetron Market Research | n/a | n/a | n/a | 23.2 | 20.5 | 16.4 | 15.1 | n/a | 8.2 | 2.7 | 4.1 | 1.4 | 2.7 | — | ALMA poll-debut at 15 %+. |
-| 24–28 Jun 2025 | IMR | n/a | n/a | n/a | 22.2 | 23.5 | 16.0 | 14.8 | n/a | 8.6 | 3.7 | 2.5 | 1.2 | 3.7 | 1.2 | — |
+| 11 Aug 2025 | Cypronet | online | n/a | n/a | 21.9 | 23.3 | 17.8 | 12.3 | n/a | 8.2 | 2.7 | 2.7 | 1.4 | 2.7 | 2.7 | - |
+| 1–8 Jul 2025 | Symmetron Market Research | n/a | n/a | n/a | 23.2 | 20.5 | 16.4 | 15.1 | n/a | 8.2 | 2.7 | 4.1 | 1.4 | 2.7 | - | ALMA poll-debut at 15 %+. |
+| 24–28 Jun 2025 | IMR | n/a | n/a | n/a | 22.2 | 23.5 | 16.0 | 14.8 | n/a | 8.6 | 3.7 | 2.5 | 1.2 | 3.7 | 1.2 | - |
 | 13–24 Jun 2025 | Unitrustmedia | Vouli TV | 2,460 (online) | n/a | n/a | n/a | 17 | 20 | n/a | n/a | 5–7 | n/a | n/a | n/a | n/a | Online panel; ALMA hypothetically 20 % (treated as outlier). |
-| 10–21 Mar 2025 | Redwolf | n/a | n/a | n/a | 25.0 | 20.0 | 16.25 | 11.25 | n/a | 10.0 | 5.0 | 3.75 | 1.25 | 5.0 | — | — |
-| 5–11 Mar 2025 | IMR | n/a | n/a | n/a | 24.0 | 21.5 | 16.5 | 13.9 | n/a | 8.9 | 3.8 | 2.5 | 1.3 | 3.8 | 1.3 | — |
-| 21 Oct – 1 Nov 2024 | RAI Consultants | n/a | n/a | n/a | 27.9 | 25.8 | 14.5 | — | n/a | 11.4 | 5.7 | 4.0 | — | 1.6 | 1.4 | Pre-ALMA. |
-| 14–16 Oct 2024 | RetailZoom | Politis | n/a | n/a | 23.5 | 11.1 | 9.9 | 20.1 (hypothetical "Michaelides party") | n/a | 3.7 | 14.8 | 1.2 | 1.2 | 2.5 | — | Hypothetical-Michaelides-party scenario; AKEL very low. |
-| 25 Sep – 5 Oct 2024 | Symmetron | n/a | n/a | n/a | 28.8 | 25.0 | 14.1 | — | n/a | 10.9 | 3.2 | 4.3 | 3.4 | 3.6 | — | — |
+| 10–21 Mar 2025 | Redwolf | n/a | n/a | n/a | 25.0 | 20.0 | 16.25 | 11.25 | n/a | 10.0 | 5.0 | 3.75 | 1.25 | 5.0 | - | - |
+| 5–11 Mar 2025 | IMR | n/a | n/a | n/a | 24.0 | 21.5 | 16.5 | 13.9 | n/a | 8.9 | 3.8 | 2.5 | 1.3 | 3.8 | 1.3 | - |
+| 21 Oct – 1 Nov 2024 | RAI Consultants | n/a | n/a | n/a | 27.9 | 25.8 | 14.5 | - | n/a | 11.4 | 5.7 | 4.0 | - | 1.6 | 1.4 | Pre-ALMA. |
+| 14–16 Oct 2024 | RetailZoom | Politis | n/a | n/a | 23.5 | 11.1 | 9.9 | 20.1 (hypothetical "Michaelides party") | n/a | 3.7 | 14.8 | 1.2 | 1.2 | 2.5 | - | Hypothetical-Michaelides-party scenario; AKEL very low. |
+| 25 Sep – 5 Oct 2024 | Symmetron | n/a | n/a | n/a | 28.8 | 25.0 | 14.1 | - | n/a | 10.9 | 3.2 | 4.3 | 3.4 | 3.6 | - | - |
 
 ### Pollster reference card
 
-- **RAI Consultants** — Polls regularly for **Alpha Cyprus** television. Multiple monthly waves through the campaign.
-- **Prime Consulting** — Conducts polls for **SIGMA TV / SigmaLive** ("Χωρίς Περιστροφές" current-affairs show). CATI methodology.
-- **Stratego-IMR** (sometimes "IMR" or "Stratego-IMR") — Polls for **Kathimerini Cyprus** newspaper.
-- **CYMAR** — Polls for **ANT1 Cyprus**.
-- **Explorer** — Polls for **Phileleftheros** newspaper / philenews.com.
-- **MRC Cypronetwork** (also "Cypronet") — Polls for the state broadcaster **CyBC / RIK**.
-- **Pulse Market Research** — Polls for **Omega Channel**.
-- **Symmetron Market Research** — Independent.
-- **Noverna** — Independent.
-- **RetailZoom** — Online panel polls, often for **Politis** newspaper.
-- **RealPolls** — Newer pollster.
-- **PolitPro** — Aggregator (not a pollster); publishes a poll-of-polls trend.
+- **RAI Consultants** - Polls regularly for **Alpha Cyprus** television. Multiple monthly waves through the campaign.
+- **Prime Consulting** - Conducts polls for **SIGMA TV / SigmaLive** ("Χωρίς Περιστροφές" current-affairs show). CATI methodology.
+- **Stratego-IMR** (sometimes "IMR" or "Stratego-IMR") - Polls for **Kathimerini Cyprus** newspaper.
+- **CYMAR** - Polls for **ANT1 Cyprus**.
+- **Explorer** - Polls for **Phileleftheros** newspaper / philenews.com.
+- **MRC Cypronetwork** (also "Cypronet") - Polls for the state broadcaster **CyBC / RIK**.
+- **Pulse Market Research** - Polls for **Omega Channel**.
+- **Symmetron Market Research** - Independent.
+- **Noverna** - Independent.
+- **RetailZoom** - Online panel polls, often for **Politis** newspaper.
+- **RealPolls** - Newer pollster.
+- **PolitPro** - Aggregator (not a pollster); publishes a poll-of-polls trend.
 
 ## 2.5 Polling trajectory analysis
 
@@ -283,13 +283,13 @@ Vote-share columns are first-preference intentions (raw, not redistributed) unle
 DISY clearly first (27–29 %); AKEL 25 %; DIKO third on 10–14 %; ELAM 10–14 %; new parties not yet on the scene. The October 2024 RetailZoom poll first floated a "hypothetical Michaelides party" at ~20 %.
 
 ### Spring 2025 (ALMA emerges)
-After ALMA's formal launch in May 2025, polls (June–July 2025: IMR, Symmetron) show ALMA debuting at 13–15 %, eating into DISY's lead and AKEL's centrist wing. The DISY+AKEL combined share — which **peaked at 68.7 % in the 2001 election (AKEL 34.7 %, DISY 34.0 %)** and last cleared 65 % in **2011 (DISY 34.27 % + AKEL 32.67 % = 66.94 %)** — has now collapsed to around 40 % combined in polls.
+After ALMA's formal launch in May 2025, polls (June–July 2025: IMR, Symmetron) show ALMA debuting at 13–15 %, eating into DISY's lead and AKEL's centrist wing. The DISY+AKEL combined share - which **peaked at 68.7 % in the 2001 election (AKEL 34.7 %, DISY 34.0 %)** and last cleared 65 % in **2011 (DISY 34.27 % + AKEL 32.67 % = 66.94 %)** - has now collapsed to around 40 % combined in polls.
 
 ### Late 2025 (Fidias enters)
 **Fidias Panayiotou announced Direct Democracy Cyprus on 16/20 October 2025**, formally constituted late 2025. From November 2025 onwards, ADK polls 4–10 %. ELAM consolidates third place at 11–17 %, with the highest **voter-consolidation/loyalty rate of any party (79 %)** according to Cypronetwork.
 
 ### Winter–Spring 2026 (fragmentation locks in)
-Three big-two-rival parties (ELAM ~13–15 %, ALMA ~9–12 %, ADK ~6–10 %) settle in. DISY and AKEL trade marginal leads, both clustered at 18–23 %. DIKO declines to a historic low of ~7–9 %. EDEK and DIPA fall below the threshold in most polls. Volt rises from ~2 % in 2025 to ~3.6–4.2 % at the close of the campaign — just clearing the 3.6 % threshold in some scenarios.
+Three big-two-rival parties (ELAM ~13–15 %, ALMA ~9–12 %, ADK ~6–10 %) settle in. DISY and AKEL trade marginal leads, both clustered at 18–23 %. DIKO declines to a historic low of ~7–9 %. EDEK and DIPA fall below the threshold in most polls. Volt rises from ~2 % in 2025 to ~3.6–4.2 % at the close of the campaign - just clearing the 3.6 % threshold in some scenarios.
 
 ### Final week (5–17 May 2026)
 Three trends:
@@ -297,12 +297,12 @@ Three trends:
 2. **ALMA slips**, losing 2+ points from April highs ("a significant drop", per Phileleftheros).
 3. **Volt and EDEK edge upward**; RealPolls' outlier puts Volt over the threshold at 7.2 %.
 
-### Undecideds — the wild card
-- Final RAI/Alpha: **26.3 % undecided** — nearly equal to DISY+AKEL combined.
+### Undecideds - the wild card
+- Final RAI/Alpha: **26.3 % undecided** - nearly equal to DISY+AKEL combined.
 - Final CYMAR/Ant1: 17 % undecided.
 - Final Kathimerini: 8.1 % undecided.
 
-Christoforos Christoforou (electoral analyst, *Cyprus Mail* 17 May 2026) warns that the polling spread for the new parties is unusually wide — **±7 pp for ADK and ±4 pp for ALMA** — reflecting pollsters' lack of historical baselines for these formations. Pollsters in 2024 missed Fidias by **15.6 percentage points**: per the *Cyprus Mail* (11 May 2026), "Panayiotou polled as low as 3.8 per cent two weeks prior to that election, and ended up taking 19.4 per cent of the vote".
+Christoforos Christoforou (electoral analyst, *Cyprus Mail* 17 May 2026) warns that the polling spread for the new parties is unusually wide - **±7 pp for ADK and ±4 pp for ALMA** - reflecting pollsters' lack of historical baselines for these formations. Pollsters in 2024 missed Fidias by **15.6 percentage points**: per the *Cyprus Mail* (11 May 2026), "Panayiotou polled as low as 3.8 per cent two weeks prior to that election, and ended up taking 19.4 per cent of the vote".
 
 ## 2.6 Seat projections (final week of campaign)
 
@@ -329,9 +329,9 @@ Christoforos Christoforou (electoral analyst, *Cyprus Mail* 17 May 2026) warns t
 
 ## 2.8 Coalition / post-election arithmetic
 
-- The Christodoulides government is supported by **DIKO + EDEK + DIPA** — together polling around 11–12 %. Pollsters universally project the governing coalition to lose its current arithmetical majority (it never had one; the cabinet is presidential, not parliamentary).
+- The Christodoulides government is supported by **DIKO + EDEK + DIPA** - together polling around 11–12 %. Pollsters universally project the governing coalition to lose its current arithmetical majority (it never had one; the cabinet is presidential, not parliamentary).
 - **The Cypriot system is presidential**, so the cabinet is not contingent on a parliamentary majority. But day-to-day legislation will require ad-hoc coalitions.
-- Analyst Nasios Orinos (SIGMA, May 2026) estimates **17–22 seats will change hands** versus 2021 — the largest single-election turnover since 1985.
+- Analyst Nasios Orinos (SIGMA, May 2026) estimates **17–22 seats will change hands** versus 2021 - the largest single-election turnover since 1985.
 
 ---
 
@@ -343,7 +343,7 @@ Christoforos Christoforou (electoral analyst, *Cyprus Mail* 17 May 2026) warns t
 - **Δεύτερη Κατανομή (Défteri Katanomí)** – Second distribution (at national level; 3.6 % threshold).
 - **Τρίτη Κατανομή (Tríti Katanomí)** – Third distribution (residual seats; 7.2 % threshold).
 - **Ενισχυμένη Αναλογική (Enischyméni Analogikí)** – Reinforced proportional representation.
-- **Αχρησιμοποίητες Ψήφοι (Achrisimopoíitės Psífoi)** – "Unused votes" — list votes minus (seats × quota); the currency of the national pool.
+- **Αχρησιμοποίητες Ψήφοι (Achrisimopoíitės Psífoi)** – "Unused votes" - list votes minus (seats × quota); the currency of the national pool.
 - **Σταυρός Προτίμησης (Stavrós Protímisis)** – Preference cross.
 - **Έγκυρα ψηφοδέλτια (Énkyra Psifodéltia)** – Valid ballot papers.
 - **Άκυρα / λευκά (Ákyra / Lefká)** – Invalid / blank.
@@ -360,7 +360,7 @@ Christoforos Christoforou (electoral analyst, *Cyprus Mail* 17 May 2026) warns t
 2. **Build an interactive seat-allocation simulator** keyed off the worked Nicosia/Kyrenia/Paphos 2021 examples in §1.7. Use the formulas verbatim: `quota = floor(valid_votes / seats)`; `seats = floor(party_votes / quota)`; `unused = party_votes − seats × quota`. Apply the 3.6 % / 7.2 % thresholds at the national pool.
 3. **Use the polling table in §2.4 as the single source of truth** for any poll-tracker visualisation. Use one colour for each pollster (RAI/Prime/CYMAR/Explorer/IMR/Cypronetwork/Pulse) and annotate the commissioner (Alpha/SIGMA/ANT1/Phileleftheros/Kathimerini/RIK/Omega).
 4. **Embed a poll-blackout banner from 22:00 Friday 22 May to polls-close 18:00 Sunday 24 May**: no new poll figures may be published under Cypriot law during that window.
-5. **Threshold reference card**: pin 3.6 % (single party / 2nd distribution), 7.2 % (3rd distribution), 10 % (2-party coalition), 20 % (3+ party coalition) prominently — most casual readers conflate them.
+5. **Threshold reference card**: pin 3.6 % (single party / 2nd distribution), 7.2 % (3rd distribution), 10 % (2-party coalition), 20 % (3+ party coalition) prominently - most casual readers conflate them.
 6. **Highlight the "Paphos +1 / Nicosia −1" seat swap** for 2026 in district pages; it is the most consequential structural change since the 1980s expansion and affects every Nicosia-based party's calculus.
 7. **Trigger thresholds that should reset the editorial line on election night:**
  - **DISY+AKEL <40 % combined** → write the story as "end of two-party era".
@@ -378,7 +378,7 @@ Christoforos Christoforou (electoral analyst, *Cyprus Mail* 17 May 2026) warns t
 - The 2026 result tables in this file are **projections only**, derived from pollster seat models. Actual seat allocations will only be confirmed in the early hours of 25 May 2026 by the Chief Returning Officer.
 - One ambiguous historical claim: the 1996 threshold reform changed the entry bar to **1/56 of valid votes ≈ 1.79 %**, generally rounded as **1.8 %**. The Greek Wikipedia and ODIHR refer to this as 1.8 %. The 2015 reform doubled it to 3.6 %.
 - The **EDEK/SYPOL coalition** in 2021 is sometimes presented as a single-party "EDEK" line in international datasets. The Tandfonline article notes both labels; this file uses "EDEK–SYPOL" for clarity.
-- Polls do not directly report seat allocations — those are model-derived. Different models produce different seat counts at identical vote shares because of the way the second/third distributions reassign seats to districts.
+- Polls do not directly report seat allocations - those are model-derived. Different models produce different seat counts at identical vote shares because of the way the second/third distributions reassign seats to districts.
 - The "~38,000 registered users" figure sometimes attached to Direct Democracy Cyprus's Agorà app appears to relate to total app downloads rather than active members; verified active membership at the time of the 22 March 2026 internal presidential election was on the order of **~7,000–12,300 users** (Cyprus Mail, 23 March 2026).
 - Polls released after **Saturday 16 May 2026** are illegal to publish under Cypriot law.
 

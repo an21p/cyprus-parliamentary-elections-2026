@@ -1,5 +1,5 @@
 /* =============================================================================
-   Cyprus 2026 Elections — Design Tokens
+   Cyprus 2026 Elections - Design Tokens
    -----------------------------------------------------------------------------
    Editorial direction: Economist / Bloomberg election explainer / FT graphics.
    - Warm-neutral paper palette (slight cream) rather than stark white.
@@ -13,21 +13,22 @@
 
 :root {
   /* ---------- Paper / neutrals (warm) -------------------------------------- */
-  --color-paper:        #fbf9f5;   /* page background — warm off-white */
+  --color-paper:        #fbf9f5;   /* page background - warm off-white */
   --color-paper-2:      #f4f1ea;   /* secondary surfaces (callouts, footer) */
   --color-paper-3:      #ece8df;   /* tertiary surfaces (hover, dividers) */
   --color-rule:         #d9d3c4;   /* hairline rules */
   --color-rule-strong:  #b8b0a0;   /* stronger dividers, focus halo */
 
-  --color-ink:          #14181f;   /* primary text — near-black with cool tint */
+  --color-ink:          #14181f;   /* primary text - near-black with cool tint */
   --color-ink-2:        #2c333d;   /* secondary text */
   --color-ink-3:        #5b6373;   /* tertiary / meta text */
   --color-ink-4:        #8a8f9b;   /* quaternary / muted captions */
 
-  /* ---------- Civic accent (deep navy — like the FT's masthead blue) ------ */
-  --color-accent:        #1f3a68;
-  --color-accent-hover:  #16294b;
-  --color-accent-soft:   #e6ebf4;   /* tinted background for active states */
+  /* ---------- Civic accent (olive bronze - Mediterranean editorial) ------- */
+  /* Distinct from every party colour; warm to match the paper. */
+  --color-accent:        #5d4a1e;
+  --color-accent-hover:  #473814;
+  --color-accent-soft:   #efe9d8;   /* tinted background for active states */
   --color-accent-ink:    #ffffff;   /* text on accent */
 
   /* ---------- Fact / editorial highlight (muted burgundy) ----------------- */
@@ -35,20 +36,23 @@
   --color-fact-soft:     #f5e8e6;
 
   /* ---------- Data states (charts / callouts only) ------------------------ */
-  --color-info:          #1f3a68;
-  --color-info-soft:     #e6ebf4;
+  /* Info is a cool slate, not navy - keeps info callouts visually distinct
+     from the warm accent and from DISY brand blue. */
+  --color-info:          #3a5470;
+  --color-info-soft:     #e9eef3;
   --color-warn:          #8a5a0c;   /* tobacco amber, not yellow */
   --color-warn-soft:     #f7eedd;
   --color-positive:      #2f6b4f;   /* moss green, not bright green */
   --color-positive-soft: #e3efe7;
 
   /* ---------- Focus ring -------------------------------------------------- */
-  --color-focus:         #1f3a68;
+  --color-focus:         #5d4a1e;
   --focus-ring:          0 0 0 2px var(--color-paper), 0 0 0 4px var(--color-focus);
 
   /* ---------- Fonts ------------------------------------------------------- */
+  /* Fraunces is the display face (variable: opsz 9..144, SOFT 0..100, wght 100..900). */
   --font-display:
-    'Noto Serif', 'Georgia', 'Times New Roman', serif;
+    'Fraunces', 'Noto Serif', 'Georgia', 'Times New Roman', serif;
   --font-hero:
     'Fraunces', 'Noto Serif', 'Georgia', 'Times New Roman', serif;
   --font-sans:
@@ -56,7 +60,16 @@
   --font-greek:
     'Noto Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono:
-    'SF Mono', 'JetBrains Mono', 'IBM Plex Mono', Menlo, Consolas, monospace;
+    'JetBrains Mono', 'SF Mono', 'IBM Plex Mono', Menlo, Consolas, monospace;
+
+  /* Variation settings for Fraunces - use on display elements so the optical
+     size + softness scale appropriately to the rendered size.
+     opsz: optical size in pt; pair to the actual rendered size.
+     SOFT: 0 = sharp/angular, 100 = soft/warm. Higher SOFT = more editorial. */
+  --fvs-display-xl:     "opsz" 144, "SOFT" 50, "wght" 600;  /* hero H1, stat digits */
+  --fvs-display-lg:     "opsz" 96,  "SOFT" 55, "wght" 600;  /* section H2 */
+  --fvs-display-md:     "opsz" 72,  "SOFT" 50, "wght" 600;  /* subsection H3 */
+  --fvs-display-sm:     "opsz" 36,  "SOFT" 60, "wght" 400;  /* hero lede */
 
   /* ---------- Type scale (fluid via clamp, base 17px) --------------------- */
   /* 1.250 modular scale, fluid between 360px and 1280px viewports */
@@ -132,9 +145,9 @@
   --max-wide:    1280px;     /* charts, large grids */
   --max-bleed:   1440px;     /* shell outer bound */
 
-  --gutter-sm:  1rem;        /* 16  — mobile gutter */
-  --gutter-md:  1.5rem;      /* 24  — tablet gutter */
-  --gutter-lg:  2rem;        /* 32  — desktop gutter */
+  --gutter-sm:  1rem;        /* 16  - mobile gutter */
+  --gutter-md:  1.5rem;      /* 24  - tablet gutter */
+  --gutter-lg:  2rem;        /* 32  - desktop gutter */
 
   --header-h:   60px;
   --header-h-md: 68px;
@@ -169,22 +182,22 @@
   --color-ink-3:        #939180;
   --color-ink-4:        #6b6a60;
 
-  --color-accent:        #7fa3d6;
-  --color-accent-hover:  #a3bfe3;
-  --color-accent-soft:   #1a263a;
+  --color-accent:        #c9b074;   /* lightened olive bronze for dark bg */
+  --color-accent-hover:  #ddc78a;
+  --color-accent-soft:   #2a2516;
   --color-accent-ink:    #11151c;
 
   --color-fact:          #d29089;
   --color-fact-soft:     #2a1e1d;
 
-  --color-info:          #7fa3d6;
-  --color-info-soft:     #1a263a;
+  --color-info:          #8aa5be;   /* lightened slate */
+  --color-info-soft:     #1d2733;
   --color-warn:          #d4a567;
   --color-warn-soft:     #2a2114;
   --color-positive:      #7fbf9c;
   --color-positive-soft: #182a22;
 
-  --color-focus:         #7fa3d6;
+  --color-focus:         #c9b074;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,0 +1,18 @@
+{
+  "fieldworkStart": "2026-05-05",
+  "fieldworkEnd": "2026-05-07",
+  "pollster": "Explorer",
+  "commissioner": "Phileleftheros",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 19.7,
+    "AKEL": 18.8,
+    "ELAM": 11.6,
+    "ALMA": 8.3,
+    "ADK": 6.7,
+    "DIKO": 8.3,
+    "VOLT": 3.2
+  },
+  "notes": "DISY/AKEL figures after redistribution. Regional: ELAM 22% in Famagusta; AKEL 23% in Larnaca; DISY 23% in Paphos."
+}

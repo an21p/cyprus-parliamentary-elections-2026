@@ -1,0 +1,60 @@
+{
+  "name": "Cyprus Parliamentary Elections 2026",
+  "short_name": "Cyprus 2026",
+  "description": "How parliament is really chosen - and why polls don't tell the whole story. Interactive explainer in English & Greek.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fbf9f5",
+  "theme_color": "#fbf9f5",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "news", "politics"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Simulator",
+      "short_name": "Simulator",
+      "description": "Try your own scenarios",
+      "url": "/en/simulator"
+    },
+    {
+      "name": "Προσομοιωτής",
+      "short_name": "Προσομοιωτής",
+      "description": "Δοκιμάστε τα δικά σας σενάρια",
+      "url": "/el/simulator"
+    }
+  ]
+}

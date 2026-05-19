@@ -22,7 +22,7 @@
     { partyId: 'ELAM', unused: 1369 }
   ];
 
-  // Sort descending — biggest unused first.
+  // Sort descending - biggest unused first.
   const sorted = $derived([...RAW].sort((a, b) => b.unused - a.unused));
   const maxUnused = $derived(Math.max(...sorted.map((r) => r.unused)));
 
@@ -33,8 +33,8 @@
   const L = $derived({
     eyebrow:
       lang === 'el'
-        ? 'Νicosia 2021 — Αχρησιμοποίητες ψήφοι'
-        : 'Nicosia 2021 — unused votes',
+        ? 'Νicosia 2021 - Αχρησιμοποίητες ψήφοι'
+        : 'Nicosia 2021 - unused votes',
     title:
       lang === 'el'
         ? 'Αυτές οι ψήφοι μπαίνουν στην εθνική δεξαμενή'

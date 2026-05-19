@@ -10,6 +10,7 @@
 <PageShell
   {lang}
   {currentPath}
+  numeral="6"
   eyebrow={lang === 'el' ? 'Γεωγραφία' : 'Geography'}
   title={lang === 'el' ? 'Οι έξι επαρχίες' : 'The six districts'}
   lede={lang === 'el'
@@ -41,8 +42,8 @@
     </Callout>
     <p>
       {lang === 'el'
-        ? 'Η ανακατανομή έγινε βάσει των ανανεωμένων εκλογικών καταλόγων: η Λευκωσία συγκεντρώνει σήμερα 198.376 εγγεγραμμένους, ενώ η Πάφος έχει φτάσει τους 47.429, αρκετά πάνω από το όριο για την πέμπτη της έδρα. Είναι η πιο ουσιαστική δομική αλλαγή του εκλογικού γεωγραφικού χάρτη από την επέκταση της Βουλής στη δεκαετία του 1980 — μειώνει τον αριθμό των σταυρών στη Λευκωσία από 5 σε 5 (παραμένει ίδιος βάσει του τύπου «ένας σταυρός ανά τέσσερις έδρες, στρογγυλοποίηση προς τα πάνω»), αλλά αλλάζει τα δεδομένα του κάθε υποψηφίου της πρωτεύουσας.'
-        : 'The redistribution followed updated voter rolls: Nicosia now has 198,376 registered voters, while Paphos has reached 47,429 — comfortably above the threshold for a fifth seat. It is the most consequential structural change to the electoral map since the expansion of the House in the 1980s. The number of preference crosses in Nicosia stays at 5 (one cross per four seats, rounded up), but every Nicosia candidate now competes for one fewer seat than in 2021.'}
+        ? 'Η ανακατανομή έγινε βάσει των ανανεωμένων εκλογικών καταλόγων: η Λευκωσία συγκεντρώνει σήμερα 198.376 εγγεγραμμένους, ενώ η Πάφος έχει φτάσει τους 47.429, αρκετά πάνω από το όριο για την πέμπτη της έδρα. Είναι η πιο ουσιαστική δομική αλλαγή του εκλογικού γεωγραφικού χάρτη από την επέκταση της Βουλής στη δεκαετία του 1980. Ο αριθμός των σταυρών στη Λευκωσία παραμένει στους 5 (βάσει του τύπου «ένας σταυρός ανά τέσσερις έδρες, στρογγυλοποίηση προς τα πάνω»), αλλά κάθε υποψήφιος της πρωτεύουσας πλέον συναγωνίζεται για μία λιγότερη έδρα από το 2021.'
+        : 'The redistribution followed updated voter rolls: Nicosia now has 198,376 registered voters, while Paphos has reached 47,429, comfortably above the threshold for a fifth seat. It is the most consequential structural change to the electoral map since the expansion of the House in the 1980s. The number of preference crosses in Nicosia stays at 5 (one cross per four seats, rounded up), but every Nicosia candidate now competes for one fewer seat than in 2021.'}
     </p>
   </SectionBlock>
 
@@ -53,8 +54,8 @@
   >
     <p>
       {lang === 'el'
-        ? 'Διαβάστε τον πίνακα σε δύο επίπεδα. Πρώτο: το μέγεθος της επαρχίας — η Λευκωσία με 19 έδρες ακολουθεί απλά την αναλογική, ενώ η Κερύνεια με μόνο 3 έδρες έχει εξαιρετικά υψηλό μέτρο. Το 2021, κανένα κόμμα στην Κερύνεια δεν έφτασε το μέτρο, και οι 3 έδρες κρίθηκαν στην εθνική δεξαμενή. Δεύτερο: ο αριθμός των σταυρών προτίμησης δεν είναι αυθαίρετος — υπολογίζεται με τον τύπο «ένας σταυρός ανά τέσσερις έδρες, στρογγυλοποίηση προς τα πάνω».'
-        : 'Read the table on two levels. First, district size: Nicosia with 19 seats follows simple proportionality, while Kyrenia with just 3 seats has an extremely high quota. In 2021, no party in Kyrenia reached the quota at all, and all three Kyrenia seats were decided in the national pool. Second, the preference-cross allowance is not arbitrary — it follows the rule "one cross per four seats, rounded up".'}
+        ? 'Διαβάστε τον πίνακα σε δύο επίπεδα. Πρώτο, το μέγεθος της επαρχίας: η Λευκωσία με 19 έδρες ακολουθεί απλά την αναλογική, ενώ η Κερύνεια με μόνο 3 έδρες έχει εξαιρετικά υψηλό μέτρο. Το 2021, κανένα κόμμα στην Κερύνεια δεν έφτασε το μέτρο, και οι 3 έδρες κρίθηκαν στην εθνική δεξαμενή. Δεύτερο, ο αριθμός των σταυρών προτίμησης δεν είναι αυθαίρετος: υπολογίζεται με τον τύπο «ένας σταυρός ανά τέσσερις έδρες, στρογγυλοποίηση προς τα πάνω».'
+        : 'Read the table on two levels. First, district size: Nicosia with 19 seats follows simple proportionality, while Kyrenia with just 3 seats has an extremely high quota. In 2021, no party in Kyrenia reached the quota at all, and all three Kyrenia seats were decided in the national pool. Second, the preference-cross allowance is not arbitrary: it follows the rule "one cross per four seats, rounded up".'}
     </p>
     <DistrictTable {lang} />
   </SectionBlock>

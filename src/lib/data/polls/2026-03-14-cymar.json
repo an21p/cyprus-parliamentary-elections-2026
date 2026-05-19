@@ -1,0 +1,22 @@
+{
+  "fieldworkStart": "2026-03-06",
+  "fieldworkEnd": "2026-03-14",
+  "pollster": "CYMAR",
+  "commissioner": "ANT1",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 21,
+    "AKEL": 21,
+    "ELAM": 13,
+    "ALMA": 12,
+    "ADK": 9,
+    "DIKO": 12,
+    "VOLT": 4,
+    "EDEK": 4,
+    "DIPA": 1,
+    "KOSP": 2,
+    "KEKK": 1
+  },
+  "notes": "Tie at the top."
+}

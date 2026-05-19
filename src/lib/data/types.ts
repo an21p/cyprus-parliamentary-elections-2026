@@ -34,6 +34,9 @@ export interface Party {
   seatsOutgoing: number | null; // seats at parliament dissolution Apr 2026
   newParty: boolean;
   notes?: Bilingual;
+  // Optional logo path under /static (e.g. '/parties/disy.svg'). Two parties
+  // (FARL, POPSF) have no published logo and fall back to a colour swatch.
+  logo?: string;
 }
 
 // 2021 baseline: national vote totals and per-district vote totals.

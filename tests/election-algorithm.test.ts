@@ -2,7 +2,7 @@
 //
 // Data drawn from research/compass_artifact_wf-...md §1.7 (worked 2021 examples)
 // and §2.3 (national 2021 baseline). Per the task brief these are inline
-// fixtures — we do NOT import from data/results-2021.ts, which is being built
+// fixtures - we do NOT import from data/results-2021.ts, which is being built
 // by a parallel subagent.
 
 import { describe, expect, it } from 'vitest';
@@ -104,7 +104,7 @@ describe('first-distribution quota math (Cyprus 2021)', () => {
     const input: AllocationInput = { districtBreakdown: emptyDistrictBreakdown() };
     input.districtBreakdown.PAF = {
       DISY: 9650,
-      // Remainder 22,648 — assign to other listed parties such that none clear 8,074.
+      // Remainder 22,648 - assign to other listed parties such that none clear 8,074.
       AKEL: 7500,
       DIKO: 4500,
       EDEK: 4000,

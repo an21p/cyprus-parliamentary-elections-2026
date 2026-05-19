@@ -12,18 +12,18 @@ export const messages: Dict = {
     el: 'Βουλευτικές Εκλογές Κύπρου 2026'
   },
   'site.tagline': {
-    en: 'How parliament is really chosen — and why polls don’t tell the whole story',
-    el: 'Πώς εκλέγεται πραγματικά η Βουλή — και γιατί οι δημοσκοπήσεις δεν δείχνουν όλη την εικόνα'
+    en: 'How parliament is really chosen, and why polls don’t tell the whole story',
+    el: 'Πώς εκλέγεται πραγματικά η Βουλή και γιατί οι δημοσκοπήσεις δεν δείχνουν όλη την εικόνα'
   },
 
   // Navigation
   'nav.home': { en: 'Home', el: 'Αρχική' },
-  'nav.system': { en: 'The system', el: 'Το σύστημα' },
+  'nav.system': { en: 'System', el: 'Σύστημα' },
   'nav.simulator': { en: 'Simulator', el: 'Προσομοιωτής' },
   'nav.polls': { en: 'Polls', el: 'Δημοσκοπήσεις' },
   'nav.districts': { en: 'Districts', el: 'Επαρχίες' },
   'nav.parties': { en: 'Parties', el: 'Κόμματα' },
-  'nav.worked_example': { en: 'Worked example', el: 'Παράδειγμα' },
+  'nav.worked_example': { en: 'Example', el: 'Παράδειγμα' },
   'nav.about': { en: 'About', el: 'Σχετικά' },
 
   // Language switcher

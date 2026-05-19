@@ -10,6 +10,7 @@
 <PageShell
   {lang}
   {currentPath}
+  numeral="3"
   eyebrow={lang === 'el' ? 'Πώς λειτουργεί' : 'How it works'}
   title={lang === 'el' ? 'Το εκλογικό σύστημα της Κύπρου' : 'The Cypriot electoral system'}
   lede={lang === 'el'
@@ -24,7 +25,7 @@
     <p>
       {lang === 'el'
         ? 'Το Σύνταγμα του 1960 όρισε τη Βουλή των Αντιπροσώπων σε 50 έδρες, 35 για Ελληνοκύπριους και 15 για Τουρκοκύπριους. Μετά την αποχώρηση των Τουρκοκυπρίων από τους θεσμούς της Δημοκρατίας το 1963–64, η Βουλή λειτουργεί αποκλειστικά με τους Ελληνοκυπρίους εκπροσώπους.'
-        : 'The 1960 Constitution set the House of Representatives at 50 seats — 35 Greek-Cypriot and 15 Turkish-Cypriot. After Turkish Cypriots withdrew from the institutions of the Republic in 1963–64, the House has operated with the Greek-Cypriot benches alone.'}
+        : 'The 1960 Constitution set the House of Representatives at 50 seats: 35 Greek-Cypriot and 15 Turkish-Cypriot. After Turkish Cypriots withdrew from the institutions of the Republic in 1963–64, the House has operated with the Greek-Cypriot benches alone.'}
     </p>
     <p>
       {lang === 'el'
@@ -33,20 +34,20 @@
     </p>
     <p>
       {lang === 'el'
-        ? 'Πέρα από τους βουλευτές, το σύστημα προβλέπει επίσης τρεις θρησκευτικούς εκπροσώπους — Αρμενίων, Μαρωνιτών και Λατίνων — οι οποίοι μετέχουν στη Βουλή χωρίς δικαίωμα ψήφου. Από την απόφαση Aziz κατά Κύπρου (ΕΔΔΑ, 2004), οι Τουρκοκύπριοι μόνιμοι κάτοικοι των ελεύθερων περιοχών μπορούν να εγγραφούν στους ελληνοκυπριακούς εκλογικούς καταλόγους· το 2026 είναι 859 από συνολικά 568.587 εγγεγραμμένους ψηφοφόρους.'
-        : 'Beyond the deputies, three religious-group representatives — Armenian, Maronite and Latin — sit in the House without voting rights. Since the European Court of Human Rights judgment in Aziz v. Cyprus (2004), Turkish Cypriots resident in the government-controlled areas may register on the Greek-Cypriot roll; in 2026, 859 are registered out of 568,587 total voters.'}
+        ? 'Πέρα από τους βουλευτές, το σύστημα προβλέπει επίσης τρεις θρησκευτικούς εκπροσώπους (Αρμενίων, Μαρωνιτών και Λατίνων), οι οποίοι μετέχουν στη Βουλή χωρίς δικαίωμα ψήφου. Από την απόφαση Aziz κατά Κύπρου (ΕΔΔΑ, 2004), οι Τουρκοκύπριοι μόνιμοι κάτοικοι των ελεύθερων περιοχών μπορούν να εγγραφούν στους ελληνοκυπριακούς εκλογικούς καταλόγους· το 2026 είναι 859 από συνολικά 568.587 εγγεγραμμένους ψηφοφόρους.'
+        : 'Beyond the deputies, three religious-group representatives (Armenian, Maronite and Latin) sit in the House without voting rights. Since the European Court of Human Rights judgment in Aziz v. Cyprus (2004), Turkish Cypriots resident in the government-controlled areas may register on the Greek-Cypriot roll; in 2026, 859 are registered out of 568,587 total voters.'}
     </p>
   </SectionBlock>
 
   <SectionBlock
     id="first-distribution"
     eyebrow={lang === 'el' ? 'Φάση 1' : 'Stage 1'}
-    title={lang === 'el' ? 'Πρώτη κατανομή — επαρχιακό μέτρο Hare' : 'First distribution — district Hare quota'}
+    title={lang === 'el' ? 'Πρώτη κατανομή: επαρχιακό μέτρο Hare' : 'First distribution: district Hare quota'}
   >
     <p>
       {lang === 'el'
-        ? 'Σε κάθε μία από τις έξι επαρχίες, η κατανομή ξεκινά με ένα απλό υπολογισμό: το εκλογικό μέτρο. Διαιρούμε τους έγκυρους ψήφους της επαρχίας με τις έδρες που της αναλογούν, και κρατάμε μόνο τον ακέραιο. Κάθε κόμμα κερδίζει τόσες έδρες όσες φορές χωράει το μέτρο στις ψήφους του — πάλι παίρνοντας τον ακέραιο.'
-        : 'In each of the six districts, allocation begins with one calculation: the electoral quota. Divide the district\'s valid votes by the seats it is awarded, keeping only the integer. Each party wins as many seats as the quota fits into its vote total — again, integer only.'}
+        ? 'Σε κάθε μία από τις έξι επαρχίες, η κατανομή ξεκινά με έναν απλό υπολογισμό: το εκλογικό μέτρο. Διαιρούμε τους έγκυρους ψήφους της επαρχίας με τις έδρες που της αναλογούν, και κρατάμε μόνο τον ακέραιο. Κάθε κόμμα κερδίζει τόσες έδρες όσες φορές χωράει το μέτρο στις ψήφους του, πάλι παίρνοντας τον ακέραιο.'
+        : 'In each of the six districts, allocation begins with one calculation: the electoral quota. Divide the district\'s valid votes by the seats it is awarded, keeping only the integer. Each party wins as many seats as the quota fits into its vote total, again integer only.'}
     </p>
     <Callout tone="fact" title={lang === 'el' ? 'Ο τύπος' : 'The formula'}>
       <p>
@@ -66,15 +67,15 @@
     </p>
     <p>
       {lang === 'el'
-        ? 'Οι «αχρησιμοποίητες ψήφοι» — οι ψήφοι κάθε κόμματος που δεν αρκούσαν για ακόμη μία έδρα — είναι το νόμισμα που μεταφέρεται στις επόμενες φάσεις. Γενικά, σχεδόν κάθε εκλογή αφήνει 12–18 έδρες ανοικτές μετά την πρώτη κατανομή.'
-        : 'The "unused votes" — each party\'s remainder, the votes that did not stretch to another seat — become the currency carried into the next stages. In practice, almost every election leaves 12–18 seats unfilled after the first distribution.'}
+        ? 'Οι «αχρησιμοποίητες ψήφοι» (οι ψήφοι κάθε κόμματος που δεν αρκούσαν για ακόμη μία έδρα) είναι το νόμισμα που μεταφέρεται στις επόμενες φάσεις. Γενικά, σχεδόν κάθε εκλογή αφήνει 12–18 έδρες ανοικτές μετά την πρώτη κατανομή.'
+        : 'The "unused votes" (each party\'s remainder, the votes that did not stretch to another seat) become the currency carried into the next stages. In practice, almost every election leaves 12–18 seats unfilled after the first distribution.'}
     </p>
   </SectionBlock>
 
   <SectionBlock
     id="second-distribution"
     eyebrow={lang === 'el' ? 'Φάση 2' : 'Stage 2'}
-    title={lang === 'el' ? 'Δεύτερη κατανομή — εθνική δεξαμενή με όριο 3,6%' : 'Second distribution — national pool with 3.6% threshold'}
+    title={lang === 'el' ? 'Δεύτερη κατανομή: εθνική δεξαμενή με όριο 3,6%' : 'Second distribution: national pool with 3.6% threshold'}
   >
     <p>
       {lang === 'el'
@@ -100,20 +101,20 @@
     </p>
     <p>
       {lang === 'el'
-        ? 'Συνέπεια: μία λίστα που έλαβε 3,27% πανεθνικά — όπως οι Κυνηγοί το 2021 με 11.712 ψήφους — αποκλείστηκε πλήρως. Όλες της οι ψήφοι μηδενίστηκαν στις επόμενες κατανομές, παρότι ξεπέρασε άλλα έξι κόμματα στην κάλπη. Συνολικά, περίπου 15.000 ψήφοι για υπο-όριο λίστες απορρίφθηκαν εκείνο το βράδυ.'
-        : 'The consequence: a list polling 3.27% nationally — like the Hunters in 2021, with 11,712 votes — was excluded entirely. All of its votes were wiped from the later stages, even though it outpolled six other lists at the ballot box. In total, roughly 15,000 sub-threshold votes were discarded on the night.'}
+        ? 'Συνέπεια: μία λίστα που έλαβε 3,27% πανεθνικά (όπως οι Κυνηγοί το 2021 με 11.712 ψήφους) αποκλείστηκε πλήρως. Όλες της οι ψήφοι μηδενίστηκαν στις επόμενες κατανομές, παρότι ξεπέρασε άλλα έξι κόμματα στην κάλπη. Συνολικά, περίπου 15.000 ψήφοι για υπο-όριο λίστες απορρίφθηκαν εκείνο το βράδυ.'
+        : 'The consequence: a list polling 3.27% nationally (like the Hunters in 2021, with 11,712 votes) was excluded entirely. All of its votes were wiped from the later stages, even though it outpolled six other lists at the ballot box. In total, roughly 15,000 sub-threshold votes were discarded on the night.'}
     </p>
   </SectionBlock>
 
   <SectionBlock
     id="third-distribution"
     eyebrow={lang === 'el' ? 'Φάση 3' : 'Stage 3'}
-    title={lang === 'el' ? 'Τρίτη κατανομή — υπόλοιπες έδρες με όριο 7,2%' : 'Third distribution — residual seats with 7.2% threshold'}
+    title={lang === 'el' ? 'Τρίτη κατανομή: υπόλοιπες έδρες με όριο 7,2%' : 'Third distribution: residual seats with 7.2% threshold'}
   >
     <p>
       {lang === 'el'
-        ? 'Αν μετά τη δεύτερη κατανομή παραμείνουν κενές έδρες — πράγμα συνηθισμένο επειδή το εθνικό μέτρο δίνει ακέραιες έδρες και αφήνει πάλι υπόλοιπα — οι έδρες αυτές δίνονται με σειρά κατάταξης στα κόμματα με τις περισσότερες εναπομείνασες αχρησιμοποίητες ψήφους. Στη φάση αυτή δικαιούνται συμμετοχή μόνο τα κόμματα που έχουν πανεθνικό ποσοστό τουλάχιστον 7,2%.'
-        : 'If seats are still unfilled after stage 2 — typical, because the national quota also produces remainders — they are awarded by ranking the parties with the largest leftover unused votes. Only lists that cleared 7.2% nationally are eligible at this stage.'}
+        ? 'Αν μετά τη δεύτερη κατανομή παραμείνουν κενές έδρες (πράγμα συνηθισμένο, καθώς το εθνικό μέτρο δίνει ακέραιες έδρες και αφήνει πάλι υπόλοιπα), οι έδρες αυτές δίνονται με σειρά κατάταξης στα κόμματα με τις περισσότερες εναπομείνασες αχρησιμοποίητες ψήφους. Στη φάση αυτή δικαιούνται συμμετοχή μόνο τα κόμματα που έχουν πανεθνικό ποσοστό τουλάχιστον 7,2%.'
+        : 'If seats are still unfilled after stage 2 (typical, because the national quota also produces remainders), they are awarded by ranking the parties with the largest leftover unused votes. Only lists that cleared 7.2% nationally are eligible at this stage.'}
     </p>
     <p>
       {lang === 'el'
@@ -129,8 +130,8 @@
   >
     <p>
       {lang === 'el'
-        ? 'Οι έδρες που κερδήθηκαν στη δεύτερη και τρίτη κατανομή πρέπει να αντιστοιχιστούν σε συγκεκριμένες επαρχίες. Ο νόμος ορίζει μία σαφή σειρά: τα κόμματα κατατάσσονται κατά συνολικές ψήφους και κάθε κόμμα παίρνει έδρα στην επαρχία όπου είχε τις περισσότερες αχρησιμοποίητες ψήφους στην πρώτη κατανομή — εφόσον αυτή η επαρχία δεν έχει ήδη συμπληρωθεί. Η διαδικασία επαναλαμβάνεται μέχρι να τοποθετηθεί κάθε εθνική έδρα σε μία επαρχία.'
-        : 'Seats won at the national level must be assigned to specific districts. The law sets a clear order: parties are ranked by total votes, and each is awarded a seat in the district where it had the largest unused-vote pile in the first distribution — provided that district has not already been filled. The process repeats until every national seat is placed in a district.'}
+        ? 'Οι έδρες που κερδήθηκαν στη δεύτερη και τρίτη κατανομή πρέπει να αντιστοιχιστούν σε συγκεκριμένες επαρχίες. Ο νόμος ορίζει μία σαφή σειρά: τα κόμματα κατατάσσονται κατά συνολικές ψήφους και κάθε κόμμα παίρνει έδρα στην επαρχία όπου είχε τις περισσότερες αχρησιμοποίητες ψήφους στην πρώτη κατανομή, εφόσον αυτή η επαρχία δεν έχει ήδη συμπληρωθεί. Η διαδικασία επαναλαμβάνεται μέχρι να τοποθετηθεί κάθε εθνική έδρα σε μία επαρχία.'
+        : 'Seats won at the national level must be assigned to specific districts. The law sets a clear order: parties are ranked by total votes, and each is awarded a seat in the district where it had the largest unused-vote pile in the first distribution, provided that district has not already been filled. The process repeats until every national seat is placed in a district.'}
     </p>
     <p>
       {lang === 'el'
@@ -146,8 +147,8 @@
   >
     <p>
       {lang === 'el'
-        ? 'Κάθε επαρχία έχει το δικό της χρώμα ψηφοδελτίου — λευκό για τη Λευκωσία, κίτρινο για τη Λεμεσό, μπλε για την Αμμόχωστο, ροζ για τη Λάρνακα, πράσινο για την Πάφο, πορτοκαλί για την Κερύνεια. Στη Λευκωσία, με 19 λίστες και 19 έδρες, το ψηφοδέλτιο εκτείνεται σε δύο διπλωμένα φύλλα. Μόνο η Λάρνακα έχει μονόπλευρο ψηφοδέλτιο.'
-        : 'Every district has its own ballot colour — white for Nicosia, yellow for Limassol, blue for Famagusta, pink for Larnaca, green for Paphos, orange for Kyrenia. In Nicosia, with 19 lists and 19 seats, the ballot extends over two folded sheets. Only Larnaca uses a single-sided ballot.'}
+        ? 'Κάθε επαρχία έχει το δικό της χρώμα ψηφοδελτίου: λευκό για τη Λευκωσία, κίτρινο για τη Λεμεσό, μπλε για την Αμμόχωστο, ροζ για τη Λάρνακα, πράσινο για την Πάφο, πορτοκαλί για την Κερύνεια. Στη Λευκωσία, με 19 λίστες και 19 έδρες, το ψηφοδέλτιο εκτείνεται σε δύο διπλωμένα φύλλα. Μόνο η Λάρνακα έχει μονόπλευρο ψηφοδέλτιο.'
+        : 'Every district has its own ballot colour: white for Nicosia, yellow for Limassol, blue for Famagusta, pink for Larnaca, green for Paphos, orange for Kyrenia. In Nicosia, with 19 lists and 19 seats, the ballot extends over two folded sheets. Only Larnaca uses a single-sided ballot.'}
     </p>
     <p>
       {lang === 'el'
@@ -156,13 +157,13 @@
     </p>
     <p>
       {lang === 'el'
-        ? 'Οι σταυροί επιτρέπονται μόνο εντός της λίστας που ψηφίστηκε: αν ο ψηφοφόρος βάλει σταυρούς σε δύο διαφορετικά κόμματα, το ψηφοδέλτιο ακυρώνεται. Οι αρχηγοί κομμάτων και οι επικεφαλής συνασπισμών αυτόματα κερδίζουν σταυρούς ίσους με τη συνολική ψήφο της λίστας — δεν χρειάζεται ο ψηφοφόρος να τους σημειώσει χωριστά. Το 2026 εξαιρούνται με αυτό τον τρόπο, μεταξύ άλλων, η Αννίτα Δημητρίου (ΔΗΣΥ), ο Στέφανος Στεφάνου (ΑΚΕΛ), ο Νικόλας Παπαδόπουλος (ΔΗΚΟ), ο Χρήστος Χρήστου (ΕΛΑΜ) και ο Οδυσσέας Μιχαηλίδης (ΑΛΜΑ).'
-        : 'Crosses are only valid within the list you voted: if a voter marks crosses on two different lists, the ballot is invalid. Party leaders and coalition heads automatically receive crosses equal to the list\'s total vote — voters do not need to mark them. For 2026 those exempted include Annita Demetriou (DISY), Stefanos Stefanou (AKEL), Nicolas Papadopoulos (DIKO), Christos Christou (ELAM) and Odysseas Michaelides (ALMA).'}
+        ? 'Οι σταυροί επιτρέπονται μόνο εντός της λίστας που ψηφίστηκε: αν ο ψηφοφόρος βάλει σταυρούς σε δύο διαφορετικά κόμματα, το ψηφοδέλτιο ακυρώνεται. Οι αρχηγοί κομμάτων και οι επικεφαλής συνασπισμών αυτόματα κερδίζουν σταυρούς ίσους με τη συνολική ψήφο της λίστας· δεν χρειάζεται ο ψηφοφόρος να τους σημειώσει χωριστά. Το 2026 εξαιρούνται με αυτό τον τρόπο, μεταξύ άλλων, η Αννίτα Δημητρίου (ΔΗΣΥ), ο Στέφανος Στεφάνου (ΑΚΕΛ), ο Νικόλας Παπαδόπουλος (ΔΗΚΟ), ο Χρήστος Χρήστου (ΕΛΑΜ) και ο Οδυσσέας Μιχαηλίδης (ΑΛΜΑ).'
+        : 'Crosses are only valid within the list you voted: if a voter marks crosses on two different lists, the ballot is invalid. Party leaders and coalition heads automatically receive crosses equal to the list\'s total vote; voters do not need to mark them. For 2026 those exempted include Annita Demetriou (DISY), Stefanos Stefanou (AKEL), Nicolas Papadopoulos (DIKO), Christos Christou (ELAM) and Odysseas Michaelides (ALMA).'}
     </p>
     <p>
       {lang === 'el'
-        ? 'Στην κάθε λίστα οι έδρες που κερδήθηκαν στην επαρχία πάνε στους υποψηφίους με τους περισσότερους προσωπικούς σταυρούς — οπότε οι σταυροί έχουν σημασία όχι για το ποιο κόμμα μπαίνει αλλά για το ποιοι υποψήφιοι του κόμματος εκλέγονται.'
-        : 'Within each list the seats won in the district go to the candidates with the most personal crosses — so preference crosses do not decide which list enters parliament; they decide which candidates of that list are elected.'}
+        ? 'Στην κάθε λίστα οι έδρες που κερδήθηκαν στην επαρχία πάνε στους υποψηφίους με τους περισσότερους προσωπικούς σταυρούς. Οι σταυροί επομένως έχουν σημασία όχι για το ποιο κόμμα μπαίνει στη Βουλή αλλά για το ποιοι υποψήφιοί του εκλέγονται.'
+        : 'Within each list the seats won in the district go to the candidates with the most personal crosses. Preference crosses therefore do not decide which list enters parliament; they decide which of its candidates are elected.'}
     </p>
 
     <BallotPreview districtId="NIC" {lang} />

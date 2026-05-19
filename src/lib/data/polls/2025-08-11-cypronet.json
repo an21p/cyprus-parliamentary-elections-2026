@@ -1,0 +1,20 @@
+{
+  "fieldworkStart": "2025-08-11",
+  "fieldworkEnd": "2025-08-11",
+  "pollster": "Cypronet",
+  "commissioner": "online",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 21.9,
+    "AKEL": 23.3,
+    "ELAM": 17.8,
+    "ALMA": 12.3,
+    "DIKO": 8.2,
+    "VOLT": 2.7,
+    "EDEK": 2.7,
+    "DIPA": 1.4,
+    "KOSP": 2.7,
+    "KEKK": 2.7
+  }
+}

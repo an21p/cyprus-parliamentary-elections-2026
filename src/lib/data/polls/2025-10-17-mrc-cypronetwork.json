@@ -1,0 +1,17 @@
+{
+  "fieldworkStart": "2025-09-29",
+  "fieldworkEnd": "2025-10-17",
+  "pollster": "MRC Cypronetwork",
+  "commissioner": "RIK / CyBC",
+  "sample": 1422,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 17,
+    "AKEL": 17,
+    "ELAM": 11.5,
+    "ALMA": 6,
+    "ADK": 6.5,
+    "DIKO": 7.5
+  },
+  "notes": "Published 15 Nov 2025. ELAM consolidation 79%."
+}

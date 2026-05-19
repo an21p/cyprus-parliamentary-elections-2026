@@ -18,7 +18,7 @@
     district.name[lang] ?? district.name.en
   );
 
-  // Bar chart max — the larger of (quota × 1.5) or (top-party votes × 1.05),
+  // Bar chart max - the larger of (quota × 1.5) or (top-party votes × 1.05),
   // so the quota line always lands inside the chart and the biggest party
   // never overflows.
   const maxVotes = $derived(

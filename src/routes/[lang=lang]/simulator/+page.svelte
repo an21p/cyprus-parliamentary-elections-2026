@@ -33,11 +33,12 @@
 <PageShell
   {lang}
   {currentPath}
+  numeral="56"
   eyebrow={lang === 'el' ? 'Διαδραστικός' : 'Interactive'}
   title={lang === 'el' ? 'Προσομοιωτής έδρας' : 'Seat allocation simulator'}
   lede={lang === 'el'
-    ? 'Δώστε ποσοστά ψήφων σε κάθε κόμμα και δείτε πώς μετατρέπονται σε έδρες — και πού «χάνονται» ψήφοι.'
-    : 'Set a vote share for each party and see how it translates into seats — and where votes get lost on the way.'}
+    ? 'Δώστε ποσοστά ψήφων σε κάθε κόμμα και δείτε πώς μετατρέπονται σε έδρες - και πού «χάνονται» ψήφοι.'
+    : 'Set a vote share for each party and see how it translates into seats - and where votes get lost on the way.'}
 >
   <SectionBlock
     id="inputs"

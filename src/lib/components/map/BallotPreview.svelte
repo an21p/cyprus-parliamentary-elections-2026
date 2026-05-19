@@ -30,8 +30,8 @@
     mark: lang === 'el' ? 'Σταυρός' : 'Cross',
     note:
       lang === 'el'
-        ? 'Σχηματική αναπαράσταση — όχι το επίσημο ψηφοδέλτιο.'
-        : 'Illustrative — not the official ballot artwork.',
+        ? 'Σχηματική αναπαράσταση - όχι το επίσημο ψηφοδέλτιο.'
+        : 'Illustrative - not the official ballot artwork.',
     instructions: lang === 'el' ? 'Οδηγίες' : 'Instructions',
     colourLabel: lang === 'el' ? 'Χρώμα' : 'Colour'
   });
@@ -61,7 +61,7 @@
 
     <div class="list-block" aria-hidden="true">
       <p class="list-header">{L.listHeader}</p>
-      <ul class="list-rows">
+      <ul class="list-rows" role="list">
         {#each sampleRows as i (i)}
           <li>
             <span class="row-name">{L.candidate} {i}</span>

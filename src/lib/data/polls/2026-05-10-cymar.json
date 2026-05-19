@@ -1,0 +1,18 @@
+{
+  "fieldworkStart": "2026-04-28",
+  "fieldworkEnd": "2026-05-10",
+  "pollster": "CYMAR",
+  "commissioner": "ANT1",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 22,
+    "AKEL": 22,
+    "ELAM": 15,
+    "ALMA": 6,
+    "DIKO": 12,
+    "ADK": 7,
+    "VOLT": 5
+  },
+  "notes": "Tie at the top; CYMAR continues to publish integer-rounded shares."
+}

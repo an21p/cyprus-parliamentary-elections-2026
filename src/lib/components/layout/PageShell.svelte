@@ -10,10 +10,12 @@
     title: string;
     eyebrow?: string;
     lede?: string;
+    /** Per-page editorial numeral that bleeds off the hero's right edge. */
+    numeral?: string;
     children?: Snippet;
   };
 
-  let { lang, currentPath, title, eyebrow, lede, children }: Props = $props();
+  let { lang, currentPath, title, eyebrow, lede, numeral, children }: Props = $props();
 
   const skipLabel = $derived(lang === 'el' ? 'Μετάβαση στο περιεχόμενο' : 'Skip to content');
 </script>
@@ -25,6 +27,9 @@
 
   <main id="main-content" class="main" tabindex="-1">
     <header class="hero">
+      {#if numeral}
+        <span class="hero-numeral" aria-hidden="true">{numeral}</span>
+      {/if}
       <div class="hero-inner">
         {#if eyebrow}
           <p class="hero-eyebrow">{eyebrow}</p>
@@ -60,21 +65,46 @@
 
   /* ---------- Hero ---------- */
   .hero {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--color-accent);   /* full-width olive hairline */
     border-bottom: 1px solid var(--color-rule);
     background-color: var(--color-paper);
-    /* Subtle, restrained background — a single hairline accent stripe at top. */
-    background-image:
-      linear-gradient(90deg,
-        var(--color-accent) 0,
-        var(--color-accent) 4rem,
-        transparent 4rem,
-        transparent 100%);
-    background-repeat: no-repeat;
-    background-size: 100% 2px;
-    background-position: 0 0;
+  }
+
+  /* Editorial numeral bleeding off the right edge of the hero.
+     Massive Fraunces digit at low opacity - each page gets its own number. */
+  .hero-numeral {
+    position: absolute;
+    top: -0.18em;
+    right: -0.10em;
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "wght" 700;
+    /* Min keeps a readable size on phones without crowding the H1; max caps
+       it on very wide displays where it would otherwise dominate. */
+    font-size: clamp(6rem, 22vw, 22rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--color-accent);
+    opacity: 0.10;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+
+  /* On very narrow viewports, dial the numeral down further so it sits as
+     a quiet ornament rather than competing with the hero title for room. */
+  @media (max-width: 480px) {
+    .hero-numeral {
+      font-size: clamp(4.5rem, 26vw, 7rem);
+      opacity: 0.08;
+    }
   }
 
   .hero-inner {
+    position: relative;
+    z-index: 1;
     max-width: var(--max-content);
     margin-inline: auto;
     padding: var(--sp-7) var(--gutter-sm) var(--sp-8);
@@ -105,6 +135,7 @@
 
   .hero-title {
     font-family: var(--font-display);
+    font-variation-settings: var(--fvs-display-xl);
     font-weight: 600;
     font-size: var(--fs-600);
     line-height: var(--lh-tight);
@@ -117,6 +148,7 @@
   .hero-lede {
     margin-top: var(--sp-5);
     font-family: var(--font-display);
+    font-variation-settings: var(--fvs-display-sm);
     font-weight: 400;
     font-size: var(--fs-300);
     line-height: var(--lh-snug);

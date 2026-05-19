@@ -13,15 +13,8 @@
     data?: PollEntry[];
   };
 
-  const DEFAULT_PARTIES: PartyId[] = [
-    'DISY',
-    'AKEL',
-    'ELAM',
-    'ALMA',
-    'ADK',
-    'DIKO',
-    'VOLT'
-  ];
+  // Top five parties competing at the top of recent polls.
+  const DEFAULT_PARTIES: PartyId[] = ['DISY', 'AKEL', 'ELAM', 'ALMA', 'DIKO'];
 
   let { lang, parties = DEFAULT_PARTIES, data = POLLS }: Props = $props();
 
@@ -31,6 +24,30 @@
   $effect(() => {
     activeIds = [...parties];
   });
+
+  // ----- Time range filter ----------------------------------------------
+  type RangeOption = '3m' | '6m' | '12m' | 'all';
+  let range = $state<RangeOption>('3m');
+
+  const RANGE_OPTIONS: { value: RangeOption; months: number | null }[] = [
+    { value: '3m', months: 3 },
+    { value: '6m', months: 6 },
+    { value: '12m', months: 12 },
+    { value: 'all', months: null }
+  ];
+
+  function rangeLabel(value: RangeOption): string {
+    if (lang === 'el') {
+      return value === '3m' ? '3 μήνες'
+        : value === '6m' ? '6 μήνες'
+        : value === '12m' ? '1 έτος'
+        : 'Όλα';
+    }
+    return value === '3m' ? '3 months'
+      : value === '6m' ? '6 months'
+      : value === '12m' ? '1 year'
+      : 'All time';
+  }
 
   // ----- Plot points -----------------------------------------------------
   type Point = {
@@ -47,11 +64,32 @@
     return new Date((a + b) / 2);
   }
 
+  // Anchor the range window to the most recent poll so "last 3 months"
+  // always lines up with the freshest data even if the system clock drifts.
+  const anchorTime = $derived.by(() => {
+    if (data.length === 0) return Date.now();
+    let max = -Infinity;
+    for (const p of data) {
+      const t = midDate(p).getTime();
+      if (t > max) max = t;
+    }
+    return max;
+  });
+
+  const filteredData = $derived.by<PollEntry[]>(() => {
+    const opt = RANGE_OPTIONS.find((r) => r.value === range);
+    if (!opt || opt.months === null) return data;
+    const cutoff = new Date(anchorTime);
+    cutoff.setMonth(cutoff.getMonth() - opt.months);
+    const cutoffT = cutoff.getTime();
+    return data.filter((p) => midDate(p).getTime() >= cutoffT);
+  });
+
   const pointsByParty = $derived.by<Record<PartyId, Point[]>>(() => {
     const out: Partial<Record<PartyId, Point[]>> = {};
     for (const party of parties) {
       const series: Point[] = [];
-      for (const poll of data) {
+      for (const poll of filteredData) {
         const share = poll.shares[party];
         if (typeof share !== 'number') continue;
         const d = midDate(poll);
@@ -159,15 +197,91 @@
     return out.filter((_, i) => i % step === 0);
   });
 
-  // ----- Tooltip / hover -------------------------------------------------
-  let hover = $state<{ point: Point; x: number; y: number } | null>(null);
+  // ----- Spike cursor / unified hover ------------------------------------
+  // Snap cursor to the nearest poll midpoint date and show every active
+  // party's value at that date in a single tooltip.
+  const uniqueMidDates = $derived.by<Date[]>(() => {
+    const seen = new Map<string, Date>();
+    for (const p of allPoints) {
+      if (!seen.has(p.mid)) seen.set(p.mid, p.date);
+    }
+    return Array.from(seen.values()).sort(
+      (a, b) => a.getTime() - b.getTime()
+    );
+  });
 
-  function handlePointEnter(point: Point) {
-    hover = { point, x: xScale(point.date), y: yScale(point.share) };
+  let hoverMid = $state<string | null>(null);
+  let svgEl: SVGSVGElement | undefined = $state();
+
+  function snapToCursor(clientX: number) {
+    if (!svgEl || uniqueMidDates.length === 0) return;
+    const rect = svgEl.getBoundingClientRect();
+    if (rect.width === 0) return;
+    const x = ((clientX - rect.left) / rect.width) * width;
+    let nearest = uniqueMidDates[0];
+    let best = Math.abs(xScale(nearest) - x);
+    for (let i = 1; i < uniqueMidDates.length; i++) {
+      const d = Math.abs(xScale(uniqueMidDates[i]) - x);
+      if (d < best) {
+        best = d;
+        nearest = uniqueMidDates[i];
+      }
+    }
+    hoverMid = nearest.toISOString().slice(0, 10);
   }
-  function handlePointLeave() {
-    hover = null;
+
+  function handleMove(ev: MouseEvent) {
+    snapToCursor(ev.clientX);
   }
+  function handleLeave() {
+    hoverMid = null;
+  }
+
+  type Row = { party: PartyId; point: Point; colour: string; name: string };
+
+  const hoverRows = $derived.by<Row[]>(() => {
+    if (!hoverMid) return [];
+    const rows: Row[] = [];
+    for (const party of parties) {
+      if (!activeIds.includes(party)) continue;
+      const series = pointsByParty[party] ?? [];
+      // If multiple polls share the same midpoint, take the last one.
+      let found: Point | undefined;
+      for (const pt of series) if (pt.mid === hoverMid) found = pt;
+      if (!found) continue;
+      const p = getParty(party);
+      rows.push({
+        party,
+        point: found,
+        colour: p.colour,
+        name: localizedName(p.shortName, lang)
+      });
+    }
+    rows.sort((a, b) => b.point.share - a.point.share);
+    return rows;
+  });
+
+  const hoverX = $derived(
+    hoverMid && uniqueMidDates.length
+      ? xScale(uniqueMidDates.find((d) => d.toISOString().slice(0, 10) === hoverMid) ?? uniqueMidDates[0])
+      : 0
+  );
+
+  const hoverDateLabel = $derived.by(() => {
+    if (!hoverMid) return '';
+    const d = new Date(hoverMid);
+    return new Intl.DateTimeFormat(lang === 'el' ? 'el-CY' : 'en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    }).format(d);
+  });
+
+  const hoverPollsters = $derived.by<string[]>(() => {
+    const set = new Set<string>();
+    for (const r of hoverRows) set.add(r.point.poll.pollster);
+    return Array.from(set);
+  });
 
   function fmtDateRange(poll: PollEntry): string {
     const opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
@@ -200,13 +314,34 @@
 </script>
 
 <div class="poll-tracker" bind:this={wrapper}>
+  <div class="range-bar" role="group" aria-label={lang === 'el' ? 'Χρονικό εύρος' : 'Time range'}>
+    <span class="range-label">{lang === 'el' ? 'Χρονικό εύρος' : 'Time range'}</span>
+    <div class="range-buttons">
+      {#each RANGE_OPTIONS as opt (opt.value)}
+        {@const on = range === opt.value}
+        <button
+          type="button"
+          class="range-btn"
+          class:range-btn--on={on}
+          aria-pressed={on}
+          onclick={() => (range = opt.value)}
+        >
+          {rangeLabel(opt.value)}
+        </button>
+      {/each}
+    </div>
+  </div>
+
   <svg
+    bind:this={svgEl}
     role="img"
     aria-label={ariaLabel}
     viewBox="0 0 {width} {height}"
     width={width}
     height={height}
     preserveAspectRatio="xMidYMid meet"
+    onmousemove={handleMove}
+    onmouseleave={handleLeave}
   >
     <title>{ariaLabel}</title>
 
@@ -251,47 +386,73 @@
       {@const on = activeIds.includes(party)}
       <g class="series" class:series--off={!on} aria-label={localizedName(p.shortName, lang)}>
         <path d={linePath(series)} stroke={p.colour} fill="none" stroke-width="1.75" />
-        {#each series as point (point.mid)}
+        {#each series as point, i (i)}
           <circle
+            class="data-dot"
             cx={xScale(point.date)}
             cy={yScale(point.share)}
             r="3"
             fill={p.colour}
             stroke="var(--color-paper)"
             stroke-width="1"
-            tabindex={on ? 0 : -1}
-            role="button"
-            aria-label={`${localizedName(p.shortName, lang)}, ${point.share}%, ${fmtDateRange(point.poll)}`}
-            onmouseenter={() => handlePointEnter(point)}
-            onmouseleave={handlePointLeave}
-            onfocus={() => handlePointEnter(point)}
-            onblur={handlePointLeave}
           />
         {/each}
       </g>
     {/each}
+
+    <!-- spike cursor: vertical line + highlighted points at snapped date -->
+    {#if hoverMid}
+      <line
+        class="spike-line"
+        x1={hoverX}
+        x2={hoverX}
+        y1={margin.top}
+        y2={margin.top + innerH}
+      />
+      {#each hoverRows as row (row.party)}
+        <circle
+          class="spike-dot"
+          cx={hoverX}
+          cy={yScale(row.point.share)}
+          r="5"
+          fill={row.colour}
+          stroke="var(--color-paper)"
+          stroke-width="1.5"
+        />
+      {/each}
+    {/if}
+
+    <!-- transparent hit area: receives mousemove across the plot region -->
+    <rect
+      class="hover-overlay"
+      x={margin.left}
+      y={margin.top}
+      width={innerW}
+      height={innerH}
+      fill="transparent"
+    />
   </svg>
 
-  {#if hover}
-    {@const p = getParty(hover.point.party)}
-    {@const left = Math.min(width - 220, Math.max(8, hover.x + 10))}
-    {@const top = Math.max(8, hover.y - 90)}
-    <div
-      class="tooltip"
-      role="tooltip"
-      style="left: {left}px; top: {top}px;"
-    >
-      <p class="tip-party">
-        <span class="tip-sw" style="background-color: {p.colour};" aria-hidden="true"></span>
-        <strong>{localizedName(p.shortName, lang)}</strong>
-        <span class="tip-share">{hover.point.share}%</span>
-      </p>
-      <p class="tip-meta">
-        <span class="tip-pollster">{hover.point.poll.pollster}</span>
-        <span class="tip-sep">·</span>
-        <span class="tip-comm">{hover.point.poll.commissioner}</span>
-      </p>
-      <p class="tip-date">{fmtDateRange(hover.point.poll)}</p>
+  {#if hoverMid && hoverRows.length}
+    {@const tipW = 220}
+    {@const flip = hoverX + tipW + 16 > width}
+    {@const left = flip
+      ? Math.max(8, hoverX - tipW - 10)
+      : Math.min(width - tipW - 8, hoverX + 10)}
+    <div class="tooltip" role="tooltip" style="left: {left}px; top: {margin.top + 8}px;">
+      <p class="tip-date">{hoverDateLabel}</p>
+      <ul class="tip-rows" role="list">
+        {#each hoverRows as row (row.party)}
+          <li class="tip-row">
+            <span class="tip-sw" style="background-color: {row.colour};" aria-hidden="true"></span>
+            <span class="tip-name">{row.name}</span>
+            <span class="tip-share">{row.point.share}%</span>
+          </li>
+        {/each}
+      </ul>
+      {#if hoverPollsters.length}
+        <p class="tip-meta">{hoverPollsters.join(' · ')}</p>
+      {/if}
     </div>
   {/if}
 
@@ -340,25 +501,29 @@
     fill: var(--color-ink-3);
   }
 
-  .series circle {
-    cursor: pointer;
-    transition: r var(--dur-fast) var(--ease-standard);
-  }
-
-  .series circle:hover,
-  .series circle:focus-visible {
-    r: 5;
-  }
-
-  .series circle:focus-visible {
-    outline: none;
-    stroke: var(--color-focus);
-    stroke-width: 2;
+  .data-dot {
+    pointer-events: none;
   }
 
   .series--off {
     opacity: 0.08;
     pointer-events: none;
+  }
+
+  .spike-line {
+    stroke: var(--color-ink-3);
+    stroke-width: 1;
+    stroke-dasharray: 3 3;
+    pointer-events: none;
+  }
+
+  .spike-dot {
+    pointer-events: none;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.25));
+  }
+
+  .hover-overlay {
+    cursor: crosshair;
   }
 
   .tooltip {
@@ -376,11 +541,36 @@
     z-index: var(--z-overlay);
   }
 
-  .tip-party {
-    margin: 0 0 var(--sp-1);
+  .tip-date {
+    margin: 0 0 var(--sp-2);
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 600;
+  }
+
+  .tip-rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .tip-row {
     display: flex;
     align-items: center;
     gap: var(--sp-2);
+  }
+
+  .tip-name {
+    color: rgba(255, 255, 255, 0.7);
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .tip-share {
@@ -388,26 +578,85 @@
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
     font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
   }
 
   .tip-sw {
     width: 8px;
     height: 8px;
     border-radius: var(--radius-1);
+    flex-shrink: 0;
   }
 
-  .tip-meta,
-  .tip-date {
-    margin: 0;
-    color: rgba(255, 255, 255, 0.78);
-  }
-
-  .tip-sep {
-    margin-inline: 0.25em;
-    opacity: 0.5;
+  .tip-meta {
+    margin: var(--sp-2) 0 0;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: calc(var(--fs-50) * 0.92);
   }
 
   .legend-wrap {
     margin-top: var(--sp-1);
+  }
+
+  .range-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2) var(--sp-3);
+  }
+
+  .range-label {
+    font-family: var(--font-sans);
+    font-size: var(--fs-50);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    color: var(--color-ink-3);
+  }
+
+  .range-buttons {
+    display: inline-flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+    padding: 2px;
+    background-color: var(--color-paper-2);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-pill);
+  }
+
+  .range-btn {
+    appearance: none;
+    border: none;
+    background: transparent;
+    /* Fix the box height so toggling font-weight on the active pill
+       can never subpixel-shift its neighbours. */
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    padding: 0 var(--sp-3);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-sans);
+    font-size: var(--fs-50);
+    line-height: 1;
+    color: var(--color-ink-2);
+    cursor: pointer;
+    transition: background-color var(--dur-fast) var(--ease-standard),
+      color var(--dur-fast) var(--ease-standard);
+  }
+
+  .range-btn:hover {
+    color: var(--color-ink);
+  }
+
+  .range-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .range-btn--on {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    font-weight: 600;
   }
 </style>

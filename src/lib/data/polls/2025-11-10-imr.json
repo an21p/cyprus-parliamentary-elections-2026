@@ -1,0 +1,21 @@
+{
+  "fieldworkStart": "2025-11-03",
+  "fieldworkEnd": "2025-11-10",
+  "pollster": "IMR",
+  "commissioner": "Reporter",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 22.1,
+    "AKEL": 21.3,
+    "ELAM": 16.2,
+    "ALMA": 12.2,
+    "ADK": 6.9,
+    "DIKO": 8.6,
+    "VOLT": 3.7,
+    "EDEK": 2.3,
+    "DIPA": 1.2,
+    "KOSP": 3,
+    "KEKK": 1.6
+  }
+}

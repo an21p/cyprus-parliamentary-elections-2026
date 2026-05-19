@@ -17,9 +17,9 @@
       titleEn: 'Official Cyprus government',
       titleEl: 'Επίσημες πηγές κυβέρνησης Κύπρου',
       items: [
-        { label: 'Central Elections Service — How to vote (gov.cy)', href: 'https://www.gov.cy/moi-elections/en/documents/parliamentary-elections-2026/how-to-vote/' },
+        { label: 'Central Elections Service - How to vote (gov.cy)', href: 'https://www.gov.cy/moi-elections/en/documents/parliamentary-elections-2026/how-to-vote/' },
         { label: 'Elections portal (elections.gov.cy)', href: 'https://elections.gov.cy/' },
-        { label: 'Ministry of Interior — 2021 results', href: 'http://results.elections.moi.gov.cy/' }
+        { label: 'Ministry of Interior - 2021 results', href: 'http://results.elections.moi.gov.cy/' }
       ]
     },
     {
@@ -39,29 +39,29 @@
       items: [
         { label: 'OSCE/ODIHR Cyprus 2021 final report', href: 'https://www.osce.org/odihr/elections/508379' },
         { label: 'OSCE/ODIHR Needs Assessment Mission report (2021)', href: 'https://www.osce.org/odihr/elections/cyprus/481552' },
-        { label: 'International IDEA — Cyprus electoral system', href: 'https://www.idea.int/node/136610' },
-        { label: 'IPU Parline — Cyprus', href: 'https://data.ipu.org/parliament/CY/CY-LC01/' },
-        { label: 'Venice Commission — Allocation of Seats Inside the Lists', href: 'https://www.venice.coe.int/webforms/documents/default.aspx?pdffile=CDL(2015)016-e' }
+        { label: 'International IDEA - Cyprus electoral system', href: 'https://www.idea.int/node/136610' },
+        { label: 'IPU Parline - Cyprus', href: 'https://data.ipu.org/parliament/CY/CY-LC01/' },
+        { label: 'Venice Commission - Allocation of Seats Inside the Lists', href: 'https://www.venice.coe.int/webforms/documents/default.aspx?pdffile=CDL(2015)016-e' }
       ]
     },
     {
       titleEn: 'Cyprus media',
       titleEl: 'Κυπριακά μέσα ενημέρωσης',
       items: [
-        { label: 'Cyprus Mail — election coverage', href: 'https://cyprus-mail.com/2026/05/10/voters-to-choose-between-bewildering-array-of-parties' },
-        { label: 'Politis EN — guide to contenders', href: 'https://en.politis.com.cy/politics/991519/a-guide-to-cyprus-parliamentary-contenders' },
+        { label: 'Cyprus Mail - election coverage', href: 'https://cyprus-mail.com/2026/05/10/voters-to-choose-between-bewildering-array-of-parties' },
+        { label: 'Politis EN - guide to contenders', href: 'https://en.politis.com.cy/politics/991519/a-guide-to-cyprus-parliamentary-contenders' },
         { label: 'Phileleftheros (philenews.com)', href: 'https://www.philenews.com/' },
         { label: 'SIGMA Live (EN)', href: 'https://en.sigmalive.com/parliamentary-elections-2026-what-to-expect/' },
-        { label: 'Financial Mirror — record challengers', href: 'https://www.financialmirror.com/2026/05/07/record-challengers-for-cyprus-parliament/' }
+        { label: 'Financial Mirror - record challengers', href: 'https://www.financialmirror.com/2026/05/07/record-challengers-for-cyprus-parliament/' }
       ]
     },
     {
       titleEn: 'Polling & academic analysis',
       titleEl: 'Δημοσκοπήσεις & ακαδημαϊκή ανάλυση',
       items: [
-        { label: 'PolitPro — Cyprus dashboard & poll-of-polls', href: 'https://politpro.eu/en/cyprus' },
-        { label: 'Europe Elects — Cyprus party guide', href: 'https://europeelects.eu/cyprus/' },
-        { label: 'Sözen (2022) — Cyprus: Political Developments and Data in 2021', href: 'https://onlinelibrary.wiley.com/doi/full/10.1111/2047-8852.12386' },
+        { label: 'PolitPro - Cyprus dashboard & poll-of-polls', href: 'https://politpro.eu/en/cyprus' },
+        { label: 'Europe Elects - Cyprus party guide', href: 'https://europeelects.eu/cyprus/' },
+        { label: 'Sözen (2022) - Cyprus: Political Developments and Data in 2021', href: 'https://onlinelibrary.wiley.com/doi/full/10.1111/2047-8852.12386' },
         { label: '"The Silent Electoral Earthquake in Cyprus" (Tandfonline)', href: 'https://www.tandfonline.com/doi/full/10.1080/13608746.2022.2034272' }
       ]
     }
@@ -84,8 +84,8 @@
   >
     <p>
       {lang === 'el'
-        ? 'Στόχος είναι να εξηγήσει στους πολίτες πώς οι ψήφοι μετατρέπονται σε έδρες στην Κύπρο — μια διαδικασία που, λόγω της τριπλής κατανομής και των ορίων, δεν είναι διαισθητική. Η σελίδα απευθύνεται σε ψηφοφόρους, δημοσιογράφους, ερευνητές και διεθνείς αναγνώστες που θέλουν να καταλάβουν τη μηχανική πίσω από τα αποτελέσματα της 24ης Μαΐου 2026.'
-        : 'The aim is to help readers understand how votes are translated into seats in Cyprus — a process that, because of the three-stage allocation and the various thresholds, is not intuitive. The site is for voters, journalists, researchers and international readers who want to follow the mechanics behind the 24 May 2026 result.'}
+        ? 'Στόχος είναι να εξηγήσει στους πολίτες πώς οι ψήφοι μετατρέπονται σε έδρες στην Κύπρο - μια διαδικασία που, λόγω της τριπλής κατανομής και των ορίων, δεν είναι διαισθητική. Η σελίδα απευθύνεται σε ψηφοφόρους, δημοσιογράφους, ερευνητές και διεθνείς αναγνώστες που θέλουν να καταλάβουν τη μηχανική πίσω από τα αποτελέσματα της 24ης Μαΐου 2026.'
+        : 'The aim is to help readers understand how votes are translated into seats in Cyprus - a process that, because of the three-stage allocation and the various thresholds, is not intuitive. The site is for voters, journalists, researchers and international readers who want to follow the mechanics behind the 24 May 2026 result.'}
     </p>
     <p>
       {lang === 'el'
@@ -99,7 +99,7 @@
     eyebrow={lang === 'el' ? 'Δεδομένα' : 'Data'}
     title={lang === 'el' ? 'Τι δεδομένα χρησιμοποιεί' : 'What data it uses'}
   >
-    <ul class="bare-list">
+    <ul class="bare-list" role="list">
       <li>
         <strong>{lang === 'el' ? 'Δημοσκοπήσεις (§2.4)' : 'Polls (§2.4)'}:</strong>
         {lang === 'el'
@@ -138,8 +138,8 @@
     eyebrow={lang === 'el' ? 'Επιφυλάξεις' : 'Caveats'}
     title={lang === 'el' ? 'Τι δεν κάνει αυτή η σελίδα' : 'What this site does not do'}
   >
-    <ul class="bare-list">
-      <li>{lang === 'el' ? 'Δεν προβλέπει αποτελέσματα — ο προσομοιωτής εκτελεί τον αλγόριθμο για τα ποσοστά που εσείς δίνετε, όχι μια πρόβλεψη.' : 'Does not predict results — the simulator runs the algorithm on the inputs you provide, not a forecast.'}</li>
+    <ul class="bare-list" role="list">
+      <li>{lang === 'el' ? 'Δεν προβλέπει αποτελέσματα - ο προσομοιωτής εκτελεί τον αλγόριθμο για τα ποσοστά που εσείς δίνετε, όχι μια πρόβλεψη.' : 'Does not predict results - the simulator runs the algorithm on the inputs you provide, not a forecast.'}</li>
       <li>{lang === 'el' ? 'Δεν στηρίζει κανένα κόμμα ή υποψήφιο.' : 'Does not endorse any party or candidate.'}</li>
       <li>{lang === 'el' ? 'Δεν περιλαμβάνει ζωντανά αποτελέσματα στην παρούσα έκδοση (v1).' : 'Does not include live election-night results in this version (v1).'}</li>
       <li>{lang === 'el' ? 'Δεν είναι επίσημη πηγή του κράτους ή του Υπουργείου Εσωτερικών.' : 'Is not an official Cypriot government or Ministry of Interior source.'}</li>
@@ -155,7 +155,7 @@
       {#each SOURCE_GROUPS as group (group.titleEn)}
         <section class="source-block">
           <h3 class="source-heading">{lang === 'el' ? group.titleEl : group.titleEn}</h3>
-          <ul class="source-list">
+          <ul class="source-list" role="list">
             {#each group.items as item (item.href)}
               <li>
                 <a class="source-link" href={item.href} rel="noopener noreferrer" target="_blank">{item.label}</a>

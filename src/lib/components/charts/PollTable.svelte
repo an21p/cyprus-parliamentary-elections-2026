@@ -27,7 +27,46 @@
 
   let { lang, data = POLLS, parties = DEFAULT_PARTIES }: Props = $props();
 
-  // Sort state
+  // ----- Pollster color codes -------------------------------------------
+  // Hash the pollster name into a hue so colours stay stable across reloads
+  // and are deterministic for unknown pollsters too.
+  function pollsterColor(name: string): string {
+    let h = 2166136261;
+    for (let i = 0; i < name.length; i++) {
+      h = Math.imul(h ^ name.charCodeAt(i), 16777619) >>> 0;
+    }
+    // Golden-angle distribution gives a good spread across nearby hashes.
+    const hue = Math.floor(((h % 360) * 137.508) % 360);
+    return `hsl(${hue} 58% 42%)`;
+  }
+
+  const uniquePollsters = $derived.by<string[]>(() => {
+    const seen = new Set<string>();
+    for (const p of data) seen.add(p.pollster);
+    return Array.from(seen).sort((a, b) => a.localeCompare(b));
+  });
+
+  // Filter state - every pollster active by default.
+  let activePollsters = $state<string[]>([]);
+  $effect(() => {
+    activePollsters = [...uniquePollsters];
+  });
+
+  function togglePollster(name: string) {
+    if (activePollsters.includes(name)) {
+      activePollsters = activePollsters.filter((x) => x !== name);
+    } else {
+      activePollsters = [...activePollsters, name];
+    }
+  }
+  function selectAllPollsters() {
+    activePollsters = [...uniquePollsters];
+  }
+  function clearPollsters() {
+    activePollsters = [];
+  }
+
+  // ----- Sort state -----------------------------------------------------
   type SortKey =
     | 'date'
     | 'pollster'
@@ -69,26 +108,28 @@
   }
 
   const rows = $derived(
-    [...data].sort((a, b) => {
-      const av = sortValue(a, sortKey);
-      const bv = sortValue(b, sortKey);
-      const dir = sortDir === 'asc' ? 1 : -1;
-      if (av === null && bv === null) return 0;
-      if (av === null) return 1;
-      if (bv === null) return -1;
-      if (typeof av === 'number' && typeof bv === 'number') {
-        return (av - bv) * dir;
-      }
-      return String(av).localeCompare(String(bv)) * dir;
-    })
+    data
+      .filter((p) => activePollsters.includes(p.pollster))
+      .sort((a, b) => {
+        const av = sortValue(a, sortKey);
+        const bv = sortValue(b, sortKey);
+        const dir = sortDir === 'asc' ? 1 : -1;
+        if (av === null && bv === null) return 0;
+        if (av === null) return 1;
+        if (bv === null) return -1;
+        if (typeof av === 'number' && typeof bv === 'number') {
+          return (av - bv) * dir;
+        }
+        return String(av).localeCompare(String(bv)) * dir;
+      })
   );
 
   function fmtDate(iso: string): string {
-    return new Intl.DateTimeFormat(lang === 'el' ? 'el-CY' : 'en-GB', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    }).format(new Date(iso));
+    const d = new Date(iso);
+    const dd = String(d.getDate()).padStart(2, '0');
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const yy = String(d.getFullYear()).slice(-2);
+    return `${dd}/${mm}/${yy}`;
   }
 
   function fmtRange(p: PollEntry): string {
@@ -97,15 +138,15 @@
   }
 
   function fmtShare(v: number | undefined): string {
-    return typeof v === 'number' ? v.toFixed(1) : '—';
+    return typeof v === 'number' ? v.toFixed(1) : '-';
   }
 
   function fmtSample(v: number | null): string {
-    return v === null ? '—' : new Intl.NumberFormat(lang === 'el' ? 'el-CY' : 'en-GB').format(v);
+    return v === null ? '-' : new Intl.NumberFormat(lang === 'el' ? 'el-CY' : 'en-GB').format(v);
   }
 
   function fmtMoE(v: number | null): string {
-    return v === null ? '—' : `±${v.toFixed(1)}`;
+    return v === null ? '-' : `±${v.toFixed(1)}`;
   }
 
   function ariaSort(key: SortKey): 'ascending' | 'descending' | 'none' {
@@ -129,9 +170,45 @@
     commissioner: lang === 'el' ? 'Ανάθεση' : 'Commissioned by',
     sample: lang === 'el' ? 'Δείγμα' : 'Sample',
     moe: lang === 'el' ? 'Σφάλμα' : 'MoE',
-    sortBy: lang === 'el' ? 'Ταξινόμηση' : 'Sort by'
+    sortBy: lang === 'el' ? 'Ταξινόμηση' : 'Sort by',
+    filterTitle: lang === 'el' ? 'Φίλτρο εταιρειών' : 'Filter pollsters',
+    selectAll: lang === 'el' ? 'Όλες' : 'All',
+    clear: lang === 'el' ? 'Καμία' : 'None',
+    empty:
+      lang === 'el'
+        ? 'Δεν επιλέχθηκε καμία εταιρεία.'
+        : 'No pollster selected.'
   });
 </script>
+
+<div class="poll-filter" role="group" aria-label={L.filterTitle}>
+  <div class="poll-filter-head">
+    <p class="poll-filter-title">{L.filterTitle}</p>
+    <div class="poll-filter-actions">
+      <button type="button" class="ghost-btn" onclick={selectAllPollsters}>{L.selectAll}</button>
+      <span class="dot" aria-hidden="true">·</span>
+      <button type="button" class="ghost-btn" onclick={clearPollsters}>{L.clear}</button>
+    </div>
+  </div>
+  <ul class="poll-filter-list" role="list">
+    {#each uniquePollsters as name (name)}
+      {@const on = activePollsters.includes(name)}
+      {@const colour = pollsterColor(name)}
+      <li>
+        <button
+          type="button"
+          class="chip"
+          class:chip--off={!on}
+          aria-pressed={on}
+          onclick={() => togglePollster(name)}
+        >
+          <span class="chip-swatch" style="background-color: {colour};" aria-hidden="true"></span>
+          <span class="chip-label">{name}</span>
+        </button>
+      </li>
+    {/each}
+  </ul>
+</div>
 
 <div class="poll-table-wrap">
   <div class="scroll">
@@ -190,18 +267,30 @@
         </tr>
       </thead>
       <tbody>
-        {#each rows as row, i (i)}
+        {#if rows.length === 0}
           <tr>
-            <th scope="row" class="col-frozen col-frozen-1 col-date">{fmtRange(row)}</th>
-            <td class="col-frozen col-frozen-2 col-pollster">{row.pollster}</td>
-            <td>{row.commissioner}</td>
-            <td class="num">{fmtSample(row.sample)}</td>
-            <td class="num">{fmtMoE(row.marginOfError)}</td>
-            {#each parties as party (party)}
-              <td class="num">{fmtShare(row.shares[party])}</td>
-            {/each}
+            <td class="empty" colspan={5 + parties.length}>{L.empty}</td>
           </tr>
-        {/each}
+        {:else}
+          {#each rows as row, i (i)}
+            {@const colour = pollsterColor(row.pollster)}
+            <tr>
+              <th scope="row" class="col-frozen col-frozen-1 col-date">{fmtRange(row)}</th>
+              <td class="col-frozen col-frozen-2 col-pollster">
+                <span class="pollster-cell">
+                  <span class="pollster-swatch" style="background-color: {colour};" aria-hidden="true"></span>
+                  <span>{row.pollster}</span>
+                </span>
+              </td>
+              <td>{row.commissioner}</td>
+              <td class="num">{fmtSample(row.sample)}</td>
+              <td class="num">{fmtMoE(row.marginOfError)}</td>
+              {#each parties as party (party)}
+                <td class="num">{fmtShare(row.shares[party])}</td>
+              {/each}
+            </tr>
+          {/each}
+        {/if}
       </tbody>
     </table>
   </div>
@@ -322,7 +411,7 @@
     display: inline-block;
   }
 
-  /* Frozen columns — left side */
+  /* Frozen columns - left side */
   .col-frozen {
     position: sticky;
     background-color: var(--color-paper);
@@ -337,14 +426,16 @@
     border-right: 1px solid var(--color-rule);
   }
   .col-frozen-2 {
-    left: 152px;
+    left: 116px;
     border-right: 1px solid var(--color-rule);
   }
   .col-date {
-    min-width: 152px;
+    min-width: 116px;
+    font-variant-numeric: tabular-nums;
+    font-family: var(--font-mono);
   }
   .col-pollster {
-    min-width: 140px;
+    min-width: 160px;
   }
 
   /* Hide frozen second column on the narrowest viewports for breathing room */
@@ -353,5 +444,145 @@
       position: static;
       left: auto;
     }
+  }
+
+  .pollster-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .pollster-swatch {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-1);
+    border: 1px solid rgba(20, 24, 31, 0.18);
+    flex-shrink: 0;
+  }
+
+  .empty {
+    text-align: center;
+    color: var(--color-ink-3);
+    padding: var(--sp-6) var(--sp-3);
+    font-style: italic;
+  }
+
+  /* Pollster filter */
+  .poll-filter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-3);
+  }
+
+  .poll-filter-head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+  }
+
+  .poll-filter-title {
+    font-family: var(--font-sans);
+    font-size: var(--fs-50);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    color: var(--color-ink-3);
+    margin: 0;
+  }
+
+  .poll-filter-actions {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--sp-2);
+  }
+
+  .poll-filter-actions .dot {
+    color: var(--color-ink-3);
+  }
+
+  .ghost-btn {
+    appearance: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-50);
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+
+  .ghost-btn:hover {
+    color: var(--color-ink);
+  }
+
+  .ghost-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-1);
+  }
+
+  .poll-filter-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .poll-filter-list > li {
+    display: flex;
+    align-items: center;
+  }
+
+  .poll-filter-list .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    height: 24px;
+    padding: 0 var(--sp-3);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-paper-2);
+    border: 1px solid var(--color-rule);
+    font-family: var(--font-sans);
+    font-size: var(--fs-50);
+    line-height: 1;
+    color: var(--color-ink);
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: border-color var(--dur-fast) var(--ease-standard),
+      background-color var(--dur-fast) var(--ease-standard);
+  }
+
+  .poll-filter-list .chip:hover {
+    border-color: var(--color-rule-strong);
+  }
+
+  .poll-filter-list .chip:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .poll-filter-list .chip--off {
+    opacity: 0.4;
+  }
+
+  .poll-filter-list .chip-swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-1);
+    flex-shrink: 0;
+    border: 1px solid rgba(20, 24, 31, 0.18);
+  }
+
+  .poll-filter-list .chip-label {
+    font-weight: 500;
+    white-space: nowrap;
   }
 </style>

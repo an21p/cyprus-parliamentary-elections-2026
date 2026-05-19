@@ -73,6 +73,7 @@
 
   .section-title {
     font-family: var(--font-display);
+    font-variation-settings: var(--fvs-display-lg);
     font-size: var(--fs-500);
     font-weight: 600;
     line-height: var(--lh-tight);

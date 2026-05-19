@@ -29,8 +29,12 @@
     target === 'en' ? t(lang, 'lang.switch_to_en') : t(lang, 'lang.switch_to_el')
   );
 
+  // Aria-label in the CURRENT reading language, with the target language's
+  // native name as an exonym. Screen readers TTS the verb in the page lang.
   const ariaLabel = $derived(
-    target === 'en' ? 'Switch language to English' : 'Αλλαγή γλώσσας στα Ελληνικά'
+    lang === 'en'
+      ? (target === 'el' ? 'Switch language to Ελληνικά' : 'Switch language to English')
+      : (target === 'en' ? 'Αλλαγή γλώσσας στα English'   : 'Αλλαγή γλώσσας στα Ελληνικά')
   );
 </script>
 

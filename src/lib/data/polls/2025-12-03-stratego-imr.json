@@ -1,0 +1,21 @@
+{
+  "fieldworkStart": "2025-11-27",
+  "fieldworkEnd": "2025-12-03",
+  "pollster": "Stratego-IMR",
+  "commissioner": "Kathimerini Cyprus",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 23.5,
+    "AKEL": 22.3,
+    "ELAM": 16.4,
+    "ALMA": 10,
+    "ADK": 9.2,
+    "DIKO": 8.1,
+    "VOLT": 2.4,
+    "EDEK": 2.1,
+    "DIPA": 1.3,
+    "KOSP": 2.3,
+    "KEKK": 1.4
+  }
+}

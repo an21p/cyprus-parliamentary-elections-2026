@@ -1,0 +1,22 @@
+{
+  "fieldworkStart": "2026-01-10",
+  "fieldworkEnd": "2026-01-16",
+  "pollster": "RAI Consultants",
+  "commissioner": "Alpha Cyprus",
+  "sample": 1031,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 22.8,
+    "AKEL": 21.8,
+    "ELAM": 16.5,
+    "ALMA": 10.5,
+    "ADK": 10.1,
+    "DIKO": 7.9,
+    "VOLT": 4,
+    "EDEK": 1.5,
+    "DIPA": 1.6,
+    "KOSP": 1,
+    "KEKK": 1.3
+  },
+  "notes": "First mention of ADK at 10.1%."
+}

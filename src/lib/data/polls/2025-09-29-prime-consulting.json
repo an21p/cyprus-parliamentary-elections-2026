@@ -1,0 +1,13 @@
+{
+  "fieldworkStart": "2025-09-22",
+  "fieldworkEnd": "2025-09-29",
+  "pollster": "Prime Consulting",
+  "commissioner": "SIGMA",
+  "sample": 1144,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 18.5,
+    "AKEL": 18
+  },
+  "notes": "Voting-certainty poll; other parties not reported."
+}

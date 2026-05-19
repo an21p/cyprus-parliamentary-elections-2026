@@ -151,7 +151,7 @@ export function createSimulatorStore(): SimulatorStore {
     }
     state.shares = shares;
     state.overrideBreakdown = null;
-    // Keep turnout at user's current setting — polls don't predict turnout.
+    // Keep turnout at user's current setting - polls don't predict turnout.
     state.activePresetMeta = {
       label: {
         en: `${poll.pollster}, ${poll.fieldworkEnd}`,

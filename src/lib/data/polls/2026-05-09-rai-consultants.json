@@ -1,0 +1,27 @@
+{
+  "fieldworkStart": "2026-05-02",
+  "fieldworkEnd": "2026-05-09",
+  "pollster": "RAI Consultants",
+  "commissioner": "Alpha Cyprus (5th & final RAI/Alpha poll)",
+  "sample": 1332,
+  "marginOfError": 2.7,
+  "shares": {
+    "DISY": 18.2,
+    "AKEL": 15.2,
+    "ELAM": 10.7,
+    "ALMA": 5.8,
+    "ADK": 4.4,
+    "DIKO": 7.2
+  },
+  "notes": "On valid votes: DISY 24.5 / AKEL 20.5 / ELAM 14.4.",
+  "seatProjection": {
+    "DISY": 15,
+    "AKEL": 13,
+    "ELAM": 9,
+    "DIKO": 6,
+    "ALMA": 6,
+    "ADK": 4,
+    "VOLT": 3
+  },
+  "undecidedPct": 26.3
+}

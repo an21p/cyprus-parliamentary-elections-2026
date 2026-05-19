@@ -1,0 +1,18 @@
+{
+  "fieldworkStart": "2026-05-06",
+  "fieldworkEnd": "2026-05-13",
+  "pollster": "Pulse Market Research",
+  "commissioner": "Omega Channel",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 23.3,
+    "AKEL": 21.5,
+    "ELAM": 13.5,
+    "ALMA": 8,
+    "DIKO": 8.6,
+    "ADK": 7.4,
+    "VOLT": 4.9
+  },
+  "notes": "Published mid-May ahead of the 16 May blackout."
+}

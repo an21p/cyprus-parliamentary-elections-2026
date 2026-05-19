@@ -1,0 +1,22 @@
+{
+  "fieldworkStart": "2026-05-01",
+  "fieldworkEnd": "2026-05-07",
+  "pollster": "RealPolls",
+  "commissioner": "independent",
+  "sample": 1555,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 19.7,
+    "AKEL": 17.5,
+    "ELAM": 14,
+    "ALMA": 9.4,
+    "ADK": 8.7,
+    "DIKO": 7.8,
+    "VOLT": 7.2,
+    "EDEK": 3.9,
+    "DIPA": 3.7,
+    "KOSP": 2.7,
+    "KEKK": 2.8
+  },
+  "notes": "Outlier: lowest DISY+AKEL ever recorded; Volt as high as 7.2%."
+}

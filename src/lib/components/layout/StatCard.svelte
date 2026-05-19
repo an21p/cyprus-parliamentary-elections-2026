@@ -4,7 +4,7 @@
   type Props = {
     /** Big headline number, pre-formatted as a string (e.g. "56", "3.6%", "568,587"). */
     value: string;
-    /** Optional small label above the number — typically an eyebrow / category. */
+    /** Optional small label above the number - typically an eyebrow / category. */
     eyebrow?: string;
     /** Short caption beneath the value. */
     caption?: string;
@@ -12,7 +12,7 @@
     unit?: string;
     /** Optional trend / change indicator string (e.g. "+1 vs 2021"). */
     delta?: string;
-    /** Optional explicit delta tone — colours the delta string. */
+    /** Optional explicit delta tone - colours the delta string. */
     deltaTone?: 'neutral' | 'positive' | 'warn' | 'fact';
     /** Optional rich children appended after caption. */
     children?: Snippet;
@@ -71,7 +71,7 @@
                 background-color var(--dur-fast) var(--ease-standard);
   }
 
-  /* Top hairline accent — single restrained editorial mark. */
+  /* Top hairline accent - single restrained editorial mark. */
   .stat-card::before {
     content: '';
     position: absolute;
@@ -107,6 +107,7 @@
 
   .stat-value {
     font-family: var(--font-display);
+    font-variation-settings: var(--fvs-display-xl);
     font-feature-settings: 'tnum' 1, 'lnum' 1, 'ss01' 1;
     font-variant-numeric: tabular-nums lining-nums;
     font-weight: 600;

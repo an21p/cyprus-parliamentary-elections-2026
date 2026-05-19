@@ -12,7 +12,7 @@
 
   let { tone, title, label, children }: Props = $props();
 
-  // Visual badge text — kept short, locale-agnostic glyph + word.
+  // Visual badge text - kept short, locale-agnostic glyph + word.
   const defaultLabels: Record<Tone, string> = {
     info: 'Note',
     warn: 'Watch',

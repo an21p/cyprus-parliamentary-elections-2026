@@ -1,0 +1,20 @@
+{
+  "fieldworkStart": "2024-10-14",
+  "fieldworkEnd": "2024-10-16",
+  "pollster": "RetailZoom",
+  "commissioner": "Politis",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 23.5,
+    "AKEL": 11.1,
+    "ELAM": 9.9,
+    "ALMA": 20.1,
+    "DIKO": 3.7,
+    "VOLT": 14.8,
+    "EDEK": 1.2,
+    "DIPA": 1.2,
+    "KOSP": 2.5
+  },
+  "notes": "Hypothetical-Michaelides-party scenario (ALMA = 20.1%); AKEL very low."
+}

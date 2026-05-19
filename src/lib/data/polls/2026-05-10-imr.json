@@ -1,0 +1,24 @@
+{
+  "fieldworkStart": "2026-04-30",
+  "fieldworkEnd": "2026-05-10",
+  "pollster": "IMR",
+  "commissioner": "Reporter",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 20.9,
+    "AKEL": 19,
+    "ELAM": 12.5,
+    "ALMA": 9.6,
+    "DIKO": 7.6,
+    "ADK": 6.7,
+    "VOLT": 4,
+    "EDEK": 2.2,
+    "KOSP": 2.1,
+    "DIPA": 1.2,
+    "KEKK": 1.2,
+    "SIKOU": 1
+  },
+  "notes": "Raw shares as published by Cyprus Mail (12 May 2026). Valid-vote redistribution per Wikipedia: DISY 23.3 / AKEL 21.1 / ELAM 14.0 / ALMA 10.7 / DIKO 8.5 / ADK 7.5 / VOLT 4.5.",
+  "undecidedPct": 7.2
+}

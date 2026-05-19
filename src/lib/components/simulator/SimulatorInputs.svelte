@@ -30,7 +30,7 @@
   let selectedPollIndex = $state<number>(-1);
 
   const finalPolls = $derived(
-    POLLS.slice(0, 5).map((p, i) => ({
+    POLLS.map((p, i) => ({
       index: i,
       label: `${p.pollster} · ${p.fieldworkEnd}`,
       pollster: p.pollster
@@ -61,12 +61,12 @@
       lang === 'el' ? 'Ενεργή προ-ρύθμιση' : 'Active preset',
     warnOver:
       lang === 'el'
-        ? 'Το άθροισμα υπερβαίνει το 100% — οι ψήφοι θα κλιμακωθούν.'
+        ? 'Το άθροισμα υπερβαίνει το 100% - οι ψήφοι θα κλιμακωθούν.'
         : 'Total exceeds 100 %. Votes will scale up accordingly.',
     warnUnder:
       lang === 'el'
-        ? 'Το άθροισμα είναι κάτω από 100% — οι υπόλοιπες ψήφοι θεωρούνται ότι πήγαν σε άλλα κόμματα/άκυρα.'
-        : 'Below 100 % — the remainder is treated as "other / invalid".',
+        ? 'Το άθροισμα είναι κάτω από 100% - οι υπόλοιπες ψήφοι θεωρούνται ότι πήγαν σε άλλα κόμματα/άκυρα.'
+        : 'Below 100 % - the remainder is treated as "other / invalid".',
     approxNote:
       lang === 'el'
         ? 'Βασίζεται σε περιφερειακά μοτίβα 2021. Δεν αποτελεί πρόβλεψη.'
@@ -121,7 +121,7 @@
     <label class="poll-picker">
       <span class="poll-picker-label">{txt.pollLabel}</span>
       <select bind:value={selectedPollIndex}>
-        <option value={-1}>—</option>
+        <option value={-1}>-</option>
         {#each finalPolls as poll (poll.index)}
           <option value={poll.index}>{poll.label}</option>
         {/each}
@@ -156,7 +156,7 @@
   </label>
 
   <!-- ---- Party rows ---- -->
-  <ul class="party-list">
+  <ul class="party-list" role="list">
     {#each visibleParties as party (party.id)}
       {@const value = simulatorState.shares[party.id] ?? 0}
       <li class="party-row">
@@ -249,7 +249,10 @@
   }
   .panel-title {
     font-family: var(--font-display);
+    font-variation-settings: var(--fvs-display-md);
     font-size: var(--fs-300);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--tracking-snug);
     margin: 0;
     color: var(--color-ink);
   }
@@ -460,14 +463,23 @@
   .muted { color: var(--color-ink-3); }
   .small { font-size: var(--fs-75); margin: 0; }
 
-  /* ---- Mobile stacking ---- */
+  /* ---- Mobile: tighter layout, keep the slider inline ---- */
   @media (max-width: 480px) {
     .party-row {
-      grid-template-columns: 14px 1fr 5ch 1ch;
-      row-gap: var(--sp-2);
+      /* swatch · name (shrinks, truncates) · slider · number · suffix */
+      grid-template-columns: 12px minmax(0, 5.5ch) minmax(48px, 1fr) 4.5ch 1ch;
+      column-gap: var(--sp-2);
+      padding: var(--sp-2);
     }
-    .party-row input[type='range'] {
-      grid-column: 1 / -1;
+    .party-name {
+      font-size: var(--fs-50);
+    }
+    .num {
+      padding: 3px 4px;
+      font-size: var(--fs-50);
+    }
+    .suffix {
+      font-size: var(--fs-50);
     }
   }
 </style>

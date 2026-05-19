@@ -1,0 +1,18 @@
+{
+  "fieldworkStart": "2026-05-01",
+  "fieldworkEnd": "2026-05-12",
+  "pollster": "Noverna",
+  "commissioner": "Politis",
+  "sample": null,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 21.8,
+    "AKEL": 20.2,
+    "ELAM": 13.4,
+    "ALMA": 8.9,
+    "DIKO": 8.1,
+    "ADK": 10.7,
+    "VOLT": 4.1
+  },
+  "notes": "Noverna pivots from independent to a Politis commission. ADK at its highest reading of any pollster."
+}

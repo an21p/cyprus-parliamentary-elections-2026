@@ -16,7 +16,7 @@
   // Far-left to far-right reading: AKEL, KOSP, EDEK, DIPA, DIMAL, ADK, VOLT,
   // ALMA, DISY, DIKO, KEKK, DEK, GRNC, AGRO, FARL, POPSF, SIKOU, ELAM, LAKE.
   // Parties with 0 seats are ignored but the same order is applied to those
-  // that do have seats. This is editorial — Cyprus's politics doesn't fit a
+  // that do have seats. This is editorial - Cyprus's politics doesn't fit a
   // clean Western left-right axis, but readers expect one.
   const SPECTRUM_ORDER: PartyId[] = [
     'FARL', 'POPSF', 'AKEL', 'KOSP', 'EDEK', 'DIPA', 'DIMAL',
@@ -43,11 +43,11 @@
     result.perParty.reduce((a, p) => a + p.seats, 0)
   );
 
-  // Hemicycle geometry — 56 seats, multiple arcs.
+  // Hemicycle geometry - 56 seats, multiple arcs.
   const SEATS_TOTAL = 56;
   const ROWS = 5;
   // Distribute seats per row roughly proportional to row index (outer rows
-  // hold more dots than inner ones — the classic hemicycle look).
+  // hold more dots than inner ones - the classic hemicycle look).
   const SEATS_PER_ROW: number[] = (() => {
     // Weights 1..ROWS, normalised so sum ≈ SEATS_TOTAL.
     const weights = Array.from({ length: ROWS }, (_, i) => i + 2);
@@ -125,12 +125,12 @@
         : 'No single party reaches 29.',
     twoPartyOk:
       lang === 'el'
-        ? 'Συνασπισμός 2 μεγαλύτερων κομμάτων: ≥29 — βιώσιμο.'
-        : 'Top-two coalition: ≥29 seats — viable.',
+        ? 'Συνασπισμός 2 μεγαλύτερων κομμάτων: ≥29 - βιώσιμο.'
+        : 'Top-two coalition: ≥29 seats - viable.',
     twoPartyShort:
       lang === 'el'
-        ? 'Συνασπισμός 2 μεγαλύτερων κομμάτων: <29 — χρειάζονται 3 κόμματα.'
-        : 'Top-two coalition: <29 seats — needs a third party.',
+        ? 'Συνασπισμός 2 μεγαλύτερων κομμάτων: <29 - χρειάζονται 3 κόμματα.'
+        : 'Top-two coalition: <29 seats - needs a third party.',
     fragmented:
       lang === 'el'
         ? 'Κατακερματισμένη Βουλή. Σχηματισμός κυβέρνησης απαιτεί 3+ κόμματα.'
@@ -231,7 +231,7 @@
       <p class="coalition-body">
         <strong>{pickShort(getParty(coalitionStatus.a))}</strong>
         + <strong>{pickShort(getParty(coalitionStatus.b))}</strong>
-        {lang === 'el' ? ' ≥ 29 έδρες — βιώσιμος δι-κομματικός συνασπισμός.' : ' ≥ 29 seats — a two-party coalition could pass legislation.'}
+        {lang === 'el' ? ' ≥ 29 έδρες - βιώσιμος δι-κομματικός συνασπισμός.' : ' ≥ 29 seats - a two-party coalition could pass legislation.'}
       </p>
     {:else}
       <p class="coalition-body">{txt.fragmented}</p>

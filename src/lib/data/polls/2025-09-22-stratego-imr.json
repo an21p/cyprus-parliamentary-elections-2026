@@ -1,0 +1,33 @@
+{
+  "fieldworkStart": "2025-09-12",
+  "fieldworkEnd": "2025-09-22",
+  "pollster": "Stratego-IMR",
+  "commissioner": "Kathimerini Cyprus",
+  "sample": 800,
+  "marginOfError": null,
+  "shares": {
+    "DISY": 22.7,
+    "AKEL": 23.9,
+    "ELAM": 15.9,
+    "ALMA": 12.5,
+    "ADK": 3.4,
+    "DIKO": 9.1,
+    "VOLT": 2.3,
+    "EDEK": 1.1,
+    "DIPA": 1.1,
+    "KOSP": 2.3,
+    "KEKK": 1.1
+  },
+  "notes": "First major poll after ALMA launch. Seat projection in source: DISY 20, AKEL 21, ELAM 14, ALMA 11, DIKO 8, VOLT 2, EDEK 1, DIPA 1, KOSP 2.",
+  "seatProjection": {
+    "DISY": 20,
+    "AKEL": 21,
+    "ELAM": 14,
+    "ALMA": 11,
+    "DIKO": 8,
+    "VOLT": 2,
+    "EDEK": 1,
+    "DIPA": 1,
+    "KOSP": 2
+  }
+}

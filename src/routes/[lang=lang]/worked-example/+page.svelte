@@ -10,11 +10,12 @@
 <PageShell
   {lang}
   {currentPath}
+  numeral="20"
   eyebrow={lang === 'el' ? 'Παράδειγμα' : 'Walkthrough'}
   title={lang === 'el' ? 'Λευκωσία 2021 βήμα-βήμα' : 'Nicosia 2021, step by step'}
   lede={lang === 'el'
-    ? 'Πώς προέκυψαν οι 20 έδρες της Λευκωσίας στις εκλογές του 2021 — η πραγματική αριθμητική του συστήματος, με τα πραγματικά δεδομένα.'
-    : 'How Nicosia\'s 20 seats were actually allocated in the 2021 election — the real arithmetic, with the real numbers.'}
+    ? 'Πώς προέκυψαν οι 20 έδρες της Λευκωσίας στις εκλογές του 2021 - η πραγματική αριθμητική του συστήματος, με τα πραγματικά δεδομένα.'
+    : 'How Nicosia\'s 20 seats were actually allocated in the 2021 election - the real arithmetic, with the real numbers.'}
 >
   <SectionBlock
     id="intro"
@@ -37,8 +38,8 @@
   >
     <p>
       {lang === 'el'
-        ? 'Το παράδειγμα της Λευκωσίας δείχνει ότι το «κατά πόσο κέρδισε ένα κόμμα» δεν εξαρτάται μόνο από το ποσοστό του στην επαρχία, αλλά και από τις «αχρησιμοποίητες ψήφους» του — το υπόλοιπο μετά τις έδρες που κέρδισε στην πρώτη φάση. Αυτές οι ψήφοι ταξιδεύουν στην εθνική δεξαμενή και επιστρέφουν με τη μορφή επιπλέον εδρών εκεί όπου το κόμμα είχε το μεγαλύτερο υπόλοιπο. Στην ίδια λογική, ένα κόμμα κάτω από το 3,6% πανεθνικά χάνει όλες του τις ψήφους στις φάσεις 2 και 3, ανεξαρτήτως πόσο καλά πήγε σε μία επαρχία.'
-        : 'The Nicosia example shows that "how well a party did" does not depend only on its district share, but also on its unused votes — the remainder left over after its first-stage seats. Those votes travel to the national pool and come back as extra seats wherever the party held the largest leftover pile. By the same logic, a party that falls below 3.6% nationally loses all of its votes from stages 2 and 3, no matter how well it did in any one district.'}
+        ? 'Το παράδειγμα της Λευκωσίας δείχνει ότι το «κατά πόσο κέρδισε ένα κόμμα» δεν εξαρτάται μόνο από το ποσοστό του στην επαρχία, αλλά και από τις «αχρησιμοποίητες ψήφους» του - το υπόλοιπο μετά τις έδρες που κέρδισε στην πρώτη φάση. Αυτές οι ψήφοι ταξιδεύουν στην εθνική δεξαμενή και επιστρέφουν με τη μορφή επιπλέον εδρών εκεί όπου το κόμμα είχε το μεγαλύτερο υπόλοιπο. Στην ίδια λογική, ένα κόμμα κάτω από το 3,6% πανεθνικά χάνει όλες του τις ψήφους στις φάσεις 2 και 3, ανεξαρτήτως πόσο καλά πήγε σε μία επαρχία.'
+        : 'The Nicosia example shows that "how well a party did" does not depend only on its district share, but also on its unused votes - the remainder left over after its first-stage seats. Those votes travel to the national pool and come back as extra seats wherever the party held the largest leftover pile. By the same logic, a party that falls below 3.6% nationally loses all of its votes from stages 2 and 3, no matter how well it did in any one district.'}
     </p>
     <p>
       <a class="inline-link" href={`/${lang}/simulator`}>

@@ -2,7 +2,7 @@
 // suitable for the seat-allocation algorithm.
 //
 // This is an *approximation*, surfaced in the UI as such. The party rank-and-
-// file maths is exact (Hare quota + reinforced PR) — only the upstream split
+// file maths is exact (Hare quota + reinforced PR) - only the upstream split
 // of national votes into the six constituencies is an estimate, because the
 // user gives us a single national number per party.
 //
@@ -16,7 +16,7 @@
 //   3. Simulated district votes for a party =
 //        currentNationalShare × districtRegisteredVoters × estTurnout × intensity.
 //   4. The algorithm tolerates districts whose summed shares differ slightly
-//      from the national share — the Hare quota is computed from each
+//      from the national share - the Hare quota is computed from each
 //      district's actual valid votes, just as in the real election.
 //   5. Rounded to integers; negative or NaN values clamp to 0.
 
@@ -122,7 +122,7 @@ function buildIntensityMap(): Map<PartyId, Partial<Record<DistrictId, number>>> 
           const seatShare = seatsWon / districtSeats;
           w = popWeight * (0.1 + 1.8 * seatShare);
         } else if (seatsWon === 0 && districtSeats > 0) {
-          // The party fielded but won no seat — assume below-average local
+          // The party fielded but won no seat - assume below-average local
           // strength.
           w = popWeight * 0.4;
         } else {
