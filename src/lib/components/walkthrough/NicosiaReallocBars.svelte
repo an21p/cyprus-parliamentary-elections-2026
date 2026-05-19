@@ -2,6 +2,7 @@
   import type { Lang, PartyId } from '$data/types';
   import { getParty } from '$data/parties';
   import { localizedName } from '$i18n/dict';
+  import { partyColour } from '$lib/theme/a11y.svelte';
 
   type Props = {
     lang: Lang;
@@ -66,7 +67,7 @@
       {@const isTop = r.partyId === topId}
       <li class="bar-row" class:bar-row--top={isTop}>
         <span class="bar-label">
-          <span class="bar-swatch" style="background-color: {p.colour};" aria-hidden="true"></span>
+          <span class="bar-swatch" style="background-color: {partyColour(p.id)};" aria-hidden="true"></span>
           {localizedName(p.shortName, lang)}
         </span>
         <span
@@ -76,7 +77,7 @@
         >
           <span
             class="bar-fill"
-            style="width: {pct.toFixed(2)}%; background-color: {p.colour};"
+            style="width: {pct.toFixed(2)}%; background-color: {partyColour(p.id)};"
           ></span>
         </span>
         <span class="bar-value">{fmt(r.unused)}</span>

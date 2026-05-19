@@ -30,6 +30,22 @@ export const messages: Dict = {
   'lang.switch_to_en': { en: 'English', el: 'English' },
   'lang.switch_to_el': { en: 'Ελληνικά', el: 'Ελληνικά' },
 
+  // Accessibility
+  'a11y.colourblind.label': {
+    en: 'Colourblind-friendly palette',
+    el: 'Παλέτα φιλική για αχρωματοψία'
+  },
+  'a11y.colourblind.on': { en: 'On', el: 'Ενεργό' },
+  'a11y.colourblind.off': { en: 'Off', el: 'Ανενεργό' },
+  'a11y.colourblind.aria_toggle': {
+    en: 'Toggle colourblind-friendly party colours',
+    el: 'Εναλλαγή χρωμάτων κομμάτων για αχρωματοψία'
+  },
+  'a11y.colourblind.hint': {
+    en: 'Swap brand colours for a palette designed to remain distinct under common forms of colour vision deficiency.',
+    el: 'Αντικαθιστά τα χρώματα των κομμάτων με παλέτα σχεδιασμένη να ξεχωρίζει σε συνήθεις μορφές αχρωματοψίας.'
+  },
+
   // Common labels
   'label.seats': { en: 'seats', el: 'έδρες' },
   'label.votes': { en: 'votes', el: 'ψήφοι' },

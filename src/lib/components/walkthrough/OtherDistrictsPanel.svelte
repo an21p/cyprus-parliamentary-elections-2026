@@ -4,6 +4,7 @@
   import { getParty } from '$data/parties';
   import { localizedName } from '$i18n/dict';
   import { RESULTS_2021, VALID_VOTES_BY_DISTRICT_2021 } from '$data/results-2021';
+  import { partyColour } from '$lib/theme/a11y.svelte';
 
   type Props = {
     lang: Lang;
@@ -153,7 +154,7 @@
               <tr class:row--max={isMax}>
                 <th scope="row">
                   <span class="row-party">
-                    <span class="row-swatch" style="background-color: {p.colour};" aria-hidden="true"></span>
+                    <span class="row-swatch" style="background-color: {partyColour(p.id)};" aria-hidden="true"></span>
                     {localizedName(p.shortName, lang)}
                   </span>
                 </th>

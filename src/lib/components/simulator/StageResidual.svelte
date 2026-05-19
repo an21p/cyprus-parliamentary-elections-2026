@@ -3,6 +3,7 @@
   import type { ThirdDistributionTrace } from '$data/types';
   import { getParty } from '$data/parties';
   import { THRESHOLDS } from '$data/thresholds';
+  import { partyColour } from '$lib/theme/a11y.svelte';
 
   type Props = {
     trace: ThirdDistributionTrace;
@@ -63,7 +64,7 @@
           {@const party = getParty(row.partyId)}
           <tr class:zero={row.seatsWon === 0}>
             <td>
-              <span class="swatch" style:background-color={party.colour} aria-hidden="true"></span>
+              <span class="swatch" style:background-color={partyColour(party.id)} aria-hidden="true"></span>
               <span>{party.shortName[lang] ?? party.shortName.en}</span>
             </td>
             <td class="num-col">{numFmt.format(Math.max(0, row.remainingUnusedVotes))}</td>
