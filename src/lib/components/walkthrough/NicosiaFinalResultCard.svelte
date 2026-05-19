@@ -50,8 +50,8 @@
     total: lang === 'el' ? 'Σύνολο' : 'Total',
     note:
       lang === 'el'
-        ? 'Πέντε από τις 20 έδρες της Λευκωσίας έμειναν ανοιχτές μετά την 1η φάση και αποδόθηκαν από την εθνική δεξαμενή. Δύο προσγειώθηκαν στο ΑΚΕΛ — είχε τις περισσότερες αχρ. ψήφους εκεί.'
-        : 'Five of Nicosia\'s 20 seats remained unfilled after stage 1 and were assigned from the national pool. Two landed with AKEL — it had the largest unused-vote pile in the district.'
+        ? 'Πέντε από τις 20 έδρες της Λευκωσίας έμειναν ανοιχτές μετά την 1η φάση και αποδόθηκαν από την εθνική δεξαμενή. Δύο προσγειώθηκαν στο ΑΚΕΛ — είχε το μεγαλύτερο πανεθνικό αχρ. σύνολο αλλά το μικρότερο αχρ. υπόλοιπο στη Λευκωσία: οι άλλες επαρχίες γέμισαν πρώτα.'
+        : 'Five of Nicosia\'s 20 seats remained unfilled after stage 1 and were assigned from the national pool. Two landed with AKEL — it had the highest nationwide unused total but the smallest Nicosia pile, so its remaining national-pool seats overflowed here once other districts were full.'
   });
 </script>
 

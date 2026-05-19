@@ -146,7 +146,7 @@
             <div class="party-table-row">
               <span class="party-label">{p.label}</span>
               <span class="num">
-                {p.unused.toLocaleString(lang === 'el' ? 'el-CY' : 'en-GB')} ÷ 5,500
+                {p.unused.toLocaleString(lang === 'el' ? 'el-CY' : 'en-GB')} ÷ {STAGE2_QUOTA.toLocaleString(lang === 'el' ? 'el-CY' : 'en-GB')}
               </span>
               <span class="num"><strong>{p.stage2}</strong></span>
               <span class="num">{p.stage2Rem.toLocaleString(lang === 'el' ? 'el-CY' : 'en-GB')}</span>

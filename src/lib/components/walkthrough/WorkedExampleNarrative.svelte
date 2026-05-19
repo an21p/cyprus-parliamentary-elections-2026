@@ -84,7 +84,7 @@
           ? 'Στην τελική εικόνα της Λευκωσίας το 2021: <strong>ΔΗΣΥ 5, ΑΚΕΛ 6, ΔΗΚΟ 3, ΕΔΕΚ 1, Οικολόγοι 2, ΔΗΠΑ 2, ΕΛΑΜ 1</strong>. Το ΑΚΕΛ μπήκε στην 1η κατανομή με 4 έδρες· η 6η ήρθε από την εθνική αναδιανομή χάρη στις αχρησιμοποίητες ψήφους του.'
           : 'Final 2021 Nicosia outcome: <strong>DISY 5, AKEL 6, DIKO 3, EDEK 1, Ecologists 2, DIPA 2, ELAM 1</strong>. AKEL entered the first distribution with 4 seats; the 6th came from the national redistribution, earned by its unused votes.',
         lang === 'el'
-          ? 'Αυτό είναι το βασικό χαρακτηριστικό του συστήματος: <strong>μια εθνική δύναμη μπορεί να κερδίσει έδρες σε επαρχίες όπου δεν έφτασε ποτέ το μέτρο</strong>, αρκεί να ξεπεράσει το όριο του 3,6% πανελλαδικά.'
+          ? 'Αυτό είναι το βασικό χαρακτηριστικό του συστήματος: <strong>μια εθνική δύναμη μπορεί να κερδίσει έδρες σε επαρχίες όπου δεν έφτασε ποτέ το μέτρο</strong>, αρκεί να ξεπεράσει το όριο του 3,6% πανεθνικά.'
           : 'This is the defining feature of the system: <strong>a nationally strong party can win seats in districts where it never reached the quota</strong>, as long as it has cleared the 3.6% nationwide threshold.'
       ]
     }
