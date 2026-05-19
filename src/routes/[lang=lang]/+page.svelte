@@ -9,7 +9,7 @@
   const lang = $derived(data.lang);
   const currentPath = $derived(data.currentPath);
 
-  const leadersForChart: PartyId[] = ['DISY', 'AKEL', 'ELAM', 'ALMA', 'ADK'];
+  const leadersForChart: PartyId[] = ['DISY', 'AKEL', 'ELAM', 'ALMA', 'DIKO', 'ADK'];
 
   const title = $derived(t(lang, 'site.title'));
   const description = $derived(t(lang, 'home.lede'));
@@ -89,13 +89,13 @@
   <SectionBlock
     id="polls"
     eyebrow={lang === 'el' ? 'Δημοσκοπήσεις' : 'What the polls say'}
-    title={lang === 'el' ? 'Πέντε κόμματα διεκδικούν την κορυφή' : 'Five parties competing at the top'}
+    title={lang === 'el' ? 'Έξι κόμματα διεκδικούν την κορυφή' : 'Six parties competing at the top'}
   >
     <p>
       {#if lang === 'el'}
-        Στη φάρα της εβδομάδας πριν από τις εκλογές, οι δύο μεγαλύτεροι ιστορικοί αντίπαλοι, <strong>ΔΗΣΥ</strong> και <strong>ΑΚΕΛ</strong>, εμφανίζονται <strong>στατιστικά ισοπαλίες</strong>. Πίσω τους έχει εδραιωθεί το <strong>ΕΛΑΜ</strong> ως τρίτη δύναμη, ενώ τα νέα κόμματα <strong>ΑΛΜΑ</strong> και <strong>Άμεση Δημοκρατία Κύπρου</strong> μπαίνουν για πρώτη φορά στο πεδίο. Το παρακάτω γράφημα δείχνει την πορεία των πέντε αυτών κομμάτων στις δημοσιευμένες δημοσκοπήσεις από τα τέλη του 2024.
+        Στη φάρα της εβδομάδας πριν από τις εκλογές, οι δύο μεγαλύτεροι ιστορικοί αντίπαλοι, <strong>ΔΗΣΥ</strong> και <strong>ΑΚΕΛ</strong>, εμφανίζονται <strong>στατιστικά ισοπαλίες</strong>. Πίσω τους έχει εδραιωθεί το <strong>ΕΛΑΜ</strong> ως τρίτη δύναμη, ακολουθούμενο από το <strong>ΑΛΜΑ</strong> και το <strong>ΔΗΚΟ</strong>, ενώ η <strong>Άμεση Δημοκρατία Κύπρου</strong> διεκδικεί επίσης θέση πάνω από το όριο. Το παρακάτω γράφημα δείχνει την πορεία των έξι αυτών κομμάτων στις δημοσιευμένες δημοσκοπήσεις από τα τέλη του 2024.
       {:else}
-        In the final week before the vote, the two historic giants, <strong>DISY</strong> and <strong>AKEL</strong>, are <strong>statistically tied</strong>. Behind them, <strong>ELAM</strong> has consolidated as the third force, and two newcomers, <strong>ALMA</strong> and <strong>Direct Democracy Cyprus</strong>, are contesting their first parliamentary election. The chart below tracks the five leaders across every published poll since late 2024.
+        In the final week before the vote, the two historic giants, <strong>DISY</strong> and <strong>AKEL</strong>, are <strong>statistically tied</strong>. Behind them, <strong>ELAM</strong> has consolidated as the third force, followed by <strong>ALMA</strong> and <strong>DIKO</strong>, with <strong>Direct Democracy Cyprus</strong> also contesting a place above the threshold. The chart below tracks these six parties across every published poll since late 2024.
       {/if}
     </p>
     <PollTracker {lang} parties={leadersForChart} />
