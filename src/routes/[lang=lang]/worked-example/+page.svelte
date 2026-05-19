@@ -51,6 +51,27 @@
         {lang === 'el' ? 'Δοκιμάστε το μόνοι σας στον προσομοιωτή →' : 'Try it yourself in the simulator →'}
       </a>
     </p>
+    <p class="source-note">
+      {#if lang === 'el'}
+        Πηγή δεδομένων:
+        <a
+          class="inline-link"
+          href="https://data.gov.cy/el/dataset/episima-apotelesmata-boyleytikon-eklogon-2021"
+          target="_blank"
+          rel="noopener noreferrer"
+        >data.gov.cy — Επίσημα Αποτελέσματα Βουλευτικών Εκλογών 2021 ↗</a>
+        (Υπουργείο Εσωτερικών, αναλυτικά στοιχεία ανά εκλογικό τμήμα, αθροισμένα κατά επαρχία × κόμμα).
+      {:else}
+        Data source:
+        <a
+          class="inline-link"
+          href="https://data.gov.cy/el/dataset/episima-apotelesmata-boyleytikon-eklogon-2021"
+          target="_blank"
+          rel="noopener noreferrer"
+        >data.gov.cy — Official 2021 Parliamentary Election Results ↗</a>
+        (Cyprus Ministry of Interior, polling-station-level data aggregated by district × party).
+      {/if}
+    </p>
   </SectionBlock>
 </PageShell>
 
@@ -63,4 +84,13 @@
     font-weight: 600;
   }
   .inline-link:hover { text-decoration-thickness: 2px; }
+
+  .source-note {
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--color-rule);
+    font-size: var(--fs-75);
+    color: var(--color-ink-3);
+    line-height: var(--lh-relaxed);
+  }
 </style>
