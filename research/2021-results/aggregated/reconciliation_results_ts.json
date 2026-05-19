@@ -1,0 +1,276 @@
+{
+  "source_ts_file": "src/lib/data/results-2021.ts",
+  "compared_against": [
+    "aggregated/votes_per_party_per_district.json",
+    "aggregated/seats_per_party_per_district.json"
+  ],
+  "party_id_to_greek": {
+    "DISY": "ΔΗΜΟΚΡΑΤΙΚΟΣ ΣΥΝΑΓΕΡΜΟΣ",
+    "AKEL": "ΑΚΕΛ (ΑΝΟΡΘΩΤΙΚΟ ΚΟΜΜΑ ΕΡΓΑΖΟΜΕΝΟΥ ΛΑΟΥ)",
+    "DIKO": "ΔΗΜΟΚΡΑΤΙΚΟ ΚΟΜΜΑ",
+    "ELAM": "ΕΘΝΙΚΟ ΛΑΪΚΟ ΜΕΤΩΠΟ (Ε.ΛΑ.Μ.)",
+    "EDEK": "ΚΙΝΗΜΑ ΣΟΣΙΑΛΔΗΜΟΚΡΑΤΩΝ ΕΔΕΚ",
+    "DIPA": "ΔΗΜΟΚΡΑΤΙΚΗ ΠΑΡΑΤΑΞΗ",
+    "KOSP": "ΚΙΝΗΜΑ ΟΙΚΟΛΟΓΩΝ-ΣΥΝΕΡΓΑΣΙΑ ΠΟΛΙΤΩΝ",
+    "KEKK": "ΕΝΕΡΓΟΙ ΠΟΛΙΤΕΣ-ΚΙΝΗΜΑ ΕΝ.ΚΥΠ. ΚΥΝΗΓΩΝ"
+  },
+  "district_id_to_greek": {
+    "NIC": "ΛΕΥΚΩΣΙΑ",
+    "LIM": "ΛΕΜΕΣΟΣ",
+    "FAM": "ΑΜΜΟΧΩΣΤΟΣ",
+    "LAR": "ΛΑΡΝΑΚΑ",
+    "PAF": "ΠΑΦΟΣ",
+    "KYR": "ΚΕΡΥΝΕΙΑ"
+  },
+  "reconciled": {
+    "DISY": {
+      "greek_name": "ΔΗΜΟΚΡΑΤΙΚΟΣ ΣΥΝΑΓΕΡΜΟΣ",
+      "national_votes": 99328,
+      "total_seats": 17,
+      "per_district": {
+        "NIC": {
+          "votes": 31163,
+          "seats": 5
+        },
+        "LIM": {
+          "votes": 20733,
+          "seats": 3
+        },
+        "FAM": {
+          "votes": 23593,
+          "seats": 4
+        },
+        "LAR": {
+          "votes": 9923,
+          "seats": 2
+        },
+        "PAF": {
+          "votes": 9650,
+          "seats": 1
+        },
+        "KYR": {
+          "votes": 4266,
+          "seats": 2
+        }
+      }
+    },
+    "AKEL": {
+      "greek_name": "ΑΚΕΛ (ΑΝΟΡΘΩΤΙΚΟ ΚΟΜΜΑ ΕΡΓΑΖΟΜΕΝΟΥ ΛΑΟΥ)",
+      "national_votes": 79913,
+      "total_seats": 15,
+      "per_district": {
+        "NIC": {
+          "votes": 25770,
+          "seats": 6
+        },
+        "LIM": {
+          "votes": 16019,
+          "seats": 3
+        },
+        "FAM": {
+          "votes": 18281,
+          "seats": 3
+        },
+        "LAR": {
+          "votes": 10008,
+          "seats": 1
+        },
+        "PAF": {
+          "votes": 5539,
+          "seats": 1
+        },
+        "KYR": {
+          "votes": 4296,
+          "seats": 1
+        }
+      }
+    },
+    "DIKO": {
+      "greek_name": "ΔΗΜΟΚΡΑΤΙΚΟ ΚΟΜΜΑ",
+      "national_votes": 40395,
+      "total_seats": 9,
+      "per_district": {
+        "NIC": {
+          "votes": 13449,
+          "seats": 3
+        },
+        "LIM": {
+          "votes": 9628,
+          "seats": 2
+        },
+        "FAM": {
+          "votes": 5030,
+          "seats": 2
+        },
+        "LAR": {
+          "votes": 3687,
+          "seats": 1
+        },
+        "PAF": {
+          "votes": 5967,
+          "seats": 1
+        },
+        "KYR": {
+          "votes": 2634,
+          "seats": 0
+        }
+      }
+    },
+    "ELAM": {
+      "greek_name": "ΕΘΝΙΚΟ ΛΑΪΚΟ ΜΕΤΩΠΟ (Ε.ΛΑ.Μ.)",
+      "national_votes": 24255,
+      "total_seats": 4,
+      "per_district": {
+        "NIC": {
+          "votes": 7486,
+          "seats": 1
+        },
+        "LIM": {
+          "votes": 4741,
+          "seats": 1
+        },
+        "FAM": {
+          "votes": 5786,
+          "seats": 1
+        },
+        "LAR": {
+          "votes": 2911,
+          "seats": 1
+        },
+        "PAF": {
+          "votes": 2360,
+          "seats": 0
+        },
+        "KYR": {
+          "votes": 971,
+          "seats": 0
+        }
+      }
+    },
+    "EDEK": {
+      "greek_name": "ΚΙΝΗΜΑ ΣΟΣΙΑΛΔΗΜΟΚΡΑΤΩΝ ΕΔΕΚ",
+      "national_votes": 24022,
+      "total_seats": 4,
+      "per_district": {
+        "NIC": {
+          "votes": 9061,
+          "seats": 1
+        },
+        "LIM": {
+          "votes": 3473,
+          "seats": 1
+        },
+        "FAM": {
+          "votes": 2975,
+          "seats": 0
+        },
+        "LAR": {
+          "votes": 3314,
+          "seats": 1
+        },
+        "PAF": {
+          "votes": 4293,
+          "seats": 1
+        },
+        "KYR": {
+          "votes": 906,
+          "seats": 0
+        }
+      }
+    },
+    "DIPA": {
+      "greek_name": "ΔΗΜΟΚΡΑΤΙΚΗ ΠΑΡΑΤΑΞΗ",
+      "national_votes": 21832,
+      "total_seats": 4,
+      "per_district": {
+        "NIC": {
+          "votes": 8232,
+          "seats": 2
+        },
+        "LIM": {
+          "votes": 4672,
+          "seats": 1
+        },
+        "FAM": {
+          "votes": 3685,
+          "seats": 1
+        },
+        "LAR": {
+          "votes": 2670,
+          "seats": 0
+        },
+        "PAF": {
+          "votes": 1185,
+          "seats": 0
+        },
+        "KYR": {
+          "votes": 1388,
+          "seats": 0
+        }
+      }
+    },
+    "KOSP": {
+      "greek_name": "ΚΙΝΗΜΑ ΟΙΚΟΛΟΓΩΝ-ΣΥΝΕΡΓΑΣΙΑ ΠΟΛΙΤΩΝ",
+      "national_votes": 15762,
+      "total_seats": 3,
+      "per_district": {
+        "NIC": {
+          "votes": 8386,
+          "seats": 2
+        },
+        "LIM": {
+          "votes": 2421,
+          "seats": 1
+        },
+        "FAM": {
+          "votes": 2090,
+          "seats": 0
+        },
+        "LAR": {
+          "votes": 829,
+          "seats": 0
+        },
+        "PAF": {
+          "votes": 1153,
+          "seats": 0
+        },
+        "KYR": {
+          "votes": 883,
+          "seats": 0
+        }
+      }
+    },
+    "KEKK": {
+      "greek_name": "ΕΝΕΡΓΟΙ ΠΟΛΙΤΕΣ-ΚΙΝΗΜΑ ΕΝ.ΚΥΠ. ΚΥΝΗΓΩΝ",
+      "national_votes": 11712,
+      "total_seats": 0,
+      "per_district": {
+        "NIC": {
+          "votes": 2704,
+          "seats": 0
+        },
+        "LIM": {
+          "votes": 1987,
+          "seats": 0
+        },
+        "FAM": {
+          "votes": 4463,
+          "seats": 0
+        },
+        "LAR": {
+          "votes": 1207,
+          "seats": 0
+        },
+        "PAF": {
+          "votes": 834,
+          "seats": 0
+        },
+        "KYR": {
+          "votes": 517,
+          "seats": 0
+        }
+      }
+    }
+  },
+  "failures": []
+}

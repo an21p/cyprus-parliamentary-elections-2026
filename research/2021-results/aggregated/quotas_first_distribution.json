@@ -1,0 +1,1266 @@
+{
+  "election": "Cyprus parliamentary 2021",
+  "election_date": "2021-05-30",
+  "source": [
+    "research/2021-results/aggregated/votes_per_party_per_district.json",
+    "research/2021-results/aggregated/seats_per_party_per_district.json"
+  ],
+  "method": "Hare quota = floor(district_valid_votes / district_seats). First-distribution seats per party = floor(party_district_votes / quota). Unused votes per party = party_district_votes - allotment * quota.",
+  "stage_2_threshold_pct": 3.6,
+  "stage_3_threshold_pct": 7.2,
+  "by_district": {
+    "ΛΕΥΚΩΣΙΑ": {
+      "district_id_short": "NIC",
+      "valid_votes": 122347,
+      "seats": 20,
+      "hare_quota": 6117,
+      "first_distribution_total": 15,
+      "seats_left_for_national_pool": 5,
+      "parties": [
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΟΣ ΣΥΝΑΓΕΡΜΟΣ",
+          "votes": 31163,
+          "first_distribution_seats": 5,
+          "unused_votes": 578,
+          "final_seats": 5,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΑΚΕΛ (ΑΝΟΡΘΩΤΙΚΟ ΚΟΜΜΑ ΕΡΓΑΖΟΜΕΝΟΥ ΛΑΟΥ)",
+          "votes": 25770,
+          "first_distribution_seats": 4,
+          "unused_votes": 1302,
+          "final_seats": 6,
+          "reallocated_seats": 2,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΟ ΚΟΜΜΑ",
+          "votes": 13449,
+          "first_distribution_seats": 2,
+          "unused_votes": 1215,
+          "final_seats": 3,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΕΘΝΙΚΟ ΛΑΪΚΟ ΜΕΤΩΠΟ (Ε.ΛΑ.Μ.)",
+          "votes": 7486,
+          "first_distribution_seats": 1,
+          "unused_votes": 1369,
+          "final_seats": 1,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΚΙΝΗΜΑ ΣΟΣΙΑΛΔΗΜΟΚΡΑΤΩΝ ΕΔΕΚ",
+          "votes": 9061,
+          "first_distribution_seats": 1,
+          "unused_votes": 2944,
+          "final_seats": 1,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΗ ΠΑΡΑΤΑΞΗ",
+          "votes": 8232,
+          "first_distribution_seats": 1,
+          "unused_votes": 2115,
+          "final_seats": 2,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΚΙΝΗΜΑ ΟΙΚΟΛΟΓΩΝ-ΣΥΝΕΡΓΑΣΙΑ ΠΟΛΙΤΩΝ",
+          "votes": 8386,
+          "first_distribution_seats": 1,
+          "unused_votes": 2269,
+          "final_seats": 2,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΕΝΕΡΓΟΙ ΠΟΛΙΤΕΣ-ΚΙΝΗΜΑ ΕΝ.ΚΥΠ. ΚΥΝΗΓΩΝ",
+          "votes": 2704,
+          "first_distribution_seats": 0,
+          "unused_votes": 2704,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΛΛΑΓΗ ΓΕΝΙΑΣ",
+          "votes": 4834,
+          "first_distribution_seats": 0,
+          "unused_votes": 4834,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΛΛΗΛΕΓΓΥΗ",
+          "votes": 3038,
+          "first_distribution_seats": 0,
+          "unused_votes": 3038,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΜΜΟΧΩΣΤΟΣ ΓΙΑ ΤΗΝ ΚΥΠΡΟ",
+          "votes": 1952,
+          "first_distribution_seats": 0,
+          "unused_votes": 1952,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΦΥΠΝΙΣΗ -2020-",
+          "votes": 1747,
+          "first_distribution_seats": 0,
+          "unused_votes": 1747,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΝΟΗ ΛΑΟΥ",
+          "votes": 1748,
+          "first_distribution_seats": 0,
+          "unused_votes": 1748,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΚΟΜΜΑ ΓΙΑ ΤΑ ΖΩΑ ΚΥΠΡΟΥ",
+          "votes": 1340,
+          "first_distribution_seats": 0,
+          "unused_votes": 1340,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΟΥΡΓΟΥΡΙΔΗΣ ΕΥΑΓΓΕΛΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΙΣΤΟΥ ΑΝΔΡΕΑΣ",
+          "votes": 1078,
+          "first_distribution_seats": 0,
+          "unused_votes": 1078,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΑΤΡΙΩΤΙΚΟΣ ΣΥΝΑΣΠΙΣΜΟΣ",
+          "votes": 246,
+          "first_distribution_seats": 0,
+          "unused_votes": 246,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΘΕΜΙΣΤΟΚΛΕΟΥΣ ΑΒΡΑΑΜ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΙΣΤΟΔΟΥΛΟΥ ΧΡΙΣΤΟΔΟΥΛΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΜΑΡΔΑΠΗΤΤΑΣ ΧΡΥΣΑΝΘΟΣ",
+          "votes": 74,
+          "first_distribution_seats": 0,
+          "unused_votes": 74,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΣΠΑΡΟΣ ΦΟΙΒΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΥΣΑΝΘΟΥ ΣΠΥΡΟΣ",
+          "votes": 39,
+          "first_distribution_seats": 0,
+          "unused_votes": 39,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        }
+      ]
+    },
+    "ΛΕΜΕΣΟΣ": {
+      "district_id_short": "LIM",
+      "valid_votes": 72635,
+      "seats": 12,
+      "hare_quota": 6052,
+      "first_distribution_total": 6,
+      "seats_left_for_national_pool": 6,
+      "parties": [
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΟΣ ΣΥΝΑΓΕΡΜΟΣ",
+          "votes": 20733,
+          "first_distribution_seats": 3,
+          "unused_votes": 2577,
+          "final_seats": 3,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΑΚΕΛ (ΑΝΟΡΘΩΤΙΚΟ ΚΟΜΜΑ ΕΡΓΑΖΟΜΕΝΟΥ ΛΑΟΥ)",
+          "votes": 16019,
+          "first_distribution_seats": 2,
+          "unused_votes": 3915,
+          "final_seats": 3,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΟ ΚΟΜΜΑ",
+          "votes": 9628,
+          "first_distribution_seats": 1,
+          "unused_votes": 3576,
+          "final_seats": 2,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΕΘΝΙΚΟ ΛΑΪΚΟ ΜΕΤΩΠΟ (Ε.ΛΑ.Μ.)",
+          "votes": 4741,
+          "first_distribution_seats": 0,
+          "unused_votes": 4741,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΚΙΝΗΜΑ ΣΟΣΙΑΛΔΗΜΟΚΡΑΤΩΝ ΕΔΕΚ",
+          "votes": 3473,
+          "first_distribution_seats": 0,
+          "unused_votes": 3473,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΗ ΠΑΡΑΤΑΞΗ",
+          "votes": 4672,
+          "first_distribution_seats": 0,
+          "unused_votes": 4672,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΚΙΝΗΜΑ ΟΙΚΟΛΟΓΩΝ-ΣΥΝΕΡΓΑΣΙΑ ΠΟΛΙΤΩΝ",
+          "votes": 2421,
+          "first_distribution_seats": 0,
+          "unused_votes": 2421,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΕΝΕΡΓΟΙ ΠΟΛΙΤΕΣ-ΚΙΝΗΜΑ ΕΝ.ΚΥΠ. ΚΥΝΗΓΩΝ",
+          "votes": 1987,
+          "first_distribution_seats": 0,
+          "unused_votes": 1987,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΛΛΑΓΗ ΓΕΝΙΑΣ",
+          "votes": 1850,
+          "first_distribution_seats": 0,
+          "unused_votes": 1850,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΛΛΗΛΕΓΓΥΗ",
+          "votes": 2494,
+          "first_distribution_seats": 0,
+          "unused_votes": 2494,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΜΜΟΧΩΣΤΟΣ ΓΙΑ ΤΗΝ ΚΥΠΡΟ",
+          "votes": 312,
+          "first_distribution_seats": 0,
+          "unused_votes": 312,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΦΥΠΝΙΣΗ -2020-",
+          "votes": 1146,
+          "first_distribution_seats": 0,
+          "unused_votes": 1146,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΝΟΗ ΛΑΟΥ",
+          "votes": 553,
+          "first_distribution_seats": 0,
+          "unused_votes": 553,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΚΟΜΜΑ ΓΙΑ ΤΑ ΖΩΑ ΚΥΠΡΟΥ",
+          "votes": 861,
+          "first_distribution_seats": 0,
+          "unused_votes": 861,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΟΥΡΓΟΥΡΙΔΗΣ ΕΥΑΓΓΕΛΟΣ",
+          "votes": 1571,
+          "first_distribution_seats": 0,
+          "unused_votes": 1571,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΙΣΤΟΥ ΑΝΔΡΕΑΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΑΤΡΙΩΤΙΚΟΣ ΣΥΝΑΣΠΙΣΜΟΣ",
+          "votes": 27,
+          "first_distribution_seats": 0,
+          "unused_votes": 27,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΘΕΜΙΣΤΟΚΛΕΟΥΣ ΑΒΡΑΑΜ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΙΣΤΟΔΟΥΛΟΥ ΧΡΙΣΤΟΔΟΥΛΟΣ",
+          "votes": 105,
+          "first_distribution_seats": 0,
+          "unused_votes": 105,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΜΑΡΔΑΠΗΤΤΑΣ ΧΡΥΣΑΝΘΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΣΠΑΡΟΣ ΦΟΙΒΟΣ",
+          "votes": 42,
+          "first_distribution_seats": 0,
+          "unused_votes": 42,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΥΣΑΝΘΟΥ ΣΠΥΡΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        }
+      ]
+    },
+    "ΑΜΜΟΧΩΣΤΟΣ": {
+      "district_id_short": "FAM",
+      "valid_votes": 74869,
+      "seats": 11,
+      "hare_quota": 6806,
+      "first_distribution_total": 5,
+      "seats_left_for_national_pool": 6,
+      "parties": [
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΟΣ ΣΥΝΑΓΕΡΜΟΣ",
+          "votes": 23593,
+          "first_distribution_seats": 3,
+          "unused_votes": 3175,
+          "final_seats": 4,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΑΚΕΛ (ΑΝΟΡΘΩΤΙΚΟ ΚΟΜΜΑ ΕΡΓΑΖΟΜΕΝΟΥ ΛΑΟΥ)",
+          "votes": 18281,
+          "first_distribution_seats": 2,
+          "unused_votes": 4669,
+          "final_seats": 3,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΟ ΚΟΜΜΑ",
+          "votes": 5030,
+          "first_distribution_seats": 0,
+          "unused_votes": 5030,
+          "final_seats": 2,
+          "reallocated_seats": 2,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΕΘΝΙΚΟ ΛΑΪΚΟ ΜΕΤΩΠΟ (Ε.ΛΑ.Μ.)",
+          "votes": 5786,
+          "first_distribution_seats": 0,
+          "unused_votes": 5786,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΚΙΝΗΜΑ ΣΟΣΙΑΛΔΗΜΟΚΡΑΤΩΝ ΕΔΕΚ",
+          "votes": 2975,
+          "first_distribution_seats": 0,
+          "unused_votes": 2975,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΗ ΠΑΡΑΤΑΞΗ",
+          "votes": 3685,
+          "first_distribution_seats": 0,
+          "unused_votes": 3685,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΚΙΝΗΜΑ ΟΙΚΟΛΟΓΩΝ-ΣΥΝΕΡΓΑΣΙΑ ΠΟΛΙΤΩΝ",
+          "votes": 2090,
+          "first_distribution_seats": 0,
+          "unused_votes": 2090,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΕΝΕΡΓΟΙ ΠΟΛΙΤΕΣ-ΚΙΝΗΜΑ ΕΝ.ΚΥΠ. ΚΥΝΗΓΩΝ",
+          "votes": 4463,
+          "first_distribution_seats": 0,
+          "unused_votes": 4463,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΛΛΑΓΗ ΓΕΝΙΑΣ",
+          "votes": 1924,
+          "first_distribution_seats": 0,
+          "unused_votes": 1924,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΛΛΗΛΕΓΓΥΗ",
+          "votes": 1712,
+          "first_distribution_seats": 0,
+          "unused_votes": 1712,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΜΜΟΧΩΣΤΟΣ ΓΙΑ ΤΗΝ ΚΥΠΡΟ",
+          "votes": 2971,
+          "first_distribution_seats": 0,
+          "unused_votes": 2971,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΦΥΠΝΙΣΗ -2020-",
+          "votes": 827,
+          "first_distribution_seats": 0,
+          "unused_votes": 827,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΝΟΗ ΛΑΟΥ",
+          "votes": 867,
+          "first_distribution_seats": 0,
+          "unused_votes": 867,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΚΟΜΜΑ ΓΙΑ ΤΑ ΖΩΑ ΚΥΠΡΟΥ",
+          "votes": 606,
+          "first_distribution_seats": 0,
+          "unused_votes": 606,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΟΥΡΓΟΥΡΙΔΗΣ ΕΥΑΓΓΕΛΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΙΣΤΟΥ ΑΝΔΡΕΑΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΑΤΡΙΩΤΙΚΟΣ ΣΥΝΑΣΠΙΣΜΟΣ",
+          "votes": 59,
+          "first_distribution_seats": 0,
+          "unused_votes": 59,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΘΕΜΙΣΤΟΚΛΕΟΥΣ ΑΒΡΑΑΜ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΙΣΤΟΔΟΥΛΟΥ ΧΡΙΣΤΟΔΟΥΛΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΜΑΡΔΑΠΗΤΤΑΣ ΧΡΥΣΑΝΘΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΣΠΑΡΟΣ ΦΟΙΒΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΥΣΑΝΘΟΥ ΣΠΥΡΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        }
+      ]
+    },
+    "ΛΑΡΝΑΚΑ": {
+      "district_id_short": "LAR",
+      "valid_votes": 38007,
+      "seats": 6,
+      "hare_quota": 6334,
+      "first_distribution_total": 2,
+      "seats_left_for_national_pool": 4,
+      "parties": [
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΟΣ ΣΥΝΑΓΕΡΜΟΣ",
+          "votes": 9923,
+          "first_distribution_seats": 1,
+          "unused_votes": 3589,
+          "final_seats": 2,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΑΚΕΛ (ΑΝΟΡΘΩΤΙΚΟ ΚΟΜΜΑ ΕΡΓΑΖΟΜΕΝΟΥ ΛΑΟΥ)",
+          "votes": 10008,
+          "first_distribution_seats": 1,
+          "unused_votes": 3674,
+          "final_seats": 1,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΟ ΚΟΜΜΑ",
+          "votes": 3687,
+          "first_distribution_seats": 0,
+          "unused_votes": 3687,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΕΘΝΙΚΟ ΛΑΪΚΟ ΜΕΤΩΠΟ (Ε.ΛΑ.Μ.)",
+          "votes": 2911,
+          "first_distribution_seats": 0,
+          "unused_votes": 2911,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΚΙΝΗΜΑ ΣΟΣΙΑΛΔΗΜΟΚΡΑΤΩΝ ΕΔΕΚ",
+          "votes": 3314,
+          "first_distribution_seats": 0,
+          "unused_votes": 3314,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΗ ΠΑΡΑΤΑΞΗ",
+          "votes": 2670,
+          "first_distribution_seats": 0,
+          "unused_votes": 2670,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΚΙΝΗΜΑ ΟΙΚΟΛΟΓΩΝ-ΣΥΝΕΡΓΑΣΙΑ ΠΟΛΙΤΩΝ",
+          "votes": 829,
+          "first_distribution_seats": 0,
+          "unused_votes": 829,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΕΝΕΡΓΟΙ ΠΟΛΙΤΕΣ-ΚΙΝΗΜΑ ΕΝ.ΚΥΠ. ΚΥΝΗΓΩΝ",
+          "votes": 1207,
+          "first_distribution_seats": 0,
+          "unused_votes": 1207,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΛΛΑΓΗ ΓΕΝΙΑΣ",
+          "votes": 717,
+          "first_distribution_seats": 0,
+          "unused_votes": 717,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΛΛΗΛΕΓΓΥΗ",
+          "votes": 335,
+          "first_distribution_seats": 0,
+          "unused_votes": 335,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΜΜΟΧΩΣΤΟΣ ΓΙΑ ΤΗΝ ΚΥΠΡΟ",
+          "votes": 206,
+          "first_distribution_seats": 0,
+          "unused_votes": 206,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΦΥΠΝΙΣΗ -2020-",
+          "votes": 638,
+          "first_distribution_seats": 0,
+          "unused_votes": 638,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΝΟΗ ΛΑΟΥ",
+          "votes": 955,
+          "first_distribution_seats": 0,
+          "unused_votes": 955,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΚΟΜΜΑ ΓΙΑ ΤΑ ΖΩΑ ΚΥΠΡΟΥ",
+          "votes": 347,
+          "first_distribution_seats": 0,
+          "unused_votes": 347,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΟΥΡΓΟΥΡΙΔΗΣ ΕΥΑΓΓΕΛΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΙΣΤΟΥ ΑΝΔΡΕΑΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΑΤΡΙΩΤΙΚΟΣ ΣΥΝΑΣΠΙΣΜΟΣ",
+          "votes": 14,
+          "first_distribution_seats": 0,
+          "unused_votes": 14,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΘΕΜΙΣΤΟΚΛΕΟΥΣ ΑΒΡΑΑΜ",
+          "votes": 246,
+          "first_distribution_seats": 0,
+          "unused_votes": 246,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΙΣΤΟΔΟΥΛΟΥ ΧΡΙΣΤΟΔΟΥΛΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΜΑΡΔΑΠΗΤΤΑΣ ΧΡΥΣΑΝΘΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΣΠΑΡΟΣ ΦΟΙΒΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΥΣΑΝΘΟΥ ΣΠΥΡΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        }
+      ]
+    },
+    "ΠΑΦΟΣ": {
+      "district_id_short": "PAF",
+      "valid_votes": 32298,
+      "seats": 4,
+      "hare_quota": 8074,
+      "first_distribution_total": 1,
+      "seats_left_for_national_pool": 3,
+      "parties": [
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΟΣ ΣΥΝΑΓΕΡΜΟΣ",
+          "votes": 9650,
+          "first_distribution_seats": 1,
+          "unused_votes": 1576,
+          "final_seats": 1,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΑΚΕΛ (ΑΝΟΡΘΩΤΙΚΟ ΚΟΜΜΑ ΕΡΓΑΖΟΜΕΝΟΥ ΛΑΟΥ)",
+          "votes": 5539,
+          "first_distribution_seats": 0,
+          "unused_votes": 5539,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΟ ΚΟΜΜΑ",
+          "votes": 5967,
+          "first_distribution_seats": 0,
+          "unused_votes": 5967,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΕΘΝΙΚΟ ΛΑΪΚΟ ΜΕΤΩΠΟ (Ε.ΛΑ.Μ.)",
+          "votes": 2360,
+          "first_distribution_seats": 0,
+          "unused_votes": 2360,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΚΙΝΗΜΑ ΣΟΣΙΑΛΔΗΜΟΚΡΑΤΩΝ ΕΔΕΚ",
+          "votes": 4293,
+          "first_distribution_seats": 0,
+          "unused_votes": 4293,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΗ ΠΑΡΑΤΑΞΗ",
+          "votes": 1185,
+          "first_distribution_seats": 0,
+          "unused_votes": 1185,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΚΙΝΗΜΑ ΟΙΚΟΛΟΓΩΝ-ΣΥΝΕΡΓΑΣΙΑ ΠΟΛΙΤΩΝ",
+          "votes": 1153,
+          "first_distribution_seats": 0,
+          "unused_votes": 1153,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΕΝΕΡΓΟΙ ΠΟΛΙΤΕΣ-ΚΙΝΗΜΑ ΕΝ.ΚΥΠ. ΚΥΝΗΓΩΝ",
+          "votes": 834,
+          "first_distribution_seats": 0,
+          "unused_votes": 834,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΛΛΑΓΗ ΓΕΝΙΑΣ",
+          "votes": 314,
+          "first_distribution_seats": 0,
+          "unused_votes": 314,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΛΛΗΛΕΓΓΥΗ",
+          "votes": 335,
+          "first_distribution_seats": 0,
+          "unused_votes": 335,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΜΜΟΧΩΣΤΟΣ ΓΙΑ ΤΗΝ ΚΥΠΡΟ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΦΥΠΝΙΣΗ -2020-",
+          "votes": 282,
+          "first_distribution_seats": 0,
+          "unused_votes": 282,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΝΟΗ ΛΑΟΥ",
+          "votes": 223,
+          "first_distribution_seats": 0,
+          "unused_votes": 223,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΚΟΜΜΑ ΓΙΑ ΤΑ ΖΩΑ ΚΥΠΡΟΥ",
+          "votes": 145,
+          "first_distribution_seats": 0,
+          "unused_votes": 145,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΟΥΡΓΟΥΡΙΔΗΣ ΕΥΑΓΓΕΛΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΙΣΤΟΥ ΑΝΔΡΕΑΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΑΤΡΙΩΤΙΚΟΣ ΣΥΝΑΣΠΙΣΜΟΣ",
+          "votes": 18,
+          "first_distribution_seats": 0,
+          "unused_votes": 18,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΘΕΜΙΣΤΟΚΛΕΟΥΣ ΑΒΡΑΑΜ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΙΣΤΟΔΟΥΛΟΥ ΧΡΙΣΤΟΔΟΥΛΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΜΑΡΔΑΠΗΤΤΑΣ ΧΡΥΣΑΝΘΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΣΠΑΡΟΣ ΦΟΙΒΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΥΣΑΝΘΟΥ ΣΠΥΡΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        }
+      ]
+    },
+    "ΚΕΡΥΝΕΙΑ": {
+      "district_id_short": "KYR",
+      "valid_votes": 17556,
+      "seats": 3,
+      "hare_quota": 5852,
+      "first_distribution_total": 0,
+      "seats_left_for_national_pool": 3,
+      "parties": [
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΟΣ ΣΥΝΑΓΕΡΜΟΣ",
+          "votes": 4266,
+          "first_distribution_seats": 0,
+          "unused_votes": 4266,
+          "final_seats": 2,
+          "reallocated_seats": 2,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΑΚΕΛ (ΑΝΟΡΘΩΤΙΚΟ ΚΟΜΜΑ ΕΡΓΑΖΟΜΕΝΟΥ ΛΑΟΥ)",
+          "votes": 4296,
+          "first_distribution_seats": 0,
+          "unused_votes": 4296,
+          "final_seats": 1,
+          "reallocated_seats": 1,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΟ ΚΟΜΜΑ",
+          "votes": 2634,
+          "first_distribution_seats": 0,
+          "unused_votes": 2634,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΕΘΝΙΚΟ ΛΑΪΚΟ ΜΕΤΩΠΟ (Ε.ΛΑ.Μ.)",
+          "votes": 971,
+          "first_distribution_seats": 0,
+          "unused_votes": 971,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΚΙΝΗΜΑ ΣΟΣΙΑΛΔΗΜΟΚΡΑΤΩΝ ΕΔΕΚ",
+          "votes": 906,
+          "first_distribution_seats": 0,
+          "unused_votes": 906,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΔΗΜΟΚΡΑΤΙΚΗ ΠΑΡΑΤΑΞΗ",
+          "votes": 1388,
+          "first_distribution_seats": 0,
+          "unused_votes": 1388,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΚΙΝΗΜΑ ΟΙΚΟΛΟΓΩΝ-ΣΥΝΕΡΓΑΣΙΑ ΠΟΛΙΤΩΝ",
+          "votes": 883,
+          "first_distribution_seats": 0,
+          "unused_votes": 883,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": true
+        },
+        {
+          "party": "ΕΝΕΡΓΟΙ ΠΟΛΙΤΕΣ-ΚΙΝΗΜΑ ΕΝ.ΚΥΠ. ΚΥΝΗΓΩΝ",
+          "votes": 517,
+          "first_distribution_seats": 0,
+          "unused_votes": 517,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΛΛΑΓΗ ΓΕΝΙΑΣ",
+          "votes": 456,
+          "first_distribution_seats": 0,
+          "unused_votes": 456,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΛΛΗΛΕΓΓΥΗ",
+          "votes": 340,
+          "first_distribution_seats": 0,
+          "unused_votes": 340,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΜΜΟΧΩΣΤΟΣ ΓΙΑ ΤΗΝ ΚΥΠΡΟ",
+          "votes": 155,
+          "first_distribution_seats": 0,
+          "unused_votes": 155,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΑΦΥΠΝΙΣΗ -2020-",
+          "votes": 199,
+          "first_distribution_seats": 0,
+          "unused_votes": 199,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΝΟΗ ΛΑΟΥ",
+          "votes": 239,
+          "first_distribution_seats": 0,
+          "unused_votes": 239,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΚΟΜΜΑ ΓΙΑ ΤΑ ΖΩΑ ΚΥΠΡΟΥ",
+          "votes": 294,
+          "first_distribution_seats": 0,
+          "unused_votes": 294,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΟΥΡΓΟΥΡΙΔΗΣ ΕΥΑΓΓΕΛΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΙΣΤΟΥ ΑΝΔΡΕΑΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΠΑΤΡΙΩΤΙΚΟΣ ΣΥΝΑΣΠΙΣΜΟΣ",
+          "votes": 12,
+          "first_distribution_seats": 0,
+          "unused_votes": 12,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΘΕΜΙΣΤΟΚΛΕΟΥΣ ΑΒΡΑΑΜ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΙΣΤΟΔΟΥΛΟΥ ΧΡΙΣΤΟΔΟΥΛΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΜΑΡΔΑΠΗΤΤΑΣ ΧΡΥΣΑΝΘΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΣΠΑΡΟΣ ΦΟΙΒΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        },
+        {
+          "party": "ΧΡΥΣΑΝΘΟΥ ΣΠΥΡΟΣ",
+          "votes": 0,
+          "first_distribution_seats": 0,
+          "unused_votes": 0,
+          "final_seats": 0,
+          "reallocated_seats": 0,
+          "qualifying_nationally": false
+        }
+      ]
+    }
+  },
+  "grand_total": {
+    "stage_1_seats": 29,
+    "national_pool_seats": 27,
+    "all_seats": 56
+  }
+}
