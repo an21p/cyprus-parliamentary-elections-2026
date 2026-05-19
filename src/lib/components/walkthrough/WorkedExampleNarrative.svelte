@@ -25,8 +25,8 @@
           : 'How the 20 Nicosia seats were allocated in 2021',
       lede:
         lang === 'el'
-          ? 'Ένα βήμα-προς-βήμα παράδειγμα με πραγματικούς αριθμούς από το 2021 - το ίδιο σύστημα που θα εφαρμοστεί στις 24 Μαΐου 2026.'
-          : 'A step-by-step example with real 2021 figures - the same system that will be applied on 24 May 2026.'
+          ? 'Ένα βήμα-προς-βήμα παράδειγμα με πραγματικούς αριθμούς από το 2021, με το ίδιο σύστημα που θα εφαρμοστεί στις 24 Μαΐου 2026.'
+          : 'A step-by-step example with real 2021 figures, using the same system that will be applied on 24 May 2026.'
     },
     s1: {
       title:
@@ -36,7 +36,7 @@
       body: [
         lang === 'el'
           ? 'Σε κάθε επαρχία ο νόμος ξεκινά με μια απλή διαίρεση: <strong>έγκυροι ψήφοι ÷ έδρες</strong>. Στη Λευκωσία 122.347 έγκυροι ψήφοι ÷ 20 έδρες = <strong>6.117</strong> ψήφοι ανά έδρα (ο ακέραιος της διαίρεσης, αυτό λέγεται <em>Hare quota με αποκοπή</em>).'
-          : 'In every district the law starts with a simple division: <strong>valid votes ÷ seats</strong>. In Nicosia, 122,347 valid votes ÷ 20 seats = <strong>6,117</strong> votes per seat (integer part - this is the <em>Hare quota with truncation</em>).',
+          : 'In every district the law starts with a simple division: <strong>valid votes ÷ seats</strong>. In Nicosia, 122,347 valid votes ÷ 20 seats = <strong>6,117</strong> votes per seat (integer part; this is the <em>Hare quota with truncation</em>).',
         lang === 'el'
           ? 'Σκεφτείτε το ως «τιμή ανά έδρα»: για να κερδίσει μία έδρα στην 1η κατανομή ένα κόμμα πρέπει να μαζέψει 6.117 ψήφους.'
           : 'Think of it as the "price" of a seat: to win one seat in the first distribution a party needs to gather 6,117 votes.'
@@ -52,8 +52,8 @@
           ? 'Για κάθε λίστα: <strong>έδρες = ⌊ψήφοι ÷ 6.117⌋</strong>. Οι ψήφοι που περισσεύουν λέγονται <strong>αχρησιμοποίητες</strong>: <strong>αχρησιμοποίητες = ψήφοι − έδρες × 6.117</strong>.'
           : 'For each list: <strong>seats = ⌊votes ÷ 6,117⌋</strong>. The leftover is called <strong>unused votes</strong>: <strong>unused = votes − seats × 6,117</strong>.',
         lang === 'el'
-          ? 'Σύνολο εδρών 1ης κατανομής: <strong>15 από 20</strong>. Οι υπόλοιπες 5 έδρες της Λευκωσίας δεν μένουν στην επαρχία - πάνε στην εθνική δεξαμενή.'
-          : 'First-distribution total: <strong>15 of 20</strong>. The remaining 5 Nicosia seats do not stay in the district - they go to the national pool.'
+          ? 'Σύνολο εδρών 1ης κατανομής: <strong>15 από 20</strong>. Οι υπόλοιπες 5 έδρες της Λευκωσίας δεν μένουν στην επαρχία· πάνε στην εθνική δεξαμενή.'
+          : 'First-distribution total: <strong>15 of 20</strong>. The remaining 5 Nicosia seats do not stay in the district; they go to the national pool.'
       ]
     },
     s3: {
@@ -66,8 +66,8 @@
           ? 'Η ίδια διαδικασία της 1ης κατανομής επαναλαμβάνεται σε κάθε επαρχία. Στη συνέχεια, για τη 2η κατανομή, η Κύπρος αντιμετωπίζεται ως <strong>μία περιφέρεια</strong>: αθροίζονται οι αχρησιμοποίητες ψήφοι κάθε κόμματος και από τις 6 επαρχίες, και ένα νέο μέτρο (συνολικές αχρ. ψήφοι ÷ έδρες που μένουν) αποδίδει εθνικές έδρες στα κόμματα που έχουν ξεπεράσει το 3,6%.'
           : 'The first-distribution procedure repeats in every district. Then, for the second distribution, Cyprus is treated as <strong>a single constituency</strong>: each party\'s unused votes are summed across all six districts, and a new quota (total unused ÷ remaining seats) hands out national-pool seats to parties above the 3.6 % threshold.',
         lang === 'el'
-          ? 'Το <strong>ΑΚΕΛ</strong> κέρδισε εθνικές έδρες όχι μόνο χάρη στις <strong>1.302 αχρ. ψήφους</strong> του στη Λευκωσία, αλλά χάρη στο <strong>πανεθνικό σύνολο των 23.395</strong>. Η Λευκωσία είναι όμως η επαρχία όπου είχε τις περισσότερες αχρ. ψήφους — γι\' αυτό, με βάση τον νόμο, μία από τις εθνικές του έδρες <em>προσγειώθηκε</em> εκεί.'
-          : '<strong>AKEL</strong> earned its national-pool seats not because of its <strong>1,302 unused votes in Nicosia</strong> alone but because of its <strong>nationwide total of 23,395</strong>. Nicosia happens to be the district where AKEL had the largest unused tally — which is why one of its earned seats <em>landed</em> there, per the re-assignment rule.'
+          ? 'Το <strong>ΑΚΕΛ</strong> κέρδισε εθνικές έδρες όχι μόνο χάρη στις <strong>1.302 αχρ. ψήφους</strong> του στη Λευκωσία, αλλά χάρη στο <strong>πανεθνικό σύνολο των 23.395</strong>. Η Λευκωσία είναι όμως η επαρχία όπου είχε τις περισσότερες αχρ. ψήφους, γι\' αυτό, με βάση τον νόμο, μία από τις εθνικές του έδρες <em>προσγειώθηκε</em> εκεί.'
+          : '<strong>AKEL</strong> earned its national-pool seats not because of its <strong>1,302 unused votes in Nicosia</strong> alone but because of its <strong>nationwide total of 23,395</strong>. Nicosia happens to be the district where AKEL had the largest unused tally, which is why one of its earned seats <em>landed</em> there under the re-assignment rule.'
       ]
     },
     s4: {
@@ -77,8 +77,8 @@
           : 'Final result: AKEL gets an extra Nicosia seat',
       body: [
         lang === 'el'
-          ? 'Στην τελική εικόνα της Λευκωσίας το 2021: <strong>ΔΗΣΥ 5, ΑΚΕΛ 6, ΔΗΚΟ 3, ΕΔΕΚ 1, Οικολόγοι 2, ΔΗΠΑ 2, ΕΛΑΜ 1</strong>. Το ΑΚΕΛ μπήκε στην 1η κατανομή με 4 έδρες - η 6η ήρθε από την εθνική αναδιανομή χάρη στις αχρησιμοποίητες ψήφους του.'
-          : 'Final 2021 Nicosia outcome: <strong>DISY 5, AKEL 6, DIKO 3, EDEK 1, Ecologists 2, DIPA 2, ELAM 1</strong>. AKEL entered the first distribution with 4 seats - the 6th came from the national redistribution, earned by its unused votes.',
+          ? 'Στην τελική εικόνα της Λευκωσίας το 2021: <strong>ΔΗΣΥ 5, ΑΚΕΛ 6, ΔΗΚΟ 3, ΕΔΕΚ 1, Οικολόγοι 2, ΔΗΠΑ 2, ΕΛΑΜ 1</strong>. Το ΑΚΕΛ μπήκε στην 1η κατανομή με 4 έδρες· η 6η ήρθε από την εθνική αναδιανομή χάρη στις αχρησιμοποίητες ψήφους του.'
+          : 'Final 2021 Nicosia outcome: <strong>DISY 5, AKEL 6, DIKO 3, EDEK 1, Ecologists 2, DIPA 2, ELAM 1</strong>. AKEL entered the first distribution with 4 seats; the 6th came from the national redistribution, earned by its unused votes.',
         lang === 'el'
           ? 'Αυτό είναι το βασικό χαρακτηριστικό του συστήματος: <strong>μια εθνική δύναμη μπορεί να κερδίσει έδρες σε επαρχίες όπου δεν έφτασε ποτέ το μέτρο</strong>, αρκεί να ξεπεράσει το όριο του 3,6% πανελλαδικά.'
           : 'This is the defining feature of the system: <strong>a nationally strong party can win seats in districts where it never reached the quota</strong>, as long as it has cleared the 3.6% nationwide threshold.'

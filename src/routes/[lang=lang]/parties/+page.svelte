@@ -26,8 +26,8 @@
   // smaller lists fall back to the party's `alignment` field.
   const NARRATIVES: Partial<Record<PartyId, { en: string; el: string }>> = {
     DISY: {
-      en: 'The dominant centre-right list of the past two decades. Annita Demetriou - the youngest party leader and first female Speaker of the House (2021) - succeeded Averof Neofytou after the 2023 presidential defeat.',
-      el: 'Το κυρίαρχο κεντροδεξιό κόμμα των τελευταίων δύο δεκαετιών. Η Αννίτα Δημητρίου - η νεότερη αρχηγός και πρώτη γυναίκα Πρόεδρος της Βουλής (2021) - διαδέχθηκε τον Αβέρωφ Νεοφύτου μετά την προεδρική ήττα του 2023.'
+      en: 'The dominant centre-right list of the past two decades. Annita Demetriou, the youngest party leader and first female Speaker of the House (2021), succeeded Averof Neofytou after the 2023 presidential defeat.',
+      el: 'Το κυρίαρχο κεντροδεξιό κόμμα των τελευταίων δύο δεκαετιών. Η Αννίτα Δημητρίου, η νεότερη αρχηγός και πρώτη γυναίκα Πρόεδρος της Βουλής (2021), διαδέχθηκε τον Αβέρωφ Νεοφύτου μετά την προεδρική ήττα του 2023.'
     },
     AKEL: {
       en: 'The historic Cypriot left, rooted in the 1926 communist movement. Rebranded as "AKEL – Social Alliance" after the 2024 European Parliament election, having absorbed smaller left-leaning groups.',
@@ -89,8 +89,8 @@
   eyebrow={lang === 'el' ? 'Κόμματα' : 'Parties'}
   title={lang === 'el' ? '19 κόμματα και 9 ανεξάρτητοι' : '19 parties and 9 independents'}
   lede={lang === 'el'
-    ? 'Από τον ΔΗΣΥ και το ΑΚΕΛ μέχρι τα νέα κόμματα ΑΛΜΑ, Άμεση Δημοκρατία Κύπρου και Volt - ο πλήρης κατάλογος των υποψηφίων λιστών για τις 24 Μαΐου 2026.'
-    : 'From DISY and AKEL to the new entrants ALMA, Direct Democracy Cyprus and Volt - the full slate of lists contesting 24 May 2026.'}
+    ? 'Από τον ΔΗΣΥ και το ΑΚΕΛ μέχρι τα νέα κόμματα ΑΛΜΑ, Άμεση Δημοκρατία Κύπρου και Volt: ο πλήρης κατάλογος των υποψηφίων λιστών για τις 24 Μαΐου 2026.'
+    : 'From DISY and AKEL to the new entrants ALMA, Direct Democracy Cyprus and Volt: the full slate of lists contesting 24 May 2026.'}
 >
   <SectionBlock
     id="big-two"
@@ -98,9 +98,11 @@
     title={lang === 'el' ? 'ΔΗΣΥ και ΑΚΕΛ' : 'DISY and AKEL'}
   >
     <p>
-      {lang === 'el'
-        ? 'Από το 1981 ως το 2021, η εκλογική μάχη της Κύπρου διεξαγόταν κυρίως μεταξύ Δημοκρατικού Συναγερμού και ΑΚΕΛ. Το συνδυασμένο τους ποσοστό άγγιξε το 68,7% το 2001 και ξεπερνούσε σταθερά το 50%. Το 2026 αναμένεται να πέσει για πρώτη φορά κάτω από αυτό το όριο.'
-        : 'From 1981 until 2021, Cypriot elections were fought primarily between DISY and AKEL. Their combined share peaked at 68.7% in 2001 and routinely cleared 50%. In 2026 it is expected to fall below that mark for the first time.'}
+      {#if lang === 'el'}
+        Από το <strong>1981 ως το 2021</strong>, η εκλογική μάχη της Κύπρου διεξαγόταν κυρίως μεταξύ <strong>Δημοκρατικού Συναγερμού</strong> και <strong>ΑΚΕΛ</strong>. Το συνδυασμένο τους ποσοστό άγγιξε το <strong>68,7% το 2001</strong> και ξεπερνούσε σταθερά το <strong>50%</strong>. Το 2026 αναμένεται να πέσει για πρώτη φορά κάτω από αυτό το όριο.
+      {:else}
+        From <strong>1981 until 2021</strong>, Cypriot elections were fought primarily between <strong>DISY</strong> and <strong>AKEL</strong>. Their combined share peaked at <strong>68.7% in 2001</strong> and routinely cleared <strong>50%</strong>. In 2026 it is expected to fall below that mark for the first time.
+      {/if}
     </p>
     <div class="party-grid">
       {#each BIG_TWO as pid (pid)}
@@ -161,9 +163,11 @@
     title={lang === 'el' ? 'Τα υπόλοιπα κόμματα της απερχόμενης Βουλής' : 'Other parties in the outgoing parliament'}
   >
     <p>
-      {lang === 'el'
-        ? 'Η απερχόμενη Βουλή πλαισιωνόταν και από έξι μικρότερα κοινοβουλευτικά κόμματα. Δύο τους (ΕΔΕΚ και ΔΗΠΑ) εμφανίζονται οριακά πάνω ή κάτω από το όριο του 3,6%.'
-        : 'The outgoing parliament also seated six smaller lists. Two of them (EDEK and DIPA) are running close to - or below - the 3.6% threshold.'}
+      {#if lang === 'el'}
+        Η απερχόμενη Βουλή πλαισιωνόταν και από <strong>έξι μικρότερα κοινοβουλευτικά κόμματα</strong>. Δύο τους (<strong>ΕΔΕΚ</strong> και <strong>ΔΗΠΑ</strong>) εμφανίζονται οριακά πάνω ή κάτω από το όριο του <strong>3,6%</strong>.
+      {:else}
+        The outgoing parliament also seated <strong>six smaller lists</strong>. Two of them (<strong>EDEK</strong> and <strong>DIPA</strong>) are running close to, or below, the <strong>3.6% threshold</strong>.
+      {/if}
     </p>
     <div class="party-grid">
       {#each INCUMBENTS as pid (pid)}
@@ -225,8 +229,8 @@
   >
     <p>
       {lang === 'el'
-        ? 'Τέσσερα κόμματα κατεβαίνουν για πρώτη φορά σε βουλευτικές εκλογές. Τα δύο πρώτα - ΑΛΜΑ και Άμεση Δημοκρατία Κύπρου - βρίσκονται καλά πάνω από το όριο εισόδου σύμφωνα με τις δημοσκοπήσεις και θα μπουν σχεδόν σίγουρα στη Βουλή.'
-        : 'Four parties are contesting a parliamentary election for the first time. The two leaders - ALMA and Direct Democracy Cyprus - are polling well above the threshold and look near-certain to enter the House.'}
+        ? 'Τέσσερα κόμματα κατεβαίνουν για πρώτη φορά σε βουλευτικές εκλογές. Τα δύο πρώτα (ΑΛΜΑ και Άμεση Δημοκρατία Κύπρου) βρίσκονται καλά πάνω από το όριο εισόδου σύμφωνα με τις δημοσκοπήσεις και θα μπουν σχεδόν σίγουρα στη Βουλή.'
+        : 'Four parties are contesting a parliamentary election for the first time. The two leaders (ALMA and Direct Democracy Cyprus) are polling well above the threshold and look near-certain to enter the House.'}
     </p>
     <div class="party-grid">
       {#each NEW_ENTRANTS as pid (pid)}
@@ -320,8 +324,8 @@
   >
     <p>
       {lang === 'el'
-        ? 'Πέρα από τις 19 λίστες, εννέα ανεξάρτητοι υποψήφιοι θα εμφανιστούν στα ψηφοδέλτια χωρίς κομματική σήμανση. Στο κυπριακό σύστημα οι ανεξάρτητοι αντιμετωπίζονται όπως μία μονομελής λίστα και θεωρητικά οφείλουν να πληρούν τα ίδια εθνικά όρια - γεγονός που πρακτικά καθιστά εξαιρετικά δύσκολη την εκλογή τους χωρίς ευρεία επαρχιακή απήχηση.'
-        : 'Beyond the 19 parties, nine independent candidates will appear on the ballots without any party affiliation. Under the Cypriot system, independents are treated as single-name lists and are nominally held to the same national thresholds - which makes their election very difficult absent broad district-level support.'}
+        ? 'Πέρα από τις 19 λίστες, εννέα ανεξάρτητοι υποψήφιοι θα εμφανιστούν στα ψηφοδέλτια χωρίς κομματική σήμανση. Στο κυπριακό σύστημα οι ανεξάρτητοι αντιμετωπίζονται όπως μία μονομελής λίστα και θεωρητικά οφείλουν να πληρούν τα ίδια εθνικά όρια, γεγονός που πρακτικά καθιστά εξαιρετικά δύσκολη την εκλογή τους χωρίς ευρεία επαρχιακή απήχηση.'
+        : 'Beyond the 19 parties, nine independent candidates will appear on the ballots without any party affiliation. Under the Cypriot system, independents are treated as single-name lists and are nominally held to the same national thresholds, which makes their election very difficult absent broad district-level support.'}
     </p>
   </SectionBlock>
 </PageShell>

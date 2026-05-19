@@ -30,8 +30,8 @@
     mark: lang === 'el' ? 'Σταυρός' : 'Cross',
     note:
       lang === 'el'
-        ? 'Σχηματική αναπαράσταση - όχι το επίσημο ψηφοδέλτιο.'
-        : 'Illustrative - not the official ballot artwork.',
+        ? 'Σχηματική αναπαράσταση· δεν είναι το επίσημο ψηφοδέλτιο.'
+        : 'Illustrative; not the official ballot artwork.',
     instructions: lang === 'el' ? 'Οδηγίες' : 'Instructions',
     colourLabel: lang === 'el' ? 'Χρώμα' : 'Colour'
   });

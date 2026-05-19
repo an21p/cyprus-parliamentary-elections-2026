@@ -24,8 +24,8 @@
         : `Stage 3 hands out any seats still vacant to parties above ${THRESHOLDS.residual.toFixed(1)} % nationally.`,
     none:
       lang === 'el'
-        ? 'Καμία υπολειπόμενη έδρα σε αυτή τη ροή - τα στάδια 1 και 2 γέμισαν τη Βουλή.'
-        : 'No residual seats this allocation - stages 1 and 2 filled the parliament.',
+        ? 'Καμία υπολειπόμενη έδρα σε αυτή τη ροή· τα στάδια 1 και 2 γέμισαν τη Βουλή.'
+        : 'No residual seats this allocation; stages 1 and 2 filled the parliament.',
     quals:
       lang === 'el' ? 'Δικαιούνται' : 'Eligible parties',
     remaining: lang === 'el' ? 'Υπολ. ψήφοι' : 'Remaining votes',

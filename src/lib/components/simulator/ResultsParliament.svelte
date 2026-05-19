@@ -125,12 +125,12 @@
         : 'No single party reaches 29.',
     twoPartyOk:
       lang === 'el'
-        ? 'Συνασπισμός 2 μεγαλύτερων κομμάτων: ≥29 - βιώσιμο.'
-        : 'Top-two coalition: ≥29 seats - viable.',
+        ? 'Συνασπισμός 2 μεγαλύτερων κομμάτων: ≥29, βιώσιμο.'
+        : 'Top-two coalition: ≥29 seats, viable.',
     twoPartyShort:
       lang === 'el'
-        ? 'Συνασπισμός 2 μεγαλύτερων κομμάτων: <29 - χρειάζονται 3 κόμματα.'
-        : 'Top-two coalition: <29 seats - needs a third party.',
+        ? 'Συνασπισμός 2 μεγαλύτερων κομμάτων: <29, χρειάζονται 3 κόμματα.'
+        : 'Top-two coalition: <29 seats, needs a third party.',
     fragmented:
       lang === 'el'
         ? 'Κατακερματισμένη Βουλή. Σχηματισμός κυβέρνησης απαιτεί 3+ κόμματα.'
@@ -144,6 +144,24 @@
   function partyColour(pid: PartyId | null): string {
     if (!pid) return 'var(--color-rule-strong)';
     return getParty(pid).colour;
+  }
+
+  function isLightFill(hex: string): boolean {
+    const c = hex.replace('#', '');
+    if (c.length !== 6) return false;
+    const r = parseInt(c.slice(0, 2), 16);
+    const g = parseInt(c.slice(2, 4), 16);
+    const b = parseInt(c.slice(4, 6), 16);
+    // Perceived luminance (Rec. 601). Pure white is 255; anything above ~220
+    // disappears against the paper background and needs a darker stroke.
+    return 0.299 * r + 0.587 * g + 0.114 * b > 220;
+  }
+
+  function seatStroke(pid: PartyId | null): string {
+    if (!pid) return 'var(--color-paper)';
+    return isLightFill(getParty(pid).colour)
+      ? 'var(--color-ink-2)'
+      : 'var(--color-paper)';
   }
 
   // Coalition analysis.
@@ -188,8 +206,8 @@
           cy={seat.y}
           r="1.7"
           fill={partyColour(seat.partyId)}
-          stroke="var(--color-paper)"
-          stroke-width="0.25"
+          stroke={seatStroke(seat.partyId)}
+          stroke-width="0.3"
         />
       {/each}
       <!-- Majority marker -->
@@ -231,7 +249,7 @@
       <p class="coalition-body">
         <strong>{pickShort(getParty(coalitionStatus.a))}</strong>
         + <strong>{pickShort(getParty(coalitionStatus.b))}</strong>
-        {lang === 'el' ? ' ≥ 29 έδρες - βιώσιμος δι-κομματικός συνασπισμός.' : ' ≥ 29 seats - a two-party coalition could pass legislation.'}
+        {lang === 'el' ? ' ≥ 29 έδρες, βιώσιμος δι-κομματικός συνασπισμός.' : ' ≥ 29 seats, a two-party coalition could pass legislation.'}
       </p>
     {:else}
       <p class="coalition-body">{txt.fragmented}</p>
@@ -303,7 +321,7 @@
     width: 10px;
     height: 10px;
     border-radius: 2px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-rule-strong);
   }
   .lg-name {
     color: var(--color-ink);

@@ -133,6 +133,17 @@ p + p {
   margin-top: var(--sp-4);
 }
 
+/* Inline emphasis. <strong> should noticeably pop out of body prose
+   (which uses --color-ink-2). <em> stays the same color but italic. */
+strong, b {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+em, i {
+  font-style: italic;
+}
+
 /* Greek body text uses Noto Sans. Greek display headings fall through the
    --font-display stack to Noto Serif automatically - Fraunces does not ship
    with native Greek glyphs, so it cleanly hands off to the next family. */

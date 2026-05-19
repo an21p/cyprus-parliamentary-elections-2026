@@ -78,16 +78,16 @@
   const L = $derived({
     eyebrow:
       lang === 'el'
-        ? 'Εθνική δεξαμενή — αχρησιμοποίητες ψήφοι ανά κόμμα'
-        : 'National pool — unused votes per party',
+        ? 'Εθνική δεξαμενή: αχρησιμοποίητες ψήφοι ανά κόμμα'
+        : 'National pool: unused votes per party',
     title:
       lang === 'el'
         ? 'Όλες οι αχρησιμοποίητες ψήφοι από τις 6 επαρχίες'
         : 'Every district\'s unused votes, summed per party',
     intro:
       lang === 'el'
-        ? 'Στη 2η κατανομή η Κύπρος αντιμετωπίζεται ως μία περιφέρεια. Η ράβδος κάθε κόμματος είναι το άθροισμα των αχρησιμοποίητων ψήφων του από τις έξι επαρχίες — οι ψήφοι με τις οποίες «αγοράζει» τις εθνικές έδρες.'
-        : 'In the second distribution Cyprus is treated as a single constituency. Each party\'s bar is its national unused-vote total, decomposed into the six district contributions — these are the votes the party "spends" to buy national-pool seats.',
+        ? 'Στη 2η κατανομή η Κύπρος αντιμετωπίζεται ως μία περιφέρεια. Η ράβδος κάθε κόμματος είναι το άθροισμα των αχρησιμοποίητων ψήφων του από τις έξι επαρχίες, οι ψήφοι με τις οποίες «αγοράζει» τις εθνικές έδρες.'
+        : 'In the second distribution Cyprus is treated as a single constituency. Each party\'s bar is its national unused-vote total, decomposed into the six district contributions: these are the votes the party "spends" to buy national-pool seats.',
     legendNic: lang === 'el' ? 'Λευκωσία' : 'Nicosia',
     legendLim: lang === 'el' ? 'Λεμεσός' : 'Limassol',
     legendFam: lang === 'el' ? 'Αμμόχωστος' : 'Famagusta',
@@ -105,8 +105,8 @@
         : 'lands in:',
     note:
       lang === 'el'
-        ? 'Πηγή: επίσημα αποτελέσματα ΥΠΕΣ 2021 (data.gov.cy). Κάθε τμήμα είναι αναλογικό του εθνικού αχρ. συνόλου του κόμματος. Το «προσγειώνεται» δείχνει την επαρχία όπου το κόμμα είχε τη μεγαλύτερη αχρ. ψήφο — και επομένως όπου τοποθετείται η αναδιανεμημένη του έδρα.'
-        : 'Source: official MOI 2021 results (data.gov.cy). Each segment is proportional to the party\'s national unused-vote total. "Lands in" is the district where the party had the largest unused vote — and therefore where its reallocated seat is placed.'
+        ? 'Πηγή: επίσημα αποτελέσματα ΥΠΕΣ 2021 (data.gov.cy). Κάθε τμήμα είναι αναλογικό του εθνικού αχρ. συνόλου του κόμματος. Το «προσγειώνεται» δείχνει την επαρχία όπου το κόμμα είχε τη μεγαλύτερη αχρ. ψήφο, και επομένως όπου τοποθετείται η αναδιανεμημένη του έδρα.'
+        : 'Source: official MOI 2021 results (data.gov.cy). Each segment is proportional to the party\'s national unused-vote total. "Lands in" is the district where the party had the largest unused vote, and therefore where its reallocated seat is placed.'
   });
 
   const districtLabel: Record<DistrictId, string> = $derived({
