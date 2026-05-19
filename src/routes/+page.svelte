@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { base } from '$app/paths';
 
   type Lang = 'en' | 'el';
 
@@ -123,7 +124,7 @@
 
       <a
         class="cta"
-        href={`/${lang}`}
+        href={`${base}/${lang}`}
         data-sveltekit-reload
         aria-label={c.aria}
       >

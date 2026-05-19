@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import { PageShell, SectionBlock } from '$components/layout';
   import { WorkedExampleNarrative } from '$lib/components/walkthrough';
 
@@ -42,7 +43,7 @@
         : 'The Nicosia example shows that "how well a party did" does not depend only on its district share, but also on its unused votes: the remainder left over after its first-stage seats. Those votes travel to the national pool and come back as extra seats wherever the party held the largest leftover pile. By the same logic, a party that falls below 3.6% nationally loses all of its votes from stages 2 and 3, no matter how well it did in any one district.'}
     </p>
     <p>
-      <a class="inline-link" href={`/${lang}/simulator`}>
+      <a class="inline-link" href={`${base}/${lang}/simulator`}>
         {lang === 'el' ? 'Δοκιμάστε το μόνοι σας στον προσομοιωτή →' : 'Try it yourself in the simulator →'}
       </a>
     </p>

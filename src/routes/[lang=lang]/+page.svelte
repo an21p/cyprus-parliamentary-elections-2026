@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import { PageShell, SectionBlock, Callout, StatGrid, StatCard } from '$components/layout';
   import { PollTracker } from '$components/charts';
   import { t } from '$i18n/dict';
@@ -50,7 +51,7 @@
     <p>
       {lang === 'el'
         ? 'Αυτή η σελίδα εξηγεί πώς το εκλογικό σύστημα μετατρέπει τις ψήφους σε έδρες και γιατί δύο κόμματα με σχεδόν ίδιο εθνικό ποσοστό μπορούν να καταλήξουν με πολύ διαφορετικό αριθμό εδρών. Ο '
-        : 'This site explains how the electoral arithmetic turns votes into seats, and why two parties on nearly identical national shares can end up with very different seat counts. The '}<a class="inline-link" href={`/${lang}/simulator`}>{lang === 'el' ? 'προσομοιωτής' : 'simulator'}</a>{lang === 'el'
+        : 'This site explains how the electoral arithmetic turns votes into seats, and why two parties on nearly identical national shares can end up with very different seat counts. The '}<a class="inline-link" href={`${base}/${lang}/simulator`}>{lang === 'el' ? 'προσομοιωτής' : 'simulator'}</a>{lang === 'el'
         ? ' σας επιτρέπει να δοκιμάσετε τα δικά σας σενάρια.'
         : ' lets you try the math yourself.'}
     </p>
@@ -106,7 +107,7 @@
     title={lang === 'el' ? 'Τρεις προτεινόμενες αφετηρίες' : 'Three places to begin'}
   >
     <div class="signposts">
-      <a class="signpost" href={`/${lang}/system`}>
+      <a class="signpost" href={`${base}/${lang}/system`}>
         <p class="signpost-eyebrow">{lang === 'el' ? 'Το σύστημα' : 'The system'}</p>
         <p class="signpost-title">{lang === 'el' ? 'Πώς εκλέγονται 56 έδρες σε τρεις φάσεις' : 'How 56 seats are filled in three stages'}</p>
         <p class="signpost-body">
@@ -117,7 +118,7 @@
         <p class="signpost-cta">{lang === 'el' ? 'Διαβάστε →' : 'Read →'}</p>
       </a>
 
-      <a class="signpost" href={`/${lang}/simulator`}>
+      <a class="signpost" href={`${base}/${lang}/simulator`}>
         <p class="signpost-eyebrow">{lang === 'el' ? 'Διαδραστικό' : 'Interactive'}</p>
         <p class="signpost-title">{lang === 'el' ? 'Ο προσομοιωτής εδρών' : 'The seat allocation simulator'}</p>
         <p class="signpost-body">
@@ -128,7 +129,7 @@
         <p class="signpost-cta">{lang === 'el' ? 'Δοκιμάστε →' : 'Try it →'}</p>
       </a>
 
-      <a class="signpost" href={`/${lang}/polls`}>
+      <a class="signpost" href={`${base}/${lang}/polls`}>
         <p class="signpost-eyebrow">{lang === 'el' ? 'Δεδομένα' : 'Data'}</p>
         <p class="signpost-title">{lang === 'el' ? 'Ο πλήρης πίνακας δημοσκοπήσεων' : 'The full polling table'}</p>
         <p class="signpost-body">

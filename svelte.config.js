@@ -5,6 +5,11 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 const config = {
   preprocess: vitePreprocess(),
   kit: {
+    paths: {
+      // Hosted under a subpath on an21p.github.io; empty by default so
+      // `npm run dev` and standalone deploys still work at the root.
+      base: process.env.BASE_PATH ?? ''
+    },
     adapter: adapter({
       pages: 'build',
       assets: 'build',
