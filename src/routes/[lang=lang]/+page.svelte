@@ -99,6 +99,12 @@
       {/if}
     </p>
     <PollTracker {lang} parties={leadersForChart} />
+    <p class="polls-cta-row">
+      <a class="polls-cta" href={`${base}/${lang}/polls#table`}>
+        {lang === 'el' ? 'Δείτε όλες τις δημοσκοπήσεις ανά εταιρεία' : 'See every poll, pollster by pollster'}
+        <span aria-hidden="true">→</span>
+      </a>
+    </p>
   </SectionBlock>
 
   <SectionBlock
@@ -217,4 +223,29 @@
     font-weight: 600;
     margin: var(--sp-2) 0 0;
   }
+
+  .polls-cta-row {
+    margin: var(--sp-4) 0 0;
+  }
+  .polls-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-4);
+    background-color: var(--color-paper-2);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-3);
+    color: var(--color-accent);
+    font-family: var(--font-sans);
+    font-size: var(--fs-100);
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color var(--dur-fast) var(--ease-standard),
+                transform var(--dur-fast) var(--ease-standard);
+  }
+  .polls-cta:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-1px);
+  }
+  .polls-cta:focus-visible { outline: none; box-shadow: var(--focus-ring); }
 </style>

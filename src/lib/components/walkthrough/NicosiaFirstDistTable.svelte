@@ -10,6 +10,8 @@
 
   let { lang }: Props = $props();
 
+  let seatsTipOpen = $state(false);
+
   const QUOTA = 6117;
 
   // Rows drawn verbatim from §1.7 (Nicosia 2021 district votes).
@@ -51,9 +53,9 @@
         : 'First distribution in Nicosia district (2021): quota 6,117 votes',
     party: lang === 'el' ? 'Κόμμα' : 'Party',
     votes: lang === 'el' ? 'Ψήφοι' : 'Votes',
-    seats:
-      lang === 'el' ? 'Έδρες (⌊ψήφοι ÷ 6.117⌋)' : 'Seats (⌊votes ÷ 6,117⌋)',
-    unused: lang === 'el' ? 'Αχρησιμοποίητες ψήφοι' : 'Unused votes',
+    seats: lang === 'el' ? 'Έδρες' : 'Seats',
+    seatsFormula: lang === 'el' ? '⌊ψήφοι ÷ 6.117⌋' : '⌊votes ÷ 6,117⌋',
+    unused: lang === 'el' ? 'Αχρησιμοποίητες ψήφοι' : 'Unused',
     total: lang === 'el' ? 'Σύνολο' : 'Total',
     note:
       lang === 'el'
@@ -69,7 +71,25 @@
       <tr>
         <th scope="col">{L.party}</th>
         <th scope="col" class="num">{L.votes}</th>
-        <th scope="col" class="num">{L.seats}</th>
+        <th scope="col" class="num">
+          <span class="seats-th" class:open={seatsTipOpen}>
+            <button
+              type="button"
+              class="seats-trigger"
+              aria-expanded={seatsTipOpen}
+              aria-describedby="fdt-seats-tip"
+              onclick={() => (seatsTipOpen = !seatsTipOpen)}
+              onmouseenter={() => (seatsTipOpen = true)}
+              onmouseleave={() => (seatsTipOpen = false)}
+              onfocus={() => (seatsTipOpen = true)}
+              onblur={() => (seatsTipOpen = false)}
+            >
+              {L.seats}
+              <span class="seats-info" aria-hidden="true">i</span>
+            </button>
+            <span id="fdt-seats-tip" role="tooltip" class="seats-tip">{L.seatsFormula}</span>
+          </span>
+        </th>
         <th scope="col" class="num unused-head">{L.unused}</th>
       </tr>
     </thead>
@@ -117,7 +137,13 @@
     background-color: var(--color-paper-2);
     border: 1px solid var(--color-rule);
     border-radius: var(--radius-3);
-    overflow: hidden;
+  }
+
+  tfoot tr :last-child {
+    border-bottom-right-radius: var(--radius-3);
+  }
+  tfoot tr :first-child {
+    border-bottom-left-radius: var(--radius-3);
   }
 
   caption {
@@ -201,6 +227,70 @@
     height: 10px;
     border-radius: var(--radius-1);
     border: 1px solid rgba(20, 24, 31, 0.18);
+  }
+
+  .seats-th {
+    position: relative;
+    display: inline-block;
+  }
+
+  .seats-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    text-transform: inherit;
+    letter-spacing: inherit;
+    cursor: help;
+  }
+
+  .seats-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    font-style: italic;
+    font-family: var(--font-serif, serif);
+    text-transform: none;
+    opacity: 0.75;
+  }
+
+  .seats-tip {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 5;
+    padding: var(--sp-2) var(--sp-3);
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-mono);
+    font-size: var(--fs-75);
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    white-space: nowrap;
+    border-radius: var(--radius-2);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 120ms ease;
+  }
+
+  .seats-th.open .seats-tip {
+    opacity: 1;
+    visibility: visible;
   }
 
   .fdt-note {

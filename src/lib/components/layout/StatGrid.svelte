@@ -41,7 +41,7 @@
   }
 
   .stat-grid.fixed {
-    grid-template-columns: repeat(var(--stat-grid-cols, 4), minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .stat-grid.bordered {
@@ -52,6 +52,9 @@
   @media (min-width: 768px) {
     .stat-grid {
       gap: var(--sp-5);
+    }
+    .stat-grid.fixed {
+      grid-template-columns: repeat(var(--stat-grid-cols, 4), minmax(0, 1fr));
     }
   }
 </style>

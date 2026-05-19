@@ -178,39 +178,88 @@
     empty:
       lang === 'el'
         ? 'Δεν επιλέχθηκε καμία εταιρεία.'
-        : 'No pollster selected.'
+        : 'No pollster selected.',
+    viewLabel: lang === 'el' ? 'Προβολή' : 'View',
+    viewTable: lang === 'el' ? 'Πίνακας' : 'Table',
+    viewBars: lang === 'el' ? 'Μπάρες' : 'Bars',
+    detailsTitle: lang === 'el' ? 'Στοιχεία δημοσκόπησης' : 'Poll details',
+    notes: lang === 'el' ? 'Σημειώσεις' : 'Notes',
+    close: lang === 'el' ? 'Κλείσιμο' : 'Close',
+    openDetailsAria: lang === 'el' ? 'Στοιχεία' : 'Details',
+    other: lang === 'el' ? 'Λοιπά / αναποφάσιστοι' : 'Other / undecided'
   });
+
+  // ----- View mode (table | bars) ---------------------------------------
+  type ViewMode = 'table' | 'bars';
+  let viewMode = $state<ViewMode>('table');
+
+  // ----- Details dialog -------------------------------------------------
+  let dialogEl = $state<HTMLDialogElement | null>(null);
+  let activeRow = $state<PollEntry | null>(null);
+
+  function openDetails(row: PollEntry) {
+    activeRow = row;
+    // Wait a tick so the dialog markup renders with the active row before opening.
+    queueMicrotask(() => dialogEl?.showModal());
+  }
+  function closeDetails() {
+    dialogEl?.close();
+    activeRow = null;
+  }
 </script>
 
-<div class="poll-filter" role="group" aria-label={L.filterTitle}>
-  <div class="poll-filter-head">
-    <p class="poll-filter-title">{L.filterTitle}</p>
-    <div class="poll-filter-actions">
-      <button type="button" class="ghost-btn" onclick={selectAllPollsters}>{L.selectAll}</button>
-      <span class="dot" aria-hidden="true">·</span>
-      <button type="button" class="ghost-btn" onclick={clearPollsters}>{L.clear}</button>
+<div class="poll-toolbar">
+  <div class="poll-filter" role="group" aria-label={L.filterTitle}>
+    <div class="poll-filter-head">
+      <p class="poll-filter-title">{L.filterTitle}</p>
+      <div class="poll-filter-actions">
+        <button type="button" class="ghost-btn" onclick={selectAllPollsters}>{L.selectAll}</button>
+        <span class="dot" aria-hidden="true">·</span>
+        <button type="button" class="ghost-btn" onclick={clearPollsters}>{L.clear}</button>
+      </div>
+    </div>
+    <ul class="poll-filter-list" role="list">
+      {#each uniquePollsters as name (name)}
+        {@const on = activePollsters.includes(name)}
+        {@const colour = pollsterColor(name)}
+        <li>
+          <button
+            type="button"
+            class="chip"
+            class:chip--off={!on}
+            aria-pressed={on}
+            onclick={() => togglePollster(name)}
+          >
+            <span class="chip-swatch" style="background-color: {colour};" aria-hidden="true"></span>
+            <span class="chip-label">{name}</span>
+          </button>
+        </li>
+      {/each}
+    </ul>
+  </div>
+
+  <div class="view-switch" role="group" aria-label={L.viewLabel}>
+    <span class="view-switch-label">{L.viewLabel}</span>
+    <div class="view-switch-buttons">
+      <button
+        type="button"
+        class="view-btn"
+        class:view-btn--on={viewMode === 'table'}
+        aria-pressed={viewMode === 'table'}
+        onclick={() => (viewMode = 'table')}
+      >{L.viewTable}</button>
+      <button
+        type="button"
+        class="view-btn"
+        class:view-btn--on={viewMode === 'bars'}
+        aria-pressed={viewMode === 'bars'}
+        onclick={() => (viewMode = 'bars')}
+      >{L.viewBars}</button>
     </div>
   </div>
-  <ul class="poll-filter-list" role="list">
-    {#each uniquePollsters as name (name)}
-      {@const on = activePollsters.includes(name)}
-      {@const colour = pollsterColor(name)}
-      <li>
-        <button
-          type="button"
-          class="chip"
-          class:chip--off={!on}
-          aria-pressed={on}
-          onclick={() => togglePollster(name)}
-        >
-          <span class="chip-swatch" style="background-color: {colour};" aria-hidden="true"></span>
-          <span class="chip-label">{name}</span>
-        </button>
-      </li>
-    {/each}
-  </ul>
 </div>
 
+{#if viewMode === 'table'}
 <div class="poll-table-wrap">
   <div class="scroll">
     <table class="poll-table">
@@ -296,6 +345,99 @@
     </table>
   </div>
 </div>
+{:else}
+<div class="poll-bars" role="list" aria-label={L.caption}>
+  {#if rows.length === 0}
+    <p class="empty empty-bars">{L.empty}</p>
+  {:else}
+    {#each rows as row, i (i)}
+      {@const colour = pollsterColor(row.pollster)}
+      {@const segments = parties
+        .map((id) => ({ id, value: row.shares[id] ?? 0 }))
+        .filter((s) => s.value > 0)}
+      {@const total = segments.reduce((s, v) => s + v.value, 0)}
+      <div class="bar-row" role="listitem">
+        <button
+          type="button"
+          class="info-cube"
+          style="background-color: {colour};"
+          aria-label="{L.openDetailsAria}: {row.pollster}, {fmtRange(row)}"
+          title="{row.pollster} — {row.commissioner}"
+          onclick={() => openDetails(row)}
+        ></button>
+        <div class="bar-meta">
+          <span class="bar-date">{fmtRange(row)}</span>
+          <span class="bar-pollster">{row.pollster}</span>
+        </div>
+        <div
+          class="bar-track"
+          role="img"
+          aria-label={parties
+            .filter((id) => (row.shares[id] ?? 0) > 0)
+            .map(
+              (id) =>
+                `${localizedName(getParty(id).shortName, lang)} ${fmtShare(row.shares[id])}%`
+            )
+            .join(', ')}
+        >
+          {#each segments as seg (seg.id)}
+            {@const p = getParty(seg.id)}
+            <span
+              class="bar-seg"
+              style="width: {seg.value}%; background-color: {partyColour(p.id)};"
+              title="{localizedName(p.shortName, lang)} · {fmtShare(seg.value)}%"
+            >
+              {#if seg.value >= 6}
+                <span class="bar-seg-label">{fmtShare(seg.value)}</span>
+              {/if}
+            </span>
+          {/each}
+          {#if total < 100}
+            <span
+              class="bar-seg bar-seg--other"
+              style="width: {100 - total}%;"
+              title="{L.other} · {fmtShare(100 - total)}%"
+            ></span>
+          {/if}
+        </div>
+      </div>
+    {/each}
+  {/if}
+</div>
+{/if}
+
+<dialog
+  bind:this={dialogEl}
+  class="poll-info-dialog"
+  onclose={() => (activeRow = null)}
+  aria-label={L.detailsTitle}
+>
+  {#if activeRow}
+    {@const c = pollsterColor(activeRow.pollster)}
+    <header class="dialog-head">
+      <span class="dialog-swatch" style="background-color: {c};" aria-hidden="true"></span>
+      <div>
+        <h3 class="dialog-title">{activeRow.pollster}</h3>
+        <p class="dialog-sub">{fmtRange(activeRow)}</p>
+      </div>
+      <button type="button" class="dialog-close" aria-label={L.close} onclick={closeDetails}>×</button>
+    </header>
+    <dl class="dialog-grid">
+      <dt>{L.commissioner}</dt>
+      <dd>{activeRow.commissioner}</dd>
+      <dt>{L.date}</dt>
+      <dd>{fmtRange(activeRow)}</dd>
+      <dt>{L.sample}</dt>
+      <dd>{fmtSample(activeRow.sample)}</dd>
+      <dt>{L.moe}</dt>
+      <dd>{fmtMoE(activeRow.marginOfError)}</dd>
+      {#if activeRow.notes}
+        <dt>{L.notes}</dt>
+        <dd class="dialog-notes">{activeRow.notes}</dd>
+      {/if}
+    </dl>
+  {/if}
+</dialog>
 
 <style>
   .poll-table-wrap {
@@ -585,5 +727,290 @@
   .poll-filter-list .chip-label {
     font-weight: 500;
     white-space: nowrap;
+  }
+
+  /* Toolbar: filter (left) + view switch (right) */
+  .poll-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-3);
+    flex-wrap: wrap;
+  }
+  .poll-toolbar .poll-filter {
+    margin-bottom: 0;
+    flex: 1 1 320px;
+    min-width: 0;
+  }
+
+  .view-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    flex-shrink: 0;
+  }
+  .view-switch-label {
+    font-family: var(--font-sans);
+    font-size: var(--fs-50);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    color: var(--color-ink-3);
+  }
+  .view-switch-buttons {
+    display: inline-flex;
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    background-color: var(--color-paper-2);
+  }
+  .view-btn {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    padding: var(--sp-1) var(--sp-3);
+    font-family: var(--font-sans);
+    font-size: var(--fs-50);
+    color: var(--color-ink-2);
+    cursor: pointer;
+    line-height: 1.6;
+    transition: background-color var(--dur-fast) var(--ease-standard),
+      color var(--dur-fast) var(--ease-standard);
+  }
+  .view-btn:hover {
+    color: var(--color-ink);
+  }
+  .view-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+  .view-btn--on {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  /* Bars view */
+  .poll-bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    width: 100%;
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-3);
+    background-color: var(--color-paper-2);
+    padding: var(--sp-3);
+  }
+
+  .bar-row {
+    display: grid;
+    grid-template-columns: 16px 160px 1fr;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: var(--sp-2) var(--sp-1);
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .bar-row:last-child {
+    border-bottom: 0;
+  }
+
+  .info-cube {
+    width: 14px;
+    height: 14px;
+    border-radius: var(--radius-1);
+    border: 1px solid rgba(20, 24, 31, 0.25);
+    padding: 0;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+    transition: transform var(--dur-fast) var(--ease-standard),
+      box-shadow var(--dur-fast) var(--ease-standard);
+  }
+  .info-cube:hover {
+    transform: scale(1.18);
+  }
+  .info-cube:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .bar-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+  .bar-date {
+    font-family: var(--font-mono);
+    font-size: var(--fs-50);
+    color: var(--color-ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .bar-pollster {
+    font-family: var(--font-sans);
+    font-size: var(--fs-75);
+    color: var(--color-ink);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bar-track {
+    display: flex;
+    width: 100%;
+    height: 22px;
+    border-radius: var(--radius-1);
+    overflow: hidden;
+    background-color: var(--color-paper);
+    border: 1px solid var(--color-rule);
+  }
+
+  .bar-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+    overflow: hidden;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .bar-seg-label {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+    padding: 0 2px;
+  }
+  .bar-seg--other {
+    background: repeating-linear-gradient(
+      45deg,
+      var(--color-paper-3, #eee),
+      var(--color-paper-3, #eee) 4px,
+      var(--color-paper-2) 4px,
+      var(--color-paper-2) 8px
+    );
+  }
+
+  .empty-bars {
+    text-align: center;
+    color: var(--color-ink-3);
+    font-style: italic;
+    padding: var(--sp-4) var(--sp-3);
+    margin: 0;
+  }
+
+  @media (max-width: 560px) {
+    .bar-row {
+      grid-template-columns: 16px 1fr;
+      grid-template-rows: auto auto;
+      row-gap: var(--sp-1);
+    }
+    .bar-meta {
+      grid-column: 2;
+    }
+    .bar-track {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* Details dialog */
+  .poll-info-dialog {
+    border: 1px solid var(--color-rule-strong);
+    border-radius: var(--radius-3);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    padding: 0;
+    max-width: min(440px, 92vw);
+    width: 100%;
+    box-shadow: 0 24px 60px -16px rgba(20, 24, 31, 0.32);
+  }
+  .poll-info-dialog::backdrop {
+    background-color: rgba(20, 24, 31, 0.4);
+    backdrop-filter: blur(2px);
+  }
+
+  .dialog-head {
+    display: grid;
+    grid-template-columns: 14px 1fr auto;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: var(--sp-3) var(--sp-4);
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .dialog-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: var(--radius-1);
+    border: 1px solid rgba(20, 24, 31, 0.25);
+  }
+  .dialog-title {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-100);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .dialog-sub {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--fs-50);
+    color: var(--color-ink-3);
+  }
+  .dialog-close {
+    appearance: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--color-ink-3);
+    padding: 4px 8px;
+    border-radius: var(--radius-1);
+  }
+  .dialog-close:hover {
+    color: var(--color-ink);
+    background-color: var(--color-paper-2);
+  }
+  .dialog-close:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .dialog-grid {
+    margin: 0;
+    padding: var(--sp-3) var(--sp-4) var(--sp-4);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--sp-2) var(--sp-4);
+    font-family: var(--font-sans);
+    font-size: var(--fs-75);
+  }
+  .dialog-grid dt {
+    color: var(--color-ink-3);
+    font-size: var(--fs-50);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    font-weight: 600;
+    align-self: baseline;
+    white-space: nowrap;
+  }
+  .dialog-grid dd {
+    margin: 0;
+    color: var(--color-ink);
+  }
+  .dialog-notes {
+    grid-column: 1 / -1;
+    color: var(--color-ink-2);
+    font-size: var(--fs-75);
+    line-height: 1.5;
+    padding-top: var(--sp-2);
+    border-top: 1px solid var(--color-rule);
+    margin-top: var(--sp-1);
+  }
+  .dialog-grid dt:has(+ .dialog-notes) {
+    grid-column: 1 / -1;
+    padding-top: var(--sp-2);
+    border-top: 1px solid var(--color-rule);
+    margin-top: var(--sp-1);
   }
 </style>

@@ -210,7 +210,7 @@
     <!-- Seat-swap badges -->
     <g class="badges" aria-hidden="true">
       <!-- Paphos +1 -->
-      <g transform="translate(175, 355)">
+      <g transform="translate(175, 320)">
         <circle r="22" fill="var(--color-positive)" stroke="var(--color-paper)" stroke-width="2.5" />
         <text class="badge-text" text-anchor="middle" dominant-baseline="middle" fill="white">
           +1
