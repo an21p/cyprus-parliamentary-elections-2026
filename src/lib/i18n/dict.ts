@@ -23,20 +23,36 @@ export const messages: Dict = {
   'nav.polls': { en: 'Polls', el: 'Δημοσκοπήσεις' },
   'nav.districts': { en: 'Districts', el: 'Επαρχίες' },
   'nav.parties': { en: 'Parties', el: 'Κόμματα' },
-  'nav.worked_example': { en: 'Example', el: 'Παράδειγμα' },
+  'nav.worked_example': { en: 'Examples', el: 'Παράδειγματα' },
   'nav.worked_example.nicosia': {
-    en: 'Example 1 — Nicosia 2021',
-    el: 'Παράδειγμα 1 — Λευκωσία 2021'
+    en: 'Nicosia 2021',
+    el: 'Λευκωσία 2021'
   },
   'nav.worked_example.govcy': {
-    en: 'Example 2 — MOI worked example',
-    el: 'Παράδειγμα 2 — Παράδειγμα Υπ. Εσωτερικών'
+    en: 'MOI worked example',
+    el: 'Παράδειγμα Υπ. Εσωτερικών'
   },
   'nav.about': { en: 'About', el: 'Σχετικά' },
 
   // Language switcher
   'lang.switch_to_en': { en: 'English', el: 'English' },
   'lang.switch_to_el': { en: 'Ελληνικά', el: 'Ελληνικά' },
+
+  // Accessibility
+  'a11y.colourblind.label': {
+    en: 'Colourblind-friendly palette',
+    el: 'Παλέτα φιλική για αχρωματοψία'
+  },
+  'a11y.colourblind.on': { en: 'On', el: 'Ενεργό' },
+  'a11y.colourblind.off': { en: 'Off', el: 'Ανενεργό' },
+  'a11y.colourblind.aria_toggle': {
+    en: 'Toggle colourblind-friendly party colours',
+    el: 'Εναλλαγή χρωμάτων κομμάτων για αχρωματοψία'
+  },
+  'a11y.colourblind.hint': {
+    en: 'Swap brand colours for a palette designed to remain distinct under common forms of colour vision deficiency.',
+    el: 'Αντικαθιστά τα χρώματα των κομμάτων με παλέτα σχεδιασμένη να ξεχωρίζει σε συνήθεις μορφές αχρωματοψίας.'
+  },
 
   // Common labels
   'label.seats': { en: 'seats', el: 'έδρες' },

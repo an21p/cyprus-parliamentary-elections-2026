@@ -3,6 +3,7 @@
   import { POLLS } from '$data/polls';
   import { getParty } from '$data/parties';
   import { localizedName } from '$i18n/dict';
+  import { partyColour } from '$lib/theme/a11y.svelte';
   import LegendSwatches, { type LegendItem } from './LegendSwatches.svelte';
 
   type Props = {
@@ -253,7 +254,7 @@
       rows.push({
         party,
         point: found,
-        colour: p.colour,
+        colour: partyColour(p.id),
         name: localizedName(p.shortName, lang)
       });
     }
@@ -314,7 +315,7 @@
   const legendItems = $derived<LegendItem[]>(
     parties.map((id) => {
       const p = getParty(id);
-      return { id, label: localizedName(p.shortName, lang), colour: p.colour };
+      return { id, label: localizedName(p.shortName, lang), colour: partyColour(p.id) };
     })
   );
 
@@ -404,17 +405,18 @@
     {#each parties as party (party)}
       {@const series = pointsByParty[party] ?? []}
       {@const p = getParty(party)}
+      {@const colour = partyColour(p.id)}
       {@const on = activeIds.includes(party)}
       <g class="series" class:series--off={!on} aria-label={localizedName(p.shortName, lang)}>
-        <path d={linePath(series)} stroke={lineStroke(p.colour)} fill="none" stroke-width="1.75" />
+        <path d={linePath(series)} stroke={lineStroke(colour)} fill="none" stroke-width="1.75" />
         {#each series as point, i (i)}
           <circle
             class="data-dot"
             cx={xScale(point.date)}
             cy={yScale(point.share)}
             r="3"
-            fill={p.colour}
-            stroke={dotStroke(p.colour)}
+            fill={colour}
+            stroke={dotStroke(colour)}
             stroke-width="1"
           />
         {/each}

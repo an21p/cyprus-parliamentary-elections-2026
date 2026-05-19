@@ -3,6 +3,7 @@
   import type { FirstDistributionDistrictTrace } from '$data/types';
   import { getParty } from '$data/parties';
   import { getDistrict } from '$data/districts';
+  import { partyColour } from '$lib/theme/a11y.svelte';
 
   type Props = {
     trace: FirstDistributionDistrictTrace;
@@ -75,7 +76,7 @@
         <div class="row-head">
           <span
             class="swatch"
-            style:background-color={party.colour}
+            style:background-color={partyColour(party.id)}
             aria-hidden="true"
           ></span>
           <span class="row-name" title={party.name[lang] ?? party.name.en}>
@@ -90,7 +91,7 @@
           <div
             class="bar"
             style:width="{width}%"
-            style:background-color={party.colour}
+            style:background-color={partyColour(party.id)}
           ></div>
           <div class="quota-line" style:left="{quotaX}%" aria-hidden="true"></div>
         </div>

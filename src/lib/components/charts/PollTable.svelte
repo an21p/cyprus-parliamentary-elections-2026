@@ -3,6 +3,7 @@
   import { POLLS } from '$data/polls';
   import { getParty } from '$data/parties';
   import { localizedName } from '$i18n/dict';
+  import { partyColour } from '$lib/theme/a11y.svelte';
 
   type Props = {
     lang: Lang;
@@ -256,7 +257,7 @@
                 type="button"
                 onclick={() => toggleSort(party)}
                 title={L.sortBy}
-                style="--party-color: {p.colour};"
+                style="--party-color: {partyColour(p.id)};"
               >
                 <span class="party-swatch" aria-hidden="true"></span>
                 {localizedName(p.shortName, lang)}

@@ -3,6 +3,7 @@
   import { PARTIES, getParty } from '$data/parties';
   import { RESULTS_2021 } from '$data/results-2021';
   import { localizedName } from '$i18n/dict';
+  import { partyColour } from '$lib/theme/a11y.svelte';
   import type { Lang, Party, PartyId } from '$data/types';
 
   let { data } = $props();
@@ -119,7 +120,7 @@
           {:else}
             <span
               class="party-bg-logo party-bg-logo--swatch"
-              style="background-color: {party.colour};"
+              style="background-color: {partyColour(party.id)};"
               aria-hidden="true"
             ></span>
           {/if}
@@ -184,7 +185,7 @@
           {:else}
             <span
               class="party-bg-logo party-bg-logo--swatch"
-              style="background-color: {party.colour};"
+              style="background-color: {partyColour(party.id)};"
               aria-hidden="true"
             ></span>
           {/if}
@@ -249,7 +250,7 @@
           {:else}
             <span
               class="party-bg-logo party-bg-logo--swatch"
-              style="background-color: {party.colour};"
+              style="background-color: {partyColour(party.id)};"
               aria-hidden="true"
             ></span>
           {/if}
@@ -305,7 +306,7 @@
             <span class="minor-logo minor-logo--placeholder" aria-hidden="true">
               <span
                 class="minor-logo-chip"
-                style="background-color: {party.colour};"
+                style="background-color: {partyColour(party.id)};"
               ></span>
             </span>
           {/if}

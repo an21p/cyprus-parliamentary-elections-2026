@@ -2,6 +2,7 @@
   import type { Lang, PartyId } from '$data/types';
   import { getParty } from '$data/parties';
   import { localizedName } from '$i18n/dict';
+  import { partyColour } from '$lib/theme/a11y.svelte';
 
   type Props = {
     lang: Lang;
@@ -78,7 +79,7 @@
         <tr>
           <th scope="row">
             <span class="party">
-              <span class="swatch" style="background-color: {p.colour};" aria-hidden="true"></span>
+              <span class="swatch" style="background-color: {partyColour(p.id)};" aria-hidden="true"></span>
               {localizedName(p.shortName, lang)}
             </span>
           </th>

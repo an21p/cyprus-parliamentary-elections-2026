@@ -3,6 +3,7 @@
   import { PARTIES } from '$data/parties';
   import { POLLS } from '$data/polls';
   import { simulatorState } from '$lib/simulator/state.svelte';
+  import { partyColour } from '$lib/theme/a11y.svelte';
   import type { PartyId } from '$data/types';
 
   type Props = { lang: Lang };
@@ -210,7 +211,7 @@
       <li class="party-row">
         <span
           class="swatch"
-          style:background-color={party.colour}
+          style:background-color={partyColour(party.id)}
           aria-hidden="true"
         ></span>
         <span class="party-name" title={pickName(party)}>
