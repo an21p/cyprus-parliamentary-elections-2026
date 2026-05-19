@@ -76,3 +76,37 @@ export function partyColour(partyId: PartyId): string {
   }
   return getParty(partyId).colour;
 }
+
+// Curated palette tuned for stacked / multi-band charts. Brand colours are
+// kept where they read well; the few that don't (ADK's white, ELAM's pure
+// black, KEKK clashing with KOSP green) get nearby substitutes so every
+// party stays distinguishable from its neighbours in a single chart. The
+// colourblind toggle still wins — it routes through partyColour() below.
+const CHART_PALETTE: Partial<Record<PartyId, string>> = {
+  DISY: '#1554a3',
+  AKEL: '#d62718',
+  DIKO: '#14a8c1',
+  ELAM: '#2c2c2c',
+  EDEK: '#c0345b',
+  DIPA: '#1d8c7c',
+  KOSP: '#3f8a3a',
+  ALMA: '#f0a500',
+  ADK: '#9aa0a6',
+  VOLT: '#8438cc',
+  DEK: '#7a5d4d',
+  DIMAL: '#5c6bc0',
+  KEKK: '#a3a437',
+  LAKE: '#4a2a23',
+  SIKOU: '#ef7c1a',
+  FARL: '#7a1a4a',
+  POPSF: '#8a4c44',
+  AGRO: '#bdb422',
+  GRNC: '#7ac84a'
+};
+
+export function chartPartyColour(partyId: PartyId): string {
+  if (a11yPrefs.colourblind) {
+    return COLOURBLIND_PALETTE[partyId] ?? partyColour(partyId);
+  }
+  return CHART_PALETTE[partyId] ?? partyColour(partyId);
+}

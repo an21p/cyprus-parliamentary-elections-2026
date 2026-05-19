@@ -3,7 +3,7 @@
   import { POLLS } from '$data/polls';
   import { getParty } from '$data/parties';
   import { localizedName } from '$i18n/dict';
-  import { partyColour } from '$lib/theme/a11y.svelte';
+  import { chartPartyColour } from '$lib/theme/a11y.svelte';
 
   type Props = {
     lang: Lang;
@@ -12,39 +12,32 @@
     parties?: PartyId[];
   };
 
+  // Shared "major eight" used by both poll graphs (tracker + table/bars).
   const DEFAULT_PARTIES: PartyId[] = [
     'DISY',
     'AKEL',
     'ELAM',
-    'ALMA',
-    'ADK',
     'DIKO',
+    'ADK',
+    'ALMA',
     'VOLT',
-    'EDEK',
-    'DIPA',
-    'KOSP',
-    'KEKK'
+    'EDEK'
   ];
 
   let { lang, data = POLLS, parties = DEFAULT_PARTIES }: Props = $props();
 
-  // ----- Pollster color codes -------------------------------------------
-  // Hash the pollster name into a hue so colours stay stable across reloads
-  // and are deterministic for unknown pollsters too.
-  function pollsterColor(name: string): string {
-    let h = 2166136261;
-    for (let i = 0; i < name.length; i++) {
-      h = Math.imul(h ^ name.charCodeAt(i), 16777619) >>> 0;
-    }
-    // Golden-angle distribution gives a good spread across nearby hashes.
-    const hue = Math.floor(((h % 360) * 137.508) % 360);
-    return `hsl(${hue} 58% 42%)`;
-  }
+  // Pollsters are identified by name; the swatch is a neutral grey across
+  // the page (filter chips, table cell, bars info-cube, details dialog).
+  const POLLSTER_SWATCH = 'var(--color-ink-3)';
+
+  const pollsterCounts = $derived.by<Map<string, number>>(() => {
+    const counts = new Map<string, number>();
+    for (const p of data) counts.set(p.pollster, (counts.get(p.pollster) ?? 0) + 1);
+    return counts;
+  });
 
   const uniquePollsters = $derived.by<string[]>(() => {
-    const seen = new Set<string>();
-    for (const p of data) seen.add(p.pollster);
-    return Array.from(seen).sort((a, b) => a.localeCompare(b));
+    return Array.from(pollsterCounts.keys()).sort((a, b) => a.localeCompare(b));
   });
 
   // Filter state - every pollster active by default.
@@ -186,27 +179,61 @@
     notes: lang === 'el' ? 'Σημειώσεις' : 'Notes',
     close: lang === 'el' ? 'Κλείσιμο' : 'Close',
     openDetailsAria: lang === 'el' ? 'Στοιχεία' : 'Details',
-    other: lang === 'el' ? 'Λοιπά / αναποφάσιστοι' : 'Other / undecided'
+    other: lang === 'el' ? 'Λοιπά / αναποφάσιστοι' : 'Other / undecided',
+    legend: lang === 'el' ? 'Κόμματα' : 'Parties'
   });
 
   // ----- View mode (table | bars) ---------------------------------------
   type ViewMode = 'table' | 'bars';
-  let viewMode = $state<ViewMode>('table');
+  let viewMode = $state<ViewMode>('bars');
 
-  // ----- Details dialog -------------------------------------------------
-  let dialogEl = $state<HTMLDialogElement | null>(null);
+  // ----- Popup anchor positioning ---------------------------------------
+  type AnchorRect = { top: number; left: number; width: number };
+
+  function anchorRect(el: Element): AnchorRect {
+    const r = el.getBoundingClientRect();
+    return { top: r.top, left: r.left, width: r.width };
+  }
+
+  // ----- Details popup --------------------------------------------------
   let activeRow = $state<PollEntry | null>(null);
+  let detailsAnchor = $state<AnchorRect | null>(null);
 
-  function openDetails(row: PollEntry) {
+  function openDetails(ev: MouseEvent, row: PollEntry) {
     activeRow = row;
-    // Wait a tick so the dialog markup renders with the active row before opening.
-    queueMicrotask(() => dialogEl?.showModal());
+    detailsAnchor = anchorRect(ev.currentTarget as Element);
   }
   function closeDetails() {
-    dialogEl?.close();
     activeRow = null;
+    detailsAnchor = null;
+  }
+
+  // ----- Party card popup (bars view) -----------------------------------
+  let activePartyCard = $state<{
+    partyId: PartyId;
+    share: number;
+    poll: PollEntry;
+  } | null>(null);
+  let partyCardAnchor = $state<AnchorRect | null>(null);
+
+  function openPartyCard(ev: MouseEvent, partyId: PartyId, share: number, poll: PollEntry) {
+    activePartyCard = { partyId, share, poll };
+    partyCardAnchor = anchorRect(ev.currentTarget as Element);
+  }
+  function closePartyCard() {
+    activePartyCard = null;
+    partyCardAnchor = null;
+  }
+
+  function onKeydown(ev: KeyboardEvent) {
+    if (ev.key === 'Escape') {
+      closePartyCard();
+      closeDetails();
+    }
   }
 </script>
+
+<svelte:window onkeydown={onKeydown} />
 
 <div class="poll-toolbar">
   <div class="poll-filter" role="group" aria-label={L.filterTitle}>
@@ -221,7 +248,6 @@
     <ul class="poll-filter-list" role="list">
       {#each uniquePollsters as name (name)}
         {@const on = activePollsters.includes(name)}
-        {@const colour = pollsterColor(name)}
         <li>
           <button
             type="button"
@@ -230,8 +256,9 @@
             aria-pressed={on}
             onclick={() => togglePollster(name)}
           >
-            <span class="chip-swatch" style="background-color: {colour};" aria-hidden="true"></span>
+            <span class="chip-swatch" style="background-color: {POLLSTER_SWATCH};" aria-hidden="true"></span>
             <span class="chip-label">{name}</span>
+            <span class="chip-count" aria-hidden="true">{pollsterCounts.get(name)}</span>
           </button>
         </li>
       {/each}
@@ -257,6 +284,16 @@
       >{L.viewBars}</button>
     </div>
   </div>
+</div>
+
+<div class="party-legend" role="list" aria-label={L.legend}>
+  {#each parties as id (id)}
+    {@const p = getParty(id)}
+    <div class="party-legend-item" role="listitem">
+      <span class="party-legend-swatch" style="background-color: {chartPartyColour(id)};" aria-hidden="true"></span>
+      <span class="party-legend-label">{localizedName(p.shortName, lang)}</span>
+    </div>
+  {/each}
 </div>
 
 {#if viewMode === 'table'}
@@ -306,7 +343,7 @@
                 type="button"
                 onclick={() => toggleSort(party)}
                 title={L.sortBy}
-                style="--party-color: {partyColour(p.id)};"
+                style="--party-color: {chartPartyColour(p.id)};"
               >
                 <span class="party-swatch" aria-hidden="true"></span>
                 {localizedName(p.shortName, lang)}
@@ -323,7 +360,7 @@
           </tr>
         {:else}
           {#each rows as row, i (i)}
-            {@const colour = pollsterColor(row.pollster)}
+            {@const colour = POLLSTER_SWATCH}
             <tr>
               <th scope="row" class="col-frozen col-frozen-1 col-date">{fmtRange(row)}</th>
               <td class="col-frozen col-frozen-2 col-pollster">
@@ -351,7 +388,7 @@
     <p class="empty empty-bars">{L.empty}</p>
   {:else}
     {#each rows as row, i (i)}
-      {@const colour = pollsterColor(row.pollster)}
+      {@const colour = POLLSTER_SWATCH}
       {@const segments = parties
         .map((id) => ({ id, value: row.shares[id] ?? 0 }))
         .filter((s) => s.value > 0)}
@@ -363,7 +400,7 @@
           style="background-color: {colour};"
           aria-label="{L.openDetailsAria}: {row.pollster}, {fmtRange(row)}"
           title="{row.pollster} — {row.commissioner}"
-          onclick={() => openDetails(row)}
+          onclick={(ev) => openDetails(ev, row)}
         ></button>
         <div class="bar-meta">
           <span class="bar-date">{fmtRange(row)}</span>
@@ -382,15 +419,18 @@
         >
           {#each segments as seg (seg.id)}
             {@const p = getParty(seg.id)}
-            <span
+            <button
+              type="button"
               class="bar-seg"
-              style="width: {seg.value}%; background-color: {partyColour(p.id)};"
+              style="width: {seg.value}%; background-color: {chartPartyColour(p.id)};"
               title="{localizedName(p.shortName, lang)} · {fmtShare(seg.value)}%"
+              aria-label="{localizedName(p.shortName, lang)} {fmtShare(seg.value)}%"
+              onclick={(ev) => openPartyCard(ev, seg.id, seg.value, row)}
             >
               {#if seg.value >= 6}
                 <span class="bar-seg-label">{fmtShare(seg.value)}</span>
               {/if}
-            </span>
+            </button>
           {/each}
           {#if total < 100}
             <span
@@ -406,16 +446,58 @@
 </div>
 {/if}
 
-<dialog
-  bind:this={dialogEl}
-  class="poll-info-dialog"
-  onclose={() => (activeRow = null)}
-  aria-label={L.detailsTitle}
->
-  {#if activeRow}
-    {@const c = pollsterColor(activeRow.pollster)}
+{#if activePartyCard && partyCardAnchor}
+  {@const party = getParty(activePartyCard.partyId)}
+  {@const swatch = chartPartyColour(party.id)}
+  <div
+    class="popup-overlay"
+    role="presentation"
+    onclick={closePartyCard}
+  ></div>
+  <div
+    class="party-card-popup"
+    role="dialog"
+    aria-label={lang === 'el' ? 'Στοιχεία κόμματος' : 'Party details'}
+    style="--anchor-left: {partyCardAnchor.left}px; --anchor-top: {partyCardAnchor.top}px; --anchor-width: {partyCardAnchor.width}px;"
+  >
+    <button
+      type="button"
+      class="party-card-close"
+      aria-label={L.close}
+      onclick={closePartyCard}
+    >×</button>
+    <div class="party-card">
+      <div class="party-card-logo" style="--party-color: {swatch};">
+        {#if party.logo}
+          <img src={party.logo} alt="" />
+        {:else}
+          <span class="party-card-swatch" aria-hidden="true"></span>
+        {/if}
+      </div>
+      <div class="party-card-info">
+        <p class="party-card-share">{fmtShare(activePartyCard.share)}<span class="party-card-share-pct">%</span></p>
+        <p class="party-card-name">{localizedName(party.shortName, lang)}</p>
+        <p class="party-card-name-full">{localizedName(party.name, lang)}</p>
+        <p class="party-card-meta">{activePartyCard.poll.pollster} · {fmtRange(activePartyCard.poll)}</p>
+      </div>
+    </div>
+  </div>
+{/if}
+
+{#if activeRow && detailsAnchor}
+  <div
+    class="popup-overlay"
+    role="presentation"
+    onclick={closeDetails}
+  ></div>
+  <div
+    class="poll-info-popup"
+    role="dialog"
+    aria-label={L.detailsTitle}
+    style="--anchor-left: {detailsAnchor.left}px; --anchor-top: {detailsAnchor.top}px; --anchor-width: {detailsAnchor.width}px;"
+  >
     <header class="dialog-head">
-      <span class="dialog-swatch" style="background-color: {c};" aria-hidden="true"></span>
+      <span class="dialog-swatch" style="background-color: {POLLSTER_SWATCH};" aria-hidden="true"></span>
       <div>
         <h3 class="dialog-title">{activeRow.pollster}</h3>
         <p class="dialog-sub">{fmtRange(activeRow)}</p>
@@ -436,10 +518,35 @@
         <dd class="dialog-notes">{activeRow.notes}</dd>
       {/if}
     </dl>
-  {/if}
-</dialog>
+  </div>
+{/if}
 
 <style>
+  .party-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1) var(--sp-3);
+    margin-bottom: var(--sp-3);
+  }
+  .party-legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+  }
+  .party-legend-swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    border: 1px solid rgba(20, 24, 31, 0.15);
+  }
+  .party-legend-label {
+    font-family: var(--font-sans);
+    font-size: var(--fs-50);
+    color: var(--color-ink-2);
+    white-space: nowrap;
+  }
+
   .poll-table-wrap {
     width: 100%;
     border: 1px solid var(--color-rule);
@@ -728,6 +835,18 @@
     font-weight: 500;
     white-space: nowrap;
   }
+  .poll-filter-list .chip-count {
+    font-size: var(--fs-50);
+    font-weight: 600;
+    color: var(--color-ink-3);
+    background-color: var(--color-paper-2);
+    border-radius: var(--radius-1);
+    padding: 1px 5px;
+    line-height: 1.4;
+  }
+  .poll-filter-list .chip--off .chip-count {
+    opacity: 0.5;
+  }
 
   /* Toolbar: filter (left) + view switch (right) */
   .poll-toolbar {
@@ -866,6 +985,10 @@
   }
 
   .bar-seg {
+    appearance: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -876,6 +999,16 @@
     overflow: hidden;
     white-space: nowrap;
     min-width: 0;
+    cursor: pointer;
+    transition: filter var(--dur-fast) var(--ease-standard);
+  }
+  .bar-seg:hover,
+  .bar-seg:focus-visible {
+    filter: brightness(1.12);
+  }
+  .bar-seg:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
   }
   .bar-seg-label {
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
@@ -913,20 +1046,138 @@
     }
   }
 
-  /* Details dialog */
-  .poll-info-dialog {
+  /* Shared overlay for click-outside dismissal */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+  }
+
+  /* Shared positioning mixin for both popups */
+  .party-card-popup,
+  .poll-info-popup {
+    position: fixed;
+    z-index: 100;
+    left: clamp(8px, calc(var(--anchor-left) + var(--anchor-width) / 2 - 160px), calc(100vw - 328px));
+    bottom: calc(100dvh - var(--anchor-top) + 8px);
     border: 1px solid var(--color-rule-strong);
     border-radius: var(--radius-3);
     background-color: var(--color-paper);
     color: var(--color-ink);
-    padding: 0;
-    max-width: min(440px, 92vw);
-    width: 100%;
-    box-shadow: 0 24px 60px -16px rgba(20, 24, 31, 0.32);
+    box-shadow: 0 8px 32px -8px rgba(20, 24, 31, 0.28);
   }
-  .poll-info-dialog::backdrop {
-    background-color: rgba(20, 24, 31, 0.4);
-    backdrop-filter: blur(2px);
+
+  /* Party card popup (clicked from a bar segment) */
+  .party-card-popup {
+    padding: var(--sp-4);
+    max-width: min(320px, calc(100vw - 16px));
+    width: 320px;
+  }
+  .party-card-close {
+    position: absolute;
+    top: var(--sp-1);
+    right: var(--sp-2);
+    appearance: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--color-ink-3);
+    padding: 4px 8px;
+    border-radius: var(--radius-1);
+  }
+  .party-card-close:hover {
+    color: var(--color-ink);
+    background-color: var(--color-paper-2);
+  }
+  .party-card-close:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .party-card {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: var(--sp-3) var(--sp-4);
+    align-items: center;
+  }
+
+  .party-card-logo {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-2);
+    background-color: var(--color-paper-2);
+    border: 1px solid var(--color-rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .party-card-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 6px;
+  }
+  .party-card-swatch {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-1);
+    background-color: var(--party-color);
+    border: 1px solid rgba(20, 24, 31, 0.18);
+  }
+
+  .party-card-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .party-card-share {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: var(--fs-300, 28px);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-ink);
+  }
+  .party-card-share-pct {
+    font-size: var(--fs-100);
+    font-weight: 500;
+    color: var(--color-ink-3);
+    margin-left: 2px;
+  }
+  .party-card-name {
+    margin: var(--sp-1) 0 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-100);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .party-card-name-full {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-75);
+    color: var(--color-ink-2);
+    line-height: var(--lh-snug);
+  }
+  .party-card-meta {
+    margin: var(--sp-2) 0 0;
+    font-family: var(--font-mono);
+    font-size: var(--fs-50);
+    color: var(--color-ink-3);
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--color-rule);
+    padding-top: var(--sp-2);
+  }
+
+  /* Details popup */
+  .poll-info-popup {
+    padding: 0;
+    max-width: min(440px, calc(100vw - 16px));
+    width: 440px;
   }
 
   .dialog-head {
