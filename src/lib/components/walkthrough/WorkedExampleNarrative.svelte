@@ -5,6 +5,7 @@
   import NicosiaFirstDistTable from './NicosiaFirstDistTable.svelte';
   import OtherDistrictsPanel from './OtherDistrictsPanel.svelte';
   import NationalUnusedStackedBars from './NationalUnusedStackedBars.svelte';
+  import NicosiaFinalResultCard from './NicosiaFinalResultCard.svelte';
 
   type Props = {
     lang: Lang;
@@ -137,6 +138,9 @@
     {#snippet body()}
       <p>{@html T.s4.body[0]}</p>
       <p>{@html T.s4.body[1]}</p>
+    {/snippet}
+    {#snippet figure()}
+      <NicosiaFinalResultCard {lang} />
     {/snippet}
   </WorkedExampleStep>
 </section>
