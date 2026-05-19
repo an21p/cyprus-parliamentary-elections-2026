@@ -331,7 +331,7 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'Popular Struggle', el: 'Λαϊκός Αγώνας' },
     leader: { en: 'Apostolos Apostolou', el: 'Απόστολος Αποστόλου' },
-    colour: '#455a64',
+    colour: '#6d4c41',
     alignment: {
       en: 'Nationalist, populist',
       el: 'Εθνικιστικό, λαϊκίστικο'
@@ -348,7 +348,7 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'Agronomos', el: 'Αγρονόμος' },
     leader: { en: 'Andreas Christofi', el: 'Ανδρέας Χριστοφή' },
-    colour: '#827717',
+    colour: '#9e9d24',
     alignment: {
       en: 'Agrarian',
       el: 'Αγροτικό'
@@ -366,7 +366,7 @@ export const PARTIES: Party[] = [
     },
     shortName: { en: 'Greens (GRNC)', el: 'Πράσινοι (GRNC)' },
     leader: { en: 'Kyriakos Andreou', el: 'Κυριάκος Ανδρέου' },
-    colour: '#2e7d32',
+    colour: '#8bc34a',
     alignment: {
       en: 'Green, separate from KOSP',
       el: 'Πράσινο, ξεχωριστό από το ΚΟΣΠ'
