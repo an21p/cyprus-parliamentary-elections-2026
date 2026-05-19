@@ -81,7 +81,7 @@
       />
       <p class="math-legend-line">
         {#if lang === 'el'}
-          όπου <KMath expr={'V_{\\text{valid}}'} /> είναι οι έγκυροι ψήφοι της επαρχίας, <KMath expr={'S'} /> οι έδρες της, <KMath expr={'V_p'} /> οι ψήφοι του κόμματος και <KMath expr={'\\lfloor \\cdot \\rfloor'} /> ο ακέραιος προς τα κάτω.
+          όπου <KMath expr={'V_{\\text{valid}}'} /> οι έγκυροι ψήφοι επαρχίας, <KMath expr={'S'} /> οι έδρες, <KMath expr={'V_p'} /> οι ψήφοι κόμματος και <KMath expr={'\\lfloor \\cdot \\rfloor'} /> ο ακέραιος προς τα κάτω.
         {:else}
           where <KMath expr={'V_{\\text{valid}}'} /> is the district's valid votes, <KMath expr={'S'} /> its seats, <KMath expr={'V_p'} /> the party's votes, and <KMath expr={'\\lfloor \\cdot \\rfloor'} /> the floor function.
         {/if}
@@ -261,7 +261,7 @@
         <li>
           <KMath expr={'s_p'} /> —
           {lang === 'el'
-            ? 'εθνικό μερίδιο του κόμματος (από τη δημοσκόπηση), στο διάστημα 0–1'
+            ? 'εθνικό μερίδιο κόμματος (από δημοσκόπηση), 0–1'
             : "party's national share (from the poll), in 0–1"}
         </li>
         <li>

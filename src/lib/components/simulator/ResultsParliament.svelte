@@ -293,7 +293,7 @@
   .muted { color: var(--color-ink-3); }
 
   .chart {
-    background: var(--color-paper);
+    background: var(--color-paper-2);
     border: 1px solid var(--color-rule);
     border-radius: var(--radius-3);
     padding: var(--sp-4);
@@ -315,7 +315,7 @@
     gap: var(--sp-2);
     align-items: center;
     padding: var(--sp-2) var(--sp-3);
-    background: var(--color-paper);
+    background: var(--color-paper-2);
     border: 1px solid var(--color-rule);
     border-radius: var(--radius-2);
     font-size: var(--fs-75);

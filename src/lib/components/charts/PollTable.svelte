@@ -303,7 +303,7 @@
     border: 1px solid var(--color-rule);
     border-radius: var(--radius-3);
     overflow: hidden;
-    background-color: var(--color-paper);
+    background-color: var(--color-paper-2);
   }
 
   .scroll {

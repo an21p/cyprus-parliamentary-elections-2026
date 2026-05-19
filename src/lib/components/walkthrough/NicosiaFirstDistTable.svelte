@@ -114,7 +114,7 @@
     border-spacing: 0;
     font-family: var(--font-sans);
     font-size: var(--fs-75);
-    background-color: var(--color-paper);
+    background-color: var(--color-paper-2);
     border: 1px solid var(--color-rule);
     border-radius: var(--radius-3);
     overflow: hidden;

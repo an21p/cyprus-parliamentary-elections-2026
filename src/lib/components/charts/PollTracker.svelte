@@ -503,7 +503,7 @@
     display: block;
     width: 100%;
     height: auto;
-    background-color: var(--color-paper);
+    background-color: var(--color-paper-2);
     border: 1px solid var(--color-rule);
     border-radius: var(--radius-3);
   }

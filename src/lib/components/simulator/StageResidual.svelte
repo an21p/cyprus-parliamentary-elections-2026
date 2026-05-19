@@ -79,7 +79,7 @@
 <style>
   .wrap {
     padding: var(--sp-4) var(--sp-5);
-    background: var(--color-paper);
+    background: var(--color-paper-2);
     border: 1px solid var(--color-rule);
     border-radius: var(--radius-3);
     display: flex;

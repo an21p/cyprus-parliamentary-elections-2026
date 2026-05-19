@@ -17,10 +17,10 @@
   type NavKey =
     | 'nav.home'
     | 'nav.system'
-    | 'nav.simulator'
-    | 'nav.polls'
     | 'nav.districts'
     | 'nav.parties'
+    | 'nav.polls'
+    | 'nav.simulator'
     | 'nav.worked_example'
     | 'nav.about';
 
@@ -29,10 +29,10 @@
   const items: NavItem[] = [
     { key: 'nav.home',           slug: '' },
     { key: 'nav.system',         slug: 'system' },
-    { key: 'nav.simulator',      slug: 'simulator' },
-    { key: 'nav.polls',          slug: 'polls' },
     { key: 'nav.districts',      slug: 'districts' },
     { key: 'nav.parties',        slug: 'parties' },
+    { key: 'nav.polls',          slug: 'polls' },
+    { key: 'nav.simulator',      slug: 'simulator' },
     { key: 'nav.worked_example', slug: 'worked-example' },
     { key: 'nav.about',          slug: 'about' }
   ];

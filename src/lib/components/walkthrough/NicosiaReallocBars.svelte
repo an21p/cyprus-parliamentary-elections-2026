@@ -94,7 +94,7 @@
 
 <style>
   .bars-panel {
-    background-color: var(--color-paper);
+    background-color: var(--color-paper-2);
     border: 1px solid var(--color-rule);
     border-radius: var(--radius-3);
     padding: var(--sp-5);
