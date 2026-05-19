@@ -3,6 +3,7 @@
   import type { Lang } from '$i18n/dict';
   import { t } from '$i18n/dict';
   import LangSwitcher from './LangSwitcher.svelte';
+  import { a11yPrefs, toggleColourblind } from '$lib/theme/a11y.svelte';
 
   type Props = {
     lang: Lang;
@@ -89,6 +90,29 @@
     </nav>
 
     <div class="nav-trailing">
+      <button
+        type="button"
+        class="a11y-btn"
+        class:a11y-btn--on={a11yPrefs.colourblind}
+        aria-pressed={a11yPrefs.colourblind}
+        aria-label={t(lang, 'a11y.colourblind.aria_toggle')}
+        title={t(lang, 'a11y.colourblind.label')}
+        onclick={toggleColourblind}
+      >
+        <svg
+          class="a11y-icon"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <!-- Half-filled circle: standard "high contrast / colour adjust" mark. -->
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.75" />
+          <path d="M12 3 a9 9 0 0 1 0 18 z" fill="currentColor" />
+        </svg>
+        <span class="visually-hidden">{t(lang, 'a11y.colourblind.label')}</span>
+      </button>
       <LangSwitcher {lang} {currentPath} />
       <button
         type="button"
@@ -285,8 +309,63 @@
   .nav-trailing {
     display: flex;
     align-items: center;
-    gap: var(--sp-3);
+    gap: var(--sp-2);
     justify-self: end;
+  }
+
+  /* ---------- A11y palette toggle ---------- */
+  .a11y-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-3);
+    background-color: transparent;
+    color: var(--color-ink-2);
+    cursor: pointer;
+    transition: background-color var(--dur-fast) var(--ease-standard),
+                border-color var(--dur-fast) var(--ease-standard),
+                color var(--dur-fast) var(--ease-standard);
+  }
+
+  .a11y-btn:hover {
+    background-color: var(--color-paper-2);
+    border-color: var(--color-rule-strong);
+    color: var(--color-ink);
+  }
+
+  .a11y-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .a11y-btn--on {
+    background-color: var(--color-accent-soft);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .a11y-btn--on:hover {
+    background-color: var(--color-accent-soft);
+    color: var(--color-accent-hover);
+  }
+
+  .a11y-icon {
+    display: block;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .nav-toggle {

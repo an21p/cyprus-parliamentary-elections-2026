@@ -6,6 +6,7 @@
   } from '$data/types';
   import { getParty } from '$data/parties';
   import { THRESHOLDS } from '$data/thresholds';
+  import { partyColour } from '$lib/theme/a11y.svelte';
 
   type Props = {
     trace: SecondDistributionTrace;
@@ -99,7 +100,7 @@
             <span
               class="swatch"
               style:background-color={row.qualifies
-                ? party.colour
+                ? partyColour(party.id)
                 : 'var(--color-rule-strong)'}
               aria-hidden="true"
             ></span>
@@ -110,7 +111,7 @@
               class="bar"
               style:width="{width}%"
               style:background-color={row.qualifies
-                ? party.colour
+                ? partyColour(party.id)
                 : 'var(--color-rule-strong)'}
             ></div>
             <div
@@ -162,7 +163,7 @@
           {@const party = getParty(row.partyId)}
           <tr>
             <td>
-              <span class="swatch sw-sm" style:background-color={party.colour} aria-hidden="true"></span>
+              <span class="swatch sw-sm" style:background-color={partyColour(party.id)} aria-hidden="true"></span>
               <span>{party.shortName[lang] ?? party.shortName.en}</span>
             </td>
             <td class="num-col">{numFmt.format(row.unusedVotes)}</td>

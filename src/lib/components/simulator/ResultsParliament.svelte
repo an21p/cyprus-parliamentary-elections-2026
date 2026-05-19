@@ -2,6 +2,7 @@
   import type { Lang } from '$i18n/dict';
   import type { AllocationResult, PartyId } from '$data/types';
   import { getParty, PARTIES } from '$data/parties';
+  import { partyColour as a11yPartyColour } from '$lib/theme/a11y.svelte';
 
   type Props = {
     result: AllocationResult;
@@ -143,10 +144,12 @@
 
   function partyColour(pid: PartyId | null): string {
     if (!pid) return 'var(--color-rule-strong)';
-    return getParty(pid).colour;
+    return a11yPartyColour(pid);
   }
 
   function isLightFill(hex: string): boolean {
+    // var(--…) values (used for empty seats) are not literal hex; treat as not-light.
+    if (!hex.startsWith('#')) return false;
     const c = hex.replace('#', '');
     if (c.length !== 6) return false;
     const r = parseInt(c.slice(0, 2), 16);
@@ -159,7 +162,7 @@
 
   function seatStroke(pid: PartyId | null): string {
     if (!pid) return 'var(--color-paper)';
-    return isLightFill(getParty(pid).colour)
+    return isLightFill(a11yPartyColour(pid))
       ? 'var(--color-ink-2)'
       : 'var(--color-paper)';
   }
@@ -228,7 +231,7 @@
     {#each orderedSeats as row (row.partyId)}
       {@const party = getParty(row.partyId)}
       <div class="lg">
-        <span class="lg-swatch" style:background-color={party.colour} aria-hidden="true"></span>
+        <span class="lg-swatch" style:background-color={a11yPartyColour(party.id)} aria-hidden="true"></span>
         <span class="lg-name">{pickShort(party)}</span>
         <span class="lg-seats">{numFmt.format(row.seats)}</span>
       </div>

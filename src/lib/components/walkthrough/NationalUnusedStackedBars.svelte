@@ -4,6 +4,7 @@
   import { getParty } from '$data/parties';
   import { localizedName } from '$i18n/dict';
   import { RESULTS_2021, VALID_VOTES_BY_DISTRICT_2021 } from '$data/results-2021';
+  import { partyColour } from '$lib/theme/a11y.svelte';
 
   type Props = {
     lang: Lang;
@@ -143,7 +144,7 @@
       <li class="bar-row">
         <div class="bar-meta">
           <span class="bar-party">
-            <span class="bar-swatch" style="background-color: {party.colour};" aria-hidden="true"></span>
+            <span class="bar-swatch" style="background-color: {partyColour(party.id)};" aria-hidden="true"></span>
             <span class="bar-party-name">{localizedName(party.shortName, lang)}</span>
           </span>
           <span class="bar-total">

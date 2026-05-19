@@ -2,6 +2,7 @@
   import type { Lang, PartyId } from '$data/types';
   import { getParty } from '$data/parties';
   import { localizedName } from '$i18n/dict';
+  import { partyColour } from '$lib/theme/a11y.svelte';
 
   type Props = {
     lang: Lang;
@@ -73,7 +74,7 @@
       {@const reallocW = (r.reallocated / maxFinal) * 100}
       <li class="row" class:row--gain={r.reallocated > 0}>
         <div class="row-head">
-          <span class="swatch" style:background-color={p.colour} aria-hidden="true"></span>
+          <span class="swatch" style:background-color={partyColour(p.id)} aria-hidden="true"></span>
           <span class="row-name">{localizedName(p.shortName, lang)}</span>
           <span class="row-final">
             <span class="num">{r.final}</span>
@@ -83,8 +84,8 @@
           </span>
         </div>
         <div class="bar-wrap" aria-hidden="true">
-          <div class="bar bar--first" style:width="{firstW}%" style:background-color={p.colour}></div>
-          <div class="bar bar--realloc" style:width="{reallocW}%" style:left="{firstW}%" style:background-color={p.colour}></div>
+          <div class="bar bar--first" style:width="{firstW}%" style:background-color={partyColour(p.id)}></div>
+          <div class="bar bar--realloc" style:width="{reallocW}%" style:left="{firstW}%" style:background-color={partyColour(p.id)}></div>
         </div>
         <div class="row-foot">
           <span>
