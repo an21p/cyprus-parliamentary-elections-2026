@@ -228,9 +228,11 @@
     title={lang === 'el' ? 'Τα κόμματα που πρωτοκατεβαίνουν' : 'Parties contesting for the first time'}
   >
     <p>
-      {lang === 'el'
-        ? 'Τέσσερα κόμματα κατεβαίνουν για πρώτη φορά σε βουλευτικές εκλογές. Τα δύο πρώτα (ΑΛΜΑ και Άμεση Δημοκρατία Κύπρου) βρίσκονται καλά πάνω από το όριο εισόδου σύμφωνα με τις δημοσκοπήσεις και θα μπουν σχεδόν σίγουρα στη Βουλή.'
-        : 'Four parties are contesting a parliamentary election for the first time. The two leaders (ALMA and Direct Democracy Cyprus) are polling well above the threshold and look near-certain to enter the House.'}
+      {#if lang === 'el'}
+        <strong>Τέσσερα κόμματα</strong> κατεβαίνουν για πρώτη φορά σε βουλευτικές εκλογές. Τα δύο πρώτα (<strong>ΑΛΜΑ</strong> και <strong>Άμεση Δημοκρατία Κύπρου</strong>) βρίσκονται καλά πάνω από το όριο εισόδου σύμφωνα με τις δημοσκοπήσεις και θα μπουν <strong>σχεδόν σίγουρα</strong> στη Βουλή.
+      {:else}
+        <strong>Four parties</strong> are contesting a parliamentary election for the first time. The two leaders (<strong>ALMA</strong> and <strong>Direct Democracy Cyprus</strong>) are polling well above the threshold and look <strong>near-certain to enter the House</strong>.
+      {/if}
     </p>
     <div class="party-grid">
       {#each NEW_ENTRANTS as pid (pid)}
@@ -279,9 +281,11 @@
     title={lang === 'el' ? 'Λοιπές λίστες' : 'Other lists'}
   >
     <p>
-      {lang === 'el'
-        ? 'Επτά μικρότερες λίστες συμπληρώνουν τις 19 υποψηφιότητες. Καμία δεν εμφανίζεται κοντά στο όριο εισόδου, αλλά πολλές εκπροσωπούν ένα συγκεκριμένο εκλογικό αίτημα ή κοινωνική ομάδα.'
-        : 'Seven smaller lists round out the 19 parties on the ballot. None is polling near the 3.6% threshold, but several represent a particular constituency or single-issue cause.'}
+      {#if lang === 'el'}
+        <strong>Επτά μικρότερες λίστες</strong> συμπληρώνουν τις 19 υποψηφιότητες. Καμία δεν εμφανίζεται κοντά στο όριο εισόδου, αλλά πολλές εκπροσωπούν ένα συγκεκριμένο εκλογικό αίτημα ή κοινωνική ομάδα.
+      {:else}
+        <strong>Seven smaller lists</strong> round out the 19 parties on the ballot. None is polling near the <strong>3.6% threshold</strong>, but several represent a particular constituency or single-issue cause.
+      {/if}
     </p>
     <ul class="minor-list" role="list">
       {#each MINOR as pid (pid)}
@@ -323,9 +327,11 @@
     title={lang === 'el' ? 'Εννέα ανεξάρτητοι υποψήφιοι' : 'Nine independent candidates'}
   >
     <p>
-      {lang === 'el'
-        ? 'Πέρα από τις 19 λίστες, εννέα ανεξάρτητοι υποψήφιοι θα εμφανιστούν στα ψηφοδέλτια χωρίς κομματική σήμανση. Στο κυπριακό σύστημα οι ανεξάρτητοι αντιμετωπίζονται όπως μία μονομελής λίστα και θεωρητικά οφείλουν να πληρούν τα ίδια εθνικά όρια, γεγονός που πρακτικά καθιστά εξαιρετικά δύσκολη την εκλογή τους χωρίς ευρεία επαρχιακή απήχηση.'
-        : 'Beyond the 19 parties, nine independent candidates will appear on the ballots without any party affiliation. Under the Cypriot system, independents are treated as single-name lists and are nominally held to the same national thresholds, which makes their election very difficult absent broad district-level support.'}
+      {#if lang === 'el'}
+        Πέρα από τις 19 λίστες, <strong>εννέα ανεξάρτητοι υποψήφιοι</strong> θα εμφανιστούν στα ψηφοδέλτια <strong>χωρίς κομματική σήμανση</strong>. Στο κυπριακό σύστημα οι ανεξάρτητοι αντιμετωπίζονται όπως <strong>μία μονομελής λίστα</strong> και θεωρητικά οφείλουν να πληρούν τα ίδια εθνικά όρια, γεγονός που πρακτικά καθιστά <strong>εξαιρετικά δύσκολη</strong> την εκλογή τους χωρίς ευρεία επαρχιακή απήχηση.
+      {:else}
+        Beyond the 19 parties, <strong>nine independent candidates</strong> will appear on the ballots <strong>without any party affiliation</strong>. Under the Cypriot system, independents are treated as <strong>single-name lists</strong> and are nominally held to the same national thresholds, which makes their election <strong>very difficult</strong> absent broad district-level support.
+      {/if}
     </p>
   </SectionBlock>
 </PageShell>
