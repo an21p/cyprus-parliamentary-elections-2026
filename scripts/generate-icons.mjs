@@ -4,7 +4,8 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { dirname } from 'node:path';
 
-const REPO = '/Users/pishias/code/elections';
+import { fileURLToPath } from 'node:url';
+const REPO = dirname(dirname(fileURLToPath(import.meta.url)));
 const SRC = `${REPO}/src/lib/components/map/CyprusMap.svelte`;
 const STATIC = `${REPO}/static`;
 const ICONS = `${STATIC}/icons`;
@@ -13,13 +14,25 @@ mkdirSync(ICONS, { recursive: true });
 // Cyprus flag silhouette: Pantone 1385C → approximated as warm copper-orange.
 const COPPER = '#D57900';
 
-// Extract the six district path strings (six matches of `path: 'M ... Z',`)
+// Extract the six districts as { id, path } pairs from the geometry table.
 const src = readFileSync(SRC, 'utf8');
-const re = /path:\s*'(M[^']+Z)'/g;
-const paths = [];
+const re = /id:\s*'([A-Z]{3})'\s*,\s*path:\s*'(M[^']+Z)'/g;
+const districts = [];
 let m;
-while ((m = re.exec(src))) paths.push(m[1]);
-if (paths.length !== 6) throw new Error(`Expected 6 district paths, got ${paths.length}`);
+while ((m = re.exec(src))) districts.push({ id: m[1], path: m[2] });
+if (districts.length !== 6) throw new Error(`Expected 6 district paths, got ${districts.length}`);
+const paths = districts.map((d) => d.path);
+
+// Ballot colours per district, mirroring the end state of the landing
+// page's `district-colorize` animation (rgba @ 0.4 over warm paper).
+const BALLOT = {
+  NIC: 'rgba(245, 245, 245, 0.4)',
+  LIM: 'rgba(255, 235, 59, 0.4)',
+  FAM: 'rgba(33, 150, 243, 0.4)',
+  LAR: 'rgba(244, 143, 177, 0.4)',
+  PAF: 'rgba(76, 175, 80, 0.4)',
+  KYR: 'rgba(255, 152, 0, 0.4)'
+};
 
 // Compute combined bbox of all paths so we can trim/center to the island.
 // Quick & dirty: parse all numeric pairs.
@@ -100,10 +113,10 @@ function ogPosterSvg({ width, height }) {
   const tx = width * 0.56 - (bx + bw / 2) * s;
   const ty = height * 0.50 - (by + bh / 2) * s;
 
-  const islandPaths = paths
+  const islandPaths = districts
     .map(
-      (d) =>
-        `<path d="${d}" fill="${ACCENT_SOFT}" stroke="${COPPER_STROKE}" stroke-width="1.25" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>`
+      ({ id, path: d }) =>
+        `<path d="${d}" fill="${BALLOT[id] ?? ACCENT_SOFT}" stroke="${COPPER_STROKE}" stroke-width="1.25" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>`
     )
     .join('');
 
